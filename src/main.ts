@@ -15,12 +15,13 @@ declare global {
 }
 
 // TODO(@Isha): Properly await till window.mooSocket is set
-setTimeout(() => {
+const launchMooLite = () => {
     if (!window.mooSocket) {
-        console.log("MooLite failed to connect")
+        console.log("MooLite not initialized, checking again...")
+        setTimeout(launchMooLite, 10);
         return;
     }
-    window.mooLite = new MooLite(window.mooSocket,);
+    window.mooLite = new MooLite(window.mooSocket);
 
     createApp(App).mount(
         (() => {
@@ -29,7 +30,7 @@ setTimeout(() => {
             return app;
         })(),
     );
-
     console.log("MooLite connected successfully")
-}, 1000)
+}
 
+launchMooLite();
