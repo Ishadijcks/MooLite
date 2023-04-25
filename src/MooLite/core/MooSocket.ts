@@ -29,7 +29,6 @@ export class MooSocket extends WebSocket {
             case ServerMessageType.ActivePlayerCountUpdated:
                 break;
             case ServerMessageType.ChatMessageReceived:
-
                 this._onChatMessageReceived.dispatch({
                     message: (msg as ChatMessageReceived).message.message,
                     channel: (msg as ChatMessageReceived).message.channelTypeHrid,
