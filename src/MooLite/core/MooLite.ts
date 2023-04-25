@@ -4,6 +4,7 @@ import {ServerMessage} from "src/MooLite/core/server/ServerMessage";
 import {MessageParser} from "src/MooLite/core/server/MessageParser";
 import {ActionCompletedParser} from "src/MooLite/core/server/messages/ActionCompleted";
 import {Game} from "src/MooLite/core/Game";
+import {ChatMessageReceivedParser} from "src/MooLite/core/server/messages/ChatMessageReceived";
 
 export class MooLite {
     pluginManager: PluginManager;
@@ -13,6 +14,7 @@ export class MooLite {
 
     messageParsers: MessageParser[] = [
         new ActionCompletedParser(),
+        new ChatMessageReceivedParser(),
     ]
 
 
@@ -30,8 +32,9 @@ export class MooLite {
         const parser = this.messageParsers.find(parser => {
             return parser.canParse(message);
         })
+        console.log(message);
         if (!parser) {
-            console.warn(`Unhandled message type ${message.type}`, message)
+            console.warn(`Unhandled message type ${message.type}`)
             return;
         }
         parser.apply(message, this.game);

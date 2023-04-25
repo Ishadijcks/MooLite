@@ -1,14 +1,16 @@
 import {ServerMessage} from "src/MooLite/core/server/ServerMessage";
 import {ServerMessageType} from "src/MooLite/core/server/ServerMessageType";
-import {ChannelTypeHrid} from "src/MooLite/core/chat/ChannelTypeHrid";
+import {ChatChannelTypeHrid} from "src/MooLite/core/chat/ChatChannelTypeHrid";
 import {ChatIconHrid} from "src/MooLite/core/chat/ChatIconHrid";
+import {MessageParser} from "src/MooLite/core/server/MessageParser";
+import {Game} from "src/MooLite/core/Game";
 
 export interface ChatMessageReceived extends ServerMessage {
     type: ServerMessageType.ChatMessageReceived
 
     message: {
         cannotBlock: boolean;
-        channelTypeHrid: ChannelTypeHrid;
+        channelTypeHrid: ChatChannelTypeHrid;
         characterId: number;
         chatIconHrid: ChatIconHrid;
         id: number;
@@ -24,4 +26,18 @@ export interface ChatMessageReceived extends ServerMessage {
         // TODO(@Isha): turn into date?
         timeStamp: string
     }
+}
+
+export class ChatMessageReceivedParser extends MessageParser {
+    type = ServerMessageType.ChatMessageReceived;
+
+    apply(message: ChatMessageReceived, game: Game): void {
+        game.chat.addMessage({
+            message: message.message.message,
+            channel: message.message.channelTypeHrid,
+            senderName: message.message.senderName,
+            receiverName: message.message.receiverName,
+        })
+    }
+
 }

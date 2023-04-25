@@ -6,7 +6,7 @@ export class ChatNotifierPlugin extends MooLitePlugin {
     targetWords: string = "Word1, Word2";
 
     onChatMessage(message: ChatMessage): void {
-        const words = this.targetWords.split(",");
+        const words = this.targetWords.replaceAll(", ", ",").split(",");
         words.forEach(word => {
             if (message.message.toLowerCase().includes(word.toLowerCase())) {
                 console.log(`Word found: ${word}`)

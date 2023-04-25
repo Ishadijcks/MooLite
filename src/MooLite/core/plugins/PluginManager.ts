@@ -20,6 +20,11 @@ export class PluginManager {
                 plugin.onXpGained?.(info);
             })
         })
+        this.game.chat.onMessage.subscribe(chatMessage => {
+            this.enabledPlugins.forEach(plugin => {
+                plugin.onChatMessage?.(chatMessage);
+            })
+        })
     }
 
     public get enabledPlugins(): MooLitePlugin[] {
