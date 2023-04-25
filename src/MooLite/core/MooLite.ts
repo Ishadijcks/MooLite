@@ -6,6 +6,8 @@ import {ActionCompletedParser} from "src/MooLite/core/server/messages/ActionComp
 import {Game} from "src/MooLite/core/Game";
 import {ChatMessageReceivedParser} from "src/MooLite/core/server/messages/ChatMessageReceived";
 import {ActivePlayerCountUpdatedParser} from "src/MooLite/core/server/messages/ActivePlayerCountUpdated";
+import {ActionsUpdatedParser} from "src/MooLite/core/server/messages/ActionsUpdated";
+import {InitCharacterInfo} from "src/MooLite/core/server/messages/InitCharacterInfo";
 
 export class MooLite {
     pluginManager: PluginManager;
@@ -14,9 +16,12 @@ export class MooLite {
     game: Game;
 
     messageParsers: MessageParser[] = [
+        new InitCharacterInfo(),
+
         new ActionCompletedParser(),
         new ChatMessageReceivedParser(),
         new ActivePlayerCountUpdatedParser(),
+        new ActionsUpdatedParser(),
     ]
 
 
