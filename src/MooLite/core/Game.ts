@@ -5,6 +5,8 @@ export class Game {
     skills: Skills;
     chat: Chat;
 
+    activePlayerCount: number = 0;
+
     constructor() {
         this.skills = new Skills();
         this.chat = new Chat();

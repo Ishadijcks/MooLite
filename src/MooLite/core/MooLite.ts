@@ -5,6 +5,7 @@ import {MessageParser} from "src/MooLite/core/server/MessageParser";
 import {ActionCompletedParser} from "src/MooLite/core/server/messages/ActionCompleted";
 import {Game} from "src/MooLite/core/Game";
 import {ChatMessageReceivedParser} from "src/MooLite/core/server/messages/ChatMessageReceived";
+import {ActivePlayerCountUpdatedParser} from "src/MooLite/core/server/messages/ActivePlayerCountUpdated";
 
 export class MooLite {
     pluginManager: PluginManager;
@@ -15,6 +16,7 @@ export class MooLite {
     messageParsers: MessageParser[] = [
         new ActionCompletedParser(),
         new ChatMessageReceivedParser(),
+        new ActivePlayerCountUpdatedParser(),
     ]
 
 
