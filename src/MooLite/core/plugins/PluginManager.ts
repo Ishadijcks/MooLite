@@ -1,20 +1,23 @@
 import {MooLitePlugin} from "src/MooLite/plugins/MooLitePlugin";
 import {ChatNotifierPlugin} from "src/MooLite/plugins/ChatNotifier/ChatNotifierPlugin";
-import {MooSocket} from "src/MooLite/core/MooSocket";
+import {Game} from "src/MooLite/core/Game";
+import {XpDetailsPlugin} from "src/MooLite/plugins/XpDetails/XpDetailsPlugin";
 
 export class PluginManager {
     plugins: MooLitePlugin[] = [
         new ChatNotifierPlugin(),
+        new XpDetailsPlugin(),
     ];
 
-    mooSocket: MooSocket;
+    game: Game;
 
-    constructor(mooSocket: MooSocket) {
-        this.mooSocket = mooSocket;
+    constructor(game: Game) {
+        this.game = game;
 
-        this.mooSocket.onChatMessage.subscribe(message => {
+        console.log(this.game);
+        this.game.skills.onXpGained.subscribe(info => {
             this.enabledPlugins.forEach(plugin => {
-                plugin.onChatMessage?.(message);
+                plugin.onXpGained?.(info);
             })
         })
     }

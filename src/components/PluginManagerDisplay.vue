@@ -9,8 +9,11 @@ const props = defineProps<{
 </script>
 
 <template>
-    <div class="flex flex-col">
-        <span v-for="plugin in manager.plugins">{{ plugin.name }}</span>
+    <div class="flex flex-col w-full bg-red-300">
+        <span v-for="plugin in manager.plugins">
+            <span>{{ plugin.name }}</span><br>
+        </span>
+
     </div>
 </template>
 

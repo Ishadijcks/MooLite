@@ -1,4 +1,4 @@
-import {ChannelTypeHrid} from "src/MooLite/core/messages/chat/ChannelTypeHrid";
+import {ChannelTypeHrid} from "src/MooLite/core/chat/ChannelTypeHrid";
 
 export interface ChatMessage {
     senderName: string;

@@ -1,7 +1,6 @@
 import {createApp} from 'vue';
 import './style.css';
 import App from './App.vue';
-import {PluginManager} from "src/MooLite/core/plugins/PluginManager";
 import {MooLite} from "src/MooLite/core/MooLite";
 import {MooSocket} from "src/MooLite/core/MooSocket";
 
@@ -21,12 +20,7 @@ setTimeout(() => {
         console.log("MooLite failed to connect")
         return;
     }
-    const pluginManager = new PluginManager(window.mooSocket);
-    window.mooLite = new MooLite(
-        pluginManager,
-        window.mooSocket,
-    );
-
+    window.mooLite = new MooLite(window.mooSocket,);
 
     createApp(App).mount(
         (() => {

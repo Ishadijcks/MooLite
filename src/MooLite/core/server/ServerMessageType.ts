@@ -4,6 +4,8 @@ export enum ServerMessageType {
 
     ActivePlayerCountUpdated = "active_player_count_updated",
 
+    ActionCompleted = "action_completed",
+
 
     // Chat
     ChatMessageReceived = "chat_message_received"

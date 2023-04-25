@@ -17,7 +17,7 @@ export default defineConfig({
       userscript: {
         icon: 'https://vitejs.dev/logo.svg',
         namespace: '123ishaTest',
-        match: ['https://www.milkywayidle.com/game'],
+        match: ['https://www.milkywayidle.com/game', 'https://test.milkywayidle.com/game'],
       },
       build: {
         externalGlobals: {

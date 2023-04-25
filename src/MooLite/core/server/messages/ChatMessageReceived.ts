@@ -1,7 +1,7 @@
-import {ServerMessage} from "src/MooLite/core/messages/ServerMessage";
-import {ServerMessageType} from "src/MooLite/core/messages/ServerMessageType";
-import {ChannelTypeHrid} from "src/MooLite/core/messages/chat/ChannelTypeHrid";
-import {ChatIconHrid} from "src/MooLite/core/messages/chat/ChatIconHrid";
+import {ServerMessage} from "src/MooLite/core/server/ServerMessage";
+import {ServerMessageType} from "src/MooLite/core/server/ServerMessageType";
+import {ChannelTypeHrid} from "src/MooLite/core/chat/ChannelTypeHrid";
+import {ChatIconHrid} from "src/MooLite/core/chat/ChatIconHrid";
 
 export interface ChatMessageReceived extends ServerMessage {
     type: ServerMessageType.ChatMessageReceived
