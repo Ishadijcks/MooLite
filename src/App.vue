@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <span>MooLite Loaded</span>
+  <span></span>
 </template>
 
 <style scoped>
