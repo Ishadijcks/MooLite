@@ -1,5 +1,5 @@
 import {ChatMessage} from "src/MooLite/core/chat/ChatMessage";
-import {SkillInfo} from "src/MooLite/core/skills/SkillInfo";
+import {XpGained} from "src/MooLite/core/skills/Skills";
 
 export abstract class MooLitePlugin {
     abstract name: string;
@@ -9,5 +9,5 @@ export abstract class MooLitePlugin {
 
     onChatMessage?(message: ChatMessage): void;
 
-    onXpGained?(info: SkillInfo): void;
+    onXpGained?(xpGained: XpGained): void;
 }

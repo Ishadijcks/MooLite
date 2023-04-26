@@ -1,14 +1,16 @@
 import {ServerMessage} from "src/MooLite/core/server/ServerMessage";
 import {ServerMessageType} from "src/MooLite/core/server/ServerMessageType";
-import {SkillInfo} from "src/MooLite/core/skills/SkillInfo";
+import {CharacterSkill} from "src/MooLite/core/skills/CharacterSkill";
 import {MessageParser} from "src/MooLite/core/server/MessageParser";
 import {Game} from "src/MooLite/core/Game";
 import {CharacterAction} from "src/MooLite/core/actions/CharacterAction";
+import {CharacterItem} from "src/MooLite/core/inventory/CharacterItem";
 
 export interface ActionCompletedMessage extends ServerMessage {
     type: ServerMessageType.ActionCompleted;
-    endCharacterSkills: SkillInfo[]
+    endCharacterSkills: CharacterSkill[];
     endCharacterAction: CharacterAction;
+    endCharacterItems: CharacterItem[];
 }
 
 export class ActionCompletedParser extends MessageParser {
@@ -17,9 +19,8 @@ export class ActionCompletedParser extends MessageParser {
     apply(message: ActionCompletedMessage, game: Game): void {
         // TODO(@Isha): Get all information out of this message
         //
-        message.endCharacterSkills.forEach(info => {
-            game.skills.updateSkill(info)
-        })
+        game.skills.updateSkills(message.endCharacterSkills);
+        game.inventory.updateItems(message.endCharacterItems);
 
         game.actionQueue.updateActions([message.endCharacterAction]);
     }
