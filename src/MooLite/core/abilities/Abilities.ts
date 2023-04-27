@@ -29,16 +29,12 @@ export class Abilities {
 
     }
 
-    updateCharacterAbilities(abilities: CharacterAbility[]) {
-        abilities.forEach(ability => {
+    updateCharacterAbilities(abilities: CharacterAbility[] | null) {
+        abilities?.forEach(ability => {
             this._characterAbilities[ability.abilityHrid] = ability;
 
             // TODO(@Isha): Check for levelups and such, emit stuff
-
-            console.log("asdklasklasd")
-            console.log(ability);
         })
-        console.log(this.equippedAbilities);
     }
 
 

@@ -22,6 +22,7 @@ export class MooSocket extends WebSocket {
             const msg = JSON.parse(e.data);
 
             if (msg.type === ServerMessageType.InitClientInfo) {
+                console.log(msg);
                 this._onInitClientInfoMessage.dispatch(msg);
             }
 

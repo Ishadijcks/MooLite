@@ -13,7 +13,7 @@ export interface InitCharacterInfoMessage extends ServerMessage {
     type: ServerMessageType.InitCharacterInfo;
 
     abilityCombatTriggersMap: Record<AbilityHrid, CombatTrigger>
-    characterAbilities: CharacterAbility[]
+    characterAbilities: CharacterAbility[] | null;
     characterActions: CharacterAction[];
     characterItems: CharacterItem[]
     characterSkills: CharacterSkill[]

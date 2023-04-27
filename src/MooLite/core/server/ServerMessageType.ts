@@ -12,4 +12,7 @@ export enum ServerMessageType {
 
     // Chat
     ChatMessageReceived = "chat_message_received",
+
+    // Combat
+    CombatTriggersUpdated = "combat_triggers_updated",
 }
