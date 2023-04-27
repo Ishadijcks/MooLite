@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {LootSimulatorPlugin} from "src/MooLite/plugins/LootSimulator/LootSimulatorPlugin";
 import {computed, Ref, ref} from "vue";
-import {ItemAmount} from "src/MooLite/core/items/ItemAmount";
+import {LootSimulatorPlugin} from "src/MooLite/plugins/LootSimulator/LootSimulatorPlugin";
+import {ItemAmount} from "src/MooLite/core/inventory/items/ItemAmount";
 
 const props = defineProps<{
     plugin: LootSimulatorPlugin

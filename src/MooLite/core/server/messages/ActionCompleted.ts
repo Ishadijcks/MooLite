@@ -22,7 +22,7 @@ export class ActionCompletedParser extends MessageParser {
     apply(message: ActionCompletedMessage, game: Game): void {
         game.abilities.updateCharacterAbilities(message.endCharacterAbilities);
         game.actionQueue.updateActions([message.endCharacterAction]);
-        game.inventory.updateItems(message.endCharacterItems);
+        game.inventory.updateCharacterItems(message.endCharacterItems);
         // game.quests.updateQuests(message.endCharacterQuests);
         game.skills.updateCharacterSkills(message.endCharacterSkills);
     }

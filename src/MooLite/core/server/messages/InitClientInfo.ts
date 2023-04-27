@@ -8,6 +8,10 @@ import {SkillHrid} from "src/MooLite/core/skills/SkillHrid";
 import {SkillDetail} from "src/MooLite/core/skills/SkillDetail";
 import {MonsterHrid} from "src/MooLite/core/combat/monsters/MonsterHrid";
 import {MonsterDetail} from "src/MooLite/core/combat/monsters/MonsterDetail";
+import {ItemHrid} from "src/MooLite/core/inventory/ItemHrid";
+import {ItemDetail} from "src/MooLite/core/inventory/items/ItemDetail";
+import {ItemCategoryHrid} from "src/MooLite/core/inventory/items/ItemCategoryHrid";
+import {ItemCategoryDetail} from "src/MooLite/core/inventory/items/ItemCategoryDetail";
 
 export interface InitClientInfoMessage extends ServerMessage {
     type: ServerMessageType.InitClientInfo;
@@ -33,8 +37,8 @@ export interface InitClientInfoMessage extends ServerMessage {
     // enhancementLevelTotalBonusMultiplierTable: number;
     // equipmentTypeDetailMap: Record<EquipmentTypeHrid, EquipmentTypeDetail>;
     // gameVersion: string;
-    // itemCategoryDetailMap: Record<ItemCategoryHrid, ItemCategoryDetail>;
-    // itemDetailMap: Record<ItemHrid, ItemDetail>;
+    itemCategoryDetailMap: Record<ItemCategoryHrid, ItemCategoryDetail>;
+    itemDetailMap: Record<ItemHrid, ItemDetail>;
     // itemLocationDetailMap: Record<ItemLocationHrid, ItemLocationDetail>;
     levelExperienceTable: number[];
     // shopItemDetailMap: Record<string, unknown>;

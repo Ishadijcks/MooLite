@@ -1,7 +1,7 @@
 import {MonsterDetail} from "src/MooLite/core/combat/monsters/MonsterDetail";
 import {ItemHrid} from "src/MooLite/core/inventory/ItemHrid";
 import {Random} from "src/MooLite/util/Random";
-import {ItemAmount} from "src/MooLite/core/items/ItemAmount";
+import {ItemAmount} from "src/MooLite/core/inventory/items/ItemAmount";
 
 export class LootSimulator {
     public static simulate(monster: MonsterDetail, iterations: number): ItemAmount[] {

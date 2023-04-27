@@ -26,7 +26,7 @@ export class Game {
         this.skills = new Skills(clientInfo.skillDetailMap, clientInfo.levelExperienceTable);
         this.chat = new Chat();
         this.actionQueue = new ActionQueue();
-        this.inventory = new Inventory();
+        this.inventory = new Inventory(clientInfo.itemDetailMap, clientInfo.itemCategoryDetailMap);
 
         this.notifier = new Notifier();
     }

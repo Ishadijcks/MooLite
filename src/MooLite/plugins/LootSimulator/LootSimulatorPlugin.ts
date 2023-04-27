@@ -4,7 +4,7 @@ import LootSimulatorPluginDisplay from "src/MooLite/plugins/LootSimulator/LootSi
 import {markRaw} from "vue";
 import {MonsterHrid} from "src/MooLite/core/combat/monsters/MonsterHrid";
 import {MonsterDetail} from "src/MooLite/core/combat/monsters/MonsterDetail";
-import {ItemAmount} from "src/MooLite/core/items/ItemAmount";
+import {ItemAmount} from "src/MooLite/core/inventory/items/ItemAmount";
 import {LootSimulator} from "src/MooLite/plugins/LootSimulator/LootSimulator";
 
 export class LootSimulatorPlugin extends MooLitePlugin {
