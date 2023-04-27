@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {XpTrackerPlugin} from "src/MooLite/plugins/XpDetails/XpTrackerPlugin";
 import {computed} from "vue";
+import {SkillHrid} from "src/MooLite/core/skills/SkillHrid";
 
 const props = defineProps<{
     plugin: XpTrackerPlugin
@@ -28,8 +29,9 @@ const formatSkill = (skill: string) => {
               v-for="(skill, index) in skills"
               class="flex flex-row justify-between">
           <template v-if="!(plugin.hideEmptySkills && gains[index] === 0)">
-            <span class="text-xs">{{ formatSkill(skill) }}</span>
-            <span class="text-xs">{{ gains[index].toFixed(2) }}</span>
+              <span class="text-xs">{{ formatSkill(skill) }}</span>
+              <span class="text-xs">{{ gains[index].toFixed(2) }}</span>
+              <span>{{Math.ceil(plugin.getXpLeft(skill as SkillHrid))}}</span>
           </template>
       </span>
     </div>

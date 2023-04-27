@@ -20,6 +20,7 @@ export class Skills {
 
     public readonly skillDetailMap: Record<SkillHrid, SkillDetail>;
     public readonly sortedSkills: SkillDetail[];
+    public readonly levelExperienceTable: number[];
 
     public get onXpGained() {
         return this._onXpGained.asEvent();
@@ -30,8 +31,9 @@ export class Skills {
     }
 
 
-    constructor(skillDetailMap: Record<SkillHrid, SkillDetail>) {
+    constructor(skillDetailMap: Record<SkillHrid, SkillDetail>, levelExperienceTable: number[]) {
         this.skillDetailMap = skillDetailMap;
+        this.levelExperienceTable = levelExperienceTable;
 
         this.sortedSkills = Object.values(this.skillDetailMap).sort((a, b) => {
             return a.sortIndex - b.sortIndex;
@@ -70,5 +72,11 @@ export class Skills {
             }
 
         })
+    }
+
+    public getXpLeft(skill: SkillHrid): number {
+        const currentLevel = this._characterSkills[skill].level;
+        const targetXp = this.levelExperienceTable[currentLevel + 1];
+        return targetXp - this._characterSkills[skill].experience;
     }
 }

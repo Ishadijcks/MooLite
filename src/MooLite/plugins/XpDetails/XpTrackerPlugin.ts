@@ -33,6 +33,10 @@ export class XpTrackerPlugin extends MooLitePlugin {
         return this.getConfig("hide-empty")?.value ?? true;
     }
 
+    public getXpLeft(skill: SkillHrid): number {
+        return this._game.skills.getXpLeft(skill);
+    }
+
     updates: number = 0;
     gains: Record<SkillHrid, number> = {} as Record<SkillHrid, number>;
 

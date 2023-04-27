@@ -47,7 +47,7 @@ export interface InitClientInfoMessage extends ServerMessage {
     // itemCategoryDetailMap: Record<ItemCategoryHrid, ItemCategoryDetail>;
     // itemDetailMap: Record<ItemHrid, ItemDetail>;
     // itemLocationDetailMap: Record<ItemLocationHrid, ItemLocationDetail>;
-    // levelExperienceTable: number[];
+    levelExperienceTable: number[];
     // shopItemDetailMap: Record<string, unknown>;
     skillDetailMap: Record<SkillHrid, SkillDetail>;
     // versionTimeStamp: string;
