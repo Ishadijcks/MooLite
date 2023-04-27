@@ -49,7 +49,7 @@ export class Skills {
         })
     }
 
-    public updateSkills(skills: CharacterSkill[], notify: boolean = true): void {
+    public updateCharacterSkills(skills: CharacterSkill[], notify: boolean = true): void {
         skills.forEach(info => {
             const xpChanged = info.experience - this._characterSkills[info.skillHrid].experience;
             const lvlChanged = info.level - this._characterSkills[info.skillHrid].level;
