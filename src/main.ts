@@ -31,35 +31,42 @@ const launchMooLite = () => {
         return;
     }
 
-    const plugins = reactive([
-        new MooLiteClientPlugin(),
-        new ChatNotifierPlugin(),
-        new XpTrackerPlugin(),
-        new IdleNotifierPlugin(),
-    ]) as MooLitePlugin[];
+    window.mooSocket.onInitClientInfoMessage.subscribe(clientInfo => {
+        // Create the game with the init client info
+        const game = reactive<Game>(new Game(clientInfo)) as Game;
 
-    const game = reactive<Game>(new Game()) as Game;
-    const pluginManager = reactive<PluginManager>(new PluginManager(game, plugins)) as PluginManager;
-    const mooLite = reactive(new MooLite(game, pluginManager, window.mooSocket)) as MooLite;
+        // Define a list of awesome plugins
+        const plugins = reactive([
+            new MooLiteClientPlugin(),
+            new ChatNotifierPlugin(),
+            new XpTrackerPlugin(),
+            new IdleNotifierPlugin(),
+        ]) as MooLitePlugin[];
+        const pluginManager = reactive<PluginManager>(new PluginManager(game, plugins)) as PluginManager;
 
-    const app = createApp(App, {client: mooLite});
-    app.mount(
-        (() => {
-            const app = document.createElement('div');
-            document.body.append(app);
-            return app;
-        })(),
-    );
+        // Create the game client
+        const mooLite = reactive(new MooLite(game, pluginManager, window.mooSocket)) as MooLite;
 
-    // Register custom components
-    plugins.forEach(plugin => {
-        if (plugin.tab) {
-            console.log("Registering custom component", plugin.tab.componentName)
-            app.component(plugin.tab.componentName, plugin.tab.component);
-        }
+        // Mount the Vue app
+        const app = createApp(App, {client: mooLite});
+        app.mount(
+            (() => {
+                const app = document.createElement('div');
+                document.body.append(app);
+                return app;
+            })(),
+        );
+
+        // Register custom components
+        plugins.forEach(plugin => {
+            if (plugin.tab) {
+                console.log("Registering custom component", plugin.tab.componentName)
+                app.component(plugin.tab.componentName, plugin.tab.component);
+            }
+        })
+
+        console.log("MooLite connected successfully")
     })
-
-    console.log("MooLite connected successfully")
 }
 
 launchMooLite();
