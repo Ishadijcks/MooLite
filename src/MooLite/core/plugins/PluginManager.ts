@@ -1,5 +1,5 @@
-import {MooLitePlugin} from "src/MooLite/plugins/MooLitePlugin";
 import {Game} from "src/MooLite/core/Game";
+import {MooLitePlugin} from "src/MooLite/core/plugins/MooLitePlugin";
 import {MooLiteTab} from "src/MooLite/core/plugins/MooLiteTab";
 
 export class PluginManager {

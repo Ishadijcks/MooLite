@@ -27,8 +27,10 @@ const formatSkill = (skill) => {
       <span
               v-for="(skill, index) in skills"
               class="flex flex-row justify-between">
-          <span class="text-xs">{{ formatSkill(skill) }}</span>
-          <span class="text-xs">{{ gains[index].toFixed(2) }}</span>
+          <template v-if="!(plugin.hideEmptySkills && gains[index] === 0)">
+            <span class="text-xs">{{ formatSkill(skill) }}</span>
+            <span class="text-xs">{{ gains[index].toFixed(2) }}</span>
+          </template>
       </span>
     </div>
 </template>

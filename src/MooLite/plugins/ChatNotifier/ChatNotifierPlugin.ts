@@ -1,4 +1,4 @@
-import {MooLitePlugin} from "src/MooLite/plugins/MooLitePlugin";
+import {MooLitePlugin} from "src/MooLite/core/plugins/MooLitePlugin";
 import {ChatMessage} from "src/MooLite/core/chat/ChatMessage";
 
 export class ChatNotifierPlugin extends MooLitePlugin {

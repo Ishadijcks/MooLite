@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {MooLitePlugin} from "src/MooLite/plugins/MooLitePlugin";
+import {MooLitePlugin} from "src/MooLite/core/plugins/MooLitePlugin";
 
 const props = defineProps<{
     plugin: MooLitePlugin

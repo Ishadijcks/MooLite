@@ -1,9 +1,11 @@
-import {MooLitePlugin} from "src/MooLite/plugins/MooLitePlugin";
+import {MooLitePlugin} from "src/MooLite/core/plugins/MooLitePlugin";
 import {XpGained} from "src/MooLite/core/skills/Skills";
 import {MooLiteTab} from "src/MooLite/core/plugins/MooLiteTab";
 import {SkillHrid} from "src/MooLite/core/skills/SkillHrid";
 import XpTrackerDisplay from "src/MooLite/plugins/XpDetails/XpTrackerDisplay.vue";
 import {markRaw} from "vue";
+import {PluginConfig} from "src/MooLite/core/plugins/config/PluginConfig";
+import {PluginConfigType} from "src/MooLite/core/plugins/config/PluginConfigType";
 
 export class XpTrackerPlugin extends MooLitePlugin {
     name: string = "Xp Tracker";
@@ -13,6 +15,21 @@ export class XpTrackerPlugin extends MooLitePlugin {
         pluginName: "Xp Tracker",
         componentName: "XpTrackerDisplay",
         component: markRaw(XpTrackerDisplay),
+    }
+
+
+    config: PluginConfig[] = [
+        {
+            key: "hide-empty",
+            name: "Hide empty skills",
+            description: "Hide skills in which you have not gained xp",
+            value: false,
+            type: PluginConfigType.CheckBox,
+        }
+    ];
+
+    public get hideEmptySkills(): boolean {
+        return this.getConfig("hide-empty")?.value ?? true;
     }
 
     updates: number = 0;
