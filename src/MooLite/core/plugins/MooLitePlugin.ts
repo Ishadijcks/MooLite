@@ -5,6 +5,7 @@ import {PluginConfig} from "src/MooLite/core/plugins/config/PluginConfig";
 import {MooNotification} from "src/MooLite/core/notifications/MooNotification";
 import {Game} from "src/MooLite/core/Game";
 import {CharacterAction} from "src/MooLite/core/actions/CharacterAction";
+import {AbilityXpGained} from "src/MooLite/core/abilities/Abilities";
 
 export abstract class MooLitePlugin {
     abstract name: string;
@@ -34,7 +35,11 @@ export abstract class MooLitePlugin {
 
     onNotification?(notification: MooNotification): void;
 
-    onXpGained?(xpGained: XpGained): void;
+    onXpGained?(gains: XpGained): void;
 
     onActionQueueUpdated?(queue: CharacterAction[]): void;
+
+    onAbilityXpGained?(gains: AbilityXpGained): void;
+
+    onAbilityLvlGained?(gains: AbilityXpGained): void;
 }

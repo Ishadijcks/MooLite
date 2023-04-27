@@ -23,7 +23,7 @@ export class InitCharacterInfo extends MessageParser {
     type = ServerMessageType.InitCharacterInfo;
 
     apply(message: InitCharacterInfoMessage, game: Game): void {
-        game.abilities.updateCharacterAbilities(message.characterAbilities);
+        game.abilities.updateCharacterAbilities(message.characterAbilities, false);
         game.actionQueue.updateActions(message.characterActions);
         game.inventory.updateItems(message.characterItems);
         game.skills.updateCharacterSkills(message.characterSkills, false)
