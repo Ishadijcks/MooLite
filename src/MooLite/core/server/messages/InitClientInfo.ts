@@ -6,6 +6,8 @@ import {AbilityHrid} from "src/MooLite/core/abilities/AbilityHrid";
 import {AbilityDetail} from "src/MooLite/core/abilities/AbilityDetail";
 import {SkillHrid} from "src/MooLite/core/skills/SkillHrid";
 import {SkillDetail} from "src/MooLite/core/skills/SkillDetail";
+import {MonsterHrid} from "src/MooLite/core/combat/monsters/MonsterHrid";
+import {MonsterDetail} from "src/MooLite/core/combat/monsters/MonsterDetail";
 
 export interface InitClientInfoMessage extends ServerMessage {
     type: ServerMessageType.InitClientInfo;
@@ -18,7 +20,7 @@ export interface InitClientInfoMessage extends ServerMessage {
     // buffTypeDetailMap: Record<BuffTypeHrid, BuffTypeDetail>;
     // buyableUpgradeDetailMap: Record<BuyableUpgradeHrid, BuyableUpgradeDetail>;
     // chatIconDetailMap: Record<ChatIconHrid, ChatIconDetail>;
-    // combatMonsterDetailMap: Record<CombatMonsterHrid, CombatMonsterDetail>;
+    combatMonsterDetailMap: Record<MonsterHrid, MonsterDetail>;
     // combatStyleDetailMap: Record<CombatStyleHrid, CombatStyleDetail>;
     // combatTriggerComparatorDetailMap: Record<CombatTriggerComparatorHrid, CombatTriggerComparatorDetail>;
     // combatTriggerConditionDetailMap: Record<CombatTriggerConditionHrid, CombatTriggerConditionDetail>;
