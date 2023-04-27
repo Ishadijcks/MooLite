@@ -30,3 +30,6 @@ const toggleConfig = () => {
         <PluginConfigDisplay v-for="config in plugin.config" :config="config"></PluginConfigDisplay>
     </div>
 </template>
+
+<style>
+</style>
