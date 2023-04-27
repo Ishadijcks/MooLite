@@ -13,6 +13,7 @@ import {XpTrackerPlugin} from "src/MooLite/plugins/XpDetails/XpTrackerPlugin";
 import {Game} from "src/MooLite/core/Game";
 import {PluginManager} from "src/MooLite/core/plugins/PluginManager";
 import {MooLiteClientPlugin} from "src/MooLite/plugins/MooLite/MooLiteClientPlugin";
+import {MooLitePlugin} from "src/MooLite/core/plugins/MooLitePlugin";
 
 
 declare global {
@@ -30,12 +31,12 @@ const launchMooLite = () => {
         return;
     }
 
-    const plugins = [
-        reactive(new MooLiteClientPlugin()),
-        reactive(new ChatNotifierPlugin()),
-        reactive(new XpTrackerPlugin()),
-        reactive(new IdleNotifierPlugin()),
-    ]
+    const plugins = reactive([
+        new MooLiteClientPlugin(),
+        new ChatNotifierPlugin(),
+        new XpTrackerPlugin(),
+        new IdleNotifierPlugin(),
+    ]) as MooLitePlugin[];
 
     const game = reactive<Game>(new Game()) as Game;
     const pluginManager = reactive<PluginManager>(new PluginManager(game, plugins)) as PluginManager;
