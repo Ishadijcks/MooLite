@@ -18,6 +18,10 @@ export abstract class MooLitePlugin {
         return this.config.find(config => config.key === key);
     }
 
+    public get hasConfig(): boolean {
+        return this.config.length > 0;
+    }
+
     tab?: MooLiteTab;
 
     protected _game!: Game;
