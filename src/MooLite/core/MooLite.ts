@@ -8,6 +8,7 @@ import {ChatMessageReceivedParser} from "src/MooLite/core/server/messages/ChatMe
 import {ActivePlayerCountUpdatedParser} from "src/MooLite/core/server/messages/ActivePlayerCountUpdated";
 import {ActionsUpdatedParser} from "src/MooLite/core/server/messages/ActionsUpdated";
 import {InitCharacterInfo} from "src/MooLite/core/server/messages/InitCharacterInfo";
+import {InfoParser} from "src/MooLite/core/server/messages/Info";
 
 export class MooLite {
     pluginManager: PluginManager;
@@ -22,6 +23,7 @@ export class MooLite {
         new ChatMessageReceivedParser(),
         new ActivePlayerCountUpdatedParser(),
         new ActionsUpdatedParser(),
+        new InfoParser(),
     ]
 
 

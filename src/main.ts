@@ -7,6 +7,7 @@ import {ChatNotifierPlugin} from "src/MooLite/plugins/ChatNotifier/ChatNotifierP
 import {XpTrackerPlugin} from "src/MooLite/plugins/XpDetails/XpTrackerPlugin";
 import {Game} from "src/MooLite/core/Game";
 import {PluginManager} from "src/MooLite/core/plugins/PluginManager";
+import {MooLiteClientPlugin} from "src/MooLite/plugins/MooLite/MooLiteClientPlugin";
 
 // Override the WebSocket
 window.WebSocket = MooSocket;
@@ -27,6 +28,7 @@ const launchMooLite = () => {
     }
 
     const plugins = [
+        reactive(new MooLiteClientPlugin()),
         reactive(new ChatNotifierPlugin()),
         reactive(new XpTrackerPlugin()),
     ]

@@ -12,7 +12,7 @@ export class InfoParser extends MessageParser {
     type = ServerMessageType.Info;
 
     apply(message: InfoMessage, game: Game): void {
-        // TODO(@Isha): Do something with info messages
+        game.notifier.processServerInfo(message);
     }
 
 }

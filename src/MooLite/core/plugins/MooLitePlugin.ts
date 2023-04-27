@@ -2,6 +2,8 @@ import {ChatMessage} from "src/MooLite/core/chat/ChatMessage";
 import {XpGained} from "src/MooLite/core/skills/Skills";
 import {MooLiteTab} from "src/MooLite/core/plugins/MooLiteTab";
 import {PluginConfig} from "src/MooLite/core/plugins/config/PluginConfig";
+import {MooNotification} from "src/MooLite/core/notifications/MooNotification";
+import {Game} from "src/MooLite/core/Game";
 
 export abstract class MooLitePlugin {
     abstract name: string;
@@ -15,9 +17,11 @@ export abstract class MooLitePlugin {
 
     tab?: MooLiteTab;
 
-    initialize?(): void;
+    initialize?(game: Game): void;
 
     onChatMessage?(message: ChatMessage): void;
+
+    onNotification?(notification: MooNotification): void;
 
     onXpGained?(xpGained: XpGained): void;
 }

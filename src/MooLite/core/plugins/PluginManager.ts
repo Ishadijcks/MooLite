@@ -23,8 +23,14 @@ export class PluginManager {
             })
         })
 
+        this.game.notifier.onNotification.subscribe(notification => {
+            this.enabledPlugins.forEach(plugin => {
+                plugin.onNotification?.(notification);
+            })
+        })
+
         this.plugins.forEach(plugin => {
-            plugin.initialize?.();
+            plugin.initialize?.(this.game);
         })
     }
 
