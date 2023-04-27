@@ -25,10 +25,9 @@ export class MooLite {
     ]
 
 
-    constructor(mooSocket: MooSocket) {
-        this.game = new Game();
-
-        this.pluginManager = new PluginManager(this.game);
+    constructor(game: Game, pluginManager: PluginManager, mooSocket: MooSocket) {
+        this.game = game;
+        this.pluginManager = pluginManager;
         this.mooSocket = mooSocket;
 
         this.mooSocket.onServerMessage.subscribe(message => this.parseServerMessage(message));

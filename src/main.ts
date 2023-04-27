@@ -1,8 +1,12 @@
-import {createApp} from 'vue';
+import {createApp, reactive} from 'vue';
 import './style.css';
 import App from './App.vue';
 import {MooLite} from "src/MooLite/core/MooLite";
 import {MooSocket} from "src/MooLite/core/MooSocket";
+import {ChatNotifierPlugin} from "src/MooLite/plugins/ChatNotifier/ChatNotifierPlugin";
+import {XpTrackerPlugin} from "src/MooLite/plugins/XpDetails/XpTrackerPlugin";
+import {Game} from "src/MooLite/core/Game";
+import {PluginManager} from "src/MooLite/core/plugins/PluginManager";
 
 // Override the WebSocket
 window.WebSocket = MooSocket;
@@ -21,9 +25,17 @@ const launchMooLite = () => {
         setTimeout(launchMooLite, 10);
         return;
     }
-    window.mooLite = new MooLite(window.mooSocket);
 
-    createApp(App).mount(
+    const plugins = [
+        reactive(new ChatNotifierPlugin()),
+        reactive(new XpTrackerPlugin()),
+    ]
+
+    const game = reactive<Game>(new Game()) as Game;
+    const pluginManager = reactive<PluginManager>(new PluginManager(game, plugins)) as PluginManager;
+    const mooLite = reactive(new MooLite(game, pluginManager, window.mooSocket)) as MooLite;
+
+    createApp(App, {client: mooLite}).mount(
         (() => {
             const app = document.createElement('div');
             document.body.append(app);

@@ -1,26 +1,55 @@
 <script setup lang="ts">
 
+import {MooLite} from "src/MooLite/core/MooLite";
 import PluginManagerDisplay from "src/components/PluginManagerDisplay.vue";
+import MooDivider from "src/components/atoms/MooDivider.vue";
+import {computed, ref} from "vue";
+import PluginTabItem from "src/components/plugins/PluginTabItem.vue";
 
-const pluginManager = window.mooLite.pluginManager
+const props = defineProps<{
+    client: MooLite
+}>()
+
+const pluginManager = computed(() => {
+    return props.client.pluginManager;
+});
+
+const tabs = computed(() => {
+    return pluginManager.value.tabs;
+})
+
+
+const activeTab = ref(0);
+
+const findPlugin = (name: string) => {
+    return pluginManager.value.plugins.find(plugin => plugin.name === name);
+}
+
+const setActiveTab = (index: number) => {
+    activeTab.value = index;
+}
+
 </script>
 
 <template>
-    <div class="w-64 flex flex-col">
-        <span class="text-center">MooLite</span>
-        <hr class="border-black mb-2"/>
-        <div class="flex flex-row">
+    <div class="w-48 flex flex-col h-full shadow-xl bg-background-game text-dark-mode">
+                <span class="text-center">MooLite ({{activeTab}})</span>
+                <MooDivider/>
 
-            <div class="flex flex-col flex-grow">
-                <PluginManagerDisplay :manager="pluginManager"></PluginManagerDisplay>
-            </div>
-            <div class="flex flex-col items-end space-y-2">
-                <span class="p-2 border-2 border-black bg-gray-300">P</span>
-                <span class="p-2 border-2 border-black">X</span>
-                <span class="p-2 border-2 border-black">Y</span>
-                <span class="p-2 border-2 border-black">N</span>
-            </div>
-        </div>
+                <div class="flex flex-row h-full">
+
+                    <div class="flex flex-col flex-grow p-2">
+                        <PluginManagerDisplay v-if="activeTab === 0" :manager="pluginManager"></PluginManagerDisplay>
+                        <div v-for="(tab, index) in tabs" v-show="index + 1 === activeTab">
+                            <component v-bind:is="tab.component" :plugin="findPlugin(tab.title)"></component>
+
+                        </div>
+                    </div>
+                    <div class="flex flex-col bg-primary">
+                        <PluginTabItem @click="setActiveTab(0)" :tab="{title: 'Plugins', icon: '🔧', component: ''}"></PluginTabItem>
+                        <PluginTabItem v-for="(tab, index) in tabs" @click="setActiveTab(index+1)" :tab="tab"></PluginTabItem>
+                    </div>
+                </div>
     </div>
 </template>
 

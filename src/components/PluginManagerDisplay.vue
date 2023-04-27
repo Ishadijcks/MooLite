@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import {PluginManager} from "src/MooLite/core/plugins/PluginManager";
+import PluginListItem from "src/components/plugins/PluginListItem.vue";
 
 const props = defineProps<{
     manager: PluginManager
@@ -9,11 +10,8 @@ const props = defineProps<{
 </script>
 
 <template>
-    <div class="flex flex-col w-full bg-red-300">
-        <span v-for="plugin in manager.plugins">
-            <span>{{ plugin.name }}</span><br>
-        </span>
-
+    <div class="flex flex-col w-full">
+        <PluginListItem v-for="plugin in manager.plugins" :plugin="plugin" :key="plugin.name"/>
     </div>
 </template>
 
