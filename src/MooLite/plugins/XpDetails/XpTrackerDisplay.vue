@@ -14,7 +14,7 @@ const gains = computed(() => {
     return Object.values(props.plugin.gains)
 })
 
-const formatSkill = (skill) => {
+const formatSkill = (skill: string) => {
     const split = skill.split("/");
     const name = split[split.length - 1];
     return name.charAt(0).toUpperCase() + name.slice(1);

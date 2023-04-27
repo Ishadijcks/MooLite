@@ -1,3 +1,3 @@
-export enum DamageType {
+export enum DamageTypeHrid {
     Water = "/damage_types/water"
 }
