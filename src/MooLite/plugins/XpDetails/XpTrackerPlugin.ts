@@ -6,6 +6,7 @@ import {SkillHrid} from "src/MooLite/core/skills/SkillHrid";
 import XpTrackerDisplay from "src/MooLite/plugins/XpDetails/XpTrackerDisplay.vue";
 import {PluginConfig} from "src/MooLite/core/plugins/config/PluginConfig";
 import {PluginConfigType} from "src/MooLite/core/plugins/config/PluginConfigType";
+import {Game} from "src/MooLite/core/Game";
 
 export class XpTrackerPlugin extends MooLitePlugin {
     name: string = "Xp Tracker";
@@ -17,7 +18,6 @@ export class XpTrackerPlugin extends MooLitePlugin {
         componentName: "XpTrackerDisplay",
         component: markRaw(XpTrackerDisplay),
     }
-
 
     config: PluginConfig[] = [
         {
@@ -36,9 +36,10 @@ export class XpTrackerPlugin extends MooLitePlugin {
     updates: number = 0;
     gains: Record<SkillHrid, number> = {} as Record<SkillHrid, number>;
 
-    initialize() {
-        Object.values(SkillHrid).forEach(hrid => {
-            this.gains[hrid] = 0;
+    initialize(game: Game) {
+        super.initialize(game);
+        this._game.skills.sortedSkills.forEach(detail => {
+            this.gains[detail.hrid] = 0;
         })
     }
 

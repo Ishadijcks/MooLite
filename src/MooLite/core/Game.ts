@@ -16,7 +16,7 @@ export class Game {
     activePlayerCount: number = 0;
 
     constructor(clientInfo: InitClientInfoMessage) {
-        this.skills = new Skills();
+        this.skills = new Skills(clientInfo.skillDetailMap);
         this.chat = new Chat();
         this.actionQueue = new ActionQueue();
         this.inventory = new Inventory();
