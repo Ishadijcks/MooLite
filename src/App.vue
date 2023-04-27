@@ -32,7 +32,7 @@ const setActiveTab = (index: number) => {
 
 <template>
     <div class="w-48 flex flex-col h-full shadow-xl bg-background-game text-dark-mode">
-        <span class="text-center">MooLite ({{ activeTab }})</span>
+        <span class="text-center">MooLite</span>
         <MooDivider/>
 
         <div class="flex flex-row h-full">
@@ -42,7 +42,7 @@ const setActiveTab = (index: number) => {
                     <component v-bind:is="tab.componentName" :plugin="findPlugin(tab.pluginName)"></component>
                 </div>
             </div>
-            <div class="flex flex-col bg-primary">
+            <div class="flex flex-col bg-divider">
                 <PluginTabItem @click="setActiveTab(0)"
                                :tab="{pluginName: 'Plugins', icon: '🔧'} as MooLiteTab"></PluginTabItem>
                 <PluginTabItem v-for="(tab, index) in tabs" @click="setActiveTab(index+1)" :tab="tab"></PluginTabItem>

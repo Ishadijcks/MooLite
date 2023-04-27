@@ -8,7 +8,7 @@ const props = defineProps<{
 </script>
 
 <template>
-    <span class="p-1 hover:bg-primary-hover cursor-pointer" :title="tab.pluginName">
+    <span class="p-1 hover:bg-space-600 cursor-pointer" :title="tab.pluginName">
         {{ tab.icon }}
     </span>
 </template>
