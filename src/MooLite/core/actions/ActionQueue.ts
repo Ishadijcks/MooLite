@@ -1,8 +1,15 @@
 import {CharacterAction} from "src/MooLite/core/actions/CharacterAction";
+import {SimpleEventDispatcher} from "strongly-typed-events";
 
 export class ActionQueue {
     private _actions: CharacterAction[] = [];
 
+
+    private _onActionQueueUpdated = new SimpleEventDispatcher<CharacterAction[]>();
+
+    public get onActionQueueUpdated() {
+        return this._onActionQueueUpdated.asEvent();
+    }
 
     public updateActions(actions: CharacterAction[]): void {
         actions.forEach(newAction => {
@@ -28,11 +35,7 @@ export class ActionQueue {
             this._actions[index] = newAction
         })
 
-        console.log(this._actions.map(action => {
-            const actionSplit = action.actionHrid.toString().split("/");
-            const actionName = actionSplit[actionSplit.length - 1];
-            return `${actionName} (${((action.hasMaxCount ? action.maxCount : Infinity) - action.currentCount)})`
-        }).join(", "))
+        this._onActionQueueUpdated.dispatch(this._actions);
     }
 
 }

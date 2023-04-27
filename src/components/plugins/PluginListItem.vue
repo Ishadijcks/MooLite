@@ -9,7 +9,7 @@ const props = defineProps<{
 
 <template>
     <div class="flex flex-row space-x-1 items-center">
-        <span>{{plugin.name}}</span>
+        <span :title="plugin.description">{{ plugin.name }}</span>
         <span class="flex-1"></span>
         <span class="text-xs hover:opacity-40 cursor-pointer">⚙️</span>
         <input class="cursor-pointer" type="checkbox" v-model="plugin.isEnabled">

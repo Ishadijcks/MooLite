@@ -4,9 +4,12 @@ import {MooLiteTab} from "src/MooLite/core/plugins/MooLiteTab";
 import {PluginConfig} from "src/MooLite/core/plugins/config/PluginConfig";
 import {MooNotification} from "src/MooLite/core/notifications/MooNotification";
 import {Game} from "src/MooLite/core/Game";
+import {CharacterAction} from "src/MooLite/core/actions/CharacterAction";
 
 export abstract class MooLitePlugin {
     abstract name: string;
+    abstract description: string;
+
     isEnabled: boolean = true;
 
     config: PluginConfig[] = [];
@@ -17,11 +20,17 @@ export abstract class MooLitePlugin {
 
     tab?: MooLiteTab;
 
-    initialize?(game: Game): void;
+    protected _game!: Game;
+
+    initialize(game: Game): void {
+        this._game = game;
+    };
 
     onChatMessage?(message: ChatMessage): void;
 
     onNotification?(notification: MooNotification): void;
 
     onXpGained?(xpGained: XpGained): void;
+
+    onActionQueueUpdated?(queue: CharacterAction[]): void;
 }

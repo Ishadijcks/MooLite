@@ -6,13 +6,11 @@ import {Game} from "src/MooLite/core/Game";
 
 export class MooLiteClientPlugin extends MooLitePlugin {
     name: string = "MooLite";
-
-    game!: Game;
+    description: string = "Your favourite (milky) way to play!"
 
     initialize(game: Game) {
+        super.initialize(game);
         Notification.requestPermission().then(console.log);
-
-        this.game = game;
     }
 
     config: PluginConfig[] = [
@@ -39,7 +37,7 @@ export class MooLiteClientPlugin extends MooLitePlugin {
 
     onNotification(notification: MooNotification): void {
         if (this.showBrowserNotifications) {
-            this.game.notifier.sendBrowserNotification(notification.message, {})
+            this._game.notifier.sendBrowserNotification(notification.message)
         }
     }
 }

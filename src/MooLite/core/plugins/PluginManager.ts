@@ -29,8 +29,15 @@ export class PluginManager {
             })
         })
 
+        this.game.actionQueue.onActionQueueUpdated.subscribe(queue => {
+            this.enabledPlugins.forEach(plugin => {
+                plugin.onActionQueueUpdated?.(queue);
+            })
+        })
+
+        // Inject the game into all plugins
         this.plugins.forEach(plugin => {
-            plugin.initialize?.(this.game);
+            plugin.initialize(this.game);
         })
     }
 

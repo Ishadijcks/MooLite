@@ -18,7 +18,7 @@ export class Notifier {
         });
     }
 
-    sendBrowserNotification(title: string, options: NotificationOptions) {
+    sendBrowserNotification(title: string, options: NotificationOptions = {}) {
         const notification = new Notification(title, options);
     }
 }

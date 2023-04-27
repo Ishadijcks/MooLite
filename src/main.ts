@@ -1,3 +1,8 @@
+// Override the WebSocket
+import {IdleNotifierPlugin} from "src/MooLite/plugins/IdleNotifier/IdleNotifierPlugin";
+
+window.WebSocket = MooSocket;
+
 import {createApp, reactive} from 'vue';
 import './style.css';
 import App from './App.vue';
@@ -9,8 +14,6 @@ import {Game} from "src/MooLite/core/Game";
 import {PluginManager} from "src/MooLite/core/plugins/PluginManager";
 import {MooLiteClientPlugin} from "src/MooLite/plugins/MooLite/MooLiteClientPlugin";
 
-// Override the WebSocket
-window.WebSocket = MooSocket;
 
 declare global {
     interface Window {
@@ -31,6 +34,7 @@ const launchMooLite = () => {
         reactive(new MooLiteClientPlugin()),
         reactive(new ChatNotifierPlugin()),
         reactive(new XpTrackerPlugin()),
+        reactive(new IdleNotifierPlugin()),
     ]
 
     const game = reactive<Game>(new Game()) as Game;
