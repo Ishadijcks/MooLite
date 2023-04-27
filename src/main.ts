@@ -35,13 +35,23 @@ const launchMooLite = () => {
     const pluginManager = reactive<PluginManager>(new PluginManager(game, plugins)) as PluginManager;
     const mooLite = reactive(new MooLite(game, pluginManager, window.mooSocket)) as MooLite;
 
-    createApp(App, {client: mooLite}).mount(
+    const app = createApp(App, {client: mooLite});
+    app.mount(
         (() => {
             const app = document.createElement('div');
             document.body.append(app);
             return app;
         })(),
     );
+
+    // Register custom components
+    plugins.forEach(plugin => {
+        if (plugin.tab) {
+            console.log("Registering custom component", plugin.tab.componentName)
+            app.component(plugin.tab.componentName, plugin.tab.component);
+        }
+    })
+
     console.log("MooLite connected successfully")
 }
 

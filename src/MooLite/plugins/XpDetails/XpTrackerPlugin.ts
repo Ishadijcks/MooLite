@@ -2,14 +2,17 @@ import {MooLitePlugin} from "src/MooLite/plugins/MooLitePlugin";
 import {XpGained} from "src/MooLite/core/skills/Skills";
 import {MooLiteTab} from "src/MooLite/core/plugins/MooLiteTab";
 import {SkillHrid} from "src/MooLite/core/skills/SkillHrid";
+import XpTrackerDisplay from "src/MooLite/plugins/XpDetails/XpTrackerDisplay.vue";
+import {markRaw} from "vue";
 
 export class XpTrackerPlugin extends MooLitePlugin {
     name: string = "Xp Tracker";
 
     tab: MooLiteTab = {
         icon: "📊",
-        title: "Xp Tracker",
-        component: "XpTrackerDisplay",
+        pluginName: "Xp Tracker",
+        componentName: "XpTrackerDisplay",
+        component: markRaw(XpTrackerDisplay),
     }
 
     updates: number = 0;
