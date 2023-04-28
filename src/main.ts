@@ -16,6 +16,7 @@ import {MooLiteClientPlugin} from "src/MooLite/plugins/MooLite/MooLiteClientPlug
 import {MooLitePlugin} from "src/MooLite/core/plugins/MooLitePlugin";
 import {LootSimulatorPlugin} from "src/MooLite/plugins/LootSimulator/LootSimulatorPlugin";
 import {ItemFinderPlugin} from "src/MooLite/plugins/ItemFinder/ItemFinderPlugin";
+import {LeaderboardPlugin} from "src/MooLite/plugins/Leaderboard/LeaderboardPlugin";
 
 
 declare global {
@@ -45,6 +46,7 @@ const launchMooLite = () => {
             new IdleNotifierPlugin(),
             new LootSimulatorPlugin(),
             new ItemFinderPlugin(),
+            new LeaderboardPlugin(),
         ]) as MooLitePlugin[];
         const pluginManager = reactive<PluginManager>(new PluginManager(game, plugins)) as PluginManager;
 
