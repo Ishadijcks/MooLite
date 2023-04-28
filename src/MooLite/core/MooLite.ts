@@ -78,13 +78,17 @@ export class MooLite {
         };
 
         this.pluginManager.plugins.forEach(plugin => {
-            saveData.plugins[plugin.key] = plugin.config.map(config => {
+            const config = plugin.config.map(config => {
                 return {
                     key: config.key,
                     value: config.value,
                 }
             });
-        })
+            saveData.plugins[plugin.key] = {
+                isEnabled: plugin.isEnabled,
+                config,
+            };
+        });
         LocalStorage.store(saveData);
         console.log("Game saved")
     }
@@ -92,13 +96,23 @@ export class MooLite {
     private _load(): void {
         const saveData: MooLiteSaveData = LocalStorage.get();
 
+        if (!saveData) {
+            return;
+        }
+
         Object.keys(saveData.plugins).forEach(pluginKey => {
             const pluginData = saveData.plugins[pluginKey];
             const plugin = this.pluginManager.plugins.find(plugin => plugin.key === pluginKey)
             if (!plugin) {
                 return;
             }
-            pluginData.forEach(configSaveData => {
+            if (pluginData.isEnabled && !plugin.isEnabled) {
+                plugin.enable();
+            }
+            if (!pluginData.isEnabled && plugin.isEnabled) {
+                plugin.disable();
+            }
+            pluginData.config.forEach(configSaveData => {
                 const config = plugin.getConfig(configSaveData.key);
                 if (config) {
                     config.value = configSaveData.value

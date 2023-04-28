@@ -15,7 +15,12 @@ export abstract class MooLitePlugin {
     abstract key: string;
     abstract description: string;
 
-    isEnabled: boolean = true;
+    protected _isEnabled: boolean = false;
+    protected _canBeDisabled: boolean = true;
+
+    public get canBeDisabled(): boolean {
+        return this._canBeDisabled;
+    }
 
     config: PluginConfig[] = [];
 
@@ -25,6 +30,18 @@ export abstract class MooLitePlugin {
 
     public get hasConfig(): boolean {
         return this.config.length > 0;
+    }
+
+    public get isEnabled(): boolean {
+        return this._isEnabled;
+    }
+
+    public set isEnabled(value: boolean) {
+        if (value) {
+            this.enable();
+        } else {
+            this.disable()
+        }
     }
 
     tab?: MooLiteTab;
@@ -56,6 +73,17 @@ export abstract class MooLitePlugin {
             }
         })
     };
+
+    enable(): void {
+        this._isEnabled = true;
+    }
+
+    disable(): void {
+        if (this._canBeDisabled) {
+            this._isEnabled = false
+        }
+    }
+
 
     onChatMessage?(message: ChatMessage): void;
 

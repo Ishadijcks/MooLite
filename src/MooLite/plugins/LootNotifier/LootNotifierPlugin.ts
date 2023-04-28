@@ -16,6 +16,8 @@ export class LootNotifierPlugin extends MooLitePlugin {
     key = "loot-notifier";
     description: string = "Notifies you whenever you get certain drops";
 
+    _isEnabled: boolean = true;
+
 
     config: PluginConfig[] = [
         {

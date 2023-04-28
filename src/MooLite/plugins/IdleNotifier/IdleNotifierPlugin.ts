@@ -6,6 +6,8 @@ export class IdleNotifierPlugin extends MooLitePlugin {
     key = "idle-notifier";
     description: string = "Notifies you when your action queue is empty";
 
+    _isEnabled: boolean = true;
+
     onActionQueueUpdated(queue: CharacterAction[]) {
         if (queue.length === 0) {
             this._game.notifier.sendBrowserNotification("You are idle")

@@ -9,9 +9,20 @@ export class MooLiteClientPlugin extends MooLitePlugin {
     key = "moolite";
     description: string = "Your favourite (milky) way to play!"
 
+    _isEnabled: boolean = true;
+    _canBeDisabled: boolean = false;
+
     initialize(game: Game) {
         super.initialize(game);
         Notification.requestPermission().then(console.log);
+    }
+
+    /**
+     * Cannot be disabled
+     */
+    disable() {
+        console.log("disable");
+        return;
     }
 
     config: PluginConfig[] = [

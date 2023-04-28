@@ -24,7 +24,7 @@ const toggleConfig = () => {
         <span class="text-xs hover:opacity-40 cursor-pointer" @click="toggleConfig">
             <span v-show="hasConfig">⚙️</span>
         </span>
-        <input class="cursor-pointer" type="checkbox" v-model="plugin.isEnabled">
+        <input class="cursor-pointer" type="checkbox" v-model="plugin.isEnabled" :disabled="!plugin.canBeDisabled">
     </div>
     <div v-if="hasConfig && showConfig" class="flex flex-col">
         <PluginConfigDisplay v-for="config in plugin.config" :config="config"></PluginConfigDisplay>
