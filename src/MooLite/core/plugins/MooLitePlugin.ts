@@ -72,4 +72,6 @@ export abstract class MooLitePlugin {
     onLeaderboardUpdated?(topics: LeaderboardTopic[]): void
 
     onItemGained?(itemGained: ItemGained): void;
+
+    onClientTick?(): void;
 }

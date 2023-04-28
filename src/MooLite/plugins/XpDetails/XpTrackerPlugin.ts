@@ -4,9 +4,8 @@ import {XpGained} from "src/MooLite/core/skills/Skills";
 import {MooLiteTab} from "src/MooLite/core/plugins/MooLiteTab";
 import {SkillHrid} from "src/MooLite/core/skills/SkillHrid";
 import XpTrackerDisplay from "src/MooLite/plugins/XpDetails/XpTrackerDisplay.vue";
-import {PluginConfig} from "src/MooLite/core/plugins/config/PluginConfig";
-import {PluginConfigType} from "src/MooLite/core/plugins/config/PluginConfigType";
 import {Game} from "src/MooLite/core/Game";
+import {XpTrackerSkill} from "src/MooLite/plugins/XpDetails/XpTrackerSkill";
 
 export class XpTrackerPlugin extends MooLitePlugin {
     name: string = "Xp Tracker";
@@ -20,36 +19,41 @@ export class XpTrackerPlugin extends MooLitePlugin {
         component: markRaw(XpTrackerDisplay),
     }
 
-    config: PluginConfig[] = [
-        {
-            key: "hide-empty",
-            name: "Hide empty skills",
-            description: "Hide skills in which you have not gained xp",
-            value: false,
-            type: PluginConfigType.CheckBox,
-        }
-    ];
+    _gains: Record<SkillHrid, XpTrackerSkill> = {} as Record<SkillHrid, XpTrackerSkill>;
 
-    public get hideEmptySkills(): boolean {
-        return this.getConfig("hide-empty")?.value ?? true;
+    public get gains(): XpTrackerSkill[] {
+        return Object.values(this._gains).filter(skill => {
+            return skill.xpGained > 0;
+        })
     }
+
+    initialize(game: Game): void {
+        super.initialize(game);
+        this._game.skills.sortedSkills.forEach(detail => {
+            this._gains[detail.hrid] = new XpTrackerSkill(detail.name, detail.hrid);
+        })
+    }
+
 
     public getXpLeft(skill: SkillHrid): number {
         return this._game.skills.getXpLeft(skill);
     }
 
-    updates: number = 0;
-    gains: Record<SkillHrid, number> = {} as Record<SkillHrid, number>;
 
-    initialize(game: Game) {
-        super.initialize(game);
-        this._game.skills.sortedSkills.forEach(detail => {
-            this.gains[detail.hrid] = 0;
-        })
+    getPercentage(skillHrid: SkillHrid) {
+        return this._game.skills.getProgressPercentage(skillHrid);
     }
 
-    onXpGained(xpGained: XpGained) {
-        this.gains[xpGained.skillHrid] += xpGained.delta;
-        this.updates++;
+    onXpGained(xpGained: XpGained): void {
+        this._gains[xpGained.skillHrid].getXpGain(xpGained.delta);
+    }
+
+
+    onClientTick(): void {
+        this.gains.forEach(gain => gain.updateXpPerHour());
+    }
+
+    getLevel(skillHrid: SkillHrid): number {
+        return this._game.skills.getLevel(skillHrid);
     }
 }

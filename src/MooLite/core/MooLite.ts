@@ -68,6 +68,8 @@ export class MooLite {
             this._save();
             this._timeSinceLastSave = 0;
         }
+
+        this.pluginManager.clientTick();
     }
 
     private _save(): void {

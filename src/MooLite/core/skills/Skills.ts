@@ -79,4 +79,17 @@ export class Skills {
         const targetXp = this.levelExperienceTable[currentLevel + 1];
         return targetXp - this._characterSkills[skill].experience;
     }
+
+    public getProgressPercentage(skill: any): number {
+        const currentLevel = this._characterSkills[skill].level;
+        const currentXp = this._characterSkills[skill].experience;
+        const previousXp = this.levelExperienceTable[currentLevel];
+        const targetXp = this.levelExperienceTable[currentLevel + 1];
+        const currentLevelXp = targetXp - previousXp;
+        return (currentXp - previousXp) / currentLevelXp;
+    }
+
+    public getLevel(skillHrid: SkillHrid) {
+        return this._characterSkills[skillHrid].level
+    }
 }

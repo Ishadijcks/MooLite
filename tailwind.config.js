@@ -6,11 +6,16 @@ export default {
     ],
     theme: {
         extend: {
+            fontSize: {
+                xxs: '0.65rem',
+            },
             colors: {
                 primary: "var(--color-space-600)",
                 "primary-hover": "var(--color-space-500)",
                 "background-game": "var(--color-background-game)",
                 "dark-mode": "var(--color-neutral-100)",
+                hitpoints: "var(--color-jade-500)",
+                manapoints: "var(--color-ocean-400)",
                 divider: "var(--color-midnight-400)",
                 midnight: {
                     100: "var(--color-midnight-100)",

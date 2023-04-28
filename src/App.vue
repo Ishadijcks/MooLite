@@ -31,7 +31,7 @@ const setActiveTab = (index: number) => {
 </script>
 
 <template>
-    <div class="w-64 flex flex-col h-full shadow-xl bg-background-game text-dark-mode">
+    <div class="w-64 flex flex-col h-full shadow-xl bg-background-game text-dark-mode drop-shadow-2xl">
         <span class="text-center">MooLite</span>
         <MooDivider/>
 

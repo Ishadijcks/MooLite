@@ -76,4 +76,10 @@ export class PluginManager {
             return plugin.tab ? [plugin.tab] : [];
         })
     }
+
+    clientTick(): void {
+        this.enabledPlugins.forEach(plugin => {
+            plugin.onClientTick?.();
+        })
+    }
 }
