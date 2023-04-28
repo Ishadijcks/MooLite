@@ -6,10 +6,12 @@ import {Notifier} from "src/MooLite/core/notifications/Notifier";
 import {InitClientInfoMessage} from "src/MooLite/core/server/messages/InitClientInfo";
 import {Abilities} from "src/MooLite/core/abilities/Abilities";
 import {Combat} from "src/MooLite/core/combat/Combat";
+import {Leaderboard} from "src/MooLite/core/leaderboard/Leaderboard";
 
 export class Game {
     abilities: Abilities;
     combat: Combat;
+    leaderboard: Leaderboard;
 
     skills: Skills;
     chat: Chat;
@@ -23,7 +25,9 @@ export class Game {
     constructor(clientInfo: InitClientInfoMessage) {
         this.abilities = new Abilities(clientInfo.abilityDetailMap, clientInfo.abilitySlotsLevelRequirementList)
         this.combat = new Combat(clientInfo.combatMonsterDetailMap);
+        this.leaderboard = new Leaderboard();
         this.skills = new Skills(clientInfo.skillDetailMap, clientInfo.levelExperienceTable);
+
         this.chat = new Chat();
         this.actionQueue = new ActionQueue(clientInfo.actionDetailMap, clientInfo.actionCategoryDetailMap);
         this.inventory = new Inventory(clientInfo.itemDetailMap, clientInfo.itemCategoryDetailMap);

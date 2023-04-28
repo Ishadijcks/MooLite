@@ -9,6 +9,7 @@ import {ActivePlayerCountUpdatedParser} from "src/MooLite/core/server/messages/A
 import {ActionsUpdatedParser} from "src/MooLite/core/server/messages/ActionsUpdated";
 import {InitCharacterInfo} from "src/MooLite/core/server/messages/InitCharacterInfo";
 import {InfoParser} from "src/MooLite/core/server/messages/Info";
+import {LeaderboardInfoUpdatedParser} from "src/MooLite/core/server/messages/LeaderboardInfoUpdated";
 
 export class MooLite {
     pluginManager: PluginManager;
@@ -25,6 +26,7 @@ export class MooLite {
         new ActionsUpdatedParser(),
         new InfoParser(),
         // new CombatTriggersUpdatedParser(),
+        new LeaderboardInfoUpdatedParser(),
     ]
 
 
