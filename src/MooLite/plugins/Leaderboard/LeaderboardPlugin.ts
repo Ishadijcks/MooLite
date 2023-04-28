@@ -8,6 +8,7 @@ export class LeaderboardPlugin extends MooLitePlugin {
     name: string = "Leaderboard";
     key = "leaderboard";
     description: string = "See how you stack against other players";
+    _isEnabled: boolean = true;
 
     tab: MooLiteTab = {
         icon: '🏆',

@@ -11,6 +11,7 @@ export class XpTrackerPlugin extends MooLitePlugin {
     name: string = "Xp Tracker";
     key = "xp-tracker";
     description: string = "Tracks Xp gains over time";
+    _isEnabled: boolean = true;
 
     tab: MooLiteTab = {
         icon: "📊",
