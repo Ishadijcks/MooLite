@@ -17,6 +17,7 @@ import {MooLitePlugin} from "src/MooLite/core/plugins/MooLitePlugin";
 import {LootSimulatorPlugin} from "src/MooLite/plugins/LootSimulator/LootSimulatorPlugin";
 import {ItemFinderPlugin} from "src/MooLite/plugins/ItemFinder/ItemFinderPlugin";
 import {LeaderboardPlugin} from "src/MooLite/plugins/Leaderboard/LeaderboardPlugin";
+import {LootNotifierPlugin} from "src/MooLite/plugins/LootNotifier/LootNotifierPlugin";
 
 
 declare global {
@@ -45,6 +46,7 @@ const launchMooLite = () => {
             new XpTrackerPlugin(),
             new IdleNotifierPlugin(),
             new LootSimulatorPlugin(),
+            new LootNotifierPlugin(),
             new ItemFinderPlugin(),
             new LeaderboardPlugin(),
         ]) as MooLitePlugin[];
