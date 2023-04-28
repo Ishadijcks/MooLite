@@ -27,11 +27,23 @@ const actions = computed(() => {
     return props.plugin.findItemInActions(selectedHrid.value);
 });
 
+const actionsInput = computed(() => {
+    return actions.value.filter(action => {
+        return action.type === "input";
+    })
+})
+const actionsOutput = computed(() => {
+    return actions.value.filter(action => {
+        return action.type === "output";
+    })
+})
+
 </script>
 
 <template>
     <div class="flex flex-col">
-        <span>Loot Simulator</span>
+        <span>{{ plugin.name }}</span>
+        <br>
         <select v-model="selectedHrid" class="bg-divider">
             <option v-for="option in options" :value="option.value" class="bg-divider">
                 {{ option.text }}
@@ -40,32 +52,37 @@ const actions = computed(() => {
 
         <br>
 
-        <div v-if="monsters.length > 0" class="flex flex-col">
-            <span>Combat</span>
-            <MooDivider/>
-            <div v-for="monster in monsters" class="flex flex-row justify-between">
-                <span>{{ monster.monsterName }}</span>
-                <span>{{ monster.loot.dropRate }}%</span>
-                <span>
+        <div class="flex flex-col space-y-4">
+            <div v-if="monsters.length > 0" class="flex flex-col">
+                <span>Combat</span>
+                <MooDivider/>
+                <div v-for="monster in monsters" class="flex flex-row justify-between">
+                    <span>{{ monster.monsterName }}</span>
+                    <span>{{ monster.loot.dropRate }}%</span>
+                    <span>
                     <span>{{ monster.loot.minCount }}</span>
                     <span v-if="monster.loot.minCount !== monster.loot.maxCount">-</span>
                     <span v-if="monster.loot.minCount !== monster.loot.maxCount">{{ monster.loot.maxCount }}</span>
                 </span>
+                </div>
+            </div>
+
+            <div v-if="actionsInput.length > 0" class="flex flex-col">
+                <span>Input</span>
+                <MooDivider/>
+                <div v-for="action in actionsInput" class="flex flex-row justify-between">
+                    <span>{{ action.action.name }}</span>
+                </div>
+            </div>
+
+            <div v-if="actionsOutput.length > 0" class="flex flex-col">
+                <span>Output</span>
+                <MooDivider/>
+                <div v-for="action in actionsOutput" class="flex flex-row justify-between">
+                    <span>{{ action.action.category }}</span>
+                    <span>{{ action.action.name }}</span>
+                </div>
             </div>
         </div>
-
-<!--        <div v-if="actions.length > 0" class="flex flex-col">-->
-<!--            <span>Actions</span>-->
-<!--            <MooDivider/>-->
-<!--            <div v-for="action in actions" class="flex flex-row justify-between">-->
-<!--                <span>{{ monster.monsterName }}</span>-->
-<!--                <span>{{ monster.loot.dropRate }}%</span>-->
-<!--                <span>-->
-<!--                    <span>{{ monster.loot.minCount }}</span>-->
-<!--                    <span v-if="monster.loot.minCount !== monster.loot.maxCount">-</span>-->
-<!--                    <span v-if="monster.loot.minCount !== monster.loot.maxCount">{{ monster.loot.maxCount }}</span>-->
-<!--                </span>-->
-<!--            </div>-->
-<!--        </div>-->
     </div>
 </template>

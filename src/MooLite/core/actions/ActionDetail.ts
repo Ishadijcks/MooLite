@@ -1,19 +1,20 @@
 import {ActionCategoryHrid} from "src/MooLite/core/actions/ActionCategoryHrid";
 import {ExperienceGain} from "src/MooLite/core/skills/ExperienceGain";
 import {ActionHrid} from "src/MooLite/core/actions/ActionHrid";
-import {ItemAmount} from "src/MooLite/core/items/ItemAmount";
 import {LevelRequirement} from "src/MooLite/core/skills/LevelRequirement";
+import {ItemAmount} from "src/MooLite/core/inventory/items/ItemAmount";
+import {DropTableLoot} from "src/MooLite/core/combat/DropTable";
+import {ActionTypeHrid} from "src/MooLite/core/actions/ActionTypeHrid";
 
 export interface ActionDetail {
     baseTimeCost: number;
     category: ActionCategoryHrid;
-    // TODO(@Isha): Add droptables
-    // dropTable: DropTable | null;
+    dropTable: DropTableLoot[] | null;
     experienceGain: ExperienceGain;
     // TODO(@Isha): Check what ActionFunctions are
     // function: ActionFunction;
     hrid: ActionHrid;
-    inputItems: ItemAmount[];
+    inputItems: ItemAmount[] | null;
     levelRequirement: LevelRequirement;
     // TODO(@Isha): Add MonsterSpawnInfo
     // monsterSpawnInfo : MonsterSpawnInfo;
@@ -21,5 +22,5 @@ export interface ActionDetail {
     outputItems: ItemAmount[];
     rareDropTable: string;
     sortIndex: number;
-    // type: ActionType;
+    type: ActionTypeHrid;
 }

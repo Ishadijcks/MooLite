@@ -12,14 +12,18 @@ import {ItemHrid} from "src/MooLite/core/inventory/ItemHrid";
 import {ItemDetail} from "src/MooLite/core/inventory/items/ItemDetail";
 import {ItemCategoryHrid} from "src/MooLite/core/inventory/items/ItemCategoryHrid";
 import {ItemCategoryDetail} from "src/MooLite/core/inventory/items/ItemCategoryDetail";
+import {ActionCategoryHrid} from "src/MooLite/core/actions/ActionCategoryHrid";
+import {ActionCategoryDetail} from "src/MooLite/core/actions/ActionCategoryDetail";
+import {ActionDetail} from "src/MooLite/core/actions/ActionDetail";
+import {ActionHrid} from "src/MooLite/core/actions/ActionHrid";
 
 export interface InitClientInfoMessage extends ServerMessage {
     type: ServerMessageType.InitClientInfo;
 
     abilityDetailMap: Record<AbilityHrid, AbilityDetail>;
     abilitySlotsLevelRequirementList: number[];
-    // actionCategoryDetailMap: Record<ActionCategoryHrid, ActionCategoryDetail>;
-    // actionDetailMap: Record<ActionHrid, ActionDetail>
+    actionCategoryDetailMap: Record<ActionCategoryHrid, ActionCategoryDetail>;
+    actionDetailMap: Record<ActionHrid, ActionDetail>
     // actionTypeMap: Record<ActionTypeHrid, ActionType>;
     // buffTypeDetailMap: Record<BuffTypeHrid, BuffTypeDetail>;
     // buyableUpgradeDetailMap: Record<BuyableUpgradeHrid, BuyableUpgradeDetail>;

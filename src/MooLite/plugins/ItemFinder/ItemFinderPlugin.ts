@@ -6,6 +6,7 @@ import {ItemDetail} from "src/MooLite/core/inventory/items/ItemDetail";
 import {ItemHrid} from "src/MooLite/core/inventory/ItemHrid";
 import {ItemFoundInLoot} from "src/MooLite/plugins/ItemFinder/ItemFoundInLoot";
 import {DropTableLoot} from "src/MooLite/core/combat/DropTable";
+import {ItemFoundInAction} from "src/MooLite/plugins/ItemFinder/ItemFoundInAction";
 
 export class ItemFinderPlugin extends MooLitePlugin {
     name: string = "Item Finder";
@@ -37,7 +38,17 @@ export class ItemFinderPlugin extends MooLitePlugin {
 
     }
 
-    findItemInActions(item: ItemHrid) {
-        return undefined;
+    findItemInActions(item: ItemHrid): ItemFoundInAction[] {
+        return this._game.actionQueue.actionDetailList.flatMap(action => {
+            const foundItemInput = action.inputItems?.find(input => input.itemHrid === item) ?? undefined;
+            const foundItemOutput = action.outputItems?.find(output => output.itemHrid === item) ?? undefined;
+            if (!foundItemInput && !foundItemOutput) {
+                return [];
+            }
+            return [{
+                type: foundItemInput ? 'input' : 'output',
+                action,
+            }]
+        })
     }
 }

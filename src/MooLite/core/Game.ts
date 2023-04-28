@@ -25,7 +25,7 @@ export class Game {
         this.combat = new Combat(clientInfo.combatMonsterDetailMap);
         this.skills = new Skills(clientInfo.skillDetailMap, clientInfo.levelExperienceTable);
         this.chat = new Chat();
-        this.actionQueue = new ActionQueue();
+        this.actionQueue = new ActionQueue(clientInfo.actionDetailMap, clientInfo.actionCategoryDetailMap);
         this.inventory = new Inventory(clientInfo.itemDetailMap, clientInfo.itemCategoryDetailMap);
 
         this.notifier = new Notifier();
