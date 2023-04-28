@@ -58,7 +58,9 @@ const actionsOutput = computed(() => {
                 <MooDivider/>
                 <div v-for="monster in monsters" class="flex flex-row justify-between">
                     <span>{{ monster.monsterName }}</span>
-                    <span>{{ monster.loot.dropRate }}%</span>
+                    <span :title="'1/' + Math.round(1 / (monster.loot.dropRate))">
+                        {{ monster.loot.dropRate * 100 }}%
+                    </span>
                     <span>
                     <span>{{ monster.loot.minCount }}</span>
                     <span v-if="monster.loot.minCount !== monster.loot.maxCount">-</span>
