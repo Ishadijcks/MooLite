@@ -1,3 +1,6 @@
 export enum PluginConfigType {
-    CheckBox = "checkbox"
+    CheckBox = "checkbox",
+    Text = "text",
+    Choice = "choice",
+    ChoiceList = "choice-list"
 }
