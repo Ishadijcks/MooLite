@@ -22,6 +22,9 @@ export class Game {
 
     activePlayerCount: number = 0;
 
+    lastPing: Date | null = null;
+    lastPong: Date | null = null;
+
     constructor(clientInfo: InitClientInfoMessage) {
         this.abilities = new Abilities(clientInfo.abilityDetailMap, clientInfo.abilitySlotsLevelRequirementList)
         this.combat = new Combat(clientInfo.combatMonsterDetailMap);
@@ -33,6 +36,13 @@ export class Game {
         this.inventory = new Inventory(clientInfo.itemDetailMap, clientInfo.itemCategoryDetailMap);
 
         this.notifier = new Notifier();
+    }
+
+    public get pingPong(): number {
+        if (!this.lastPing || !this.lastPong) {
+            return -1;
+        }
+        return this.lastPong.getTime() - this.lastPing.getTime();
     }
 
 }

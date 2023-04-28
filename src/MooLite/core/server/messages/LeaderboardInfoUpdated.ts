@@ -14,7 +14,6 @@ export class LeaderboardInfoUpdatedParser extends MessageParser {
     type = ServerMessageType.LeaderboardInfoUpdated;
 
     apply(message: LeaderboardInfoUpdatedMessage, game: Game): void {
-        console.log(message);
         game.leaderboard.updateLeaderBoard(message.leaderboardList);
     }
 

@@ -2,6 +2,8 @@ export enum ServerMessageType {
     InitClientInfo = "init_client_info",
     InitCharacterInfo = "init_character_info",
 
+    Pong = "pong",
+
     Info = "info",
 
     ActivePlayerCountUpdated = "active_player_count_updated",
@@ -18,4 +20,5 @@ export enum ServerMessageType {
 
     // Leaderboard
     LeaderboardInfoUpdated = "leaderboard_info_updated",
+
 }

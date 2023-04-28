@@ -10,6 +10,9 @@ import {ActionsUpdatedParser} from "src/MooLite/core/server/messages/ActionsUpda
 import {InitCharacterInfo} from "src/MooLite/core/server/messages/InitCharacterInfo";
 import {InfoParser} from "src/MooLite/core/server/messages/Info";
 import {LeaderboardInfoUpdatedParser} from "src/MooLite/core/server/messages/LeaderboardInfoUpdated";
+import {PingParser} from "src/MooLite/core/server/clientmessages/Ping";
+import {ClientMessage} from "src/MooLite/core/server/clientmessages/ClientMessage";
+import {PongParser} from "src/MooLite/core/server/messages/Pong";
 
 export class MooLite {
     pluginManager: PluginManager;
@@ -18,7 +21,9 @@ export class MooLite {
     game: Game;
 
     messageParsers: MessageParser[] = [
+        // Server messages
         new InitCharacterInfo(),
+        new PongParser(),
 
         new ActionCompletedParser(),
         new ChatMessageReceivedParser(),
@@ -27,6 +32,9 @@ export class MooLite {
         new InfoParser(),
         // new CombatTriggersUpdatedParser(),
         new LeaderboardInfoUpdatedParser(),
+
+        // Client messages
+        new PingParser(),
     ]
 
 
@@ -35,10 +43,11 @@ export class MooLite {
         this.pluginManager = pluginManager;
         this.mooSocket = mooSocket;
 
-        this.mooSocket.onServerMessage.subscribe(message => this.parseServerMessage(message));
+        this.mooSocket.onServerMessage.subscribe(message => this.parseMessage(message));
+        this.mooSocket.onClientMessage.subscribe(message => this.parseMessage(message));
     }
 
-    private parseServerMessage(message: ServerMessage): void {
+    private parseMessage(message: ServerMessage | ClientMessage): void {
         const parser = this.messageParsers.find(parser => {
             return parser.canParse(message);
         })
