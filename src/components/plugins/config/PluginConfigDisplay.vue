@@ -9,7 +9,6 @@ const props = defineProps<{
 }>()
 
 const options = computed(() => {
-    console.log("yaeee", props.config.options)
     return props.config.options as PluginConfigOption;
 })
 

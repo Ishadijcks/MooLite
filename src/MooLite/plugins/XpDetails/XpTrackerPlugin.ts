@@ -10,6 +10,7 @@ import {Game} from "src/MooLite/core/Game";
 
 export class XpTrackerPlugin extends MooLitePlugin {
     name: string = "Xp Tracker";
+    key = "xp-tracker";
     description: string = "Tracks Xp gains over time";
 
     tab: MooLiteTab = {

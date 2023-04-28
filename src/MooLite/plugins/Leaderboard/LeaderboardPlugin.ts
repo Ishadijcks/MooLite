@@ -6,6 +6,7 @@ import {LeaderboardPlayerSummary} from "src/MooLite/core/leaderboard/Leaderboard
 
 export class LeaderboardPlugin extends MooLitePlugin {
     name: string = "Leaderboard";
+    key = "leaderboard";
     description: string = "See how you stack against other players";
 
     tab: MooLiteTab = {

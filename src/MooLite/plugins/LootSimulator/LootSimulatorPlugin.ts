@@ -9,6 +9,7 @@ import {LootSimulator} from "src/MooLite/plugins/LootSimulator/LootSimulator";
 
 export class LootSimulatorPlugin extends MooLitePlugin {
     name: string = "Loot Simulator";
+    key = "loot-simulator";
     description: string = "Try your 'luck' against some of the monsters in the game!";
 
 

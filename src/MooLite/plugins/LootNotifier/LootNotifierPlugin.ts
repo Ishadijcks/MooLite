@@ -13,6 +13,7 @@ enum AbilityNotifierOptions {
 
 export class LootNotifierPlugin extends MooLitePlugin {
     name: string = "Loot Notifier";
+    key = "loot-notifier";
     description: string = "Notifies you whenever you get certain drops";
 
 

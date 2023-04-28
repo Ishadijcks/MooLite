@@ -12,6 +12,7 @@ import {PluginBuiltinOption} from "src/MooLite/core/plugins/config/PluginBuiltin
 
 export abstract class MooLitePlugin {
     abstract name: string;
+    abstract key: string;
     abstract description: string;
 
     isEnabled: boolean = true;

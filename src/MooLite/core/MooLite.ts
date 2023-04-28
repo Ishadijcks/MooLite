@@ -13,6 +13,8 @@ import {LeaderboardInfoUpdatedParser} from "src/MooLite/core/server/messages/Lea
 import {PingParser} from "src/MooLite/core/server/clientmessages/Ping";
 import {ClientMessage} from "src/MooLite/core/server/clientmessages/ClientMessage";
 import {PongParser} from "src/MooLite/core/server/messages/Pong";
+import {LocalStorage} from "src/MooLite/util/LocalStorage";
+import {MooLiteSaveData} from "src/MooLite/core/MooLiteSaveData";
 
 export class MooLite {
     pluginManager: PluginManager;
@@ -37,6 +39,8 @@ export class MooLite {
         new PingParser(),
     ]
 
+    private _interval: NodeJS.Timeout;
+
 
     constructor(game: Game, pluginManager: PluginManager, mooSocket: MooSocket) {
         this.game = game;
@@ -45,7 +49,62 @@ export class MooLite {
 
         this.mooSocket.onServerMessage.subscribe(message => this.parseMessage(message));
         this.mooSocket.onClientMessage.subscribe(message => this.parseMessage(message));
+
+
+        this._interval = setInterval(() => {
+            this._clientTick(1);
+        }, 1000)
+
+        this._load();
     }
+
+    private _timeSinceLastSave: number = 0;
+    private readonly SAVE_INTERVAL = 5;
+
+    private _clientTick(delta: number): void {
+        this._timeSinceLastSave += delta;
+
+        if (this._timeSinceLastSave > this.SAVE_INTERVAL) {
+            this._save();
+            this._timeSinceLastSave = 0;
+        }
+    }
+
+    private _save(): void {
+        const saveData: MooLiteSaveData = {
+            plugins: {},
+        };
+
+        this.pluginManager.plugins.forEach(plugin => {
+            saveData.plugins[plugin.key] = plugin.config.map(config => {
+                return {
+                    key: config.key,
+                    value: config.value,
+                }
+            });
+        })
+        LocalStorage.store(saveData);
+        console.log("Game saved")
+    }
+
+    private _load(): void {
+        const saveData: MooLiteSaveData = LocalStorage.get();
+
+        Object.keys(saveData.plugins).forEach(pluginKey => {
+            const pluginData = saveData.plugins[pluginKey];
+            const plugin = this.pluginManager.plugins.find(plugin => plugin.key === pluginKey)
+            if (!plugin) {
+                return;
+            }
+            pluginData.forEach(configSaveData => {
+                const config = plugin.getConfig(configSaveData.key);
+                if (config) {
+                    config.value = configSaveData.value
+                }
+            })
+        })
+    }
+
 
     private parseMessage(message: ServerMessage | ClientMessage): void {
         const parser = this.messageParsers.find(parser => {

@@ -2,8 +2,9 @@ import {MooLitePlugin} from "src/MooLite/core/plugins/MooLitePlugin";
 import {ChatMessage} from "src/MooLite/core/chat/ChatMessage";
 
 export class ChatNotifierPlugin extends MooLitePlugin {
-    name = "Chat Notifier"
-    description = "Notifies your of chat messages"
+    name = "Chat Notifier";
+    key = "chat-notifier";
+    description = "Notifies your of chat messages";
 
     targetWords: string = "Word1, Word2";
 

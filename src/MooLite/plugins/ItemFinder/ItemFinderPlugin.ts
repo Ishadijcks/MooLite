@@ -10,6 +10,7 @@ import {ItemFoundInAction} from "src/MooLite/plugins/ItemFinder/ItemFoundInActio
 
 export class ItemFinderPlugin extends MooLitePlugin {
     name: string = "Item Finder";
+    key = "item-finder";
     description: string = "Inspect the possible ways to obtain items";
 
 

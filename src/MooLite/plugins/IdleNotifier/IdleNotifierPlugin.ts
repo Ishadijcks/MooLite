@@ -3,6 +3,7 @@ import {CharacterAction} from "src/MooLite/core/actions/CharacterAction";
 
 export class IdleNotifierPlugin extends MooLitePlugin {
     name: string = "Idle Notifier";
+    key = "idle-notifier";
     description: string = "Notifies you when your action queue is empty";
 
     onActionQueueUpdated(queue: CharacterAction[]) {

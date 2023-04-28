@@ -6,6 +6,7 @@ import {Game} from "src/MooLite/core/Game";
 
 export class MooLiteClientPlugin extends MooLitePlugin {
     name: string = "MooLite";
+    key = "moolite";
     description: string = "Your favourite (milky) way to play!"
 
     initialize(game: Game) {
