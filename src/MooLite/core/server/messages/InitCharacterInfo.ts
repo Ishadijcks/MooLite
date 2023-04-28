@@ -26,7 +26,7 @@ export class InitCharacterInfo extends MessageParser {
         console.log(message);
         game.abilities.updateCharacterAbilities(message.characterAbilities, false);
         game.actionQueue.updateActions(message.characterActions);
-        game.inventory.updateCharacterItems(message.characterItems);
+        game.inventory.updateCharacterItems(message.characterItems, false);
         game.skills.updateCharacterSkills(message.characterSkills, false)
         // TODO(@Isha): Parse everything here
         //

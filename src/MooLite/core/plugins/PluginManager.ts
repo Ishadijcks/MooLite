@@ -30,6 +30,13 @@ export class PluginManager {
                 plugin.onXpGained?.(info);
             })
         })
+
+        this.game.inventory.onItemGained.subscribe(itemGained => {
+            this.enabledPlugins.forEach(plugin => {
+                plugin.onItemGained?.(itemGained);
+            })
+        })
+
         this.game.chat.onMessage.subscribe(chatMessage => {
             this.enabledPlugins.forEach(plugin => {
                 plugin.onChatMessage?.(chatMessage);

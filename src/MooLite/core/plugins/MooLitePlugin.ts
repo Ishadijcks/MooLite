@@ -7,6 +7,8 @@ import {Game} from "src/MooLite/core/Game";
 import {CharacterAction} from "src/MooLite/core/actions/CharacterAction";
 import {AbilityXpGained} from "src/MooLite/core/abilities/Abilities";
 import {LeaderboardTopic} from "src/MooLite/core/leaderboard/LeaderboardTopic";
+import {ItemGained} from "src/MooLite/core/inventory/Inventory";
+import {PluginBuiltinOption} from "src/MooLite/core/plugins/config/PluginBuiltinOption";
 
 export abstract class MooLitePlugin {
     abstract name: string;
@@ -16,8 +18,8 @@ export abstract class MooLitePlugin {
 
     config: PluginConfig[] = [];
 
-    public getConfig(key: string): PluginConfig | undefined {
-        return this.config.find(config => config.key === key);
+    public getConfig(key: string): PluginConfig {
+        return this.config.find(config => config.key === key) as PluginConfig;
     }
 
     public get hasConfig(): boolean {
@@ -30,6 +32,28 @@ export abstract class MooLitePlugin {
 
     initialize(game: Game): void {
         this._game = game;
+
+        this.config.forEach(config => {
+            if (typeof config.options === "string") {
+                switch ((config.options as PluginBuiltinOption)) {
+                    case PluginBuiltinOption.Monsters:
+                        config.options = this._game.combat.monsterDetailList.map(monster => ({
+                            text: monster.name,
+                            value: monster.hrid,
+                        }))
+                        break;
+                    case PluginBuiltinOption.Items:
+                        config.options = this._game.inventory.sortedAlphabeticalItems.map(item => ({
+                            text: item.name,
+                            value: item.hrid,
+                        }))
+                        break;
+                    default:
+                        console.error(`Unrecognized builtin option '${config.options}'`)
+                        return [];
+                }
+            }
+        })
     };
 
     onChatMessage?(message: ChatMessage): void;
@@ -45,4 +69,6 @@ export abstract class MooLitePlugin {
     onAbilityLvlGained?(gains: AbilityXpGained): void;
 
     onLeaderboardUpdated?(topics: LeaderboardTopic[]): void
+
+    onItemGained?(itemGained: ItemGained): void;
 }
