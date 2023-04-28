@@ -48,6 +48,12 @@ export class PluginManager {
             })
         })
 
+        this.game.leaderboard.onLeaderboardUpdated.subscribe(topics => {
+            this.enabledPlugins.forEach(plugin => {
+                plugin.onLeaderboardUpdated?.(topics);
+            })
+        })
+
         // Inject the game into all plugins
         this.plugins.forEach(plugin => {
             plugin.initialize(this.game);

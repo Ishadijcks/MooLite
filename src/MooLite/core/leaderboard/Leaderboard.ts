@@ -1,16 +1,22 @@
 import {LeaderboardTopic} from "src/MooLite/core/leaderboard/LeaderboardTopic";
 import {LeaderboardPlayerSummary} from "src/MooLite/core/leaderboard/LeaderboardPlayerSummary";
 import {LeaderboardSkill} from "src/MooLite/core/leaderboard/LeaderboardSkill";
+import {SimpleEventDispatcher} from "strongly-typed-events";
 
 export class Leaderboard {
     public leaderboardList: LeaderboardTopic[] = [];
     public lastUpdated: Date | null = null;
 
+    private _onLeaderboardUpdated = new SimpleEventDispatcher<LeaderboardTopic[]>();
+    public get onLeaderboardUpdated() {
+        return this._onLeaderboardUpdated.asEvent();
+    }
 
     updateLeaderBoard(list: LeaderboardTopic[]): void {
         this.leaderboardList = list;
         this.lastUpdated = new Date();
-        console.error("Leaderboard updated")
+
+        this._onLeaderboardUpdated.dispatch(this.leaderboardList);
     }
 
     getPlayerSummary(name: string): LeaderboardPlayerSummary | null {

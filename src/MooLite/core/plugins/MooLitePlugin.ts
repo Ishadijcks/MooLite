@@ -6,6 +6,7 @@ import {MooNotification} from "src/MooLite/core/notifications/MooNotification";
 import {Game} from "src/MooLite/core/Game";
 import {CharacterAction} from "src/MooLite/core/actions/CharacterAction";
 import {AbilityXpGained} from "src/MooLite/core/abilities/Abilities";
+import {LeaderboardTopic} from "src/MooLite/core/leaderboard/LeaderboardTopic";
 
 export abstract class MooLitePlugin {
     abstract name: string;
@@ -42,4 +43,6 @@ export abstract class MooLitePlugin {
     onAbilityXpGained?(gains: AbilityXpGained): void;
 
     onAbilityLvlGained?(gains: AbilityXpGained): void;
+
+    onLeaderboardUpdated?(topics: LeaderboardTopic[]): void
 }

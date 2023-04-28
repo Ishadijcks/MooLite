@@ -55,7 +55,7 @@ const lastUpdatedText = computed(() => {
                     <th>{{ entry.rank }}</th>
                 </tr>
             </table>
-            <span v-else class="italic text-xs">Player {{ selectedName }} not found on the leaderboards</span>
+            <span v-else class="italic text-xs" v-if="selectedName">Player {{ selectedName }} not found on the leaderboards</span>
         </div>
     </div>
 </template>
