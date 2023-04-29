@@ -46,19 +46,39 @@ export class LootNotifierPlugin extends MooLitePlugin {
         return this.getConfig("highlighted-items").value.replaceAll(", ", ",").split(",")
     }
 
+    public get highlightAbilities(): AbilityNotifierOptions {
+        return this.getConfig("highlight-abilities").value;
+    }
+
     onItemGained(itemGained: ItemGained) {
-        console.log(itemGained);
         this.highlightedItemHrids.forEach(hrid => {
             if (itemGained.itemHrid === hrid) {
                 const name = this._game.inventory.itemDetailMap[hrid].name;
                 this._game.notifier.sendBrowserNotification(`Highlighted drop: ${itemGained.delta} ${name}`)
                 return;
             }
-            if (this._game.inventory.isAbilityBook(itemGained.itemHrid)) {
-                const name = this._game.inventory.itemDetailMap[hrid].name;
-                this._game.notifier.sendBrowserNotification(`Ability book: ${name}`)
-            }
         });
+
+        if (this._game.inventory.isAbilityBook(itemGained.itemHrid)) {
+            const itemDetail = this._game.inventory.itemDetailMap[itemGained.itemHrid];
+            const name = itemDetail.name;
+            const abilityHrid = itemDetail.abilityBookDetail.abilityHrid;
+            const isNew = !this._game.abilities.hasUnlockedAbility(abilityHrid);
+
+            switch (this.highlightAbilities) {
+                case AbilityNotifierOptions.Never:
+                    break;
+                case AbilityNotifierOptions.New:
+                    if (isNew) {
+                        this._game.notifier.sendBrowserNotification(`New ability book: ${name}`)
+                    }
+                    break;
+                case AbilityNotifierOptions.Always:
+                    this._game.notifier.sendBrowserNotification(`${isNew ? "New a" : "A"}bility book: ${name}`)
+                    break;
+            }
+        }
+
     }
 
 }

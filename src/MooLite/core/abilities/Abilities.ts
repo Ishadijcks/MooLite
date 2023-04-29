@@ -77,4 +77,7 @@ export class Abilities {
     }
 
 
+    public hasUnlockedAbility(abilityHrid: AbilityHrid): boolean {
+        return this._characterAbilities[abilityHrid] != null;
+    }
 }
