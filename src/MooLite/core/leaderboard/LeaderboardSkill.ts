@@ -1,5 +1,5 @@
 export interface LeaderboardSkill {
-    name: string
+    name: string;
     experience: number;
     level: number;
     rank: number;

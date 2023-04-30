@@ -1,3 +1,1 @@
-export enum ActionTypeHrid {
-
-}
+export enum ActionTypeHrid {}

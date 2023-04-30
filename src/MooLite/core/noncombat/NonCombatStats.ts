@@ -12,5 +12,4 @@ export interface NonCombatStats {
     skillingRareFind: number;
     tailoringSpeed: number;
     woodcuttingSpeed: number;
-
 }

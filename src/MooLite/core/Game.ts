@@ -1,12 +1,12 @@
-import {Skills} from "src/MooLite/core/skills/Skills";
-import {Chat} from "src/MooLite/core/chat/Chat";
-import {ActionQueue} from "src/MooLite/core/actions/ActionQueue";
-import {Inventory} from "src/MooLite/core/inventory/Inventory";
-import {Notifier} from "src/MooLite/core/notifications/Notifier";
-import {InitClientInfoMessage} from "src/MooLite/core/server/messages/InitClientInfo";
-import {Abilities} from "src/MooLite/core/abilities/Abilities";
-import {Combat} from "src/MooLite/core/combat/Combat";
-import {Leaderboard} from "src/MooLite/core/leaderboard/Leaderboard";
+import { Skills } from "src/MooLite/core/skills/Skills";
+import { Chat } from "src/MooLite/core/chat/Chat";
+import { ActionQueue } from "src/MooLite/core/actions/ActionQueue";
+import { Inventory } from "src/MooLite/core/inventory/Inventory";
+import { Notifier } from "src/MooLite/core/notifications/Notifier";
+import { InitClientInfoMessage } from "src/MooLite/core/server/messages/InitClientInfo";
+import { Abilities } from "src/MooLite/core/abilities/Abilities";
+import { Combat } from "src/MooLite/core/combat/Combat";
+import { Leaderboard } from "src/MooLite/core/leaderboard/Leaderboard";
 
 export class Game {
     abilities: Abilities;
@@ -26,7 +26,7 @@ export class Game {
     lastPong: Date | null = null;
 
     constructor(clientInfo: InitClientInfoMessage) {
-        this.abilities = new Abilities(clientInfo.abilityDetailMap, clientInfo.abilitySlotsLevelRequirementList)
+        this.abilities = new Abilities(clientInfo.abilityDetailMap, clientInfo.abilitySlotsLevelRequirementList);
         this.combat = new Combat(clientInfo.combatMonsterDetailMap);
         this.leaderboard = new Leaderboard();
         this.skills = new Skills(clientInfo.skillDetailMap, clientInfo.levelExperienceTable);
@@ -44,5 +44,4 @@ export class Game {
         }
         return this.lastPong.getTime() - this.lastPing.getTime();
     }
-
 }

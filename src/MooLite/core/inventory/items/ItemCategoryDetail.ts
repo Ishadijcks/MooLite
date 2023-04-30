@@ -1,4 +1,4 @@
-import {ItemCategoryHrid} from "src/MooLite/core/inventory/items/ItemCategoryHrid";
+import { ItemCategoryHrid } from "src/MooLite/core/inventory/items/ItemCategoryHrid";
 
 export interface ItemCategoryDetail {
     hrid: ItemCategoryHrid;

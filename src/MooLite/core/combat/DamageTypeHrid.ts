@@ -1,2 +1,1 @@
-export enum DamageTypeHrid {
-}
+export enum DamageTypeHrid {}

@@ -20,5 +20,4 @@ export enum ServerMessageType {
 
     // Leaderboard
     LeaderboardInfoUpdated = "leaderboard_info_updated",
-
 }

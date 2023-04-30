@@ -1,3 +1,1 @@
-export enum ActionCategoryHrid {
-
-}
+export enum ActionCategoryHrid {}

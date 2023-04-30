@@ -1,4 +1,4 @@
-import {MooLiteSaveData} from "src/MooLite/core/MooLiteSaveData";
+import { MooLiteSaveData } from "src/MooLite/core/MooLiteSaveData";
 
 export class LocalStorage {
     private static readonly SAVE_KEY = "MooLite";
@@ -10,6 +10,6 @@ export class LocalStorage {
 
     public static get(): MooLiteSaveData {
         const saveString = localStorage.getItem(this.SAVE_KEY) as string;
-        return JSON.parse(saveString) as MooLiteSaveData
+        return JSON.parse(saveString) as MooLiteSaveData;
     }
 }

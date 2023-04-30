@@ -1,7 +1,7 @@
-import {SkillHrid} from "src/MooLite/core/skills/SkillHrid";
+import { SkillHrid } from "src/MooLite/core/skills/SkillHrid";
 
 export interface CharacterSkill {
-    skillHrid: SkillHrid
+    skillHrid: SkillHrid;
     experience: number;
     level: number;
 }

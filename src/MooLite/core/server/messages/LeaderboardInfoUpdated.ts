@@ -1,13 +1,13 @@
-import {ServerMessageType} from "src/MooLite/core/server/ServerMessageType";
-import {MessageParser} from "src/MooLite/core/server/MessageParser";
-import {Game} from "src/MooLite/core/Game";
-import {ServerMessage} from "src/MooLite/core/server/ServerMessage";
-import {LeaderboardTopic} from "src/MooLite/core/leaderboard/LeaderboardTopic";
+import { ServerMessageType } from "src/MooLite/core/server/ServerMessageType";
+import { MessageParser } from "src/MooLite/core/server/MessageParser";
+import { Game } from "src/MooLite/core/Game";
+import { ServerMessage } from "src/MooLite/core/server/ServerMessage";
+import { LeaderboardTopic } from "src/MooLite/core/leaderboard/LeaderboardTopic";
 
 export interface LeaderboardInfoUpdatedMessage extends ServerMessage {
-    type: ServerMessageType.LeaderboardInfoUpdated,
+    type: ServerMessageType.LeaderboardInfoUpdated;
 
-    leaderboardList: LeaderboardTopic[]
+    leaderboardList: LeaderboardTopic[];
 }
 
 export class LeaderboardInfoUpdatedParser extends MessageParser {
@@ -16,5 +16,4 @@ export class LeaderboardInfoUpdatedParser extends MessageParser {
     apply(message: LeaderboardInfoUpdatedMessage, game: Game): void {
         game.leaderboard.updateLeaderBoard(message.leaderboardList);
     }
-
 }

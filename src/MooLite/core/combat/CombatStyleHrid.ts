@@ -1,2 +1,1 @@
-export enum CombatStyleHrid {
-}
+export enum CombatStyleHrid {}

@@ -1,8 +1,8 @@
-import {ActionHrid} from "src/MooLite/core/actions/ActionHrid";
+import { ActionHrid } from "src/MooLite/core/actions/ActionHrid";
 
 export interface CharacterAction {
     id: number;
-    actionHrid: ActionHrid
+    actionHrid: ActionHrid;
 
     // Items left, not actions
     currentCount: number;

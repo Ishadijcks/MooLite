@@ -1,9 +1,9 @@
-import {MooLitePlugin} from "src/MooLite/core/plugins/MooLitePlugin";
-import {ItemGained} from "src/MooLite/core/inventory/Inventory";
-import {PluginConfig} from "src/MooLite/core/plugins/config/PluginConfig";
-import {PluginConfigType} from "src/MooLite/core/plugins/config/PluginConfigType";
-import {ItemHrid} from "src/MooLite/core/inventory/ItemHrid";
-import {PluginBuiltinOption} from "src/MooLite/core/plugins/config/PluginBuiltinOption";
+import { MooLitePlugin } from "src/MooLite/core/plugins/MooLitePlugin";
+import { ItemGained } from "src/MooLite/core/inventory/Inventory";
+import { PluginConfig } from "src/MooLite/core/plugins/config/PluginConfig";
+import { PluginConfigType } from "src/MooLite/core/plugins/config/PluginConfigType";
+import { ItemHrid } from "src/MooLite/core/inventory/ItemHrid";
+import { PluginBuiltinOption } from "src/MooLite/core/plugins/config/PluginBuiltinOption";
 
 enum AbilityNotifierOptions {
     Never = "never",
@@ -17,7 +17,6 @@ export class LootNotifierPlugin extends MooLitePlugin {
     description: string = "Notifies you whenever you get certain drops";
 
     _isEnabled: boolean = true;
-
 
     config: PluginConfig[] = [
         {
@@ -35,15 +34,15 @@ export class LootNotifierPlugin extends MooLitePlugin {
             key: "highlight-abilities",
             value: AbilityNotifierOptions.New,
             options: [
-                {text: "Never", value: AbilityNotifierOptions.Never},
-                {text: "New", value: AbilityNotifierOptions.New},
-                {text: "Always", value: AbilityNotifierOptions.Always},
-            ]
-        }
+                { text: "Never", value: AbilityNotifierOptions.Never },
+                { text: "New", value: AbilityNotifierOptions.New },
+                { text: "Always", value: AbilityNotifierOptions.Always },
+            ],
+        },
     ];
 
     public get highlightedItemHrids(): ItemHrid[] {
-        return this.getConfig("highlighted-items").value.replaceAll(", ", ",").split(",")
+        return this.getConfig("highlighted-items").value.replaceAll(", ", ",").split(",");
     }
 
     public get highlightAbilities(): AbilityNotifierOptions {
@@ -51,10 +50,10 @@ export class LootNotifierPlugin extends MooLitePlugin {
     }
 
     onItemGained(itemGained: ItemGained) {
-        this.highlightedItemHrids.forEach(hrid => {
+        this.highlightedItemHrids.forEach((hrid) => {
             if (itemGained.itemHrid === hrid) {
                 const name = this._game.inventory.itemDetailMap[hrid].name;
-                this._game.notifier.sendBrowserNotification(`Highlighted drop: ${itemGained.delta} ${name}`)
+                this._game.notifier.sendBrowserNotification(`Highlighted drop: ${itemGained.delta} ${name}`);
                 return;
             }
         });
@@ -70,15 +69,13 @@ export class LootNotifierPlugin extends MooLitePlugin {
                     break;
                 case AbilityNotifierOptions.New:
                     if (isNew) {
-                        this._game.notifier.sendBrowserNotification(`New ability book: ${name}`)
+                        this._game.notifier.sendBrowserNotification(`New ability book: ${name}`);
                     }
                     break;
                 case AbilityNotifierOptions.Always:
-                    this._game.notifier.sendBrowserNotification(`${isNew ? "New a" : "A"}bility book: ${name}`)
+                    this._game.notifier.sendBrowserNotification(`${isNew ? "New a" : "A"}bility book: ${name}`);
                     break;
             }
         }
-
     }
-
 }

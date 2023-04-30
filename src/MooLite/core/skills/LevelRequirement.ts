@@ -1,6 +1,6 @@
-import {SkillHrid} from "src/MooLite/core/skills/SkillHrid";
+import { SkillHrid } from "src/MooLite/core/skills/SkillHrid";
 
 export interface LevelRequirement {
     level: number;
-    skillHrid: SkillHrid
+    skillHrid: SkillHrid;
 }

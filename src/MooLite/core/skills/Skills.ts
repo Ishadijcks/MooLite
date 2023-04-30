@@ -1,7 +1,7 @@
-import {SkillHrid} from "src/MooLite/core/skills/SkillHrid";
-import {CharacterSkill} from "src/MooLite/core/skills/CharacterSkill";
-import {SimpleEventDispatcher} from "strongly-typed-events";
-import {SkillDetail} from "src/MooLite/core/skills/SkillDetail";
+import { SkillHrid } from "src/MooLite/core/skills/SkillHrid";
+import { CharacterSkill } from "src/MooLite/core/skills/CharacterSkill";
+import { SimpleEventDispatcher } from "strongly-typed-events";
+import { SkillDetail } from "src/MooLite/core/skills/SkillDetail";
 
 export interface XpGained extends CharacterSkill {
     delta: number;
@@ -13,7 +13,6 @@ export interface LvlGained extends CharacterSkill {
 
 export class Skills {
     private readonly _characterSkills: Record<SkillHrid, CharacterSkill>;
-
 
     private _onXpGained = new SimpleEventDispatcher<XpGained>();
     private _onLvlGained = new SimpleEventDispatcher<LvlGained>();
@@ -30,27 +29,26 @@ export class Skills {
         return this._onLvlGained.asEvent();
     }
 
-
     constructor(skillDetailMap: Record<SkillHrid, SkillDetail>, levelExperienceTable: number[]) {
         this.skillDetailMap = skillDetailMap;
         this.levelExperienceTable = levelExperienceTable;
 
         this.sortedSkills = Object.values(this.skillDetailMap).sort((a, b) => {
             return a.sortIndex - b.sortIndex;
-        })
+        });
 
         this._characterSkills = {} as Record<SkillHrid, CharacterSkill>;
-        this.sortedSkills.forEach(detail => {
+        this.sortedSkills.forEach((detail) => {
             this._characterSkills[detail.hrid] = {
                 skillHrid: detail.hrid,
                 experience: 0,
                 level: 0,
-            }
-        })
+            };
+        });
     }
 
     public updateCharacterSkills(skills: CharacterSkill[], notify: boolean = true): void {
-        skills.forEach(info => {
+        skills.forEach((info) => {
             const xpChanged = info.experience - this._characterSkills[info.skillHrid].experience;
             const lvlChanged = info.level - this._characterSkills[info.skillHrid].level;
             this._characterSkills[info.skillHrid] = info;
@@ -70,8 +68,7 @@ export class Skills {
                     delta: lvlChanged,
                 });
             }
-
-        })
+        });
     }
 
     public getXpLeft(skill: SkillHrid): number {
@@ -90,6 +87,6 @@ export class Skills {
     }
 
     public getLevel(skillHrid: SkillHrid) {
-        return this._characterSkills[skillHrid].level
+        return this._characterSkills[skillHrid].level;
     }
 }

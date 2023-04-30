@@ -1,4 +1,4 @@
-import {SkillHrid} from "src/MooLite/core/skills/SkillHrid";
+import { SkillHrid } from "src/MooLite/core/skills/SkillHrid";
 
 export class XpTrackerSkill {
     name: string;
@@ -41,7 +41,6 @@ export class XpTrackerSkill {
         const hoursSpend = diff / this.MS_PER_HOUR;
         this.xpPerHour = this.xpGained / hoursSpend;
     }
-
 
     private _reset(): void {
         this._startTime = new Date();

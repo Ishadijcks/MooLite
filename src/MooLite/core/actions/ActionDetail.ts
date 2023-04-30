@@ -1,10 +1,10 @@
-import {ActionCategoryHrid} from "src/MooLite/core/actions/ActionCategoryHrid";
-import {ExperienceGain} from "src/MooLite/core/skills/ExperienceGain";
-import {ActionHrid} from "src/MooLite/core/actions/ActionHrid";
-import {LevelRequirement} from "src/MooLite/core/skills/LevelRequirement";
-import {ItemAmount} from "src/MooLite/core/inventory/items/ItemAmount";
-import {DropTableLoot} from "src/MooLite/core/combat/DropTable";
-import {ActionTypeHrid} from "src/MooLite/core/actions/ActionTypeHrid";
+import { ActionCategoryHrid } from "src/MooLite/core/actions/ActionCategoryHrid";
+import { ExperienceGain } from "src/MooLite/core/skills/ExperienceGain";
+import { ActionHrid } from "src/MooLite/core/actions/ActionHrid";
+import { LevelRequirement } from "src/MooLite/core/skills/LevelRequirement";
+import { ItemAmount } from "src/MooLite/core/inventory/items/ItemAmount";
+import { DropTableLoot } from "src/MooLite/core/combat/DropTable";
+import { ActionTypeHrid } from "src/MooLite/core/actions/ActionTypeHrid";
 
 export interface ActionDetail {
     baseTimeCost: number;

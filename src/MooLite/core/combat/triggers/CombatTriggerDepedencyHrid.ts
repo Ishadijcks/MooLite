@@ -1,3 +1,1 @@
-export enum CombatTriggerDependencyHrid {
-
-}
+export enum CombatTriggerDependencyHrid {}

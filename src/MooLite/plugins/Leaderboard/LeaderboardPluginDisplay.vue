@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import {computed, ref} from "vue";
-import {LeaderboardPlugin} from "src/MooLite/plugins/Leaderboard/LeaderboardPlugin";
+import { computed, ref } from "vue";
+import { LeaderboardPlugin } from "src/MooLite/plugins/Leaderboard/LeaderboardPlugin";
 import MooDivider from "src/components/atoms/MooDivider.vue";
-import {DateFormatter} from "src/MooLite/util/DateFormatter";
+import { DateFormatter } from "src/MooLite/util/DateFormatter";
 
 const props = defineProps<{
-    plugin: LeaderboardPlugin
-}>()
+    plugin: LeaderboardPlugin;
+}>();
 
-
-const selectedName = ref("")
+const selectedName = ref("");
 
 const playerData = computed(() => {
     if (!selectedName.value) {
@@ -24,22 +23,22 @@ const lastUpdatedText = computed(() => {
         return null;
     }
     return DateFormatter.toHHMM(lastUpdated);
-})
-
+});
 </script>
 
 <template>
     <div class="flex flex-col">
         <span>Leaderboard</span>
-        <MooDivider/>
-        <span v-if="!plugin.hasData"
-              class="italic text-xs">Please visit the leaderboard tab to load in the latest data</span>
+        <MooDivider />
+        <span v-if="!plugin.hasData" class="italic text-xs"
+            >Please visit the leaderboard tab to load in the latest data</span
+        >
         <div v-else class="flex flex-col">
             <span v-if="plugin.lastUpdated" class="italic text-xs">Last updated on {{ lastUpdatedText }}</span>
-            <br>
+            <br />
 
             <span>Player</span>
-            <input type="text" v-model="selectedName" class="bg-divider">
+            <input type="text" v-model="selectedName" class="bg-divider" />
 
             <table v-if="playerData">
                 <tr>
@@ -55,7 +54,9 @@ const lastUpdatedText = computed(() => {
                     <th>{{ entry.rank }}</th>
                 </tr>
             </table>
-            <span v-else class="italic text-xs" v-if="selectedName">Player {{ selectedName }} not found on the leaderboards</span>
+            <span v-else class="italic text-xs" v-if="selectedName"
+                >Player {{ selectedName }} not found on the leaderboards</span
+            >
         </div>
     </div>
 </template>

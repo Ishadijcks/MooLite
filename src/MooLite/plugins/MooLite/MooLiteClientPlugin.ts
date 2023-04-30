@@ -1,13 +1,13 @@
-import {MooLitePlugin} from "src/MooLite/core/plugins/MooLitePlugin";
-import {PluginConfig} from "src/MooLite/core/plugins/config/PluginConfig";
-import {PluginConfigType} from "src/MooLite/core/plugins/config/PluginConfigType";
-import {MooNotification} from "src/MooLite/core/notifications/MooNotification";
-import {Game} from "src/MooLite/core/Game";
+import { MooLitePlugin } from "src/MooLite/core/plugins/MooLitePlugin";
+import { PluginConfig } from "src/MooLite/core/plugins/config/PluginConfig";
+import { PluginConfigType } from "src/MooLite/core/plugins/config/PluginConfigType";
+import { MooNotification } from "src/MooLite/core/notifications/MooNotification";
+import { Game } from "src/MooLite/core/Game";
 
 export class MooLiteClientPlugin extends MooLitePlugin {
     name: string = "MooLite";
     key = "moolite";
-    description: string = "Your favourite (milky) way to play!"
+    description: string = "Your favourite (milky) way to play!";
 
     _isEnabled: boolean = true;
     _canBeDisabled: boolean = false;
@@ -39,17 +39,16 @@ export class MooLiteClientPlugin extends MooLitePlugin {
             description: "Show notifications in the chat",
             type: PluginConfigType.CheckBox,
             value: true,
-        }
+        },
     ];
 
     public get showBrowserNotifications(): boolean {
-        return this.getConfig("mooliteclient/browser-notifications")?.value
+        return this.getConfig("mooliteclient/browser-notifications")?.value;
     }
-
 
     onNotification(notification: MooNotification): void {
         if (this.showBrowserNotifications) {
-            this._game.notifier.sendBrowserNotification(notification.message)
+            this._game.notifier.sendBrowserNotification(notification.message);
         }
     }
 }
