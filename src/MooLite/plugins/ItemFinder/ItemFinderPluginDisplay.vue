@@ -52,6 +52,10 @@ const getItemName = (itemHrid: ItemHrid): string => {
     })?.name as string;
 }
 
+const formatDropRate = (percentage: number, digits: number = 3, threshold: number = 0.01) => {
+    return percentage < threshold ? '~' + (percentage * 100).toFixed(digits) : (percentage * 100)
+}
+
 </script>
 
 <template>
@@ -63,7 +67,6 @@ const getItemName = (itemHrid: ItemHrid): string => {
                 {{ option.text }}
             </option>
         </select>
-
         <br>
 
         <div class="flex flex-col space-y-8">
@@ -77,7 +80,7 @@ const getItemName = (itemHrid: ItemHrid): string => {
                             </td>
                             <td class="text-left">{{ monster.monsterName }}</td>
                             <td :title="'1/' + Math.round(1 / (monster.loot.dropRate))">
-                                {{ monster.loot.dropRate * 100 }}%
+                                {{ formatDropRate(monster.loot.dropRate) }}%
                             </td>
                             <td>
                                 <span>{{ monster.loot.minCount }}</span>
@@ -106,7 +109,7 @@ const getItemName = (itemHrid: ItemHrid): string => {
                             </td>
                             <td>{{ action.action.name }}</td>
                             <td :title="'1/' + Math.round(1 / (action.loot.dropRate))">
-                                {{ action.loot.dropRate * 100 }}%
+                                {{ formatDropRate(action.loot.dropRate) }}%
                             </td>
                             <td>
                                 <span>{{ action.loot.minCount }}</span>
