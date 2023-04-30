@@ -1,14 +1,14 @@
 {
-  "plugins":[
+  "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     [
       "@semantic-release/github",
       {
-        "assets":[
+        "assets": [
           {
-            "path":"dist",
-            "label":"moolite.user.js"
+            "path": "dist",
+            "label": "moolite.user.js"
           }
         ]
       }
