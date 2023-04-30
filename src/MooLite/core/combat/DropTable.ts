@@ -1,4 +1,4 @@
-import {ItemHrid} from "src/MooLite/core/inventory/ItemHrid";
+import { ItemHrid } from "src/MooLite/core/inventory/ItemHrid";
 
 export interface DropTableLoot {
     dropRate: number;

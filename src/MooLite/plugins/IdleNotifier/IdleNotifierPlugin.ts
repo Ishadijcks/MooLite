@@ -1,5 +1,5 @@
-import {MooLitePlugin} from "src/MooLite/core/plugins/MooLitePlugin";
-import {CharacterAction} from "src/MooLite/core/actions/CharacterAction";
+import { MooLitePlugin } from "src/MooLite/core/plugins/MooLitePlugin";
+import { CharacterAction } from "src/MooLite/core/actions/CharacterAction";
 
 export class IdleNotifierPlugin extends MooLitePlugin {
     name: string = "Idle Notifier";
@@ -10,7 +10,7 @@ export class IdleNotifierPlugin extends MooLitePlugin {
 
     onActionQueueUpdated(queue: CharacterAction[]) {
         if (queue.length === 0) {
-            this._game.notifier.sendBrowserNotification("You are idle")
+            this._game.notifier.sendBrowserNotification("You are idle");
         }
     }
 }

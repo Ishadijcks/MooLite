@@ -1,2 +1,1 @@
-export enum SkillHrid {
-}
+export enum SkillHrid {}

@@ -1,3 +1,1 @@
-export enum CombatTriggerTypeHrid {
-
-}
+export enum CombatTriggerTypeHrid {}

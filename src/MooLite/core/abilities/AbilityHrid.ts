@@ -1,3 +1,1 @@
-export enum AbilityHrid {
-
-}
+export enum AbilityHrid {}

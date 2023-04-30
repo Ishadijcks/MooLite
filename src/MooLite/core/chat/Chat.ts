@@ -1,6 +1,6 @@
-import {ChatMessage} from "src/MooLite/core/chat/ChatMessage";
-import {SimpleEventDispatcher} from "strongly-typed-events";
-import {ChatChannelTypeHrid} from "src/MooLite/core/chat/ChatChannelTypeHrid";
+import { ChatMessage } from "src/MooLite/core/chat/ChatMessage";
+import { SimpleEventDispatcher } from "strongly-typed-events";
+import { ChatChannelTypeHrid } from "src/MooLite/core/chat/ChatChannelTypeHrid";
 
 export class Chat {
     private _messages: ChatMessage[] = [];
@@ -24,7 +24,6 @@ export class Chat {
         return this._onTradeMessage.asEvent();
     }
 
-
     public get onHelpMessage() {
         return this._onHelpMessage.asEvent();
     }
@@ -32,7 +31,6 @@ export class Chat {
     public get onWhisperMessage() {
         return this._onWhisperMessage.asEvent();
     }
-
 
     addMessage(chatMessage: ChatMessage): void {
         this._messages.push(chatMessage);
@@ -44,15 +42,14 @@ export class Chat {
                 this._onGeneralMessage.dispatch(chatMessage);
                 break;
             case ChatChannelTypeHrid.Trade:
-                this._onTradeMessage.dispatch(chatMessage)
+                this._onTradeMessage.dispatch(chatMessage);
                 break;
             case ChatChannelTypeHrid.Help:
-                this._onHelpMessage.dispatch(chatMessage)
+                this._onHelpMessage.dispatch(chatMessage);
                 break;
             case ChatChannelTypeHrid.Whisper:
                 this._onWhisperMessage.dispatch(chatMessage);
                 break;
-
         }
     }
 }

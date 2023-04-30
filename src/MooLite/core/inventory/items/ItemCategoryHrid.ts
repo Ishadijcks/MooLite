@@ -1,3 +1,1 @@
-export enum ItemCategoryHrid {
-
-}
+export enum ItemCategoryHrid {}

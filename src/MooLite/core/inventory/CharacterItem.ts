@@ -1,5 +1,5 @@
-import {ItemHrid} from "src/MooLite/core/inventory/ItemHrid";
-import {ItemLocationHrid} from "src/MooLite/core/inventory/ItemLocationHrid";
+import { ItemHrid } from "src/MooLite/core/inventory/ItemHrid";
+import { ItemLocationHrid } from "src/MooLite/core/inventory/ItemLocationHrid";
 
 export interface CharacterItem {
     count: number;
@@ -7,6 +7,6 @@ export interface CharacterItem {
     hash: string;
     id: number;
     itemHrid: ItemHrid;
-    itemLocationHrid: ItemLocationHrid
+    itemLocationHrid: ItemLocationHrid;
     offlineCount: number;
 }

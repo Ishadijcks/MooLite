@@ -1,7 +1,7 @@
-import {ServerMessage} from "src/MooLite/core/server/ServerMessage";
-import {ServerMessageType} from "src/MooLite/core/server/ServerMessageType";
-import {MessageParser} from "src/MooLite/core/server/MessageParser";
-import {Game} from "src/MooLite/core/Game";
+import { ServerMessage } from "src/MooLite/core/server/ServerMessage";
+import { ServerMessageType } from "src/MooLite/core/server/ServerMessageType";
+import { MessageParser } from "src/MooLite/core/server/MessageParser";
+import { Game } from "src/MooLite/core/Game";
 
 export interface ActivePlayerCountUpdatedMessage extends ServerMessage {
     type: ServerMessageType.ActivePlayerCountUpdated;
@@ -14,5 +14,4 @@ export class ActivePlayerCountUpdatedParser extends MessageParser {
     apply(message: ActivePlayerCountUpdatedMessage, game: Game): void {
         game.activePlayerCount = message.activePlayerCount;
     }
-
 }

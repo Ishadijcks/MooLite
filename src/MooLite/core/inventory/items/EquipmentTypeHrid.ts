@@ -1,3 +1,1 @@
-export interface EquipmentTypeHrid {
-
-}
+export interface EquipmentTypeHrid {}

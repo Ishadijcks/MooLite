@@ -1,3 +1,3 @@
 <template>
-  <span class="fon"></span>
+    <span class="fon"></span>
 </template>

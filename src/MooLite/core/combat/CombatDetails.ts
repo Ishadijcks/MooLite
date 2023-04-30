@@ -1,4 +1,4 @@
-import {CombatStats} from "src/MooLite/core/combat/CombatStats";
+import { CombatStats } from "src/MooLite/core/combat/CombatStats";
 
 export interface CombatDetails {
     attackLevel: number;

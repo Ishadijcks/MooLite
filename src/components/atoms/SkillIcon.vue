@@ -1,19 +1,17 @@
 <script setup lang="ts">
-
-import {SkillHrid} from "src/MooLite/core/skills/SkillHrid";
-import {computed} from "vue";
+import { SkillHrid } from "src/MooLite/core/skills/SkillHrid";
+import { computed } from "vue";
 
 const props = defineProps<{
-    skill: SkillHrid
-}>()
+    skill: SkillHrid;
+}>();
 
 const imgUrl = computed(() => {
-    const split = (props.skill as string).split("/")
-    const skillPostfix = split[split.length - 1]
+    const split = (props.skill as unknown as string).split("/");
+    const skillPostfix = split[split.length - 1];
     // TODO(@Isha): Research how these CDN resource urls are generated
     return `/static/media/skills_sprite.3704eb13.svg#${skillPostfix}`;
-})
-
+});
 </script>
 
 <template>
@@ -22,6 +20,4 @@ const imgUrl = computed(() => {
     </svg>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

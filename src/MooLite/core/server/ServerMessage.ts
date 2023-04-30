@@ -1,5 +1,5 @@
-import {ServerMessageType} from "src/MooLite/core/server/ServerMessageType";
+import { ServerMessageType } from "src/MooLite/core/server/ServerMessageType";
 
 export interface ServerMessage {
-    type: ServerMessageType
+    type: ServerMessageType;
 }

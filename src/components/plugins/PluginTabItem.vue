@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import {MooLiteTab} from "src/MooLite/core/plugins/MooLiteTab";
+import { MooLiteTab } from "src/MooLite/core/plugins/MooLiteTab";
 
 const props = defineProps<{
-    tab: MooLiteTab
-}>()
-
+    tab: MooLiteTab;
+}>();
 </script>
 
 <template>

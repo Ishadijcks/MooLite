@@ -1,13 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: [
-        "./index.html",
-        "./src/**/*.{vue,js,ts,jsx,tsx}",
-    ],
+    content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
     theme: {
         extend: {
             fontSize: {
-                xxs: '0.65rem',
+                xxs: "0.65rem",
             },
             colors: {
                 primary: "var(--color-space-600)",
@@ -73,7 +70,7 @@ export default {
                 neutral: {
                     50: "var(--color-neutral-50)",
                     100: "var(--color-neutral-100)",
-                    200: "var(--color-neutral-200)"
+                    200: "var(--color-neutral-200)",
                 },
                 jade: {
                     300: "var(--color-jade-300)",
@@ -94,5 +91,4 @@ export default {
         },
     },
     plugins: [],
-}
-
+};

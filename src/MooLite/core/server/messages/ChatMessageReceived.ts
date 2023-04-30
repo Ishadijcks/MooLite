@@ -1,12 +1,12 @@
-import {ServerMessage} from "src/MooLite/core/server/ServerMessage";
-import {ServerMessageType} from "src/MooLite/core/server/ServerMessageType";
-import {ChatChannelTypeHrid} from "src/MooLite/core/chat/ChatChannelTypeHrid";
-import {ChatIconHrid} from "src/MooLite/core/chat/ChatIconHrid";
-import {MessageParser} from "src/MooLite/core/server/MessageParser";
-import {Game} from "src/MooLite/core/Game";
+import { ServerMessage } from "src/MooLite/core/server/ServerMessage";
+import { ServerMessageType } from "src/MooLite/core/server/ServerMessageType";
+import { ChatChannelTypeHrid } from "src/MooLite/core/chat/ChatChannelTypeHrid";
+import { ChatIconHrid } from "src/MooLite/core/chat/ChatIconHrid";
+import { MessageParser } from "src/MooLite/core/server/MessageParser";
+import { Game } from "src/MooLite/core/Game";
 
 export interface ChatMessageReceived extends ServerMessage {
-    type: ServerMessageType.ChatMessageReceived
+    type: ServerMessageType.ChatMessageReceived;
 
     message: {
         cannotBlock: boolean;
@@ -24,8 +24,8 @@ export interface ChatMessageReceived extends ServerMessage {
         // TODO(@Isha): turn into enum
         specialChatIconHrid: string;
         // TODO(@Isha): turn into date?
-        timeStamp: string
-    }
+        timeStamp: string;
+    };
 }
 
 export class ChatMessageReceivedParser extends MessageParser {
@@ -37,7 +37,6 @@ export class ChatMessageReceivedParser extends MessageParser {
             channel: message.message.channelTypeHrid,
             senderName: message.message.senderName,
             receiverName: message.message.receiverName,
-        })
+        });
     }
-
 }

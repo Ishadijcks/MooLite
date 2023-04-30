@@ -1,27 +1,26 @@
 <script setup lang="ts">
-import {computed, ref} from "vue";
-import {ItemFinderPlugin} from "src/MooLite/plugins/ItemFinder/ItemFinderPlugin";
+import { computed, ref } from "vue";
+import { ItemFinderPlugin } from "src/MooLite/plugins/ItemFinder/ItemFinderPlugin";
 import MooDivider from "src/components/atoms/MooDivider.vue";
-import {ItemHrid} from "src/MooLite/core/inventory/ItemHrid";
+import { ItemHrid } from "src/MooLite/core/inventory/ItemHrid";
 import ItemAmountDisplay from "src/components/atoms/ItemAmountDisplay.vue";
 import MonsterIcon from "src/components/atoms/MonsterIcon.vue";
 import ActionIcon from "src/components/atoms/ActionIcon.vue";
 
 const props = defineProps<{
-    plugin: ItemFinderPlugin
-}>()
-
+    plugin: ItemFinderPlugin;
+}>();
 
 const options = computed(() => {
-    return props.plugin.allItems.map(item => {
+    return props.plugin.allItems.map((item) => {
         return {
             text: item.name,
-            value: item.hrid
-        }
-    })
-})
+            value: item.hrid,
+        };
+    });
+});
 
-const selectedHrid = ref(options.value[0].value)
+const selectedHrid = ref(options.value[0].value);
 
 const monsters = computed(() => {
     return props.plugin.findItemInLoot(selectedHrid.value);
@@ -33,41 +32,40 @@ const actions = computed(() => {
 
 const actionsDropTable = computed(() => {
     return props.plugin.findItemInActionDropTable(selectedHrid.value);
-})
+});
 
 const actionsInput = computed(() => {
-    return actions.value.filter(action => {
+    return actions.value.filter((action) => {
         return action.type === "input";
-    })
-})
+    });
+});
 const actionsOutput = computed(() => {
-    return actions.value.filter(action => {
+    return actions.value.filter((action) => {
         return action.type === "output";
-    })
-})
+    });
+});
 
 const getItemName = (itemHrid: ItemHrid): string => {
-    return props.plugin.allItems.find(item => {
-        return item.hrid === itemHrid
+    return props.plugin.allItems.find((item) => {
+        return item.hrid === itemHrid;
     })?.name as string;
-}
+};
 
 const formatDropRate = (percentage: number, digits: number = 3, threshold: number = 0.01) => {
-    return percentage < threshold ? '~' + (percentage * 100).toFixed(digits) : (percentage * 100)
-}
-
+    return percentage < threshold ? "~" + (percentage * 100).toFixed(digits) : percentage * 100;
+};
 </script>
 
 <template>
     <div class="flex flex-col">
         <span class="text-center">{{ plugin.name }}</span>
-        <MooDivider class="mb-2"/>
+        <MooDivider class="mb-2" />
         <select v-model="selectedHrid" class="bg-divider p-2">
             <option v-for="option in options" :value="option.value" class="bg-divider">
                 {{ option.text }}
             </option>
         </select>
-        <br>
+        <br />
 
         <div class="flex flex-col space-y-8">
             <div v-if="monsters.length">
@@ -79,7 +77,7 @@ const formatDropRate = (percentage: number, digits: number = 3, threshold: numbe
                                 <MonsterIcon class="w-6 h-6" :monster="monster.monsterHrid"></MonsterIcon>
                             </td>
                             <td class="text-left">{{ monster.monsterName }}</td>
-                            <td :title="'1/' + Math.round(1 / (monster.loot.dropRate))">
+                            <td :title="'1/' + Math.round(1 / monster.loot.dropRate)">
                                 {{ formatDropRate(monster.loot.dropRate) }}%
                             </td>
                             <td>
@@ -87,13 +85,12 @@ const formatDropRate = (percentage: number, digits: number = 3, threshold: numbe
                                 <span v-if="monster.loot.minCount !== monster.loot.maxCount">-</span>
                                 <span v-if="monster.loot.minCount !== monster.loot.maxCount">{{
                                     monster.loot.maxCount
-                                    }}</span>
+                                }}</span>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
-
 
             <div v-if="actionsDropTable.length">
                 <span class="font-bold">Gathering</span>
@@ -101,14 +98,15 @@ const formatDropRate = (percentage: number, digits: number = 3, threshold: numbe
                     <table class="w-full">
                         <tr v-for="action in actionsDropTable">
                             <td>
-                                <ActionIcon class="w-6 h-6"
-                                            :actionHrid="action.action.hrid"
-                                            :itemHrid="action.loot.itemHrid"
-                                            :showAction="action.action.dropTable?.length > 1"
+                                <ActionIcon
+                                    class="w-6 h-6"
+                                    :actionHrid="action.action.hrid"
+                                    :itemHrid="action.loot.itemHrid"
+                                    :showAction="(action.action.dropTable?.length ?? 0) > 1"
                                 ></ActionIcon>
                             </td>
                             <td>{{ action.action.name }}</td>
-                            <td :title="'1/' + Math.round(1 / (action.loot.dropRate))">
+                            <td :title="'1/' + Math.round(1 / action.loot.dropRate)">
                                 {{ formatDropRate(action.loot.dropRate) }}%
                             </td>
                             <td>
@@ -116,13 +114,12 @@ const formatDropRate = (percentage: number, digits: number = 3, threshold: numbe
                                 <span v-if="action.loot.minCount !== action.loot.maxCount">-</span>
                                 <span v-if="action.loot.minCount !== action.loot.maxCount">{{
                                     action.loot.maxCount
-                                    }}</span>
+                                }}</span>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
-
 
             <div v-if="actionsInput.length">
                 <span class="font-bold">Ingredient</span>
@@ -131,14 +128,16 @@ const formatDropRate = (percentage: number, digits: number = 3, threshold: numbe
                         <span class="text-center w-full">{{ action.action.name }}</span>
                         <div class="flex flex-row justify-around items-center">
                             <ItemAmountDisplay
-                                    :name="getItemName(input.itemHrid)"
-                                    :item-amount="input"
-                                    v-for="input in action.action.inputItems"/>
+                                :name="getItemName(input.itemHrid)"
+                                :item-amount="input"
+                                v-for="input in action.action.inputItems"
+                            />
                             <span class="text-xxs">➡</span>
                             <ItemAmountDisplay
-                                    :name="getItemName(output.itemHrid)"
-                                    :item-amount="output"
-                                    v-for="output in action.action.outputItems"/>
+                                :name="getItemName(output.itemHrid)"
+                                :item-amount="output"
+                                v-for="output in action.action.outputItems"
+                            />
                         </div>
                     </div>
                 </div>
@@ -146,25 +145,26 @@ const formatDropRate = (percentage: number, digits: number = 3, threshold: numbe
 
             <div v-if="actionsOutput.length">
                 <span class="font-bold">Product</span>
-                <MooDivider/>
+                <MooDivider />
                 <div class="flex flex-col space-y-4">
                     <div v-for="action in actionsOutput" class="bg-divider p-1 flex flex-col">
                         <span class="text-center w-full">{{ action.action.name }}</span>
                         <div class="flex flex-row justify-around items-center">
                             <ItemAmountDisplay
-                                    :name="getItemName(input.itemHrid)"
-                                    :item-amount="input"
-                                    v-for="input in action.action.inputItems"/>
+                                :name="getItemName(input.itemHrid)"
+                                :item-amount="input"
+                                v-for="input in action.action.inputItems"
+                            />
                             <span class="text-xxs">➡</span>
                             <ItemAmountDisplay
-                                    :name="getItemName(output.itemHrid)"
-                                    :item-amount="output"
-                                    v-for="output in action.action.outputItems"/>
+                                :name="getItemName(output.itemHrid)"
+                                :item-amount="output"
+                                v-for="output in action.action.outputItems"
+                            />
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </template>

@@ -1,4 +1,4 @@
 export enum PluginBuiltinOption {
-    Monsters = 'monsters',
-    Items = 'items',
+    Monsters = "monsters",
+    Items = "items",
 }

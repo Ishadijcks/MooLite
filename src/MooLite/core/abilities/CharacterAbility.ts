@@ -1,4 +1,4 @@
-import {AbilityHrid} from "src/MooLite/core/abilities/AbilityHrid";
+import { AbilityHrid } from "src/MooLite/core/abilities/AbilityHrid";
 
 export interface CharacterAbility {
     abilityHrid: AbilityHrid;

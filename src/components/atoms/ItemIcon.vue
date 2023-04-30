@@ -1,18 +1,17 @@
 <script setup lang="ts">
-import {computed} from "vue";
-import {ItemHrid} from "src/MooLite/core/inventory/ItemHrid";
+import { computed } from "vue";
+import { ItemHrid } from "src/MooLite/core/inventory/ItemHrid";
 
 const props = defineProps<{
-    item: ItemHrid
-}>()
+    item: ItemHrid;
+}>();
 
 const imgUrl = computed(() => {
-    const split = (props.item as string).split("/")
-    const itemPostfix = split[split.length - 1]
+    const split = (props.item as unknown as string).split("/");
+    const itemPostfix = split[split.length - 1];
     // TODO(@Isha): Research how these CDN resource urls are generated
     return `/static/media/items_sprite.20cec8ed.svg#${itemPostfix}`;
-})
-
+});
 </script>
 
 <template>

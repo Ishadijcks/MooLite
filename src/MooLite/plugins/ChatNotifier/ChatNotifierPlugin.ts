@@ -1,5 +1,5 @@
-import {MooLitePlugin} from "src/MooLite/core/plugins/MooLitePlugin";
-import {ChatMessage} from "src/MooLite/core/chat/ChatMessage";
+import { MooLitePlugin } from "src/MooLite/core/plugins/MooLitePlugin";
+import { ChatMessage } from "src/MooLite/core/chat/ChatMessage";
 
 export class ChatNotifierPlugin extends MooLitePlugin {
     name = "Chat Notifier";
@@ -10,11 +10,11 @@ export class ChatNotifierPlugin extends MooLitePlugin {
 
     onChatMessage(message: ChatMessage): void {
         const words = this.targetWords.replaceAll(", ", ",").split(",");
-        words.forEach(word => {
+        words.forEach((word) => {
             if (message.message.toLowerCase().includes(word.toLowerCase())) {
-                console.log(`Word found: ${word}`)
+                console.log(`Word found: ${word}`);
                 return;
             }
-        })
+        });
     }
 }

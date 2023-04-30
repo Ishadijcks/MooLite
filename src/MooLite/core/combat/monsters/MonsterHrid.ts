@@ -1,3 +1,1 @@
-export enum MonsterHrid {
-
-}
+export enum MonsterHrid {}

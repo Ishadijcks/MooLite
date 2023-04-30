@@ -1,24 +1,23 @@
 // Override the WebSocket
-import {IdleNotifierPlugin} from "src/MooLite/plugins/IdleNotifier/IdleNotifierPlugin";
+import { IdleNotifierPlugin } from "src/MooLite/plugins/IdleNotifier/IdleNotifierPlugin";
 
 window.WebSocket = MooSocket;
 
-import {createApp, reactive} from 'vue';
-import './style.css';
-import App from './App.vue';
-import {MooLite} from "src/MooLite/core/MooLite";
-import {MooSocket} from "src/MooLite/core/MooSocket";
-import {ChatNotifierPlugin} from "src/MooLite/plugins/ChatNotifier/ChatNotifierPlugin";
-import {XpTrackerPlugin} from "src/MooLite/plugins/XpDetails/XpTrackerPlugin";
-import {Game} from "src/MooLite/core/Game";
-import {PluginManager} from "src/MooLite/core/plugins/PluginManager";
-import {MooLiteClientPlugin} from "src/MooLite/plugins/MooLite/MooLiteClientPlugin";
-import {MooLitePlugin} from "src/MooLite/core/plugins/MooLitePlugin";
-import {LootSimulatorPlugin} from "src/MooLite/plugins/LootSimulator/LootSimulatorPlugin";
-import {ItemFinderPlugin} from "src/MooLite/plugins/ItemFinder/ItemFinderPlugin";
-import {LeaderboardPlugin} from "src/MooLite/plugins/Leaderboard/LeaderboardPlugin";
-import {LootNotifierPlugin} from "src/MooLite/plugins/LootNotifier/LootNotifierPlugin";
-
+import { createApp, reactive } from "vue";
+import "./style.css";
+import App from "./App.vue";
+import { MooLite } from "src/MooLite/core/MooLite";
+import { MooSocket } from "src/MooLite/core/MooSocket";
+import { ChatNotifierPlugin } from "src/MooLite/plugins/ChatNotifier/ChatNotifierPlugin";
+import { XpTrackerPlugin } from "src/MooLite/plugins/XpDetails/XpTrackerPlugin";
+import { Game } from "src/MooLite/core/Game";
+import { PluginManager } from "src/MooLite/core/plugins/PluginManager";
+import { MooLiteClientPlugin } from "src/MooLite/plugins/MooLite/MooLiteClientPlugin";
+import { MooLitePlugin } from "src/MooLite/core/plugins/MooLitePlugin";
+import { LootSimulatorPlugin } from "src/MooLite/plugins/LootSimulator/LootSimulatorPlugin";
+import { ItemFinderPlugin } from "src/MooLite/plugins/ItemFinder/ItemFinderPlugin";
+import { LeaderboardPlugin } from "src/MooLite/plugins/Leaderboard/LeaderboardPlugin";
+import { LootNotifierPlugin } from "src/MooLite/plugins/LootNotifier/LootNotifierPlugin";
 
 declare global {
     interface Window {
@@ -30,12 +29,12 @@ declare global {
 // TODO(@Isha): Properly await till window.mooSocket is set
 const launchMooLite = () => {
     if (!window.mooSocket) {
-        console.log("MooLite not initialized, checking again...")
+        console.log("MooLite not initialized, checking again...");
         setTimeout(launchMooLite, 10);
         return;
     }
 
-    window.mooSocket.onInitClientInfoMessage.subscribe(clientInfo => {
+    window.mooSocket.onInitClientInfoMessage.subscribe((clientInfo) => {
         // Create the game with the init client info
         const game = reactive<Game>(new Game(clientInfo)) as Game;
 
@@ -56,25 +55,25 @@ const launchMooLite = () => {
         const mooLite = reactive(new MooLite(game, pluginManager, window.mooSocket)) as MooLite;
 
         // Mount the Vue app
-        const app = createApp(App, {client: mooLite});
+        const app = createApp(App, { client: mooLite });
         app.mount(
             (() => {
-                const app = document.createElement('div');
+                const app = document.createElement("div");
                 document.body.append(app);
                 return app;
-            })(),
+            })()
         );
 
         // Register custom components
-        plugins.forEach(plugin => {
+        plugins.forEach((plugin) => {
             if (plugin.tab) {
-                console.log("Registering custom component", plugin.tab.componentName)
+                console.log("Registering custom component", plugin.tab.componentName);
                 app.component(plugin.tab.componentName, plugin.tab.component);
             }
-        })
+        });
 
-        console.log("MooLite connected successfully")
-    })
-}
+        console.log("MooLite connected successfully");
+    });
+};
 
 launchMooLite();

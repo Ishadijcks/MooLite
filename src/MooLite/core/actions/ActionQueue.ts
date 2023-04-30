@@ -1,13 +1,12 @@
-import {CharacterAction} from "src/MooLite/core/actions/CharacterAction";
-import {SimpleEventDispatcher} from "strongly-typed-events";
-import {ActionHrid} from "src/MooLite/core/actions/ActionHrid";
-import {ActionDetail} from "src/MooLite/core/actions/ActionDetail";
-import {ActionCategoryHrid} from "src/MooLite/core/actions/ActionCategoryHrid";
-import {ActionCategoryDetail} from "src/MooLite/core/actions/ActionCategoryDetail";
+import { CharacterAction } from "src/MooLite/core/actions/CharacterAction";
+import { SimpleEventDispatcher } from "strongly-typed-events";
+import { ActionHrid } from "src/MooLite/core/actions/ActionHrid";
+import { ActionDetail } from "src/MooLite/core/actions/ActionDetail";
+import { ActionCategoryHrid } from "src/MooLite/core/actions/ActionCategoryHrid";
+import { ActionCategoryDetail } from "src/MooLite/core/actions/ActionCategoryDetail";
 
 export class ActionQueue {
     private _characterActions: CharacterAction[] = [];
-
 
     private _onActionQueueUpdated = new SimpleEventDispatcher<CharacterAction[]>();
 
@@ -20,24 +19,26 @@ export class ActionQueue {
 
     public readonly actionDetailList: ActionDetail[];
 
-
-    constructor(actionDetailMap: Record<ActionHrid, ActionDetail>, actionCategoryDetailMap: Record<ActionCategoryHrid, ActionCategoryDetail>) {
+    constructor(
+        actionDetailMap: Record<ActionHrid, ActionDetail>,
+        actionCategoryDetailMap: Record<ActionCategoryHrid, ActionCategoryDetail>
+    ) {
         this.actionDetailMap = actionDetailMap;
-        this.actionCategoryDetailMap = actionCategoryDetailMap
+        this.actionCategoryDetailMap = actionCategoryDetailMap;
         this.actionDetailList = Object.values(this.actionDetailMap).sort((a, b) => {
             return a.name.localeCompare(b.name);
         });
     }
 
     public updateActions(actions: CharacterAction[]): void {
-        actions.forEach(newAction => {
-            const actionInQueue = this._characterActions.find(action => {
+        actions.forEach((newAction) => {
+            const actionInQueue = this._characterActions.find((action) => {
                 return action.id === newAction.id;
             });
 
             // If not in the queue, add it and we're done
             if (!actionInQueue) {
-                this._characterActions.push(newAction)
+                this._characterActions.push(newAction);
                 return;
             }
 
@@ -50,10 +51,9 @@ export class ActionQueue {
             }
 
             // Otherwise just update it
-            this._characterActions[index] = newAction
-        })
+            this._characterActions[index] = newAction;
+        });
 
         this._onActionQueueUpdated.dispatch(this._characterActions);
     }
-
 }

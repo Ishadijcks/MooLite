@@ -58,7 +58,9 @@ export class Random {
      * @param array
      */
     static shuffle<T>(array: T[]): T[] {
-        let currentIndex = array.length, temporaryValue, randomIndex;
+        let currentIndex = array.length,
+            temporaryValue,
+            randomIndex;
 
         // While there remain elements to shuffle...
         while (0 !== currentIndex) {

@@ -1,18 +1,63 @@
-# Vue 3 + TypeScript + Vite
+# MooLite
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+MooLite is a free, open source [Milky Way Idle](https://www.milkywayidle.com/) client.
 
-## Recommended IDE Setup
+## Usage
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+> IMPORTANT: MooLite is implemented as a TamperMonkey user script.
+> TamperMonkey is a browser extension that can read and modify webpages you are browsing.
+> Make sure you only install MooLite if you trust both TamperMonkey and MooLite not to steal your information.
 
-## Type Support For `.vue` Imports in TS
+- Install [TamperMonkey](https://www.tampermonkey.net/) in the browser of your choice.
+- Install [MooLite](TODO) here.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+## Development
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+The following instructions are only relevant if you want to help develop MooLite.
+If you're looking to install the browser extension, see [Usage](#usage)
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+MooLite uses [Vite](https://vitejs.dev/), [Vue 3](https://vuejs.org/), and [TypeScript](https://www.typescriptlang.org/)
+to deliver extensions right in thr browser.
+
+### Installation
+
+Install the dependencies to work on this project
+
+```bash
+npm run install
+```
+
+### Running the client locally
+
+```bash
+npm run dev
+```
+
+You can now open the game in your browser, and see the MooLite sidebar.
+
+### Linting
+
+Enforces the correct styles across all files
+
+```bash
+npm run lint
+```
+
+## Acknowledgements
+
+This client is heavily inspired by [RuneLite](https://github.com/runelite/runelite/) a great open source OldSchool
+RuneScape client.
+Most of the design decisions were made to mimic RuneLite, as it has a truly amazing plugin system.
+
+The build process is based on [lisonge/vite-plugin-monkey](https://github.com/lisonge/vite-plugin-monkey), a vite plugin
+to create Tampermonkey scripts.
+
+And of course this client would not exist if the very fun game [Milky Way Idle](https://www.milkywayidle.com/) was never
+made.
+If you enjoy this game, make sure to show the developers some support if you can afford it!
+
+
+## Privacy
+
+MooLite does not collect user information or analytics of any kind.
+The only external request it makes is to load `Vue` from an external CDN.

@@ -1,3 +1,1 @@
-export interface CombatTriggerComparatorHrid {
-
-}
+export interface CombatTriggerComparatorHrid {}
