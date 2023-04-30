@@ -20,7 +20,7 @@ export interface ActionDetail {
     // monsterSpawnInfo : MonsterSpawnInfo;
     name: string;
     outputItems: ItemAmount[];
-    rareDropTable: string;
+    rareDropTable: DropTableLoot[] | null;
     sortIndex: number;
     type: ActionTypeHrid;
 }
