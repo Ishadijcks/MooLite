@@ -49,7 +49,7 @@ const launchMooLite = () => {
             new LootNotifierPlugin(),
             new ItemFinderPlugin(),
             new LeaderboardPlugin(),
-        ]) as MooLitePlugin[];
+        ]) as unknown as MooLitePlugin[];
         const pluginManager = reactive<PluginManager>(new PluginManager(game, plugins)) as PluginManager;
 
         // Create the game client
