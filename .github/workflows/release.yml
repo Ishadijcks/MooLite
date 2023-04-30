@@ -8,16 +8,17 @@ jobs:
   deployment:
     runs-on: ubuntu-latest
     steps:
-      -   uses: actions/checkout@v3
-      -   uses: actions/setup-node@v3
-          with:
-            node-version: '18.x'
-            registry-url: 'https://npm.pkg.github.com'
-      -   name: Release
-          run: |
-            npm i
-            npm run build 
-            cd dist && npx semantic-release
-          env:
-            NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://npm.pkg.github.com'
+      - name: Release
+        run: |
+          npm i
+          npm run build 
+          cp package.json dist/package.json
+          cd dist && npx semantic-release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
