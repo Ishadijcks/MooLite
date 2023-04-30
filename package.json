@@ -6,7 +6,10 @@
     "scripts": {
         "dev": "vite",
         "build": "vue-tsc --noEmit && vite build",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "lint": "prettier --write src",
+        "lint:check": "prettier --check src",
+        "semantic-release": "semantic-release"
     },
     "dependencies": {
         "strongly-typed-events": "^3.0.9",

@@ -15,7 +15,7 @@ export default defineConfig({
         monkey({
             entry: "src/main.ts",
             userscript: {
-                icon: "https://vitejs.dev/logo.svg",
+                icon: "https://www.milkywayidle.com/favicon.svg",
                 namespace: "123ishaTest",
                 match: ["https://www.milkywayidle.com/game", "https://test.milkywayidle.com/game"],
             },
