@@ -8,7 +8,7 @@
         "assets":[
           {
             "path":"dist",
-            "label":"foo-${nextRelease.gitTag}"
+            "label":"moolite.user.js"
           }
         ]
       }
