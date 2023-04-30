@@ -102,7 +102,7 @@ const formatDropRate = (percentage: number, digits: number = 3, threshold: numbe
                                     class="w-6 h-6"
                                     :actionHrid="action.action.hrid"
                                     :itemHrid="action.loot.itemHrid"
-                                    :showAction="action.action.dropTable?.length > 1"
+                                    :showAction="(action.action.dropTable?.length ?? 0) > 1"
                                 ></ActionIcon>
                             </td>
                             <td>{{ action.action.name }}</td>

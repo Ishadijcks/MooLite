@@ -7,7 +7,7 @@ const props = defineProps<{
 }>();
 
 const imgUrl = computed(() => {
-    const split = (props.monster as string).split("/");
+    const split = (props.monster as unknown as string).split("/");
     const monsterPostfix = split[split.length - 1];
     // TODO(@Isha): Research how these CDN resource urls are generated
     return `/static/media/combat_monsters_sprite.0f9c0366.svg#${monsterPostfix}`;

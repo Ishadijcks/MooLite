@@ -9,7 +9,7 @@ const props = defineProps<{
 }>();
 
 const options = computed(() => {
-    return props.config.options as PluginConfigOption;
+    return props.config.options as PluginConfigOption[];
 });
 </script>
 

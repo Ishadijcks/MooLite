@@ -7,7 +7,7 @@ const props = defineProps<{
 }>();
 
 const imgUrl = computed(() => {
-    const split = (props.skill as string).split("/");
+    const split = (props.skill as unknown as string).split("/");
     const skillPostfix = split[split.length - 1];
     // TODO(@Isha): Research how these CDN resource urls are generated
     return `/static/media/skills_sprite.3704eb13.svg#${skillPostfix}`;
