@@ -16,8 +16,10 @@ export default defineConfig({
             entry: "src/main.ts",
             userscript: {
                 icon: "https://www.milkywayidle.com/favicon.svg",
+                description: "Useful plugins for Milky Way Idle",
+                "run-at": "document-start",
                 namespace: "123ishaTest",
-                match: ["https://www.milkywayidle.com/game", "https://test.milkywayidle.com/game"],
+                match: ["*://*www.milkywayidle.com/*", "*://*test.milkywayidle.com/*"],
             },
             build: {
                 externalGlobals: {
