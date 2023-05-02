@@ -19,7 +19,7 @@ export default defineConfig({
                 description: "Useful plugins for Milky Way Idle",
                 "run-at": "document-start",
                 namespace: "123ishaTest",
-                match: ["https://www.milkywayidle.com/game", "https://test.milkywayidle.com/game"],
+                match: ["*://*www.milkywayidle.com/*", "*://*test.milkywayidle.com/*"],
             },
             build: {
                 externalGlobals: {

@@ -1,11 +1,8 @@
-// Override the WebSocket
-import { IdleNotifierPlugin } from "src/MooLite/plugins/IdleNotifier/IdleNotifierPlugin";
-
-window.WebSocket = MooSocket;
-
+import { unsafeWindow } from "$";
 import { createApp, reactive } from "vue";
 import "./style.css";
 import App from "./App.vue";
+import { IdleNotifierPlugin } from "src/MooLite/plugins/IdleNotifier/IdleNotifierPlugin";
 import { MooLite } from "src/MooLite/core/MooLite";
 import { MooSocket } from "src/MooLite/core/MooSocket";
 import { ChatNotifierPlugin } from "src/MooLite/plugins/ChatNotifier/ChatNotifierPlugin";
@@ -22,14 +19,19 @@ import { LootNotifierPlugin } from "src/MooLite/plugins/LootNotifier/LootNotifie
 declare global {
     interface Window {
         mooSocket: MooSocket;
-        mooLite: MooLite;
+        WebSocket: typeof MooSocket;
     }
 }
+unsafeWindow.WebSocket = MooSocket;
 
 // TODO(@Isha): Properly await till window.mooSocket is set
+const maxTries = 100;
+let tries = 0;
 const launchMooLite = () => {
     if (!window.mooSocket) {
-        console.log("MooLite not initialized, checking again...");
+        if (tries++ === maxTries) {
+            console.error("MooLite did not initialize in time");
+        }
         setTimeout(launchMooLite, 10);
         return;
     }
