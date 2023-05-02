@@ -30,6 +30,7 @@ export class InitCharacterInfo extends MessageParser {
     type = ServerMessageType.InitCharacterInfo;
 
     apply(message: InitCharacterInfoMessage, game: Game): void {
+        console.log(message);
         game.abilities.updateCharacterAbilities(message.characterAbilities, false);
         game.actionQueue.updateActions(message.characterActions);
         game.inventory.updateCharacterItems(message.characterItems, false);
