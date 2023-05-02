@@ -27,7 +27,12 @@ export class Game {
 
     constructor(clientInfo: InitClientInfoMessage) {
         this.abilities = new Abilities(clientInfo.abilityDetailMap, clientInfo.abilitySlotsLevelRequirementList);
-        this.combat = new Combat(clientInfo.combatMonsterDetailMap);
+        this.combat = new Combat(
+            clientInfo.combatMonsterDetailMap,
+            clientInfo.combatTriggerComparatorDetailMap,
+            clientInfo.combatTriggerConditionDetailMap,
+            clientInfo.combatTriggerDependencyDetailMap
+        );
         this.leaderboard = new Leaderboard();
         this.skills = new Skills(clientInfo.skillDetailMap, clientInfo.levelExperienceTable);
 
