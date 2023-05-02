@@ -16,6 +16,7 @@ import { ClientMessage } from "src/MooLite/core/server/clientmessages/ClientMess
 import { PongParser } from "src/MooLite/core/server/messages/Pong";
 import { LocalStorage } from "src/MooLite/util/LocalStorage";
 import { MooLiteSaveData } from "src/MooLite/core/MooLiteSaveData";
+import { CombatTriggersUpdatedParser } from "src/MooLite/core/server/messages/CombatTriggersUpdated";
 
 export class MooLite {
     pluginManager: PluginManager;
@@ -34,7 +35,7 @@ export class MooLite {
         new ActionsUpdatedParser(),
         new ConsumableSlotsUpdatedParser(),
         new InfoParser(),
-        // new CombatTriggersUpdatedParser(),
+        new CombatTriggersUpdatedParser(),
         new LeaderboardInfoUpdatedParser(),
 
         // Client messages
