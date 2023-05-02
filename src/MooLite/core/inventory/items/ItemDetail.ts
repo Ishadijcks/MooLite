@@ -10,7 +10,6 @@ export interface ItemDetail {
     categoryHrid: ItemCategoryHrid;
     consumableDetail: ConsumableDetail;
     description: string;
-    // TODO(@Isha): Or what?
     enhancementCosts: ItemAmount[] | null;
     equipmentDetail: EquipmentDetail;
     hrid: ItemHrid;

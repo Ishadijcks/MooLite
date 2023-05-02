@@ -18,6 +18,8 @@ import { ActionDetail } from "src/MooLite/core/actions/ActionDetail";
 import { ActionHrid } from "src/MooLite/core/actions/ActionHrid";
 import { ActionTypeHrid } from "src/MooLite/core/actions/ActionTypeHrid";
 import { ActionTypeDetail } from "src/MooLite/core/actions/ActionTypeDetail";
+import { ChatIconHrid } from "src/MooLite/core/chat/ChatIconHrid";
+import { ChatIconDetail } from "src/MooLite/core/chat/ChatIconDetail";
 
 export interface InitClientInfoMessage extends ServerMessage {
     type: ServerMessageType.InitClientInfo;
@@ -29,7 +31,7 @@ export interface InitClientInfoMessage extends ServerMessage {
     actionTypeDetailMap: Record<ActionTypeHrid, ActionTypeDetail>;
     // buffTypeDetailMap: Record<BuffTypeHrid, BuffTypeDetail>;
     // buyableUpgradeDetailMap: Record<BuyableUpgradeHrid, BuyableUpgradeDetail>;
-    // chatIconDetailMap: Record<ChatIconHrid, ChatIconDetail>;
+    chatIconDetailMap: Record<ChatIconHrid, ChatIconDetail>;
     combatMonsterDetailMap: Record<MonsterHrid, MonsterDetail>;
     // combatStyleDetailMap: Record<CombatStyleHrid, CombatStyleDetail>;
     // combatTriggerComparatorDetailMap: Record<CombatTriggerComparatorHrid, CombatTriggerComparatorDetail>;
