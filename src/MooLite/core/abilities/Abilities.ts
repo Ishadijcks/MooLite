@@ -79,7 +79,6 @@ export class Abilities {
         this._abilityCombatTriggers = abilityCombatTriggersMap;
     }
 
-
     public hasUnlockedAbility(abilityHrid: AbilityHrid): boolean {
         return this._characterAbilities[abilityHrid] != null;
     }
