@@ -9,7 +9,7 @@ MooLite is a free, open source [Milky Way Idle](https://www.milkywayidle.com/) c
 > Make sure you only install MooLite if you trust both TamperMonkey and MooLite not to steal your information.
 
 - Install [TamperMonkey](https://www.tampermonkey.net/) in the browser of your choice.
-- Install [MooLite](TODO) here.
+- Install [MooLite](https://github.com/Ishadijcks/Moolite/releases/latest/download/moolite.user.js) here.
 
 ## Development
 
