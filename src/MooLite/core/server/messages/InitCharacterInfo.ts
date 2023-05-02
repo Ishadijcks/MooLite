@@ -10,15 +10,14 @@ import { AbilityHrid } from "src/MooLite/core/abilities/AbilityHrid";
 import { CombatTrigger } from "src/MooLite/core/combat/triggers/CombatTrigger";
 import { ChatIconHrid } from "src/MooLite/core/chat/ChatIconHrid";
 import { CharacterChatIcon } from "src/MooLite/core/chat/CharacterChatIton";
-import { ActionHrid } from "src/MooLite/core/actions/ActionHrid";
-import { DrinkDetail } from "src/MooLite/core/inventory/items/DrinkDetail";
-import { FoodDetail } from "src/MooLite/core/inventory/items/FoodDetail";
+import { ActionTypeHrid } from "src/MooLite/core/actions/ActionTypeHrid";
+import { CharacterConsumable } from "src/MooLite/core/inventory/items/CharacterConsumable";
 
 export interface InitCharacterInfoMessage extends ServerMessage {
     type: ServerMessageType.InitCharacterInfo;
 
-    actionTypeDrinkSlotsMap: Record<ActionHrid, DrinkDetail[]>;
-    actionTypeFoodSlotsMap: Record<ActionHrid, FoodDetail[]>;
+    actionTypeDrinkSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]>;
+    actionTypeFoodSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]>;
     abilityCombatTriggersMap: Record<AbilityHrid, CombatTrigger>;
     characterAbilities: CharacterAbility[] | null;
     characterActions: CharacterAction[];
