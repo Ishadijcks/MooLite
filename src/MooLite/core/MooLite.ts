@@ -95,6 +95,13 @@ export class MooLite {
         const saveData: MooLiteSaveData = LocalStorage.get();
 
         if (!saveData) {
+            alert(
+                "Thank you for using MooLite.\n" +
+                    "MooLite is community-made client, unrelated to the development of Milky Way Idle\n" +
+                    "Please report any issues with MooLite over at \n" +
+                    "https://github.com/Ishadijcks/MooLite\n" +
+                    "and do not bother the Milky Way Idle developers about it on Discord.\n"
+            );
             return;
         }
 
