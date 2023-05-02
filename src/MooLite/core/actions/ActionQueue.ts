@@ -4,6 +4,8 @@ import { ActionHrid } from "src/MooLite/core/actions/ActionHrid";
 import { ActionDetail } from "src/MooLite/core/actions/ActionDetail";
 import { ActionCategoryHrid } from "src/MooLite/core/actions/ActionCategoryHrid";
 import { ActionCategoryDetail } from "src/MooLite/core/actions/ActionCategoryDetail";
+import { ActionTypeHrid } from "src/MooLite/core/actions/ActionTypeHrid";
+import { ActionTypeDetail } from "src/MooLite/core/actions/ActionTypeDetail";
 
 export class ActionQueue {
     private _characterActions: CharacterAction[] = [];
@@ -16,15 +18,18 @@ export class ActionQueue {
 
     public readonly actionDetailMap: Record<ActionHrid, ActionDetail>;
     public readonly actionCategoryDetailMap: Record<ActionCategoryHrid, ActionCategoryDetail>;
+    public readonly actionTypeDetailMap: Record<ActionTypeHrid, ActionTypeDetail>;
 
     public readonly actionDetailList: ActionDetail[];
 
     constructor(
         actionDetailMap: Record<ActionHrid, ActionDetail>,
-        actionCategoryDetailMap: Record<ActionCategoryHrid, ActionCategoryDetail>
+        actionCategoryDetailMap: Record<ActionCategoryHrid, ActionCategoryDetail>,
+        actionTypeDetailMap: Record<ActionTypeHrid, ActionTypeDetail>
     ) {
         this.actionDetailMap = actionDetailMap;
         this.actionCategoryDetailMap = actionCategoryDetailMap;
+        this.actionTypeDetailMap = actionTypeDetailMap;
         this.actionDetailList = Object.values(this.actionDetailMap).sort((a, b) => {
             return a.name.localeCompare(b.name);
         });
