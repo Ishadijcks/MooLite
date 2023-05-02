@@ -39,7 +39,6 @@ export class Inventory {
     }
 
     updateCharacterItems(items: CharacterItem[], notify: boolean = true) {
-        // TODO(@Isha): Add events
         items.forEach((newItem) => {
             const itemInInventory = this._characterItems.find((item) => {
                 return item.id === newItem.id;
