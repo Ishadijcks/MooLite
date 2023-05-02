@@ -50,7 +50,7 @@ const lastUpdatedText = computed(() => {
                 <tr v-for="entry in playerData.skills">
                     <th class="text-left">{{ entry.name }}</th>
                     <th>{{ entry.level }}</th>
-                    <th>{{ entry.experience }}</th>
+                    <th>{{ entry.experience.toLocaleString() }}</th>
                     <th>{{ entry.rank }}</th>
                 </tr>
             </table>

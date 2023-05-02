@@ -23,22 +23,22 @@ const actionsLeft = computed(() => {
             <div class="flex flex-col flex-1">
                 <span class="text-xxs">
                     <span class="text-ocean-200">XP Gained:</span>
-                    {{ Math.floor(skill.xpGained) }}
+                    {{ Math.floor(skill.xpGained).toLocaleString() }}
                 </span>
                 <span class="text-xxs">
                     <span class="text-ocean-200">XP/hr:</span>
-                    {{ Math.floor(skill.xpPerHour) }}
+                    {{ Math.floor(skill.xpPerHour).toLocaleString() }}
                 </span>
             </div>
 
             <div class="flex flex-col items-end">
                 <span class="text-xxs">
                     <span class="text-ocean-200">XP Left:</span>
-                    {{ Math.ceil(xpLeft) }}
+                    {{ Math.ceil(xpLeft).toLocaleString() }}
                 </span>
                 <span class="text-xxs">
                     <span class="text-ocean-200">Actions:</span>
-                    {{ Math.ceil(actionsLeft) }}
+                    {{ Math.ceil(actionsLeft).toLocaleString() }}
                 </span>
             </div>
         </div>
