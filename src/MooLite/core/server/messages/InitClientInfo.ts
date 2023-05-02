@@ -16,6 +16,8 @@ import { ActionCategoryHrid } from "src/MooLite/core/actions/ActionCategoryHrid"
 import { ActionCategoryDetail } from "src/MooLite/core/actions/ActionCategoryDetail";
 import { ActionDetail } from "src/MooLite/core/actions/ActionDetail";
 import { ActionHrid } from "src/MooLite/core/actions/ActionHrid";
+import { ActionTypeHrid } from "src/MooLite/core/actions/ActionTypeHrid";
+import { ActionTypeDetail } from "src/MooLite/core/actions/ActionTypeDetail";
 
 export interface InitClientInfoMessage extends ServerMessage {
     type: ServerMessageType.InitClientInfo;
@@ -24,7 +26,7 @@ export interface InitClientInfoMessage extends ServerMessage {
     abilitySlotsLevelRequirementList: number[];
     actionCategoryDetailMap: Record<ActionCategoryHrid, ActionCategoryDetail>;
     actionDetailMap: Record<ActionHrid, ActionDetail>;
-    // actionTypeMap: Record<ActionTypeHrid, ActionType>;
+    actionTypeDetailMap: Record<ActionTypeHrid, ActionTypeDetail>;
     // buffTypeDetailMap: Record<BuffTypeHrid, BuffTypeDetail>;
     // buyableUpgradeDetailMap: Record<BuyableUpgradeHrid, BuyableUpgradeDetail>;
     // chatIconDetailMap: Record<ChatIconHrid, ChatIconDetail>;
