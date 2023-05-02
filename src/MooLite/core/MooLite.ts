@@ -6,6 +6,7 @@ import { ActionCompletedParser } from "src/MooLite/core/server/messages/ActionCo
 import { Game } from "src/MooLite/core/Game";
 import { ChatMessageReceivedParser } from "src/MooLite/core/server/messages/ChatMessageReceived";
 import { ActivePlayerCountUpdatedParser } from "src/MooLite/core/server/messages/ActivePlayerCountUpdated";
+import { ConsumableSlotsUpdatedParser } from "src/MooLite/core/server/messages/ConsumableSlotsUpdated";
 import { ActionsUpdatedParser } from "src/MooLite/core/server/messages/ActionsUpdated";
 import { InitCharacterInfo } from "src/MooLite/core/server/messages/InitCharacterInfo";
 import { InfoParser } from "src/MooLite/core/server/messages/Info";
@@ -31,6 +32,7 @@ export class MooLite {
         new ChatMessageReceivedParser(),
         new ActivePlayerCountUpdatedParser(),
         new ActionsUpdatedParser(),
+        new ConsumableSlotsUpdatedParser(),
         new InfoParser(),
         // new CombatTriggersUpdatedParser(),
         new LeaderboardInfoUpdatedParser(),

@@ -10,10 +10,14 @@ import { AbilityHrid } from "src/MooLite/core/abilities/AbilityHrid";
 import { CombatTrigger } from "src/MooLite/core/combat/triggers/CombatTrigger";
 import { ChatIconHrid } from "src/MooLite/core/chat/ChatIconHrid";
 import { CharacterChatIcon } from "src/MooLite/core/chat/CharacterChatIton";
+import { ActionTypeHrid } from "src/MooLite/core/actions/ActionTypeHrid";
+import { CharacterConsumable } from "src/MooLite/core/inventory/items/CharacterConsumable";
 
 export interface InitCharacterInfoMessage extends ServerMessage {
     type: ServerMessageType.InitCharacterInfo;
 
+    actionTypeDrinkSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]>;
+    actionTypeFoodSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]>;
     abilityCombatTriggersMap: Record<AbilityHrid, CombatTrigger>;
     characterAbilities: CharacterAbility[] | null;
     characterActions: CharacterAction[];
@@ -26,15 +30,14 @@ export class InitCharacterInfo extends MessageParser {
     type = ServerMessageType.InitCharacterInfo;
 
     apply(message: InitCharacterInfoMessage, game: Game): void {
-        console.log(message);
         game.abilities.updateCharacterAbilities(message.characterAbilities, false);
         game.actionQueue.updateActions(message.characterActions);
         game.inventory.updateCharacterItems(message.characterItems, false);
+        game.inventory.updateCharacterDrink(message.actionTypeDrinkSlotsMap);
+        game.inventory.updateCharacterFood(message.actionTypeFoodSlotsMap);
         game.skills.updateCharacterSkills(message.characterSkills, false);
         // TODO(@Isha): Parse everything here
         //
-        //  actionTypeDrinkSlotsMap
-        //  actionTypeFoodSlotsMap
         //  blockerCharacterMap
         //  character
         game.chat.updateCharacterChatIcons(message.characterChatIconMap);

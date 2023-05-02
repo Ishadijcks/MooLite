@@ -11,6 +11,7 @@ export enum ServerMessageType {
     // Actions
     ActionCompleted = "action_completed",
     ActionsUpdated = "actions_updated",
+    ConsumableSlotsUpdated = "action_type_consumable_slots_updated",
 
     // Chat
     ChatMessageReceived = "chat_message_received",
