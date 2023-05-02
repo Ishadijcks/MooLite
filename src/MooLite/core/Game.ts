@@ -31,7 +31,7 @@ export class Game {
         this.leaderboard = new Leaderboard();
         this.skills = new Skills(clientInfo.skillDetailMap, clientInfo.levelExperienceTable);
 
-        this.chat = new Chat();
+        this.chat = new Chat(clientInfo.chatIconDetailMap);
         this.actionQueue = new ActionQueue(clientInfo.actionDetailMap, clientInfo.actionCategoryDetailMap);
         this.inventory = new Inventory(clientInfo.itemDetailMap, clientInfo.itemCategoryDetailMap);
 

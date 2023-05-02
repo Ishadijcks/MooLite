@@ -1,9 +1,13 @@
 import { ChatMessage } from "src/MooLite/core/chat/ChatMessage";
 import { SimpleEventDispatcher } from "strongly-typed-events";
 import { ChatChannelTypeHrid } from "src/MooLite/core/chat/ChatChannelTypeHrid";
+import { ChatIconDetail } from "src/MooLite/core/chat/ChatIconDetail";
+import { ChatIconHrid } from "src/MooLite/core/chat/ChatIconHrid";
+import { CharacterChatIcon } from "src/MooLite/core/chat/CharacterChatIton";
 
 export class Chat {
     private _messages: ChatMessage[] = [];
+    private _characterChatIcons: Record<ChatIconHrid, CharacterChatIcon> = {};
 
     private _onMessage = new SimpleEventDispatcher<ChatMessage>();
 
@@ -11,6 +15,16 @@ export class Chat {
     private _onTradeMessage = new SimpleEventDispatcher<ChatMessage>();
     private _onHelpMessage = new SimpleEventDispatcher<ChatMessage>();
     private _onWhisperMessage = new SimpleEventDispatcher<ChatMessage>();
+
+    public readonly chatIconDetailMap: Record<ChatIconHrid, ChatIconDetail>;
+
+    constructor(chatIconDetailMap: Record<ChatIconHrid, ChatIconDetail>) {
+        this.chatIconDetailMap = chatIconDetailMap;
+    }
+
+    public updateCharacterChatIcons(chatIconMap: Record<ChatIconHrid, CharacterChatIcon>) {
+        this._characterChatIcons = chatIconMap;
+    }
 
     public get onMessage() {
         return this._onMessage.asEvent();

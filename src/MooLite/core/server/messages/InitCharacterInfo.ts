@@ -8,6 +8,8 @@ import { CharacterSkill } from "src/MooLite/core/skills/CharacterSkill";
 import { CharacterAbility } from "src/MooLite/core/abilities/CharacterAbility";
 import { AbilityHrid } from "src/MooLite/core/abilities/AbilityHrid";
 import { CombatTrigger } from "src/MooLite/core/combat/triggers/CombatTrigger";
+import { ChatIconHrid } from "src/MooLite/core/chat/ChatIconHrid";
+import { CharacterChatIcon } from "src/MooLite/core/chat/CharacterChatIton";
 
 export interface InitCharacterInfoMessage extends ServerMessage {
     type: ServerMessageType.InitCharacterInfo;
@@ -15,6 +17,7 @@ export interface InitCharacterInfoMessage extends ServerMessage {
     abilityCombatTriggersMap: Record<AbilityHrid, CombatTrigger>;
     characterAbilities: CharacterAbility[] | null;
     characterActions: CharacterAction[];
+    characterChatIconMap: Record<ChatIconHrid, CharacterChatIcon>;
     characterItems: CharacterItem[];
     characterSkills: CharacterSkill[];
 }
@@ -34,7 +37,7 @@ export class InitCharacterInfo extends MessageParser {
         //  actionTypeFoodSlotsMap
         //  blockerCharacterMap
         //  character
-        //  characterChatIconMap
+        game.chat.updateCharacterChatIcons(message.characterChatIconMap);
         //  characterQuests
         //  characterSetting
         //  characterUpgradeMap
