@@ -24,7 +24,7 @@ to deliver extensions right in thr browser.
 Install the dependencies to work on this project
 
 ```bash
-npm run install
+npm install
 ```
 
 ### Running the client locally
@@ -32,6 +32,9 @@ npm run install
 ```bash
 npm run dev
 ```
+This will run Vite. Once it's booted, click the Vite link in your terminal to open and install the userscript.
+
+> IMPORTANT: Make sure to disable the installed MooLite version while using the dev version.
 
 You can now open the game in your browser, and see the MooLite sidebar.
 
