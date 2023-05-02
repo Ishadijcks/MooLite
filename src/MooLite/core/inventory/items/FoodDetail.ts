@@ -3,11 +3,11 @@ import { ConsumableSlotTypeHrid } from "src/MooLite/core/inventory/ConsumableSlo
 import { ItemHrid } from "src/MooLite/core/inventory/ItemHrid";
 
 export interface FoodDetail {
-  actionTypeHrid: ActionTypeHrid,
-  characterID: number,
-  consumableSlotTypeHrid: ConsumableSlotTypeHrid,
-  duration: number,
-  isActive: boolean,
-  itemHrid: ItemHrid,
-  slotIndex: number,
+    actionTypeHrid: ActionTypeHrid;
+    characterID: number;
+    consumableSlotTypeHrid: ConsumableSlotTypeHrid;
+    duration: number;
+    isActive: boolean;
+    itemHrid: ItemHrid;
+    slotIndex: number;
 }

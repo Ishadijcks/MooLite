@@ -17,8 +17,8 @@ import { FoodDetail } from "src/MooLite/core/inventory/items/FoodDetail";
 export interface InitCharacterInfoMessage extends ServerMessage {
     type: ServerMessageType.InitCharacterInfo;
 
-    actionTypeDrinkSlotsMap: Record<ActionHrid, DrinkDetail[]>
-    actionTypeFoodSlotsMap: Record<ActionHrid, FoodDetail[]>
+    actionTypeDrinkSlotsMap: Record<ActionHrid, DrinkDetail[]>;
+    actionTypeFoodSlotsMap: Record<ActionHrid, FoodDetail[]>;
     abilityCombatTriggersMap: Record<AbilityHrid, CombatTrigger>;
     characterAbilities: CharacterAbility[] | null;
     characterActions: CharacterAction[];
