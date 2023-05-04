@@ -20,8 +20,12 @@ export class CombatTriggersUpdatedParser extends MessageParser {
     type = ServerMessageType.CombatTriggersUpdated;
 
     apply(message: CombatTriggersUpdatedMessage, game: Game): void {
-        // TODO(@Isha): Figure out what to do with combat triggers
-        // game.abilities.updateCombatTriggers(message.)
-        console.log(message);
+        if (message.abilityHrid) {
+            game.abilities.updateCombatTriggers(message.combatTriggers);
+        }
+        // TODO: Add whenever we implement triggers on consumables
+        // if (message.itemHrid) {
+        //     game.inventory.updateConsumableTriggers(message.combatTriggers);
+        // }
     }
 }

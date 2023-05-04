@@ -20,6 +20,12 @@ import { ActionTypeHrid } from "src/MooLite/core/actions/ActionTypeHrid";
 import { ActionTypeDetail } from "src/MooLite/core/actions/ActionTypeDetail";
 import { ChatIconHrid } from "src/MooLite/core/chat/ChatIconHrid";
 import { ChatIconDetail } from "src/MooLite/core/chat/ChatIconDetail";
+import { CombatTriggerComparatorHrid } from "src/MooLite/core/combat/triggers/CombatTriggerComparatorHrid";
+import { CombatTriggerConditionHrid } from "src/MooLite/core/combat/triggers/CombatTriggerConditionHrid";
+import { CombatTriggerDependencyHrid } from "src/MooLite/core/combat/triggers/CombatTriggerDepedencyHrid";
+import { CombatTriggerComparatorDetail } from "src/MooLite/core/combat/triggers/CombatTriggerComparatorDetail";
+import { CombatTriggerConditionDetail } from "src/MooLite/core/combat/triggers/CombatTriggerConditionDetail";
+import { CombatTriggerDependencyDetail } from "src/MooLite/core/combat/triggers/CombatTriggerDependencyDetail";
 
 export interface InitClientInfoMessage extends ServerMessage {
     type: ServerMessageType.InitClientInfo;
@@ -34,9 +40,9 @@ export interface InitClientInfoMessage extends ServerMessage {
     chatIconDetailMap: Record<ChatIconHrid, ChatIconDetail>;
     combatMonsterDetailMap: Record<MonsterHrid, MonsterDetail>;
     // combatStyleDetailMap: Record<CombatStyleHrid, CombatStyleDetail>;
-    // combatTriggerComparatorDetailMap: Record<CombatTriggerComparatorHrid, CombatTriggerComparatorDetail>;
-    // combatTriggerConditionDetailMap: Record<CombatTriggerConditionHrid, CombatTriggerConditionDetail>;
-    // combatTriggerDependencyDetailMap: Record<CombatTriggerDependencyHrid, CombatTriggerDependencyDetail>;
+    combatTriggerComparatorDetailMap: Record<CombatTriggerComparatorHrid, CombatTriggerComparatorDetail>;
+    combatTriggerConditionDetailMap: Record<CombatTriggerConditionHrid, CombatTriggerConditionDetail>;
+    combatTriggerDependencyDetailMap: Record<CombatTriggerDependencyHrid, CombatTriggerDependencyDetail>;
     // communityBuffTypeDetailMap: Record<CommunityBuffTypeHrid, CommunityBuffTypeDetail>;
     // cowbellBundleDetailMap: Record<string, CowbellBundleDetail>;
     // currentTimestamp: string;

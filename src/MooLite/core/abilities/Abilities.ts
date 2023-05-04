@@ -2,6 +2,7 @@ import { CharacterAbility } from "src/MooLite/core/abilities/CharacterAbility";
 import { AbilityHrid } from "src/MooLite/core/abilities/AbilityHrid";
 import { AbilityDetail } from "src/MooLite/core/abilities/AbilityDetail";
 import { SimpleEventDispatcher } from "strongly-typed-events";
+import { CombatTrigger } from "src/MooLite/core/combat/triggers/CombatTrigger";
 
 export interface AbilityXpGained extends CharacterAbility {
     delta: number;
@@ -13,6 +14,7 @@ export interface AbilityLvlGained extends CharacterAbility {
 
 export class Abilities {
     private _characterAbilities: Record<AbilityHrid, CharacterAbility | null> = {};
+    private _abilityCombatTriggers: Record<AbilityHrid, CombatTrigger> = {};
 
     private _onAbilityXpGained = new SimpleEventDispatcher<AbilityXpGained>();
     private _onAbilityLvlGained = new SimpleEventDispatcher<AbilityLvlGained>();
@@ -71,6 +73,10 @@ export class Abilities {
                 });
             }
         });
+    }
+
+    public updateCombatTriggers(abilityCombatTriggersMap: Record<AbilityHrid, CombatTrigger>) {
+        this._abilityCombatTriggers = abilityCombatTriggersMap;
     }
 
     public hasUnlockedAbility(abilityHrid: AbilityHrid): boolean {

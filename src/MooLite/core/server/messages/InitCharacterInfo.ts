@@ -32,6 +32,7 @@ export class InitCharacterInfo extends MessageParser {
     apply(message: InitCharacterInfoMessage, game: Game): void {
         console.log(message);
         game.abilities.updateCharacterAbilities(message.characterAbilities, false);
+        game.abilities.updateCombatTriggers(message.abilityCombatTriggersMap);
         game.actionQueue.updateActions(message.characterActions);
         game.inventory.updateCharacterItems(message.characterItems, false);
         game.inventory.updateCharacterDrink(message.actionTypeDrinkSlotsMap);

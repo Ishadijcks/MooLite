@@ -1,1 +1,1 @@
-export interface CombatTriggerComparatorHrid {}
+export enum CombatTriggerComparatorHrid {}
