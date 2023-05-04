@@ -23,6 +23,10 @@ declare global {
     }
 }
 
+if (process.env.NODE_ENV === "production") {
+    unsafeWindow.WebSocket = MooSocket;
+}
+
 const maxTries = 100;
 let tries = 0;
 const launchMooLite = () => {
