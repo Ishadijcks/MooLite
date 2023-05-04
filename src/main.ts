@@ -22,13 +22,16 @@ declare global {
         WebSocket: typeof MooSocket;
     }
 }
-unsafeWindow.WebSocket = MooSocket;
 
-// TODO(@Isha): Properly await till window.mooSocket is set
+if (process.env.NODE_ENV === "production") {
+    unsafeWindow.WebSocket = MooSocket;
+}
+
 const maxTries = 100;
 let tries = 0;
 const launchMooLite = () => {
-    if (!window.mooSocket) {
+    const mooSocket = unsafeWindow.mooSocket;
+    if (!mooSocket) {
         if (tries++ === maxTries) {
             console.error("MooLite did not initialize in time");
         }
@@ -36,7 +39,7 @@ const launchMooLite = () => {
         return;
     }
 
-    window.mooSocket.onInitClientInfoMessage.subscribe((clientInfo) => {
+    mooSocket.onInitClientInfoMessage.subscribe((clientInfo) => {
         // Create the game with the init client info
         const game = reactive<Game>(new Game(clientInfo)) as Game;
 
@@ -54,7 +57,7 @@ const launchMooLite = () => {
         const pluginManager = reactive<PluginManager>(new PluginManager(game, plugins)) as PluginManager;
 
         // Create the game client
-        const mooLite = reactive(new MooLite(game, pluginManager, window.mooSocket)) as MooLite;
+        const mooLite = reactive(new MooLite(game, pluginManager, mooSocket)) as MooLite;
 
         // Mount the Vue app
         const app = createApp(App, { client: mooLite });
