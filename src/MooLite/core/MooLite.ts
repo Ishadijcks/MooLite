@@ -48,8 +48,8 @@ export class MooLite {
         this.pluginManager = pluginManager;
         this.mooSocket = mooSocket;
 
-        this.mooSocket.onServerMessage.subscribe((message) => this.parseMessage(message));
-        this.mooSocket.onClientMessage.subscribe((message) => this.parseMessage(message));
+        this.mooSocket.onServerMessage.subscribe((message) => this.parseMessage(message, false));
+        this.mooSocket.onClientMessage.subscribe((message) => this.parseMessage(message, true));
 
         this._interval = setInterval(() => {
             this._clientTick(1);
@@ -128,14 +128,15 @@ export class MooLite {
         });
     }
 
-    private parseMessage(message: ServerMessage | ClientMessage): void {
+    private parseMessage(message: ServerMessage | ClientMessage, isClientMessage: boolean): void {
         const parser = this.messageParsers.find((parser) => {
             return parser.canParse(message);
         });
-        // console.log(message);
         if (!parser) {
-            console.warn(`Unhandled message type ${message.type}`);
-            console.log(message);
+            if (!isClientMessage) {
+                console.warn(`Unhandled message type ${message.type}`);
+                console.log(message);
+            }
             return;
         }
         parser.apply(message, this.game);
