@@ -12,6 +12,12 @@
           }
         ]
       }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "sed -i 's/0.0.0/${nextRelease.version}/' ./dist/moolite.user.js"
+      }
     ]
   ]
 }
