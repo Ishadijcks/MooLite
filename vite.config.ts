@@ -19,6 +19,7 @@ export default defineConfig({
                 description: "Useful plugins for Milky Way Idle",
                 "run-at": "document-start",
                 namespace: "123ishaTest",
+                updateURL: "https://github.com/Ishadijcks/Moolite/releases/latest/download/moolite.user.js",
                 match: ["*://*www.milkywayidle.com/*", "*://*test.milkywayidle.com/*"],
             },
             build: {
