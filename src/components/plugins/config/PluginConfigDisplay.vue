@@ -18,8 +18,14 @@ const options = computed(() => {
         <span :title="config.description">{{ config.name }}</span>
         <span class="flex-1"></span>
         <input v-if="config.type === PluginConfigType.CheckBox" type="checkbox" v-model="config.value" />
+        <input
+            v-if="config.type === PluginConfigType.Text"
+            type="text"
+            v-model="config.value"
+            class="bg-divider w-24C"
+        />
 
-        <select v-if="config.type === PluginConfigType.Choice" v-model="config.value" class="bg-divider">
+        <select v-if="config.type === PluginConfigType.Choice" v-model="config.value" class="bg-divider w-24">
             {{
                 options
             }}

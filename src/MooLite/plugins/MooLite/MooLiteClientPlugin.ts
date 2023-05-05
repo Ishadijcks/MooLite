@@ -3,6 +3,9 @@ import { PluginConfig } from "src/MooLite/core/plugins/config/PluginConfig";
 import { PluginConfigType } from "src/MooLite/core/plugins/config/PluginConfigType";
 import { MooNotification } from "src/MooLite/core/notifications/MooNotification";
 import { Game } from "src/MooLite/core/Game";
+import { MooLiteTab } from "src/MooLite/core/plugins/MooLiteTab";
+import MooLiteClientPluginDisplay from "src/MooLite/plugins/MooLite/MooLiteClientPluginDisplay.vue";
+import { markRaw } from "vue";
 
 export class MooLiteClientPlugin extends MooLitePlugin {
     name: string = "MooLite";
@@ -11,6 +14,13 @@ export class MooLiteClientPlugin extends MooLitePlugin {
 
     _isEnabled: boolean = true;
     _canBeDisabled: boolean = false;
+
+    tab: MooLiteTab = {
+        pluginName: this.name,
+        icon: "🐮",
+        componentName: "MooLiteClientPluginDisplay",
+        component: markRaw(MooLiteClientPluginDisplay),
+    };
 
     initialize(game: Game) {
         super.initialize(game);
