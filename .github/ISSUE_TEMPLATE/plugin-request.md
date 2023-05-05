@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-<!-- Be aware that MooLite can not make any actions for you, it can only provide QOL plugins -->
+<!-- Be aware that MooLite can not make any actions for you, it can only provide QOL plugins to track game events and update UI -->
 
 **What part of the game does your Plugin relate to?**
 Ex. Combat
