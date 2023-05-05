@@ -30,9 +30,8 @@ const setActiveTab = (index: number) => {
 </script>
 
 <template>
-    <div class="w-64 flex flex-col h-full shadow-xl bg-background-game text-dark-mode drop-shadow-2xl">
-        <span class="text-center">MooLite</span>
-        <MooDivider />
+    <div class="w-64 overflow-scroll flex flex-col h-full bg-background-game text-dark-mode shadow-space-200 shadow-sm">
+        <MooDivider class="border-b-4" />
 
         <div class="flex flex-row h-full">
             <div class="flex flex-col flex-grow p-2">
@@ -41,12 +40,20 @@ const setActiveTab = (index: number) => {
                     <component v-bind:is="tab.componentName" :plugin="findPlugin(tab.pluginName)"></component>
                 </div>
             </div>
-            <div class="flex flex-col bg-divider">
-                <PluginTabItem
-                    @click="setActiveTab(0)"
-                    :tab="{pluginName: 'Plugins', icon: '🔧'} as MooLiteTab"
-                ></PluginTabItem>
-                <PluginTabItem v-for="(tab, index) in tabs" @click="setActiveTab(index + 1)" :tab="tab"></PluginTabItem>
+            <div class="flex flex-col bg-divider shadow-space-200 shadow-sm">
+                <template v-for="(tab, index) in tabs">
+                    <PluginTabItem
+                        v-if="index === 1"
+                        @click="setActiveTab(0)"
+                        :tab="{pluginName: 'Plugins', icon: '🔧'} as MooLiteTab"
+                        :class="{ 'bg-space-950': 0 === activeTab }"
+                    ></PluginTabItem>
+                    <PluginTabItem
+                        @click="setActiveTab(index + 1)"
+                        :tab="tab"
+                        :class="{ 'bg-space-950': index + 1 === activeTab }"
+                    ></PluginTabItem>
+                </template>
             </div>
         </div>
     </div>

@@ -3,6 +3,7 @@ import { ServerMessage } from "src/MooLite/core/server/ServerMessage";
 import { InitClientInfoMessage } from "src/MooLite/core/server/messages/InitClientInfo";
 import { ServerMessageType } from "src/MooLite/core/server/ServerMessageType";
 import { ClientMessage } from "src/MooLite/core/server/clientmessages/ClientMessage";
+import { unsafeWindow } from "$";
 
 export class MooSocket extends WebSocket {
     private _onServerMessage = new SimpleEventDispatcher<ServerMessage>();
@@ -27,13 +28,16 @@ export class MooSocket extends WebSocket {
             const msg = JSON.parse(e.data);
 
             if (msg.type === ServerMessageType.InitClientInfo) {
-                console.log(msg);
                 this._onInitClientInfoMessage.dispatch(msg);
             }
 
             this._onServerMessage.dispatch(msg);
         });
-        window.mooSocket = this;
+
+        // Only set the correct socket and skip the one Vite is using
+        if (url.toString().includes("milkyway")) {
+            unsafeWindow.mooSocket = this;
+        }
     }
 
     send(data: string | ArrayBufferLike | Blob | ArrayBufferView): void {

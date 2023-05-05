@@ -6,8 +6,9 @@ import { ActionCompletedParser } from "src/MooLite/core/server/messages/ActionCo
 import { Game } from "src/MooLite/core/Game";
 import { ChatMessageReceivedParser } from "src/MooLite/core/server/messages/ChatMessageReceived";
 import { ActivePlayerCountUpdatedParser } from "src/MooLite/core/server/messages/ActivePlayerCountUpdated";
+import { ConsumableSlotsUpdatedParser } from "src/MooLite/core/server/messages/ConsumableSlotsUpdated";
 import { ActionsUpdatedParser } from "src/MooLite/core/server/messages/ActionsUpdated";
-import { InitCharacterInfo } from "src/MooLite/core/server/messages/InitCharacterInfo";
+import { InitCharacterInfoParser } from "src/MooLite/core/server/messages/InitCharacterInfoParser";
 import { InfoParser } from "src/MooLite/core/server/messages/Info";
 import { LeaderboardInfoUpdatedParser } from "src/MooLite/core/server/messages/LeaderboardInfoUpdated";
 import { PingParser } from "src/MooLite/core/server/clientmessages/Ping";
@@ -15,6 +16,10 @@ import { ClientMessage } from "src/MooLite/core/server/clientmessages/ClientMess
 import { PongParser } from "src/MooLite/core/server/messages/Pong";
 import { LocalStorage } from "src/MooLite/util/LocalStorage";
 import { MooLiteSaveData } from "src/MooLite/core/MooLiteSaveData";
+import { CombatTriggersUpdatedParser } from "src/MooLite/core/server/messages/CombatTriggersUpdated";
+import { CharacterStatsUpdatedParser } from "src/MooLite/core/server/messages/CharacterStatsUpdated";
+import { EquipmentBuffsUpdatedParser } from "src/MooLite/core/server/messages/EquipmentBuffsUpdated";
+import { ItemsUpdatedParser } from "src/MooLite/core/server/messages/ItemsUpdated";
 
 export class MooLite {
     pluginManager: PluginManager;
@@ -24,16 +29,20 @@ export class MooLite {
 
     messageParsers: MessageParser[] = [
         // Server messages
-        new InitCharacterInfo(),
+        new InitCharacterInfoParser(),
         new PongParser(),
 
         new ActionCompletedParser(),
         new ChatMessageReceivedParser(),
         new ActivePlayerCountUpdatedParser(),
         new ActionsUpdatedParser(),
+        new ConsumableSlotsUpdatedParser(),
         new InfoParser(),
-        // new CombatTriggersUpdatedParser(),
+        new CombatTriggersUpdatedParser(),
         new LeaderboardInfoUpdatedParser(),
+        new CharacterStatsUpdatedParser(),
+        new EquipmentBuffsUpdatedParser(),
+        new ItemsUpdatedParser(),
 
         // Client messages
         new PingParser(),
@@ -46,8 +55,8 @@ export class MooLite {
         this.pluginManager = pluginManager;
         this.mooSocket = mooSocket;
 
-        this.mooSocket.onServerMessage.subscribe((message) => this.parseMessage(message));
-        this.mooSocket.onClientMessage.subscribe((message) => this.parseMessage(message));
+        this.mooSocket.onServerMessage.subscribe((message) => this.parseMessage(message, false));
+        this.mooSocket.onClientMessage.subscribe((message) => this.parseMessage(message, true));
 
         this._interval = setInterval(() => {
             this._clientTick(1);
@@ -88,13 +97,19 @@ export class MooLite {
             };
         });
         LocalStorage.store(saveData);
-        console.log("Game saved");
     }
 
     private _load(): void {
         const saveData: MooLiteSaveData = LocalStorage.get();
 
         if (!saveData) {
+            alert(
+                "Thank you for using MooLite.\n" +
+                    "MooLite is community-made client, unrelated to the development of Milky Way Idle\n" +
+                    "Please report any issues with MooLite over at \n" +
+                    "https://github.com/Ishadijcks/MooLite\n" +
+                    "and do not bother the Milky Way Idle developers about it on Discord.\n"
+            );
             return;
         }
 
@@ -119,14 +134,15 @@ export class MooLite {
         });
     }
 
-    private parseMessage(message: ServerMessage | ClientMessage): void {
+    private parseMessage(message: ServerMessage | ClientMessage, isClientMessage: boolean): void {
         const parser = this.messageParsers.find((parser) => {
             return parser.canParse(message);
         });
-        // console.log(message);
         if (!parser) {
-            console.warn(`Unhandled message type ${message.type}`);
-            console.log(message);
+            if (!isClientMessage) {
+                console.warn(`Unhandled message type ${message.type}`);
+                console.log(message);
+            }
             return;
         }
         parser.apply(message, this.game);

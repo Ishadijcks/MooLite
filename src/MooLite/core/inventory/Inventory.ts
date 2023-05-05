@@ -4,6 +4,8 @@ import { ItemHrid } from "src/MooLite/core/inventory/ItemHrid";
 import { ItemCategoryHrid } from "src/MooLite/core/inventory/items/ItemCategoryHrid";
 import { ItemCategoryDetail } from "src/MooLite/core/inventory/items/ItemCategoryDetail";
 import { SimpleEventDispatcher } from "strongly-typed-events";
+import { ActionTypeHrid } from "src/MooLite/core/actions/ActionTypeHrid";
+import { CharacterConsumable } from "src/MooLite/core/inventory/items/CharacterConsumable";
 
 export interface ItemGained extends CharacterItem {
     delta: number;
@@ -18,6 +20,8 @@ export class Inventory {
         return this._onItemGained.asEvent();
     }
 
+    private _actionTypeDrinkSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]> = {};
+    private _actionTypeFoodSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]> = {};
     public readonly itemDetailMap: Record<ItemHrid, ItemDetail>;
     public readonly itemCategoryDetailMap: Record<ItemCategoryHrid, ItemCategoryDetail>;
     public readonly sortedItems: ItemDetail[];
@@ -39,7 +43,6 @@ export class Inventory {
     }
 
     updateCharacterItems(items: CharacterItem[], notify: boolean = true) {
-        // TODO(@Isha): Add events
         items.forEach((newItem) => {
             const itemInInventory = this._characterItems.find((item) => {
                 return item.id === newItem.id;
@@ -77,6 +80,14 @@ export class Inventory {
                 });
             }
         });
+    }
+
+    updateCharacterDrink(actionTypeDrinkSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]>) {
+        this._actionTypeDrinkSlotsMap = actionTypeDrinkSlotsMap;
+    }
+
+    updateCharacterFood(actionTypeFoodSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]>) {
+        this._actionTypeFoodSlotsMap = actionTypeFoodSlotsMap;
     }
 
     public isAbilityBook(itemHrid: ItemHrid): boolean {

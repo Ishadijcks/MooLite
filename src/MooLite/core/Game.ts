@@ -7,10 +7,12 @@ import { InitClientInfoMessage } from "src/MooLite/core/server/messages/InitClie
 import { Abilities } from "src/MooLite/core/abilities/Abilities";
 import { Combat } from "src/MooLite/core/combat/Combat";
 import { Leaderboard } from "src/MooLite/core/leaderboard/Leaderboard";
+import { Equipment } from "src/MooLite/core/equipment/Equipment";
 
 export class Game {
     abilities: Abilities;
     combat: Combat;
+    equipment: Equipment;
     leaderboard: Leaderboard;
 
     skills: Skills;
@@ -27,12 +29,22 @@ export class Game {
 
     constructor(clientInfo: InitClientInfoMessage) {
         this.abilities = new Abilities(clientInfo.abilityDetailMap, clientInfo.abilitySlotsLevelRequirementList);
-        this.combat = new Combat(clientInfo.combatMonsterDetailMap);
+        this.combat = new Combat(
+            clientInfo.combatMonsterDetailMap,
+            clientInfo.combatTriggerComparatorDetailMap,
+            clientInfo.combatTriggerConditionDetailMap,
+            clientInfo.combatTriggerDependencyDetailMap
+        );
         this.leaderboard = new Leaderboard();
         this.skills = new Skills(clientInfo.skillDetailMap, clientInfo.levelExperienceTable);
 
-        this.chat = new Chat();
-        this.actionQueue = new ActionQueue(clientInfo.actionDetailMap, clientInfo.actionCategoryDetailMap);
+        this.chat = new Chat(clientInfo.chatIconDetailMap);
+        this.actionQueue = new ActionQueue(
+            clientInfo.actionDetailMap,
+            clientInfo.actionCategoryDetailMap,
+            clientInfo.actionTypeDetailMap
+        );
+        this.equipment = new Equipment(clientInfo.equipmentTypeDetailMap);
         this.inventory = new Inventory(clientInfo.itemDetailMap, clientInfo.itemCategoryDetailMap);
 
         this.notifier = new Notifier();

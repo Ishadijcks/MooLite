@@ -6,4 +6,5 @@ export interface CombatTrigger {
     comparatorHrid: CombatTriggerComparatorHrid;
     conditionHrid: CombatTriggerConditionHrid;
     dependencyHrid: CombatTriggerDependencyHrid;
+    value: number;
 }
