@@ -30,7 +30,7 @@ export interface InitCharacterInfoMessage extends ServerMessage {
     noncombatStats: NonCombatStats;
 }
 
-export class InitCharacterInfo extends MessageParser {
+export class InitCharacterInfoParser extends MessageParser {
     type = ServerMessageType.InitCharacterInfo;
 
     apply(message: InitCharacterInfoMessage, game: Game): void {

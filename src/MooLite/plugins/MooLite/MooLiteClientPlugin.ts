@@ -14,14 +14,13 @@ export class MooLiteClientPlugin extends MooLitePlugin {
 
     initialize(game: Game) {
         super.initialize(game);
-        Notification.requestPermission().then(console.log);
+        Notification.requestPermission().then();
     }
 
     /**
      * Cannot be disabled
      */
     disable() {
-        console.log("disable");
         return;
     }
 
