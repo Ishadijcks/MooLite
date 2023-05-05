@@ -8,6 +8,9 @@ export enum ServerMessageType {
 
     ActivePlayerCountUpdated = "active_player_count_updated",
 
+    CharacterStatsUpdated = "character_stats_updated",
+    EquipmentBuffsUpdated = "equipment_buffs_updated",
+
     // Actions
     ActionCompleted = "action_completed",
     ActionsUpdated = "actions_updated",

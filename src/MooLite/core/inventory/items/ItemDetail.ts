@@ -1,7 +1,7 @@
 import { AbilityBookDetail } from "src/MooLite/core/abilities/AbilityBookDetail";
 import { ItemCategoryHrid } from "src/MooLite/core/inventory/items/ItemCategoryHrid";
 import { ConsumableDetail } from "src/MooLite/core/inventory/items/ConsumableDetail";
-import { EquipmentDetail } from "src/MooLite/core/inventory/items/EquipmentDetail";
+import { EquipmentDetail } from "src/MooLite/core/equipment/EquipmentDetail";
 import { ItemHrid } from "src/MooLite/core/inventory/ItemHrid";
 import { ItemAmount } from "src/MooLite/core/inventory/items/ItemAmount";
 

@@ -6,8 +6,18 @@ import { CombatTriggerConditionHrid } from "src/MooLite/core/combat/triggers/Com
 import { CombatTriggerConditionDetail } from "src/MooLite/core/combat/triggers/CombatTriggerConditionDetail";
 import { CombatTriggerDependencyHrid } from "src/MooLite/core/combat/triggers/CombatTriggerDepedencyHrid";
 import { CombatTriggerDependencyDetail } from "src/MooLite/core/combat/triggers/CombatTriggerDependencyDetail";
+import { CombatUnit } from "src/MooLite/core/combat/CombatUnit";
+import { SimpleEventDispatcher } from "strongly-typed-events";
 
 export class Combat {
+    private _combatUnit!: CombatUnit;
+
+    private _onCombatUnitChanged = new SimpleEventDispatcher<CombatUnit>();
+
+    public get onCombatUnitChanged() {
+        return this._onCombatUnitChanged.asEvent();
+    }
+
     public readonly monsterDetailMap: Record<MonsterHrid, MonsterDetail>;
 
     public readonly monsterDetailList: MonsterDetail[];
@@ -31,5 +41,13 @@ export class Combat {
         this.monsterDetailList = Object.values(this.monsterDetailMap).sort((a, b) => {
             return a.name.localeCompare(b.name);
         });
+    }
+
+    public updateCombatUnit(combatUnit: CombatUnit, notify: boolean = false) {
+        this._combatUnit = combatUnit;
+
+        if (notify) {
+            this._onCombatUnitChanged.dispatch(combatUnit);
+        }
     }
 }

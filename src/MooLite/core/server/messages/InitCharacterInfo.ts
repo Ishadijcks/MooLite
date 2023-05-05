@@ -12,6 +12,8 @@ import { ChatIconHrid } from "src/MooLite/core/chat/ChatIconHrid";
 import { CharacterChatIcon } from "src/MooLite/core/chat/CharacterChatIton";
 import { ActionTypeHrid } from "src/MooLite/core/actions/ActionTypeHrid";
 import { CharacterConsumable } from "src/MooLite/core/inventory/items/CharacterConsumable";
+import { CombatUnit } from "src/MooLite/core/combat/CombatUnit";
+import { NonCombatStats } from "src/MooLite/core/equipment/NonCombatStats";
 
 export interface InitCharacterInfoMessage extends ServerMessage {
     type: ServerMessageType.InitCharacterInfo;
@@ -24,6 +26,8 @@ export interface InitCharacterInfoMessage extends ServerMessage {
     characterChatIconMap: Record<ChatIconHrid, CharacterChatIcon>;
     characterItems: CharacterItem[];
     characterSkills: CharacterSkill[];
+    combatUnit: CombatUnit;
+    noncombatStats: NonCombatStats;
 }
 
 export class InitCharacterInfo extends MessageParser {
@@ -48,7 +52,7 @@ export class InitCharacterInfo extends MessageParser {
         //  characterUpgradeMap
         //  chatHistoryByChannelMap
         //  chatWhisperHistory
-        //  combatUnit
+        game.combat.updateCombatUnit(message.combatUnit, false);
         //  communityActionTypeBuffsMap
         //  communityBuffs
         //  consumableActionTypeBuffsMap
@@ -60,7 +64,7 @@ export class InitCharacterInfo extends MessageParser {
         //  isDead
         //  minTotalLevelsToChat
         //  myMarketListings
-        //  noncombatStats
+        game.equipment.updateNonCombatStats(message.noncombatStats, false);
         //  offlineItems
         //  offlineSkills
         //  respawnTime

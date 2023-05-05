@@ -26,6 +26,8 @@ import { CombatTriggerDependencyHrid } from "src/MooLite/core/combat/triggers/Co
 import { CombatTriggerComparatorDetail } from "src/MooLite/core/combat/triggers/CombatTriggerComparatorDetail";
 import { CombatTriggerConditionDetail } from "src/MooLite/core/combat/triggers/CombatTriggerConditionDetail";
 import { CombatTriggerDependencyDetail } from "src/MooLite/core/combat/triggers/CombatTriggerDependencyDetail";
+import { EquipmentTypeHrid } from "src/MooLite/core/equipment/EquipmentTypeHrid";
+import { EquipmentTypeDetail } from "src/MooLite/core/equipment/EquipmentTypeDetail";
 
 export interface InitClientInfoMessage extends ServerMessage {
     type: ServerMessageType.InitClientInfo;
@@ -49,7 +51,7 @@ export interface InitClientInfoMessage extends ServerMessage {
     // damageTypeDetailMap: Record<DamageTypeHrid, DamageTypeDetail>;
     // enhancementLevelSuccessRateTable: number;
     // enhancementLevelTotalBonusMultiplierTable: number;
-    // equipmentTypeDetailMap: Record<EquipmentTypeHrid, EquipmentTypeDetail>;
+    equipmentTypeDetailMap: Record<EquipmentTypeHrid, EquipmentTypeDetail>;
     // gameVersion: string;
     itemCategoryDetailMap: Record<ItemCategoryHrid, ItemCategoryDetail>;
     itemDetailMap: Record<ItemHrid, ItemDetail>;

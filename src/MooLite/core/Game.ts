@@ -7,10 +7,12 @@ import { InitClientInfoMessage } from "src/MooLite/core/server/messages/InitClie
 import { Abilities } from "src/MooLite/core/abilities/Abilities";
 import { Combat } from "src/MooLite/core/combat/Combat";
 import { Leaderboard } from "src/MooLite/core/leaderboard/Leaderboard";
+import { Equipment } from "src/MooLite/core/equipment/Equipment";
 
 export class Game {
     abilities: Abilities;
     combat: Combat;
+    equipment: Equipment;
     leaderboard: Leaderboard;
 
     skills: Skills;
@@ -42,6 +44,7 @@ export class Game {
             clientInfo.actionCategoryDetailMap,
             clientInfo.actionTypeDetailMap
         );
+        this.equipment = new Equipment(clientInfo.equipmentTypeDetailMap);
         this.inventory = new Inventory(clientInfo.itemDetailMap, clientInfo.itemCategoryDetailMap);
 
         this.notifier = new Notifier();
