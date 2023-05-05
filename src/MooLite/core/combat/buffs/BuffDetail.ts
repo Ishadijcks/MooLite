@@ -1,7 +1,7 @@
-import { BuffTypeHrid } from "src/MooLite/core/combat/buffs/BuffTypeHrid";
 import { BuffUniqueHrid } from "src/MooLite/core/combat/buffs/BuffUniqueHrid";
+import { BuffTypeHrid } from "src/MooLite/core/combat/buffs/BuffTypeHrid";
 
-export interface CombatBuff {
+export interface BuffDetail {
     duration: number;
     flatBoost: number;
     flatBoostLevelBonus: number;
