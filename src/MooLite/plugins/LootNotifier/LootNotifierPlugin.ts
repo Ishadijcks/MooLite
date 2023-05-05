@@ -21,7 +21,7 @@ export class LootNotifierPlugin extends MooLitePlugin {
     config: PluginConfig[] = [
         {
             type: PluginConfigType.Choice,
-            name: "Items",
+            name: "Item",
             description: "Select the item to highlight",
             key: "highlighted-items",
             value: "",
