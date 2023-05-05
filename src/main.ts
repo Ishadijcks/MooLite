@@ -72,7 +72,7 @@ const launchMooLite = () => {
         // Register custom components
         plugins.forEach((plugin) => {
             if (plugin.tab) {
-                console.log("Registering custom component", plugin.tab.componentName);
+                console.debug("Registering custom component", plugin.tab.componentName);
                 app.component(plugin.tab.componentName, plugin.tab.component);
             }
         });

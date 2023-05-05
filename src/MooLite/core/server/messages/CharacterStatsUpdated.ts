@@ -16,7 +16,6 @@ export class CharacterStatsUpdatedParser extends MessageParser {
     type = ServerMessageType.CharacterStatsUpdated;
 
     apply(message: CharacterStatsUpdatedMessage, game: Game): void {
-        console.log("asdasd");
         game.combat.updateCombatUnit(message.combatUnit);
         game.equipment.updateNonCombatStats(message.nonCombatStats);
     }

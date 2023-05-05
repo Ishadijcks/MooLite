@@ -8,7 +8,7 @@ import { ChatMessageReceivedParser } from "src/MooLite/core/server/messages/Chat
 import { ActivePlayerCountUpdatedParser } from "src/MooLite/core/server/messages/ActivePlayerCountUpdated";
 import { ConsumableSlotsUpdatedParser } from "src/MooLite/core/server/messages/ConsumableSlotsUpdated";
 import { ActionsUpdatedParser } from "src/MooLite/core/server/messages/ActionsUpdated";
-import { InitCharacterInfo } from "src/MooLite/core/server/messages/InitCharacterInfo";
+import { InitCharacterInfoParser } from "src/MooLite/core/server/messages/InitCharacterInfoParser";
 import { InfoParser } from "src/MooLite/core/server/messages/Info";
 import { LeaderboardInfoUpdatedParser } from "src/MooLite/core/server/messages/LeaderboardInfoUpdated";
 import { PingParser } from "src/MooLite/core/server/clientmessages/Ping";
@@ -19,6 +19,7 @@ import { MooLiteSaveData } from "src/MooLite/core/MooLiteSaveData";
 import { CombatTriggersUpdatedParser } from "src/MooLite/core/server/messages/CombatTriggersUpdated";
 import { CharacterStatsUpdatedParser } from "src/MooLite/core/server/messages/CharacterStatsUpdated";
 import { EquipmentBuffsUpdatedParser } from "src/MooLite/core/server/messages/EquipmentBuffsUpdated";
+import { ItemsUpdatedParser } from "src/MooLite/core/server/messages/ItemsUpdated";
 
 export class MooLite {
     pluginManager: PluginManager;
@@ -28,7 +29,7 @@ export class MooLite {
 
     messageParsers: MessageParser[] = [
         // Server messages
-        new InitCharacterInfo(),
+        new InitCharacterInfoParser(),
         new PongParser(),
 
         new ActionCompletedParser(),
@@ -41,6 +42,7 @@ export class MooLite {
         new LeaderboardInfoUpdatedParser(),
         new CharacterStatsUpdatedParser(),
         new EquipmentBuffsUpdatedParser(),
+        new ItemsUpdatedParser(),
 
         // Client messages
         new PingParser(),
@@ -95,7 +97,6 @@ export class MooLite {
             };
         });
         LocalStorage.store(saveData);
-        console.log("Game saved");
     }
 
     private _load(): void {

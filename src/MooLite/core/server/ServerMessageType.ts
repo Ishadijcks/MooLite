@@ -1,15 +1,17 @@
 export enum ServerMessageType {
+    // Internals
     InitClientInfo = "init_client_info",
     InitCharacterInfo = "init_character_info",
-
     Pong = "pong",
+
+    // Meta
+    ActivePlayerCountUpdated = "active_player_count_updated",
 
     Info = "info",
 
-    ActivePlayerCountUpdated = "active_player_count_updated",
-
     CharacterStatsUpdated = "character_stats_updated",
     EquipmentBuffsUpdated = "equipment_buffs_updated",
+    ItemsUpdated = "items_updated",
 
     // Actions
     ActionCompleted = "action_completed",

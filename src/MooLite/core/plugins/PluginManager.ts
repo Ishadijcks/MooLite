@@ -11,8 +11,6 @@ export class PluginManager {
         this.game = game;
         this.plugins = plugins;
 
-        console.log(this.game);
-
         this.game.abilities.onAbilityXpGained.subscribe((gains) => {
             this.enabledPlugins.forEach((plugin) => {
                 plugin.onAbilityXpGained?.(gains);
