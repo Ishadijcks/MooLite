@@ -9,3 +9,7 @@ body {
 input {
     @apply bg-white text-black;
 }
+
+select {
+    @apply bg-white text-black;
+}
