@@ -23,7 +23,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: EndBug/add-and-commit@v9
         with:
-          add: 'dist'
+          add: 'dist -f'
 
           # If this input is set, the action will push the commit to a new branch with this name.
           new_branch: release
