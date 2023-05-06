@@ -18,6 +18,13 @@ jobs:
           npm i
           npm run build 
           npx semantic-release
+          
+          cd dist
+          git init
+          git add -A
+          git commit -m 'release'
+          git push -f https://github.com/Ishadijcks/MooLite master:release
+
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
