@@ -17,9 +17,10 @@ export default defineConfig({
             userscript: {
                 icon: "https://www.milkywayidle.com/favicon.svg",
                 description: "Useful plugins for Milky Way Idle",
+                author: "Isha",
                 "run-at": "document-start",
                 namespace: "123ishaTest",
-                updateURL: "https://github.com/Ishadijcks/Moolite/releases/latest/download/moolite.user.js",
+                updateURL: "https://github.com/Ishadijcks/MooLite/raw/release/dist/moolite.user.js",
                 match: ["*://*www.milkywayidle.com/*", "*://*test.milkywayidle.com/*"],
             },
             build: {
