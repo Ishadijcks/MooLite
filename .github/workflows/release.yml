@@ -18,8 +18,7 @@ jobs:
           npm i
           npm run build 
           npx semantic-release
-
-        # Deploy to release branch
+          
           cd dist
           git init
           git add -A
