@@ -21,6 +21,8 @@ jobs:
           
           cd dist
           git init
+          git config --global user.email "CI@CI.com"
+          git config --global user.name "CI"
           git add -A
           git commit -m 'release'
           git push -f https://github.com/Ishadijcks/MooLite master:release
