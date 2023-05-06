@@ -5,3 +5,7 @@
 body {
     display: flex;
 }
+
+input {
+    @apply bg-white text-black;
+}
