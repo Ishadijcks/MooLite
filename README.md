@@ -2,6 +2,8 @@
 
 MooLite is a free, open source [Milky Way Idle](https://www.milkywayidle.com/) client.
 
+![MooLite](./docs/MooLite.png)
+
 ## Usage
 
 > IMPORTANT: MooLite is implemented as a TamperMonkey user script.
@@ -51,6 +53,7 @@ You can now open the game in your browser, and see the MooLite sidebar.
 
 > If you don't see the sidebar the first time, try refreshing once.
 > If you ever don't get the sidebar after that, please open an issue.
+
 ### Linting
 
 Enforces the correct styles across all files
