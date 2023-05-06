@@ -25,16 +25,23 @@ const findPlugin = (name: string) => {
 };
 
 const setActiveTab = (index: number) => {
-    activeTab.value = index;
+    if (activeTab.value === index) {
+        activeTab.value = -1;
+    } else {
+        activeTab.value = index;
+    }
 };
 </script>
 
 <template>
-    <div class="w-64 overflow-scroll flex flex-col h-full bg-background-game text-dark-mode shadow-space-200 shadow-sm">
+    <div
+        class="overflow-scroll flex flex-col h-full bg-background-game text-dark-mode shadow-space-200 shadow-sm"
+        :class="{ 'w-64': activeTab !== -1 }"
+    >
         <MooDivider class="border-b-4" />
 
         <div class="flex flex-row h-full">
-            <div class="flex flex-col flex-grow p-2">
+            <div v-if="activeTab > -1" class="flex flex-col flex-grow p-2">
                 <PluginManagerDisplay v-if="activeTab === 0" :manager="pluginManager"></PluginManagerDisplay>
                 <div v-for="(tab, index) in tabs" v-show="index + 1 === activeTab">
                     <component v-bind:is="tab.componentName" :plugin="findPlugin(tab.pluginName)"></component>
