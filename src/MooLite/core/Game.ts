@@ -8,13 +8,14 @@ import { Abilities } from "src/MooLite/core/abilities/Abilities";
 import { Combat } from "src/MooLite/core/combat/Combat";
 import { Leaderboard } from "src/MooLite/core/leaderboard/Leaderboard";
 import { Equipment } from "src/MooLite/core/equipment/Equipment";
+import { LootBoxes } from "src/MooLite/core/lootboxes/LootBoxes";
 
 export class Game {
     abilities: Abilities;
     combat: Combat;
     equipment: Equipment;
     leaderboard: Leaderboard;
-
+    lootBoxes: LootBoxes;
     skills: Skills;
     chat: Chat;
     actionQueue: ActionQueue;
@@ -36,6 +37,7 @@ export class Game {
             clientInfo.combatTriggerDependencyDetailMap
         );
         this.leaderboard = new Leaderboard();
+        this.lootBoxes = new LootBoxes();
         this.skills = new Skills(clientInfo.skillDetailMap, clientInfo.levelExperienceTable);
 
         this.chat = new Chat(clientInfo.chatIconDetailMap);
