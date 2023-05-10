@@ -5,5 +5,5 @@ export interface CombatUnit {
     abilityUsedCounter: number;
     autoAttackCounter: number;
     baseCombatDetails: CombatDetails;
-    combatAbilities: CharacterAbility[];
+    combatAbilities: CharacterAbility;
 }

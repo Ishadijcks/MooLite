@@ -50,7 +50,4 @@ export class Combat {
             this._onCombatUnitChanged.dispatch(combatUnit);
         }
     }
-    getCombatUnit() {
-        return this._combatUnit;
-    }
 }
