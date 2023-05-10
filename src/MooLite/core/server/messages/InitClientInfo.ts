@@ -28,6 +28,8 @@ import { CombatTriggerConditionDetail } from "src/MooLite/core/combat/triggers/C
 import { CombatTriggerDependencyDetail } from "src/MooLite/core/combat/triggers/CombatTriggerDependencyDetail";
 import { EquipmentTypeHrid } from "src/MooLite/core/equipment/EquipmentTypeHrid";
 import { EquipmentTypeDetail } from "src/MooLite/core/equipment/EquipmentTypeDetail";
+import {ItemLocationHrid} from "src/MooLite/core/inventory/ItemLocationHrid";
+import {ItemLocationDetail} from "src/MooLite/core/inventory/ItemLocationDetail";
 
 export interface InitClientInfoMessage extends ServerMessage {
     type: ServerMessageType.InitClientInfo;
@@ -55,7 +57,7 @@ export interface InitClientInfoMessage extends ServerMessage {
     // gameVersion: string;
     itemCategoryDetailMap: Record<ItemCategoryHrid, ItemCategoryDetail>;
     itemDetailMap: Record<ItemHrid, ItemDetail>;
-    // itemLocationDetailMap: Record<ItemLocationHrid, ItemLocationDetail>;
+    itemLocationDetailMap: Record<ItemLocationHrid, ItemLocationDetail>;
     levelExperienceTable: number[];
     // shopItemDetailMap: Record<string, unknown>;
     skillDetailMap: Record<SkillHrid, SkillDetail>;

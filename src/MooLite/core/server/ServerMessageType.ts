@@ -23,6 +23,7 @@ export enum ServerMessageType {
 
     // Combat
     CombatTriggersUpdated = "combat_triggers_updated",
+    AbilitiesUpdated = "abilities_updated",
 
     // Leaderboard
     LeaderboardInfoUpdated = "leaderboard_info_updated",

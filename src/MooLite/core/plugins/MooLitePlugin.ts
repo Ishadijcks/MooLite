@@ -5,7 +5,7 @@ import { PluginConfig } from "src/MooLite/core/plugins/config/PluginConfig";
 import { MooNotification } from "src/MooLite/core/notifications/MooNotification";
 import { Game } from "src/MooLite/core/Game";
 import { CharacterAction } from "src/MooLite/core/actions/CharacterAction";
-import { AbilityXpGained } from "src/MooLite/core/abilities/Abilities";
+import {AbilitySlotChanged, AbilityXpGained} from "src/MooLite/core/abilities/Abilities";
 import { LeaderboardTopic } from "src/MooLite/core/leaderboard/LeaderboardTopic";
 import { ItemGained } from "src/MooLite/core/inventory/Inventory";
 import { PluginBuiltinOption } from "src/MooLite/core/plugins/config/PluginBuiltinOption";
@@ -95,6 +95,8 @@ export abstract class MooLitePlugin {
     onAbilityXpGained?(gains: AbilityXpGained): void;
 
     onAbilityLvlGained?(gains: AbilityXpGained): void;
+
+    onAbilitySlotChanged?(gains: AbilitySlotChanged): void;
 
     onLeaderboardUpdated?(topics: LeaderboardTopic[]): void;
 

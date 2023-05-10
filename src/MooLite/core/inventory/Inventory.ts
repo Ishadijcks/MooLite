@@ -6,6 +6,8 @@ import { ItemCategoryDetail } from "src/MooLite/core/inventory/items/ItemCategor
 import { SimpleEventDispatcher } from "strongly-typed-events";
 import { ActionTypeHrid } from "src/MooLite/core/actions/ActionTypeHrid";
 import { CharacterConsumable } from "src/MooLite/core/inventory/items/CharacterConsumable";
+import {ItemLocationHrid} from "src/MooLite/core/inventory/ItemLocationHrid";
+import {ItemLocationDetail} from "src/MooLite/core/inventory/ItemLocationDetail";
 
 export interface ItemGained extends CharacterItem {
     delta: number;
@@ -24,15 +26,18 @@ export class Inventory {
     private _actionTypeFoodSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]> = {};
     public readonly itemDetailMap: Record<ItemHrid, ItemDetail>;
     public readonly itemCategoryDetailMap: Record<ItemCategoryHrid, ItemCategoryDetail>;
+    public readonly itemLocationDetailMap: Record<ItemLocationHrid, ItemLocationDetail>;
     public readonly sortedItems: ItemDetail[];
     public readonly sortedAlphabeticalItems: ItemDetail[];
 
     constructor(
         itemDetailMap: Record<ItemHrid, ItemDetail>,
-        itemCategoryDetailMap: Record<ItemCategoryHrid, ItemCategoryDetail>
+        itemCategoryDetailMap: Record<ItemCategoryHrid, ItemCategoryDetail>,
+        itemLocationDetailMap: Record<ItemLocationHrid, ItemLocationDetail>
     ) {
         this.itemDetailMap = itemDetailMap;
         this.itemCategoryDetailMap = itemCategoryDetailMap;
+        this.itemLocationDetailMap = itemLocationDetailMap;
 
         this.sortedItems = Object.values(this.itemDetailMap).sort((a, b) => {
             return a.sortIndex - b.sortIndex;
@@ -92,5 +97,13 @@ export class Inventory {
 
     public isAbilityBook(itemHrid: ItemHrid): boolean {
         return this.itemDetailMap[itemHrid].abilityBookDetail?.abilityHrid.toString().length > 0;
+    }
+
+    public get_equippedFood(): CharacterConsumable[] {
+        return this._actionTypeFoodSlotsMap["/action_types/combat"];
+    }
+
+    public get_equippedDrinks(): CharacterConsumable[] {
+        return this._actionTypeDrinkSlotsMap["/action_types/combat"];
     }
 }

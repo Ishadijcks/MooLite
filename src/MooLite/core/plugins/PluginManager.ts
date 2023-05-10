@@ -23,6 +23,12 @@ export class PluginManager {
             });
         });
 
+        this.game.abilities.onAbilitySlotChanged.subscribe((gains) => {
+            this.enabledPlugins.forEach((plugin) => {
+                plugin.onAbilitySlotChanged?.(gains);
+            });
+        });
+
         this.game.skills.onXpGained.subscribe((info) => {
             this.enabledPlugins.forEach((plugin) => {
                 plugin.onXpGained?.(info);

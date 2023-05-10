@@ -2,13 +2,14 @@ import { markRaw } from "vue";
 import { MooLitePlugin } from "src/MooLite/core/plugins/MooLitePlugin";
 import { MooLiteTab } from "src/MooLite/core/plugins/MooLiteTab";
 import EquipmentExporterPluginDisplay from "src/MooLite/plugins/EquipmentExporter/EquipmentExporterPluginDisplay.vue";
-import EquippedItems from "src/MooLite/core/inventory/items/EquippedItems";
+import {CharacterItem} from "src/MooLite/core/inventory/CharacterItem";
+import {CharacterConsumable} from "src/MooLite/core/inventory/items/CharacterConsumable";
 import {CharacterAbility} from "src/MooLite/core/abilities/CharacterAbility";
 
 export class EquipmentExporterPlugin extends MooLitePlugin {
     name: string = "Equipment Exporter";
     key = "equipment-exporter";
-    description: string = "Export your equipment details for the Combat Sim";
+    description: string = "Export your equipment details for the Combat Sim - By Void";
 
     tab: MooLiteTab = {
         icon: "🗡",
@@ -17,33 +18,64 @@ export class EquipmentExporterPlugin extends MooLitePlugin {
         component: markRaw(EquipmentExporterPluginDisplay),
     };
 
-    getEquipmentSummary(): Array<EquippedItems> | null {
-        const equippedItems = new Array<EquippedItems>();
-        const abilities = this._game.combat.getCombatUnit().combatAbilities;
-        const combatFood = this._game.combat.getCombatUnit().combatConsumables;
+    getEquipmentSummary(): Array<CharacterItem> | null {
+        const equippedItems = new Array<CharacterItem>();
         const allItems = this._game.inventory._characterItems;
-        ["head", "body", "legs", "feet", "hands", "main_hand", "two_hand", "off_hand", "pouch", "neck", "earrings", "ring"].forEach((location) => {
-            let equipmentLocation = "/item_locations/" + location;
-            let index = allItems.findIndex(item => item.itemLocationHrid === equipmentLocation);
-            if (index != -1) {
-                equippedItems.push(new EquippedItems(String(allItems[index].itemHrid), allItems[index].enhancementLevel));
+        const itemLocations = this._game.inventory.itemLocationDetailMap;
+        for (let location in itemLocations) {
+            if(!itemLocations[location].hrid.includes("tool")) {
+                let index = allItems.findIndex(item => item.itemLocationHrid === location);
+                if (index != -1) {
+                    equippedItems.push(allItems[index]);
+                }
             }
-        });
-        for(let i = 0; i < abilities.length; i++) {
-            equippedItems.push(new EquippedItems(String(abilities[i].abilityHrid), abilities[i].level));
-        }
-        for(let i = 0; i < combatFood.length; i++) {
-            equippedItems.push(new EquippedItems(String(combatFood[i].itemHrid), 0));
         }
         return equippedItems;
+    }
+
+    getFoodSummary(): Array<CharacterConsumable> | null {
+        return this._game.inventory.get_equippedFood();
+    }
+
+    getDrinkSummary(): Array<CharacterConsumable> | null {
+        return this._game.inventory.get_equippedDrinks();
     }
 
     getLevel(skillHrid): String {
         return this._game.skills.getLevel(skillHrid);
     }
 
-    getAbilities(): CharacterAbility[] {
-        return this._game.combat.getCombatUnit().combatAbilities;
+    getAbilities(): Array<CharacterAbility> | null {
+        return this._game.abilities.equippedAbilities;
     }
+
+    exportDetails() {
+        try {
+            const equipmentData = this.getEquipmentSummary();
+            let drinks = this.getDrinkSummary();
+            let food = this.getFoodSummary();
+            let abilities = this.getAbilities();
+            let attackLevel = this.getLevel("/skills/attack");
+            let staminaLevel = this.getLevel("/skills/stamina");
+            let intelligenceLevel = this.getLevel("/skills/intelligence");
+            let powerLevel = this.getLevel("/skills/power");
+            let defenseLevel = this.getLevel("/skills/defense");
+            let rangedLevel = this.getLevel("/skills/ranged");
+            let magicLevel = this.getLevel("/skills/magic");
+            const zone = "/actions/combat/fly";
+            const simulationTime = "100";
+            const exportSet = {"player": {attackLevel, magicLevel, powerLevel, rangedLevel, defenseLevel, staminaLevel, intelligenceLevel, "equipment": equipmentData}, drinks, food, abilities, zone, simulationTime};
+            let copyValue = JSON.stringify(exportSet);
+            if (!navigator.clipboard) {
+                throw new Error("Browser don't have support for native clipboard.");
+            }
+
+            navigator.clipboard.writeText(copyValue);
+            alert("Copied Equipment to Clipboard");
+        } catch (error) {
+            console.log(error.toString());
+        }
+    }
+
 
 }

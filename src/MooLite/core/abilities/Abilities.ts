@@ -12,12 +12,17 @@ export interface AbilityLvlGained extends CharacterAbility {
     delta: number;
 }
 
+export interface AbilitySlotChanged extends CharacterAbility {
+    delta: number;
+}
+
 export class Abilities {
     private _characterAbilities: Record<AbilityHrid, CharacterAbility | null> = {};
     private _abilityCombatTriggers: Record<AbilityHrid, CombatTrigger> = {};
 
     private _onAbilityXpGained = new SimpleEventDispatcher<AbilityXpGained>();
     private _onAbilityLvlGained = new SimpleEventDispatcher<AbilityLvlGained>();
+    private _onAbilitySlotChanged = new SimpleEventDispatcher<AbilitySlotChanged>();
 
     public get onAbilityXpGained() {
         return this._onAbilityXpGained.asEvent();
@@ -25,6 +30,10 @@ export class Abilities {
 
     public get onAbilityLvlGained() {
         return this._onAbilityLvlGained.asEvent();
+    }
+
+    public get onAbilitySlotChanged() {
+        return this._onAbilitySlotChanged.asEvent();
     }
 
     public readonly abilityDetailMap: Record<AbilityHrid, AbilityDetail>;
@@ -54,6 +63,7 @@ export class Abilities {
         abilities?.forEach((ability) => {
             const xpChanged = ability.experience - (this._characterAbilities[ability.abilityHrid]?.experience ?? 0);
             const lvlChanged = ability.level - (this._characterAbilities[ability.abilityHrid]?.level ?? 0);
+            const slotChanged = ability.slotNumber - (this._characterAbilities[ability.abilityHrid]?.slotNumber ?? 0)
 
             this._characterAbilities[ability.abilityHrid] = ability;
 
@@ -70,6 +80,12 @@ export class Abilities {
                 this._onAbilityLvlGained.dispatch({
                     ...(this._characterAbilities[ability.abilityHrid] as CharacterAbility),
                     delta: lvlChanged,
+                });
+            }
+            if (slotChanged !== 0) {
+                this._onAbilitySlotChanged.dispatch({
+                    ...(this._characterAbilities[ability.abilityHrid] as CharacterAbility),
+                    delta: slotChanged,
                 });
             }
         });
