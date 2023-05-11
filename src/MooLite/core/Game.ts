@@ -11,6 +11,9 @@ import { Equipment } from "src/MooLite/core/equipment/Equipment";
 import { LootBoxes } from "src/MooLite/core/lootboxes/LootBoxes";
 
 export class Game {
+    gameVersion: string;
+    versionTimestamp: string;
+
     abilities: Abilities;
     combat: Combat;
     equipment: Equipment;
@@ -29,6 +32,9 @@ export class Game {
     lastPong: Date | null = null;
 
     constructor(clientInfo: InitClientInfoMessage) {
+        this.gameVersion = clientInfo.gameVersion;
+        this.versionTimestamp = clientInfo.versionTimeStamp;
+
         this.abilities = new Abilities(clientInfo.abilityDetailMap, clientInfo.abilitySlotsLevelRequirementList);
         this.combat = new Combat(
             clientInfo.combatMonsterDetailMap,
