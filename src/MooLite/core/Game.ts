@@ -45,7 +45,11 @@ export class Game {
             clientInfo.actionTypeDetailMap
         );
         this.equipment = new Equipment(clientInfo.equipmentTypeDetailMap);
-        this.inventory = new Inventory(clientInfo.itemDetailMap, clientInfo.itemCategoryDetailMap, clientInfo.itemLocationDetailMap);
+        this.inventory = new Inventory(
+            clientInfo.itemDetailMap,
+            clientInfo.itemCategoryDetailMap,
+            clientInfo.itemLocationDetailMap
+        );
 
         this.notifier = new Notifier();
     }

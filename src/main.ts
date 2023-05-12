@@ -15,7 +15,7 @@ import { LootSimulatorPlugin } from "src/MooLite/plugins/LootSimulator/LootSimul
 import { ItemFinderPlugin } from "src/MooLite/plugins/ItemFinder/ItemFinderPlugin";
 import { LeaderboardPlugin } from "src/MooLite/plugins/Leaderboard/LeaderboardPlugin";
 import { LootNotifierPlugin } from "src/MooLite/plugins/LootNotifier/LootNotifierPlugin";
-import {EquipmentExporterPlugin} from "src/MooLite/plugins/EquipmentExporter/EquipmentExporterPlugin";
+import { EquipmentExporterPlugin } from "src/MooLite/plugins/EquipmentExporter/EquipmentExporterPlugin";
 
 declare global {
     interface Window {

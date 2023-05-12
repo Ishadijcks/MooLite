@@ -28,8 +28,8 @@ import { CombatTriggerConditionDetail } from "src/MooLite/core/combat/triggers/C
 import { CombatTriggerDependencyDetail } from "src/MooLite/core/combat/triggers/CombatTriggerDependencyDetail";
 import { EquipmentTypeHrid } from "src/MooLite/core/equipment/EquipmentTypeHrid";
 import { EquipmentTypeDetail } from "src/MooLite/core/equipment/EquipmentTypeDetail";
-import {ItemLocationHrid} from "src/MooLite/core/inventory/ItemLocationHrid";
-import {ItemLocationDetail} from "src/MooLite/core/inventory/ItemLocationDetail";
+import { ItemLocationHrid } from "src/MooLite/core/inventory/ItemLocationHrid";
+import { ItemLocationDetail } from "src/MooLite/core/inventory/ItemLocationDetail";
 
 export interface InitClientInfoMessage extends ServerMessage {
     type: ServerMessageType.InitClientInfo;

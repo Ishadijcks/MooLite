@@ -13,7 +13,7 @@ export interface AbilityLvlGained extends CharacterAbility {
 }
 
 export interface AbilitySlotChanged extends CharacterAbility {
-    delta: number;
+    indexChanged: number;
 }
 
 export class Abilities {
@@ -63,7 +63,6 @@ export class Abilities {
         abilities?.forEach((ability) => {
             const xpChanged = ability.experience - (this._characterAbilities[ability.abilityHrid]?.experience ?? 0);
             const lvlChanged = ability.level - (this._characterAbilities[ability.abilityHrid]?.level ?? 0);
-            const slotChanged = ability.slotNumber - (this._characterAbilities[ability.abilityHrid]?.slotNumber ?? 0)
 
             this._characterAbilities[ability.abilityHrid] = ability;
 
@@ -80,12 +79,6 @@ export class Abilities {
                 this._onAbilityLvlGained.dispatch({
                     ...(this._characterAbilities[ability.abilityHrid] as CharacterAbility),
                     delta: lvlChanged,
-                });
-            }
-            if (slotChanged !== 0) {
-                this._onAbilitySlotChanged.dispatch({
-                    ...(this._characterAbilities[ability.abilityHrid] as CharacterAbility),
-                    delta: slotChanged,
                 });
             }
         });

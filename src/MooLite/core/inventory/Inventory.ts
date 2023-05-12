@@ -6,8 +6,8 @@ import { ItemCategoryDetail } from "src/MooLite/core/inventory/items/ItemCategor
 import { SimpleEventDispatcher } from "strongly-typed-events";
 import { ActionTypeHrid } from "src/MooLite/core/actions/ActionTypeHrid";
 import { CharacterConsumable } from "src/MooLite/core/inventory/items/CharacterConsumable";
-import {ItemLocationHrid} from "src/MooLite/core/inventory/ItemLocationHrid";
-import {ItemLocationDetail} from "src/MooLite/core/inventory/ItemLocationDetail";
+import { ItemLocationHrid } from "src/MooLite/core/inventory/ItemLocationHrid";
+import { ItemLocationDetail } from "src/MooLite/core/inventory/ItemLocationDetail";
 
 export interface ItemGained extends CharacterItem {
     delta: number;
@@ -99,11 +99,11 @@ export class Inventory {
         return this.itemDetailMap[itemHrid].abilityBookDetail?.abilityHrid.toString().length > 0;
     }
 
-    public get_equippedFood(): CharacterConsumable[] {
-        return this._actionTypeFoodSlotsMap["/action_types/combat"];
+    public getEquippedFood(): CharacterConsumable[] {
+        return this._actionTypeFoodSlotsMap;
     }
 
-    public get_equippedDrinks(): CharacterConsumable[] {
-        return this._actionTypeDrinkSlotsMap["/action_types/combat"];
+    public getEquippedDrinks(): CharacterConsumable[] {
+        return this._actionTypeDrinkSlotsMap;
     }
 }

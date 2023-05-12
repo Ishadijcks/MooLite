@@ -2,9 +2,9 @@ import { markRaw } from "vue";
 import { MooLitePlugin } from "src/MooLite/core/plugins/MooLitePlugin";
 import { MooLiteTab } from "src/MooLite/core/plugins/MooLiteTab";
 import EquipmentExporterPluginDisplay from "src/MooLite/plugins/EquipmentExporter/EquipmentExporterPluginDisplay.vue";
-import {CharacterItem} from "src/MooLite/core/inventory/CharacterItem";
-import {CharacterConsumable} from "src/MooLite/core/inventory/items/CharacterConsumable";
-import {CharacterAbility} from "src/MooLite/core/abilities/CharacterAbility";
+import { CharacterItem } from "src/MooLite/core/inventory/CharacterItem";
+import { CharacterConsumable } from "src/MooLite/core/inventory/items/CharacterConsumable";
+import { CharacterAbility } from "src/MooLite/core/abilities/CharacterAbility";
 
 export class EquipmentExporterPlugin extends MooLitePlugin {
     name: string = "Equipment Exporter";
@@ -18,13 +18,13 @@ export class EquipmentExporterPlugin extends MooLitePlugin {
         component: markRaw(EquipmentExporterPluginDisplay),
     };
 
-    getEquipmentSummary(): Array<CharacterItem> | null {
-        const equippedItems = new Array<CharacterItem>();
+    getEquipmentSummary(): CharacterItem[] | null {
+        const equippedItems = [];
         const allItems = this._game.inventory._characterItems;
         const itemLocations = this._game.inventory.itemLocationDetailMap;
         for (let location in itemLocations) {
-            if(!itemLocations[location].hrid.includes("tool")) {
-                let index = allItems.findIndex(item => item.itemLocationHrid === location);
+            if (!itemLocations[location].hrid.includes("tool")) {
+                let index = allItems.findIndex((item) => item.itemLocationHrid === location);
                 if (index != -1) {
                     equippedItems.push(allItems[index]);
                 }
@@ -34,11 +34,11 @@ export class EquipmentExporterPlugin extends MooLitePlugin {
     }
 
     getFoodSummary(): Array<CharacterConsumable> | null {
-        return this._game.inventory.get_equippedFood();
+        return this._game.inventory.getEquippedFood();
     }
 
     getDrinkSummary(): Array<CharacterConsumable> | null {
-        return this._game.inventory.get_equippedDrinks();
+        return this._game.inventory.getEquippedDrinks();
     }
 
     getLevel(skillHrid): String {
@@ -49,33 +49,47 @@ export class EquipmentExporterPlugin extends MooLitePlugin {
         return this._game.abilities.equippedAbilities;
     }
 
-    exportDetails() {
-        try {
-            const equipmentData = this.getEquipmentSummary();
-            let drinks = this.getDrinkSummary();
-            let food = this.getFoodSummary();
-            let abilities = this.getAbilities();
-            let attackLevel = this.getLevel("/skills/attack");
-            let staminaLevel = this.getLevel("/skills/stamina");
-            let intelligenceLevel = this.getLevel("/skills/intelligence");
-            let powerLevel = this.getLevel("/skills/power");
-            let defenseLevel = this.getLevel("/skills/defense");
-            let rangedLevel = this.getLevel("/skills/ranged");
-            let magicLevel = this.getLevel("/skills/magic");
-            const zone = "/actions/combat/fly";
-            const simulationTime = "100";
-            const exportSet = {"player": {attackLevel, magicLevel, powerLevel, rangedLevel, defenseLevel, staminaLevel, intelligenceLevel, "equipment": equipmentData}, drinks, food, abilities, zone, simulationTime};
-            let copyValue = JSON.stringify(exportSet);
-            if (!navigator.clipboard) {
-                throw new Error("Browser don't have support for native clipboard.");
-            }
-
-            navigator.clipboard.writeText(copyValue);
-            alert("Copied Equipment to Clipboard");
-        } catch (error) {
-            console.log(error.toString());
-        }
+    getItemName(itemHrid): String | null {
+        return this._game.inventory.itemDetailMap[itemHrid].name;
     }
 
+    exportDetails() {
+        const equipmentData = this.getEquipmentSummary();
+        let drinks = this.getDrinkSummary();
+        let food = this.getFoodSummary();
+        let abilities = this.getAbilities();
+        let attackLevel = this.getLevel("/skills/attack");
+        let staminaLevel = this.getLevel("/skills/stamina");
+        let intelligenceLevel = this.getLevel("/skills/intelligence");
+        let powerLevel = this.getLevel("/skills/power");
+        let defenseLevel = this.getLevel("/skills/defense");
+        let rangedLevel = this.getLevel("/skills/ranged");
+        let magicLevel = this.getLevel("/skills/magic");
+        const zone = "/actions/combat/fly";
+        const simulationTime = "100";
+        const exportSet = {
+            player: {
+                attackLevel,
+                magicLevel,
+                powerLevel,
+                rangedLevel,
+                defenseLevel,
+                staminaLevel,
+                intelligenceLevel,
+                equipment: equipmentData,
+            },
+            drinks,
+            food,
+            abilities,
+            zone,
+            simulationTime,
+        };
+        let copyValue = JSON.stringify(exportSet);
+        if (!navigator.clipboard) {
+            throw new Error("Browser don't have support for native clipboard.");
+        }
 
+        navigator.clipboard.writeText(copyValue);
+        alert("Copied Equipment to Clipboard");
+    }
 }
