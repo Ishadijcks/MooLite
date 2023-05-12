@@ -20,6 +20,7 @@ import { CombatTriggersUpdatedParser } from "src/MooLite/core/server/messages/Co
 import { CharacterStatsUpdatedParser } from "src/MooLite/core/server/messages/CharacterStatsUpdated";
 import { EquipmentBuffsUpdatedParser } from "src/MooLite/core/server/messages/EquipmentBuffsUpdated";
 import { ItemsUpdatedParser } from "src/MooLite/core/server/messages/ItemsUpdated";
+import { LootOpenedParser } from "src/MooLite/core/server/messages/LootOpened";
 import { AbilitiesUpdatedParser } from "src/MooLite/core/server/messages/AbilitiesUpdated";
 
 export class MooLite {
