@@ -9,6 +9,7 @@ import { AbilitySlotChanged, AbilityXpGained } from "src/MooLite/core/abilities/
 import { LeaderboardTopic } from "src/MooLite/core/leaderboard/LeaderboardTopic";
 import { ItemGained } from "src/MooLite/core/inventory/Inventory";
 import { PluginBuiltinOption } from "src/MooLite/core/plugins/config/PluginBuiltinOption";
+import { LootBoxOpened } from "src/MooLite/core/lootboxes/LootBoxOpened";
 
 export abstract class MooLitePlugin {
     abstract name: string;
@@ -99,6 +100,8 @@ export abstract class MooLitePlugin {
     onAbilitySlotChanged?(slotChanged: AbilitySlotChanged): void;
 
     onLeaderboardUpdated?(topics: LeaderboardTopic[]): void;
+
+    onLootBoxOpened?(lootBoxOpened: LootBoxOpened): void;
 
     onItemGained?(itemGained: ItemGained): void;
 

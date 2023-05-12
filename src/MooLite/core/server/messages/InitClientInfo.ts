@@ -54,14 +54,14 @@ export interface InitClientInfoMessage extends ServerMessage {
     // enhancementLevelSuccessRateTable: number;
     // enhancementLevelTotalBonusMultiplierTable: number;
     equipmentTypeDetailMap: Record<EquipmentTypeHrid, EquipmentTypeDetail>;
-    // gameVersion: string;
+    gameVersion: string;
     itemCategoryDetailMap: Record<ItemCategoryHrid, ItemCategoryDetail>;
     itemDetailMap: Record<ItemHrid, ItemDetail>;
     itemLocationDetailMap: Record<ItemLocationHrid, ItemLocationDetail>;
     levelExperienceTable: number[];
     // shopItemDetailMap: Record<string, unknown>;
     skillDetailMap: Record<SkillHrid, SkillDetail>;
-    // versionTimeStamp: string;
+    versionTimeStamp: string;
 }
 
 export class InitClientInfoParser extends MessageParser {

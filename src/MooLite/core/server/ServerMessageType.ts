@@ -1,5 +1,5 @@
 export enum ServerMessageType {
-    // Internals
+    // Internals,
     InitClientInfo = "init_client_info",
     InitCharacterInfo = "init_character_info",
     Pong = "pong",
@@ -12,6 +12,8 @@ export enum ServerMessageType {
     CharacterStatsUpdated = "character_stats_updated",
     EquipmentBuffsUpdated = "equipment_buffs_updated",
     ItemsUpdated = "items_updated",
+
+    LootOpened = "loot_opened",
 
     // Actions
     ActionCompleted = "action_completed",

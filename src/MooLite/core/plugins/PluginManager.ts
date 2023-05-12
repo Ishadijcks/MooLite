@@ -65,6 +65,12 @@ export class PluginManager {
             });
         });
 
+        this.game.lootBoxes.onLootBoxOpened.subscribe((lootBoxOpened) => {
+            this.enabledPlugins.forEach((plugin) => {
+                plugin.onLootBoxOpened?.(lootBoxOpened);
+            });
+        });
+
         // Inject the game into all plugins
         this.plugins.forEach((plugin) => {
             plugin.initialize(this.game);

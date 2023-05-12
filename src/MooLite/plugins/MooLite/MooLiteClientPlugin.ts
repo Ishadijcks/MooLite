@@ -37,8 +37,9 @@ export class MooLiteClientPlugin extends MooLitePlugin {
     config: PluginConfig[] = [
         {
             key: "mooliteclient/browser-notifications",
-            name: "Browser notifications",
-            description: "Show browser notifications\nRemember to allow them in your browser",
+            name: "Info message notifications",
+            description:
+                "Show browser notifications when you gain an info message (such as levelling up)\nRemember to allow them in your browser",
             type: PluginConfigType.CheckBox,
             value: true,
         },

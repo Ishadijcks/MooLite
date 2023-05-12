@@ -42,6 +42,7 @@ export class MooLite {
         new InfoParser(),
         new CombatTriggersUpdatedParser(),
         new LeaderboardInfoUpdatedParser(),
+        new LootOpenedParser(),
         new CharacterStatsUpdatedParser(),
         new EquipmentBuffsUpdatedParser(),
         new ItemsUpdatedParser(),
