@@ -23,9 +23,9 @@ export class PluginManager {
             });
         });
 
-        this.game.abilities.onAbilitySlotChanged.subscribe((gains) => {
+        this.game.abilities.onAbilitySlotChanged.subscribe((slotChanged) => {
             this.enabledPlugins.forEach((plugin) => {
-                plugin.onAbilitySlotChanged?.(gains);
+                plugin.onAbilitySlotChanged?.(slotChanged);
             });
         });
 
