@@ -94,8 +94,14 @@ export class Inventory {
         });
     }
 
-    updateCharacterDrink(actionTypeDrinkSlotsMap: Record<ActionTypeHrid, (CharacterConsumable | null)[]>) {
+    updateCharacterDrinks(
+        actionTypeDrinkSlotsMap: Record<ActionTypeHrid, (CharacterConsumable | null)[]>,
+        notify: boolean = true
+    ) {
         for (const actionType in actionTypeDrinkSlotsMap) {
+            if (!notify) {
+                return;
+            }
             const consumables = actionTypeDrinkSlotsMap[actionType];
 
             if (this._characterDrinks[actionType] == null) {
@@ -103,7 +109,9 @@ export class Inventory {
             }
 
             this._characterDrinks[actionType].forEach((storedConsumable, i) => {
-                if (storedConsumable === null) return;
+                if (storedConsumable === null) {
+                    return;
+                }
                 const newConsumable = actionTypeDrinkSlotsMap[actionType][i];
 
                 // If stored consumable state is active and new state = inactive,
