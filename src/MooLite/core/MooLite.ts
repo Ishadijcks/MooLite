@@ -20,6 +20,8 @@ import { CombatTriggersUpdatedParser } from "src/MooLite/core/server/messages/Co
 import { CharacterStatsUpdatedParser } from "src/MooLite/core/server/messages/CharacterStatsUpdated";
 import { EquipmentBuffsUpdatedParser } from "src/MooLite/core/server/messages/EquipmentBuffsUpdated";
 import { ItemsUpdatedParser } from "src/MooLite/core/server/messages/ItemsUpdated";
+import { LootOpenedParser } from "src/MooLite/core/server/messages/LootOpened";
+import { AbilitiesUpdatedParser } from "src/MooLite/core/server/messages/AbilitiesUpdated";
 
 export class MooLite {
     pluginManager: PluginManager;
@@ -40,9 +42,11 @@ export class MooLite {
         new InfoParser(),
         new CombatTriggersUpdatedParser(),
         new LeaderboardInfoUpdatedParser(),
+        new LootOpenedParser(),
         new CharacterStatsUpdatedParser(),
         new EquipmentBuffsUpdatedParser(),
         new ItemsUpdatedParser(),
+        new AbilitiesUpdatedParser(),
 
         // Client messages
         new PingParser(),

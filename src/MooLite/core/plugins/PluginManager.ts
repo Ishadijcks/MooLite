@@ -23,6 +23,12 @@ export class PluginManager {
             });
         });
 
+        this.game.abilities.onAbilitySlotChanged.subscribe((slotChanged) => {
+            this.enabledPlugins.forEach((plugin) => {
+                plugin.onAbilitySlotChanged?.(slotChanged);
+            });
+        });
+
         this.game.skills.onXpGained.subscribe((info) => {
             this.enabledPlugins.forEach((plugin) => {
                 plugin.onXpGained?.(info);
@@ -56,6 +62,12 @@ export class PluginManager {
         this.game.leaderboard.onLeaderboardUpdated.subscribe((topics) => {
             this.enabledPlugins.forEach((plugin) => {
                 plugin.onLeaderboardUpdated?.(topics);
+            });
+        });
+
+        this.game.lootBoxes.onLootBoxOpened.subscribe((lootBoxOpened) => {
+            this.enabledPlugins.forEach((plugin) => {
+                plugin.onLootBoxOpened?.(lootBoxOpened);
             });
         });
 

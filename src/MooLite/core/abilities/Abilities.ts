@@ -12,12 +12,17 @@ export interface AbilityLvlGained extends CharacterAbility {
     delta: number;
 }
 
+export interface AbilitySlotChanged extends CharacterAbility {
+    indexChanged: number;
+}
+
 export class Abilities {
     private _characterAbilities: Record<AbilityHrid, CharacterAbility | null> = {};
     private _abilityCombatTriggers: Record<AbilityHrid, CombatTrigger> = {};
 
     private _onAbilityXpGained = new SimpleEventDispatcher<AbilityXpGained>();
     private _onAbilityLvlGained = new SimpleEventDispatcher<AbilityLvlGained>();
+    private _onAbilitySlotChanged = new SimpleEventDispatcher<AbilitySlotChanged>();
 
     public get onAbilityXpGained() {
         return this._onAbilityXpGained.asEvent();
@@ -25,6 +30,10 @@ export class Abilities {
 
     public get onAbilityLvlGained() {
         return this._onAbilityLvlGained.asEvent();
+    }
+
+    public get onAbilitySlotChanged() {
+        return this._onAbilitySlotChanged.asEvent();
     }
 
     public readonly abilityDetailMap: Record<AbilityHrid, AbilityDetail>;

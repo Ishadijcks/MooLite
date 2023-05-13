@@ -1,1 +1,1 @@
-export enum SkillHrid {}
+export type SkillHrid = string;
