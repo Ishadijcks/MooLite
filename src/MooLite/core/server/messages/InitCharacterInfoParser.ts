@@ -39,8 +39,8 @@ export class InitCharacterInfoParser extends MessageParser {
         game.abilities.updateCombatTriggers(message.abilityCombatTriggersMap);
         game.actionQueue.updateActions(message.characterActions);
         game.inventory.updateCharacterItems(message.characterItems, false);
-        game.inventory.updateCharacterDrinks(message.actionTypeDrinkSlotsMap);
-        game.inventory.updateCharacterFood(message.actionTypeFoodSlotsMap);
+        game.inventory.updateCharacterDrinks(message.actionTypeDrinkSlotsMap, false);
+        game.inventory.updateCharacterFood(message.actionTypeFoodSlotsMap, false);
         game.skills.updateCharacterSkills(message.characterSkills, false);
         // TODO(@Isha): Parse everything here
         //
