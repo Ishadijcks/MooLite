@@ -127,8 +127,11 @@ export class Inventory {
         }
     }
 
-    updateCharacterFood(actionTypeFoodSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]>) {
+    updateCharacterFood(actionTypeFoodSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]>, notify: boolean = true) {
         for (const actionType in actionTypeFoodSlotsMap) {
+            if (!notify) {
+                return;
+            }
             const consumables = actionTypeFoodSlotsMap[actionType];
 
             if (this._characterFoods[actionType] == null) {
