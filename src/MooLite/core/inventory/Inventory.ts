@@ -120,7 +120,28 @@ export class Inventory {
     }
 
     updateCharacterFood(actionTypeFoodSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]>) {
-        this._characterFoods = actionTypeFoodSlotsMap;
+        for (const actionType in actionTypeFoodSlotsMap) {
+            const consumables = actionTypeFoodSlotsMap[actionType];
+
+            if (this._characterFoods[actionType] == null) {
+                this._characterFoods[actionType] = consumables;
+            }
+
+            this._characterFoods[actionType].forEach((storedConsumable, i) => {
+                if (storedConsumable === null) return;
+                const newConsumable = actionTypeFoodSlotsMap[actionType][i];
+
+                // If stored consumable state is active and new state = inactive,
+                // dispatch the event. Checking for the difference stops the notification
+                // from being sent out every time updateCharacterDrink is called.
+                if (!newConsumable?.isActive && storedConsumable.isActive) {
+                    this._onConsumableDepleted.dispatch(storedConsumable);
+                }
+            });
+
+            // Save the new consumable slots state
+            this._characterFoods[actionType] = actionTypeFoodSlotsMap[actionType];
+        }
     }
 
     public isAbilityBook(itemHrid: ItemHrid): boolean {
