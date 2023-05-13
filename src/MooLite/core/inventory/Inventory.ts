@@ -99,11 +99,11 @@ export class Inventory {
         return this.itemDetailMap[itemHrid].abilityBookDetail?.abilityHrid.toString().length > 0;
     }
 
-    public getEquippedFood(): CharacterConsumable[] {
+    public getEquippedFood(): Record<ActionTypeHrid, CharacterConsumable[]> {
         return this._actionTypeFoodSlotsMap;
     }
 
-    public getEquippedDrinks(): CharacterConsumable[] {
+    public getEquippedDrinks(): Record<ActionTypeHrid, CharacterConsumable[]> {
         return this._actionTypeDrinkSlotsMap;
     }
 }

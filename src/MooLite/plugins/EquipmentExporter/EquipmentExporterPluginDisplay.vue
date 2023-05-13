@@ -16,9 +16,9 @@ const equipmentData = computed(() => {
     });
 });
 
-const exportData = computed(() => {
-    return props.plugin.exportDetails();
-});
+const exportData = () => {
+    props.plugin.exportDetails();
+};
 </script>
 
 <template>

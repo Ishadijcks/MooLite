@@ -5,6 +5,9 @@ import EquipmentExporterPluginDisplay from "src/MooLite/plugins/EquipmentExporte
 import { CharacterItem } from "src/MooLite/core/inventory/CharacterItem";
 import { CharacterConsumable } from "src/MooLite/core/inventory/items/CharacterConsumable";
 import { CharacterAbility } from "src/MooLite/core/abilities/CharacterAbility";
+import { ItemHrid } from "src/MooLite/core/inventory/ItemHrid";
+import { SkillHrid } from "src/MooLite/core/skills/SkillHrid";
+import { ActionTypeHrid } from "src/MooLite/core/actions/ActionTypeHrid";
 
 export class EquipmentExporterPlugin extends MooLitePlugin {
     name: string = "Equipment Exporter";
@@ -23,8 +26,8 @@ export class EquipmentExporterPlugin extends MooLitePlugin {
         const allItems = this._game.inventory._characterItems;
         const itemLocations = this._game.inventory.itemLocationDetailMap;
         for (let location in itemLocations) {
-            if (!itemLocations[location].hrid.includes("tool")) {
-                let index = allItems.findIndex((item) => item.itemLocationHrid === location);
+            if (!String(itemLocations[location].hrid).includes("tool")) {
+                let index = allItems.findIndex((item: CharacterItem) => String(item.itemLocationHrid) === location);
                 if (index != -1) {
                     equippedItems.push(allItems[index]);
                 }
@@ -33,38 +36,45 @@ export class EquipmentExporterPlugin extends MooLitePlugin {
         return equippedItems;
     }
 
-    getFoodSummary(): Array<CharacterConsumable> | null {
+    getFoodSummary(): Record<ActionTypeHrid, CharacterConsumable[]> | null {
         return this._game.inventory.getEquippedFood();
     }
 
-    getDrinkSummary(): Array<CharacterConsumable> | null {
+    getDrinkSummary(): Record<ActionTypeHrid, CharacterConsumable[]> | null {
         return this._game.inventory.getEquippedDrinks();
     }
 
-    getLevel(skillHrid): String {
+    getLevel(skillHrid: SkillHrid): number {
         return this._game.skills.getLevel(skillHrid);
     }
 
-    getAbilities(): Array<CharacterAbility> | null {
+    getAbilities(): CharacterAbility[] | null {
         return this._game.abilities.equippedAbilities;
     }
 
-    getItemName(itemHrid): String | null {
+    getItemName(itemHrid: ItemHrid): String | null {
         return this._game.inventory.itemDetailMap[itemHrid].name;
     }
 
     exportDetails() {
         const equipmentData = this.getEquipmentSummary();
+        const skillDetailMap = this._game.skills.skillDetailMap;
         let drinks = this.getDrinkSummary();
         let food = this.getFoodSummary();
         let abilities = this.getAbilities();
-        let attackLevel = this.getLevel("/skills/attack");
-        let staminaLevel = this.getLevel("/skills/stamina");
-        let intelligenceLevel = this.getLevel("/skills/intelligence");
-        let powerLevel = this.getLevel("/skills/power");
-        let defenseLevel = this.getLevel("/skills/defense");
-        let rangedLevel = this.getLevel("/skills/ranged");
-        let magicLevel = this.getLevel("/skills/magic");
+        let levels = [];
+        for (let skill in skillDetailMap) {
+            const skillName = String(skillDetailMap[skill].hrid);
+            const skillLevel = this.getLevel(skillDetailMap[skill].hrid);
+            levels.push({ skillName, skillLevel });
+        }
+        let attackLevel = levels.find((skill) => skill.skillName === "/skills/attack")?.skillLevel;
+        let staminaLevel = levels.find((skill) => skill.skillName === "/skills/stamina")?.skillLevel;
+        let intelligenceLevel = levels.find((skill) => skill.skillName === "/skills/intelligence")?.skillLevel;
+        let powerLevel = levels.find((skill) => skill.skillName === "/skills/power")?.skillLevel;
+        let defenseLevel = levels.find((skill) => skill.skillName === "/skills/defense")?.skillLevel;
+        let rangedLevel = levels.find((skill) => skill.skillName === "/skills/ranged")?.skillLevel;
+        let magicLevel = levels.find((skill) => skill.skillName === "/skills/magic")?.skillLevel;
         const zone = "/actions/combat/fly";
         const simulationTime = "100";
         const exportSet = {
