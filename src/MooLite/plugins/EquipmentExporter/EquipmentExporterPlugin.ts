@@ -26,7 +26,10 @@ export class EquipmentExporterPlugin extends MooLitePlugin {
         const allItems = this._game.inventory._characterItems;
         const itemLocations = this._game.inventory.itemLocationDetailMap;
         for (let location in itemLocations) {
-            if (!String(itemLocations[location].hrid).includes("tool")) {
+            if (
+                !String(itemLocations[location].hrid).includes("tool") &&
+                !String(itemLocations[location].hrid).includes("inventory")
+            ) {
                 let index = allItems.findIndex((item: CharacterItem) => String(item.itemLocationHrid) === location);
                 if (index != -1) {
                     equippedItems.push(allItems[index]);
