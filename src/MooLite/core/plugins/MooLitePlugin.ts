@@ -10,6 +10,8 @@ import { LeaderboardTopic } from "src/MooLite/core/leaderboard/LeaderboardTopic"
 import { ItemGained } from "src/MooLite/core/inventory/Inventory";
 import { PluginBuiltinOption } from "src/MooLite/core/plugins/config/PluginBuiltinOption";
 import { LootBoxOpened } from "src/MooLite/core/lootboxes/LootBoxOpened";
+import { ActionTypeHrid } from "src/MooLite/core/actions/ActionTypeHrid";
+import { CharacterConsumable } from "src/MooLite/core/inventory/items/CharacterConsumable";
 
 export abstract class MooLitePlugin {
     abstract name: string;
@@ -104,6 +106,8 @@ export abstract class MooLitePlugin {
     onLootBoxOpened?(lootBoxOpened: LootBoxOpened): void;
 
     onItemGained?(itemGained: ItemGained): void;
+
+    onConsumableDepleted?(consumable: CharacterConsumable): void;
 
     onClientTick?(): void;
 }

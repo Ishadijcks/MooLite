@@ -22,8 +22,15 @@ export class Inventory {
         return this._onItemGained.asEvent();
     }
 
-    private _actionTypeDrinkSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]> = {};
-    private _actionTypeFoodSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]> = {};
+    private _characterDrinks: Record<ActionTypeHrid, (CharacterConsumable | null)[]> = {};
+    private _characterFoods: Record<ActionTypeHrid, (CharacterConsumable | null)[]> = {};
+
+    private _onConsumableDepleted = new SimpleEventDispatcher<CharacterConsumable>();
+
+    public get onConsumableDepleted() {
+        return this._onConsumableDepleted.asEvent();
+    }
+
     public readonly itemDetailMap: Record<ItemHrid, ItemDetail>;
     public readonly itemCategoryDetailMap: Record<ItemCategoryHrid, ItemCategoryDetail>;
     public readonly itemLocationDetailMap: Record<ItemLocationHrid, ItemLocationDetail>;
@@ -87,23 +94,70 @@ export class Inventory {
         });
     }
 
-    updateCharacterDrink(actionTypeDrinkSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]>) {
-        this._actionTypeDrinkSlotsMap = actionTypeDrinkSlotsMap;
+    updateCharacterDrinks(
+        actionTypeDrinkSlotsMap: Record<ActionTypeHrid, (CharacterConsumable | null)[]>,
+        notify: boolean = true
+    ) {
+        for (const actionType in actionTypeDrinkSlotsMap) {
+            const consumables = actionTypeDrinkSlotsMap[actionType];
+
+            if (this._characterDrinks[actionType] == null) {
+                this._characterDrinks[actionType] = consumables;
+            }
+
+            this._characterDrinks[actionType].forEach((storedConsumable, i) => {
+                if (storedConsumable === null) {
+                    return;
+                }
+                const newConsumable = actionTypeDrinkSlotsMap[actionType][i];
+
+                // If stored consumable state is active and new state = inactive,
+                // dispatch the event. Checking for the difference stops the notification
+                // from being sent out every time updateCharacterDrink is called.
+                if (!newConsumable?.isActive && storedConsumable.isActive && notify) {
+                    this._onConsumableDepleted.dispatch(storedConsumable);
+                }
+            });
+
+            // Save the new consumable slots state
+            this._characterDrinks[actionType] = actionTypeDrinkSlotsMap[actionType];
+        }
     }
 
-    updateCharacterFood(actionTypeFoodSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]>) {
-        this._actionTypeFoodSlotsMap = actionTypeFoodSlotsMap;
+    updateCharacterFood(actionTypeFoodSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]>, notify: boolean = true) {
+        for (const actionType in actionTypeFoodSlotsMap) {
+            const consumables = actionTypeFoodSlotsMap[actionType];
+
+            if (this._characterFoods[actionType] == null) {
+                this._characterFoods[actionType] = consumables;
+            }
+
+            this._characterFoods[actionType].forEach((storedConsumable, i) => {
+                if (storedConsumable === null) return;
+                const newConsumable = actionTypeFoodSlotsMap[actionType][i];
+
+                // If stored consumable state is active and new state = inactive,
+                // dispatch the event. Checking for the difference stops the notification
+                // from being sent out every time updateCharacterDrink is called.
+                if (!newConsumable?.isActive && storedConsumable.isActive && notify) {
+                    this._onConsumableDepleted.dispatch(storedConsumable);
+                }
+            });
+
+            // Save the new consumable slots state
+            this._characterFoods[actionType] = actionTypeFoodSlotsMap[actionType];
+        }
     }
 
     public isAbilityBook(itemHrid: ItemHrid): boolean {
         return this.itemDetailMap[itemHrid].abilityBookDetail?.abilityHrid.toString().length > 0;
     }
 
-    public getEquippedFood(): Record<ActionTypeHrid, CharacterConsumable[]> {
-        return this._actionTypeFoodSlotsMap;
+    public getEquippedFood(): Record<ActionTypeHrid, (CharacterConsumable | null)[]> {
+        return this._characterFoods;
     }
 
-    public getEquippedDrinks(): Record<ActionTypeHrid, CharacterConsumable[]> {
-        return this._actionTypeDrinkSlotsMap;
+    public getEquippedDrinks(): Record<ActionTypeHrid, (CharacterConsumable | null)[]> {
+        return this._characterDrinks;
     }
 }

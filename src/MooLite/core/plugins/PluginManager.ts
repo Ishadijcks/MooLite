@@ -41,6 +41,12 @@ export class PluginManager {
             });
         });
 
+        this.game.inventory.onConsumableDepleted.subscribe((consumable) => {
+            this.enabledPlugins.forEach((plugin) => {
+                plugin.onConsumableDepleted?.(consumable);
+            });
+        });
+
         this.game.chat.onMessage.subscribe((chatMessage) => {
             this.enabledPlugins.forEach((plugin) => {
                 plugin.onChatMessage?.(chatMessage);
