@@ -26,11 +26,9 @@ export class EquipmentExporterPlugin extends MooLitePlugin {
         const allItems = this._game.inventory._characterItems;
         const itemLocations = this._game.inventory.itemLocationDetailMap;
         for (let location in itemLocations) {
-            if (
-                !String(itemLocations[location].hrid).includes("tool") &&
-                !String(itemLocations[location].hrid).includes("inventory")
-            ) {
-                let index = allItems.findIndex((item: CharacterItem) => String(item.itemLocationHrid) === location);
+            const locationName = itemLocations[location].hrid.toString();
+            if (!locationName.includes("tool") && !locationName.includes("inventory")) {
+                let index = allItems.findIndex((item: CharacterItem) => item.itemLocationHrid.toString() === location);
                 if (index != -1) {
                     equippedItems.push(allItems[index]);
                 }
@@ -61,34 +59,20 @@ export class EquipmentExporterPlugin extends MooLitePlugin {
 
     exportDetails() {
         const equipmentData = this.getEquipmentSummary();
-        const skillDetailMap = this._game.skills.skillDetailMap;
-        let drinks = this.getDrinkSummary();
-        let food = this.getFoodSummary();
-        let abilities = this.getAbilities();
-        let levels = [];
-        for (let skill in skillDetailMap) {
-            const skillName = String(skillDetailMap[skill].hrid);
-            const skillLevel = this.getLevel(skillDetailMap[skill].hrid);
-            levels.push({ skillName, skillLevel });
-        }
-        let attackLevel = levels.find((skill) => skill.skillName === "/skills/attack")?.skillLevel;
-        let staminaLevel = levels.find((skill) => skill.skillName === "/skills/stamina")?.skillLevel;
-        let intelligenceLevel = levels.find((skill) => skill.skillName === "/skills/intelligence")?.skillLevel;
-        let powerLevel = levels.find((skill) => skill.skillName === "/skills/power")?.skillLevel;
-        let defenseLevel = levels.find((skill) => skill.skillName === "/skills/defense")?.skillLevel;
-        let rangedLevel = levels.find((skill) => skill.skillName === "/skills/ranged")?.skillLevel;
-        let magicLevel = levels.find((skill) => skill.skillName === "/skills/magic")?.skillLevel;
+        const drinks = this.getDrinkSummary();
+        const food = this.getFoodSummary();
+        const abilities = this.getAbilities();
         const zone = "/actions/combat/fly";
         const simulationTime = "100";
         const exportSet = {
             player: {
-                attackLevel,
-                magicLevel,
-                powerLevel,
-                rangedLevel,
-                defenseLevel,
-                staminaLevel,
-                intelligenceLevel,
+                attackLevel: this.getLevel("/skills/attack"),
+                magicLevel: this.getLevel("/skills/magic"),
+                powerLevel: this.getLevel("/skills/power"),
+                rangedLevel: this.getLevel("/skills/ranged"),
+                defenseLevel: this.getLevel("/skills/defense"),
+                staminaLevel: this.getLevel("/skills/stamina"),
+                intelligenceLevel: this.getLevel("/skills/intelligence"),
                 equipment: equipmentData,
             },
             drinks,
@@ -97,12 +81,12 @@ export class EquipmentExporterPlugin extends MooLitePlugin {
             zone,
             simulationTime,
         };
-        let copyValue = JSON.stringify(exportSet);
+        const copyValue = JSON.stringify(exportSet);
         if (!navigator.clipboard) {
             throw new Error("Browser don't have support for native clipboard.");
         }
 
-        navigator.clipboard.writeText(copyValue);
+        void navigator.clipboard.writeText(copyValue);
         alert("Copied Equipment to Clipboard");
     }
 }
