@@ -37,11 +37,11 @@ export class EquipmentExporterPlugin extends MooLitePlugin {
         return equippedItems;
     }
 
-    getFoodSummary(): Record<ActionTypeHrid, CharacterConsumable[]> | null {
+    getFoodSummary(): Record<ActionTypeHrid, (CharacterConsumable | null)[]> | null {
         return this._game.inventory.getEquippedFood();
     }
 
-    getDrinkSummary(): Record<ActionTypeHrid, CharacterConsumable[]> | null {
+    getDrinkSummary(): Record<ActionTypeHrid, (CharacterConsumable | null)[]> | null {
         return this._game.inventory.getEquippedDrinks();
     }
 
