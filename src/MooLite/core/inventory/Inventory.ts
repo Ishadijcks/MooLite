@@ -22,10 +22,8 @@ export class Inventory {
         return this._onItemGained.asEvent();
     }
 
-    private _actionTypeDrinkSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]> = {};
-    private _actionTypeFoodSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]> = {};
-
-    _characterDrinks: Record<ActionTypeHrid, (CharacterConsumable | null)[]> = {};
+    private _characterDrinks: Record<ActionTypeHrid, (CharacterConsumable | null)[]> = {};
+    private _characterFoods: Record<ActionTypeHrid, CharacterConsumable[]> = {};
 
     private _onConsumableDepleted = new SimpleEventDispatcher<CharacterConsumable>();
 
@@ -122,18 +120,18 @@ export class Inventory {
     }
 
     updateCharacterFood(actionTypeFoodSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]>) {
-        this._actionTypeFoodSlotsMap = actionTypeFoodSlotsMap;
+        this._characterFoods = actionTypeFoodSlotsMap;
     }
 
     public isAbilityBook(itemHrid: ItemHrid): boolean {
         return this.itemDetailMap[itemHrid].abilityBookDetail?.abilityHrid.toString().length > 0;
     }
 
-    public getEquippedFood(): Record<ActionTypeHrid, CharacterConsumable[]> {
-        return this._actionTypeFoodSlotsMap;
+    public getEquippedFood(): Record<ActionTypeHrid, (CharacterConsumable | null)[]> {
+        return this._characterFoods;
     }
 
-    public getEquippedDrinks(): Record<ActionTypeHrid, CharacterConsumable[]> {
-        return this._actionTypeDrinkSlotsMap;
+    public getEquippedDrinks(): Record<ActionTypeHrid, (CharacterConsumable | null)[]> {
+        return this._characterDrinks;
     }
 }
