@@ -16,7 +16,7 @@ export class ConsumableSlotsUpdatedParser extends MessageParser {
     type = ServerMessageType.ConsumableSlotsUpdated;
 
     apply(message: ConsumableSlotsUpdatedMessage, game: Game): void {
-        game.inventory.updateCharacterDrink(message.actionTypeDrinkSlotsMap);
+        game.inventory.updateCharacterDrinks(message.actionTypeDrinkSlotsMap);
         game.inventory.updateCharacterFood(message.actionTypeFoodSlotsMap);
     }
 }
