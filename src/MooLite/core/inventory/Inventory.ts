@@ -99,9 +99,6 @@ export class Inventory {
         notify: boolean = true
     ) {
         for (const actionType in actionTypeDrinkSlotsMap) {
-            if (!notify) {
-                return;
-            }
             const consumables = actionTypeDrinkSlotsMap[actionType];
 
             if (this._characterDrinks[actionType] == null) {
@@ -117,7 +114,7 @@ export class Inventory {
                 // If stored consumable state is active and new state = inactive,
                 // dispatch the event. Checking for the difference stops the notification
                 // from being sent out every time updateCharacterDrink is called.
-                if (!newConsumable?.isActive && storedConsumable.isActive) {
+                if (!newConsumable?.isActive && storedConsumable.isActive && notify) {
                     this._onConsumableDepleted.dispatch(storedConsumable);
                 }
             });
@@ -129,9 +126,6 @@ export class Inventory {
 
     updateCharacterFood(actionTypeFoodSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]>, notify: boolean = true) {
         for (const actionType in actionTypeFoodSlotsMap) {
-            if (!notify) {
-                return;
-            }
             const consumables = actionTypeFoodSlotsMap[actionType];
 
             if (this._characterFoods[actionType] == null) {
@@ -145,7 +139,7 @@ export class Inventory {
                 // If stored consumable state is active and new state = inactive,
                 // dispatch the event. Checking for the difference stops the notification
                 // from being sent out every time updateCharacterDrink is called.
-                if (!newConsumable?.isActive && storedConsumable.isActive) {
+                if (!newConsumable?.isActive && storedConsumable.isActive && notify) {
                     this._onConsumableDepleted.dispatch(storedConsumable);
                 }
             });
