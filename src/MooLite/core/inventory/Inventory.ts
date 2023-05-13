@@ -23,7 +23,7 @@ export class Inventory {
     }
 
     private _characterDrinks: Record<ActionTypeHrid, (CharacterConsumable | null)[]> = {};
-    private _characterFoods: Record<ActionTypeHrid, CharacterConsumable[]> = {};
+    private _characterFoods: Record<ActionTypeHrid, (CharacterConsumable | null)[]> = {};
 
     private _onConsumableDepleted = new SimpleEventDispatcher<CharacterConsumable>();
 
