@@ -9,6 +9,7 @@ import { Combat } from "src/MooLite/core/combat/Combat";
 import { Leaderboard } from "src/MooLite/core/leaderboard/Leaderboard";
 import { Equipment } from "src/MooLite/core/equipment/Equipment";
 import { LootBoxes } from "src/MooLite/core/lootboxes/LootBoxes";
+import { Enhancing } from "src/MooLite/core/enhancing/Enhancing";
 
 export class Game {
     gameVersion: string;
@@ -23,6 +24,7 @@ export class Game {
     chat: Chat;
     actionQueue: ActionQueue;
     inventory: Inventory;
+    enhancing: Enhancing;
 
     notifier: Notifier;
 
@@ -57,6 +59,10 @@ export class Game {
             clientInfo.itemDetailMap,
             clientInfo.itemCategoryDetailMap,
             clientInfo.itemLocationDetailMap
+        );
+        this.enhancing = new Enhancing(
+            clientInfo.enhancementLevelSuccessRateTable,
+            clientInfo.enhancementLevelTotalBonusMultiplierTable
         );
 
         this.notifier = new Notifier();

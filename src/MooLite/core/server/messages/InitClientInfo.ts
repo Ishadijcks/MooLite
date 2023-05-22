@@ -51,8 +51,8 @@ export interface InitClientInfoMessage extends ServerMessage {
     // cowbellBundleDetailMap: Record<string, CowbellBundleDetail>;
     // currentTimestamp: string;
     // damageTypeDetailMap: Record<DamageTypeHrid, DamageTypeDetail>;
-    // enhancementLevelSuccessRateTable: number;
-    // enhancementLevelTotalBonusMultiplierTable: number;
+    enhancementLevelSuccessRateTable: number[];
+    enhancementLevelTotalBonusMultiplierTable: number[];
     equipmentTypeDetailMap: Record<EquipmentTypeHrid, EquipmentTypeDetail>;
     gameVersion: string;
     itemCategoryDetailMap: Record<ItemCategoryHrid, ItemCategoryDetail>;
