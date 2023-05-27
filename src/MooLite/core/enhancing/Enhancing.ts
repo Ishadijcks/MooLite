@@ -90,6 +90,19 @@ export class Enhancing {
         return protects;
     }
 
+    getBlessedTeaTable(successTable: number[], blessedTeaBoost: number): number[] {
+        let blessedTeaTable = [1, 1];
+        for (let i = 2; i < successTable.length; i++) {
+            blessedTeaTable.push(
+                ((1 - blessedTeaBoost) ** 2 +
+                    blessedTeaBoost * (1 - blessedTeaBoost) * (1 - successTable[i]) +
+                    blessedTeaBoost / successTable[i - 1]) *
+                    blessedTeaTable[i - 1]
+            );
+        }
+        return blessedTeaTable;
+    }
+
     getCostWithProtects(
         costTable: number[],
         successChanceTable: number[],

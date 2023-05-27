@@ -32,15 +32,16 @@ const currentToolBonus = ref(props.plugin.getEnhancingToolBonus(props.plugin.get
 const currentEnhancementLevel = ref(0);
 const targetItemLevel = ref(1);
 const protectCost = ref(1);
+const baseItemCost = ref(1);
 const selectedHrid = ref(options.value[0].value);
 const protectLevel = ref();
 const actionAmount = ref();
 const protectionAmount = ref();
 const estimatedTotalCost = ref();
 const estimatedTotalExperience = ref();
+const timeTaken = ref();
 
 const simulate = () => {
-    //TODO BlessedTea Approximation and Experience Calculations
     let enhancementLevelBonus = 0;
     let totalMaterialCost = props.plugin.getTotalMaterialCost(
         <HTMLTableElement>document.getElementById("materialTable")
@@ -73,6 +74,7 @@ const simulate = () => {
         protectCost.value,
         totalMaterialCost
     );
+    let blessedTeaTable = props.plugin.getBlessedTeaTable(successTable);
     protectionAmount.value = props.plugin.getProtectionAmount(
         protectionAmountTable,
         targetItemLevel.value,
@@ -81,12 +83,21 @@ const simulate = () => {
     actionAmount.value = props.plugin.getActionAmount(
         actionAmountTable,
         enhancementCostTable,
+        blessedTeaTable,
         targetItemLevel.value,
         currentEnhancementLevel.value,
         totalMaterialCost
     );
-    estimatedTotalCost.value = totalMaterialCost * actionAmount.value + protectCost.value * protectionAmount.value;
-    estimatedTotalExperience.value = props.plugin.getExperience();
+    timeTaken.value = props.plugin.getTimeTaken(actionAmount.value, currentEnhancingLevel.value, itemLevel);
+    estimatedTotalCost.value =
+        totalMaterialCost * actionAmount.value + protectCost.value * protectionAmount.value + baseItemCost.value;
+    estimatedTotalExperience.value = props.plugin.getExperience(
+        sTable,
+        actionAmount.value,
+        itemLevel,
+        currentEnhancementLevel.value,
+        targetItemLevel.value
+    );
 };
 </script>
 
@@ -150,6 +161,15 @@ const simulate = () => {
         </table>
         <br />
         <span
+            >Base Item Cost:
+            <input
+                class="bg-divider"
+                type="number"
+                style="width: 35%; float: right; color: white"
+                v-model="baseItemCost"
+            />
+        </span>
+        <span
             >Protect Item Cost:
             <input
                 class="bg-divider"
@@ -174,11 +194,11 @@ const simulate = () => {
             ><input type="checkbox" style="float: right" id="superEnhancingTea" name="superEnhancingTea"
         /></span>
         <span
-            ><label for="wisdomTea">(WIP) Wisdom Tea</label
+            ><label for="wisdomTea">Wisdom Tea</label
             ><input type="checkbox" style="float: right" id="wisdomTea" name="wisdomTea"
         /></span>
         <span
-            ><label for="blessedTea">(WIP) Blessed Tea</label
+            ><label for="blessedTea">Blessed Tea</label
             ><input type="checkbox" style="float: right" id="blessedTea" name="blessedTea"
         /></span>
     </div>
@@ -205,10 +225,13 @@ const simulate = () => {
             </table>
             <MooDivider />
             <br />
-            <span>Average Actions: {{ Math.round(actionAmount).toLocaleString() }}</span>
-            <span>Total Cost: {{ Math.round(estimatedTotalCost).toLocaleString() }}</span>
             <span>Best Protection Level: {{ protectLevel }}</span>
-            <!--<span>Experience Approximation: {{ Math.round(estimatedTotalExperience).toLocaleString() }}</span>-->
+            <span>Total Cost: {{ Math.round(estimatedTotalCost).toLocaleString() }}</span>
+            <span>Average Actions: {{ Math.round(actionAmount).toLocaleString() }}</span>
+            <span>Time Taken: {{ props.plugin.getTimeTakenString(timeTaken) }}</span>
+            <span>Experience: {{ Math.round(estimatedTotalExperience).toLocaleString() }}</span>
+            <span>Xp/Hr: {{ Math.round((estimatedTotalExperience * 3600) / timeTaken).toLocaleString() }}</span>
+            <span>Gp/Xp: {{ Math.round((estimatedTotalCost / estimatedTotalExperience) * 100) / 100 }}</span>
         </div>
     </div>
 </template>

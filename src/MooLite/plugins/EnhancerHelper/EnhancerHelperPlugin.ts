@@ -86,6 +86,10 @@ export class EnhancerHelperPlugin extends MooLitePlugin {
         return this._game.enhancing.getProtectsRequiredTable(costTable, actionsTable, protectCost, enhancementCost);
     }
 
+    getBlessedTeaTable(successTable: number[]): number[] {
+        return this._game.enhancing.getBlessedTeaTable(successTable, 0.01);
+    }
+
     getTotalMaterialCost(table: HTMLTableElement | null): number {
         let totalCost = 0;
         if (table) {
@@ -142,26 +146,68 @@ export class EnhancerHelperPlugin extends MooLitePlugin {
     getActionAmount(
         actionAmountTable: number[],
         enhancementCostTable: number[],
+        blessedTeaTable: number[],
         targetItemLevel: number,
         currentEnhancementLevel: number,
         totalMaterialCost: number
     ): number {
         const useProtection = <HTMLInputElement>document.getElementById("useProtect");
+        const useBlessedTea = <HTMLInputElement>document.getElementById("blessedTea");
+        let actionAmount = 0;
         if (useProtection.checked) {
-            return actionAmountTable[targetItemLevel] - actionAmountTable[currentEnhancementLevel];
+            actionAmount = actionAmountTable[targetItemLevel] - actionAmountTable[currentEnhancementLevel];
+        } else {
+            actionAmount =
+                (enhancementCostTable[targetItemLevel] - enhancementCostTable[currentEnhancementLevel]) /
+                totalMaterialCost;
         }
-        return (
-            (enhancementCostTable[targetItemLevel] - enhancementCostTable[currentEnhancementLevel]) / totalMaterialCost
-        );
+        if (useBlessedTea.checked) {
+            return actionAmount / blessedTeaTable[targetItemLevel];
+        }
+        return actionAmount;
     }
 
-    getExperience(): number {
+    getExperience(
+        sTable: number[],
+        actionAmount: number,
+        itemLevel: number,
+        currentLevel: number,
+        targetLevel: number
+    ): number {
         const wisdomTea = <HTMLInputElement>document.getElementById("wisdomTea");
-        //TODO Big maths for experience
         let experience = 0;
+        const baseExpRate = 1.4 * itemLevel + 14;
+        let remainingActionAmount = actionAmount;
+        for (let i = currentLevel + 1; i < targetLevel; i++) {
+            experience +=
+                baseExpRate * i * actionAmount * sTable[i] +
+                baseExpRate * i * (remainingActionAmount - actionAmount * sTable[i]) * (1 - sTable[i]) * 0.1;
+            remainingActionAmount = actionAmount * sTable[i];
+        }
+        experience += baseExpRate * targetLevel;
+        if (remainingActionAmount - 1 > 0) {
+            experience += baseExpRate * targetLevel * (remainingActionAmount - 1) * 0.1;
+        }
         if (wisdomTea.checked) {
             experience *= 1.15;
         }
         return experience;
+    }
+
+    getTimeTaken(actionAmount: number, enhancingLevel: number, itemLevel: number): number {
+        let actionSpeedBonus = 1;
+        if (enhancingLevel - itemLevel >= 0) {
+            actionSpeedBonus = 1 + (enhancingLevel - itemLevel) / 100;
+        }
+        const baseTime = 12;
+        return (baseTime / actionSpeedBonus) * actionAmount;
+    }
+
+    getTimeTakenString(totalSeconds: number): String {
+        const totalMinutes = Math.floor(totalSeconds / 60);
+        const seconds = Math.floor(totalSeconds % 60);
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = Math.floor(totalMinutes % 60);
+        return hours + "h " + minutes + "m " + seconds + "s";
     }
 }
