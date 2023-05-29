@@ -6,6 +6,7 @@ import { ItemDetail } from "src/MooLite/core/inventory/items/ItemDetail";
 import { ItemAmount } from "src/MooLite/core/inventory/items/ItemAmount";
 import { ItemHrid } from "src/MooLite/core/inventory/ItemHrid";
 import { CharacterItem } from "src/MooLite/core/inventory/CharacterItem";
+import { DateFormatter } from "src/MooLite/util/DateFormatter";
 
 export class EnhancerHelperPlugin extends MooLitePlugin {
     name: string = "Enhancer Helper";
@@ -13,7 +14,7 @@ export class EnhancerHelperPlugin extends MooLitePlugin {
     description: string = "Various enhancing tools - By Void";
 
     tab: MooLiteTab = {
-        icon: "💎",
+        icon: "📡",
         pluginName: this.name,
         componentName: "EnhancerHelperPluginDisplay",
         component: markRaw(EnhancerHelperPluginDisplay),
@@ -32,17 +33,27 @@ export class EnhancerHelperPlugin extends MooLitePlugin {
     }
 
     getEnhancingLevel(): number {
-        return this._game.skills.getLevel("/skills/enhancing");
+        return this._game.skills.getEnhancingLevel();
     }
 
-    getEnhancementSuccessTable(enhancingLevel: number, itemLevel: number, toolBonus: number): number[] {
+    getEnhancementSuccessTable(
+        enhancingLevel: number,
+        itemLevel: number,
+        toolBonus: number,
+        useEnhancingTea: boolean,
+        useSuperEnhancingTea: boolean
+    ): number[] {
         let enhancementLevelBonus = 0;
-        const enhancingTea = <HTMLInputElement>document.getElementById("enhancingTea");
-        const superEnhancingTea = <HTMLInputElement>document.getElementById("superEnhancingTea");
-        if (superEnhancingTea.checked) {
-            enhancementLevelBonus = 6;
-        } else if (enhancingTea.checked) {
-            enhancementLevelBonus = 3;
+        const enhancingTeaBuff =
+            this._game.inventory.itemDetailMap[<ItemHrid>(<unknown>"/items/enhancing_tea")].consumableDetail.buffs[0]
+                .flatBoost;
+        const superEnhancingTeaBuff =
+            this._game.inventory.itemDetailMap[<ItemHrid>(<unknown>"/items/super_enhancing_tea")].consumableDetail
+                .buffs[0].flatBoost;
+        if (useSuperEnhancingTea) {
+            enhancementLevelBonus = superEnhancingTeaBuff;
+        } else if (useEnhancingTea) {
+            enhancementLevelBonus = enhancingTeaBuff;
         }
         return this._game.enhancing.getSuccessChanceTable(enhancingLevel + enhancementLevelBonus, itemLevel, toolBonus);
     }
@@ -87,16 +98,17 @@ export class EnhancerHelperPlugin extends MooLitePlugin {
     }
 
     getBlessedTeaTable(successTable: number[]): number[] {
-        return this._game.enhancing.getBlessedTeaTable(successTable, 0.01);
+        const blessedTeaBoost =
+            this._game.inventory.itemDetailMap[<ItemHrid>(<unknown>"/items/blessed_tea")].consumableDetail.buffs[0]
+                .flatBoost;
+        return this._game.enhancing.getBlessedTeaTable(successTable, blessedTeaBoost);
     }
 
-    getTotalMaterialCost(table: HTMLTableElement | null): number {
+    getTotalMaterialCost(materials: { name: String | null; amount: number; value: number }[] | undefined): number {
         let totalCost = 0;
-        if (table) {
-            for (let i = 1; i < table.rows.length; i++) {
-                const amount = Number(table.rows[i].cells[1].innerHTML);
-                const value = Object(table.rows[i].cells[2].firstChild).value;
-                totalCost += amount * value;
+        if (materials) {
+            for (let i = 0; i < materials.length; i++) {
+                totalCost += materials[i].value * materials[i].amount;
             }
         }
         return totalCost;
@@ -111,14 +123,7 @@ export class EnhancerHelperPlugin extends MooLitePlugin {
     }
 
     getEnhancingTool(): CharacterItem | null {
-        const allItems = this._game.inventory._characterItems;
-        let index = allItems.findIndex(
-            (item: CharacterItem) => item.itemLocationHrid.toString() === "/item_locations/enhancing_tool"
-        );
-        if (index != -1) {
-            return allItems[index];
-        }
-        return null;
+        return this._game.inventory.getEnhancingTool();
     }
 
     getEnhancingToolBonus(item: CharacterItem | null): number {
@@ -134,10 +139,10 @@ export class EnhancerHelperPlugin extends MooLitePlugin {
     getProtectionAmount(
         protectionAmountTable: number[],
         targetItemLevel: number,
-        currentEnhancementLevel: number
+        currentEnhancementLevel: number,
+        useProtection: boolean
     ): number {
-        const useProtection = <HTMLInputElement>document.getElementById("useProtect");
-        if (useProtection.checked) {
+        if (useProtection) {
             return protectionAmountTable[targetItemLevel] - protectionAmountTable[currentEnhancementLevel];
         }
         return 0;
@@ -149,19 +154,19 @@ export class EnhancerHelperPlugin extends MooLitePlugin {
         blessedTeaTable: number[],
         targetItemLevel: number,
         currentEnhancementLevel: number,
-        totalMaterialCost: number
+        totalMaterialCost: number,
+        useProtection: boolean,
+        useBlessedTea: boolean
     ): number {
-        const useProtection = <HTMLInputElement>document.getElementById("useProtect");
-        const useBlessedTea = <HTMLInputElement>document.getElementById("blessedTea");
         let actionAmount = 0;
-        if (useProtection.checked) {
+        if (useProtection) {
             actionAmount = actionAmountTable[targetItemLevel] - actionAmountTable[currentEnhancementLevel];
         } else {
             actionAmount =
                 (enhancementCostTable[targetItemLevel] - enhancementCostTable[currentEnhancementLevel]) /
                 totalMaterialCost;
         }
-        if (useBlessedTea.checked) {
+        if (useBlessedTea) {
             return actionAmount / blessedTeaTable[targetItemLevel];
         }
         return actionAmount;
@@ -172,9 +177,13 @@ export class EnhancerHelperPlugin extends MooLitePlugin {
         actionAmount: number,
         itemLevel: number,
         currentLevel: number,
-        targetLevel: number
+        targetLevel: number,
+        useWisdomTea: boolean
     ): number {
-        const wisdomTea = <HTMLInputElement>document.getElementById("wisdomTea");
+        const wisdomTeaBuff =
+            1 +
+            this._game.inventory.itemDetailMap[<ItemHrid>(<unknown>"/items/wisdom_tea")].consumableDetail.buffs[0]
+                .flatBoost;
         let experience = 0;
         const baseExpRate = 1.4 * itemLevel + 14;
         let remainingActionAmount = actionAmount;
@@ -188,8 +197,8 @@ export class EnhancerHelperPlugin extends MooLitePlugin {
         if (remainingActionAmount - 1 > 0) {
             experience += baseExpRate * targetLevel * (remainingActionAmount - 1) * 0.1;
         }
-        if (wisdomTea.checked) {
-            experience *= 1.15;
+        if (useWisdomTea) {
+            experience *= wisdomTeaBuff;
         }
         return experience;
     }
@@ -204,10 +213,6 @@ export class EnhancerHelperPlugin extends MooLitePlugin {
     }
 
     getTimeTakenString(totalSeconds: number): String {
-        const totalMinutes = Math.floor(totalSeconds / 60);
-        const seconds = Math.floor(totalSeconds % 60);
-        const hours = Math.floor(totalMinutes / 60);
-        const minutes = Math.floor(totalMinutes % 60);
-        return hours + "h " + minutes + "m " + seconds + "s";
+        return DateFormatter.secondsToHHMMSS(totalSeconds);
     }
 }

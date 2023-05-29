@@ -23,6 +23,7 @@ const materials = computed(() => {
         return {
             name: props.plugin.getItemName(item.itemHrid),
             amount: item.count,
+            value: 1,
         };
     });
 });
@@ -40,17 +41,22 @@ const protectionAmount = ref();
 const estimatedTotalCost = ref();
 const estimatedTotalExperience = ref();
 const timeTaken = ref();
+const enhancingTea = ref();
+const superEnhancingTea = ref();
+const blessedTea = ref();
+const wisdomTea = ref();
+const useProtect = ref();
 
 const simulate = () => {
     let enhancementLevelBonus = 0;
-    let totalMaterialCost = props.plugin.getTotalMaterialCost(
-        <HTMLTableElement>document.getElementById("materialTable")
-    );
+    let totalMaterialCost = props.plugin.getTotalMaterialCost(materials.value);
     let itemLevel = props.plugin.getItemLevel(selectedHrid.value);
     let successTable = props.plugin.getEnhancementSuccessTable(
         currentEnhancingLevel.value + enhancementLevelBonus,
         itemLevel,
-        currentToolBonus.value
+        currentToolBonus.value,
+        enhancingTea.value,
+        superEnhancingTea.value
     );
     let sTable = props.plugin.getEnhancementSTable(successTable);
     let zTable = props.plugin.getEnhancementZTable(successTable);
@@ -78,7 +84,8 @@ const simulate = () => {
     protectionAmount.value = props.plugin.getProtectionAmount(
         protectionAmountTable,
         targetItemLevel.value,
-        currentEnhancementLevel.value
+        currentEnhancementLevel.value,
+        useProtect.value
     );
     actionAmount.value = props.plugin.getActionAmount(
         actionAmountTable,
@@ -86,7 +93,9 @@ const simulate = () => {
         blessedTeaTable,
         targetItemLevel.value,
         currentEnhancementLevel.value,
-        totalMaterialCost
+        totalMaterialCost,
+        useProtect.value,
+        blessedTea.value
     );
     timeTaken.value = props.plugin.getTimeTaken(actionAmount.value, currentEnhancingLevel.value, itemLevel);
     estimatedTotalCost.value =
@@ -96,7 +105,8 @@ const simulate = () => {
         actionAmount.value,
         itemLevel,
         currentEnhancementLevel.value,
-        targetItemLevel.value
+        targetItemLevel.value,
+        wisdomTea.value
     );
 };
 </script>
@@ -156,7 +166,9 @@ const simulate = () => {
             <tr v-for="entry in materials">
                 <th class="text-left">{{ entry.name }}</th>
                 <th>{{ entry.amount.toLocaleString() }}</th>
-                <th><input class="bg-divider" style="width: 60%; color: white" type="number" value="1" /></th>
+                <th>
+                    <input v-model="entry.value" class="bg-divider" style="width: 60%; color: white" type="number" />
+                </th>
             </tr>
         </table>
         <br />
@@ -183,23 +195,28 @@ const simulate = () => {
         <span class="text-center">Options:</span>
         <span
             ><label for="useProtect"> Use protection item</label
-            ><input type="checkbox" style="float: right" id="useProtect" name="useProtect"
+            ><input v-model="useProtect" type="checkbox" style="float: right" id="useProtect" name="useProtect"
         /></span>
         <span
             ><label for="enhancingTea">Enhancing Tea</label
-            ><input type="checkbox" style="float: right" id="enhancingTea" name="enhancingTea"
+            ><input v-model="enhancingTea" type="checkbox" style="float: right" id="enhancingTea" name="enhancingTea"
         /></span>
         <span
             ><label for="superEnhancingTea">Super Enhancing Tea</label
-            ><input type="checkbox" style="float: right" id="superEnhancingTea" name="superEnhancingTea"
+            ><input
+                v-model="superEnhancingTea"
+                type="checkbox"
+                style="float: right"
+                id="superEnhancingTea"
+                name="superEnhancingTea"
         /></span>
         <span
             ><label for="wisdomTea">Wisdom Tea</label
-            ><input type="checkbox" style="float: right" id="wisdomTea" name="wisdomTea"
+            ><input v-model="wisdomTea" type="checkbox" style="float: right" id="wisdomTea" name="wisdomTea"
         /></span>
         <span
             ><label for="blessedTea">Blessed Tea</label
-            ><input type="checkbox" style="float: right" id="blessedTea" name="blessedTea"
+            ><input v-model="blessedTea" type="checkbox" style="float: right" id="blessedTea" name="blessedTea"
         /></span>
     </div>
     <br />
@@ -231,7 +248,7 @@ const simulate = () => {
             <span>Time Taken: {{ props.plugin.getTimeTakenString(timeTaken) }}</span>
             <span>Experience: {{ Math.round(estimatedTotalExperience).toLocaleString() }}</span>
             <span>Xp/Hr: {{ Math.round((estimatedTotalExperience * 3600) / timeTaken).toLocaleString() }}</span>
-            <span>Gp/Xp: {{ Math.round((estimatedTotalCost / estimatedTotalExperience) * 100) / 100 }}</span>
+            <span>Gp/Xp: {{ Math.round(((estimatedTotalCost - baseItemCost) / estimatedTotalExperience) * 100) / 100 }}</span>
         </div>
     </div>
 </template>

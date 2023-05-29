@@ -1,4 +1,5 @@
 import { ItemDetail } from "src/MooLite/core/inventory/items/ItemDetail";
+import { Math as MathUtil } from "src/MooLite/util/Math";
 
 export class Enhancing {
     public readonly enhancementLevelSuccessRateTable: number[];
@@ -27,7 +28,7 @@ export class Enhancing {
     getZScoreTable(successChanceTable: number[]): number[] {
         let zScoreTable = [];
         for (let i = 0; i < successChanceTable.length - 1; i++) {
-            const zScore = (1 - successChanceTable[i + 1]) * this.multiply(successChanceTable.slice(1, i + 1));
+            const zScore = (1 - successChanceTable[i + 1]) * MathUtil.multiplyArray(successChanceTable.slice(1, i + 1));
             zScoreTable.push(zScore);
         }
         return zScoreTable;
@@ -36,7 +37,7 @@ export class Enhancing {
     getSTable(successChanceTable: number[]): number[] {
         let sTable = [1 - successChanceTable[1]];
         for (let i = 1; i < successChanceTable.length - 1; i++) {
-            const sValue = this.multiply(successChanceTable.slice(1, i + 1));
+            const sValue = MathUtil.multiplyArray(successChanceTable.slice(1, i + 1));
             sTable.push(sValue);
         }
         return sTable;
@@ -45,11 +46,10 @@ export class Enhancing {
     getCostTable(zScoreTable: number[], sTable: number[], materialCost: number): number[] {
         let costs = [0];
         let multArray = [];
-        let sumTable = [];
         for (let i = 0; i < zScoreTable.length; i++) {
             multArray[i] = zScoreTable[i] * (i + 1);
-            sumTable.push(multArray.slice(0, i + 1).reduce((a, b) => a + b, 0));
         }
+        let sumTable = MathUtil.sumArray(multArray);
         for (let i = 1; i < sTable.length; i++) {
             const cost = ((sumTable[i - 1] + sTable[i] * i) / sTable[i]) * materialCost;
             costs.push(cost);
@@ -130,14 +130,6 @@ export class Enhancing {
             }
         }
         return 20;
-    }
-
-    private multiply(numbers: number[]): number {
-        let result = 1;
-        for (let num in numbers) {
-            result = result * numbers[num];
-        }
-        return result;
     }
 
     getEnhancingToolBonus(enhancementLevel: number, itemDetails: ItemDetail): number {

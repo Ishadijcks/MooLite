@@ -89,4 +89,8 @@ export class Skills {
     public getLevel(skillHrid: SkillHrid) {
         return this._characterSkills[skillHrid].level;
     }
+
+    public getEnhancingLevel() {
+        return this._characterSkills["/skills/enhancing"].level;
+    }
 }

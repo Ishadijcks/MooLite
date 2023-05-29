@@ -1,8 +1,8 @@
 import { CombatTrigger } from "src/MooLite/core/combat/triggers/CombatTrigger";
+import { Buffs } from "src/MooLite/core/inventory/items/Buffs";
 
 export interface ConsumableDetail {
-    // TODO(@Isha): Or what?
-    buffs: null;
+    buffs: Buffs[];
     cooldownDuration: number;
     defaultCombatTriggers: CombatTrigger[] | null;
     hitpointsRestore: number;

@@ -160,4 +160,15 @@ export class Inventory {
     public getEquippedDrinks(): Record<ActionTypeHrid, (CharacterConsumable | null)[]> {
         return this._characterDrinks;
     }
+
+    public getEnhancingTool(): CharacterItem | null {
+        const allItems = this._characterItems;
+        let index = allItems.findIndex(
+            (item: CharacterItem) => item.itemLocationHrid.toString() === "/item_locations/enhancing_tool"
+        );
+        if (index != -1) {
+            return allItems[index];
+        }
+        return null;
+    }
 }
