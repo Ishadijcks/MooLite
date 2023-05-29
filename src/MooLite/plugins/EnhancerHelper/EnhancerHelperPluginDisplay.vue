@@ -248,7 +248,10 @@ const simulate = () => {
             <span>Time Taken: {{ props.plugin.getTimeTakenString(timeTaken) }}</span>
             <span>Experience: {{ Math.round(estimatedTotalExperience).toLocaleString() }}</span>
             <span>Xp/Hr: {{ Math.round((estimatedTotalExperience * 3600) / timeTaken).toLocaleString() }}</span>
-            <span>Gp/Xp: {{ Math.round(((estimatedTotalCost - baseItemCost) / estimatedTotalExperience) * 100) / 100 }}</span>
+            <span
+                >Gp/Xp:
+                {{ Math.round(((estimatedTotalCost - baseItemCost) / estimatedTotalExperience) * 100) / 100 }}</span
+            >
         </div>
     </div>
 </template>
