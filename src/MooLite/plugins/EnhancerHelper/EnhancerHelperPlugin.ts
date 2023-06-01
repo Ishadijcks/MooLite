@@ -7,6 +7,7 @@ import { ItemAmount } from "src/MooLite/core/inventory/items/ItemAmount";
 import { ItemHrid } from "src/MooLite/core/inventory/ItemHrid";
 import { CharacterItem } from "src/MooLite/core/inventory/CharacterItem";
 import { DateFormatter } from "src/MooLite/util/DateFormatter";
+import { EnhancingConstants } from "src/MooLite/core/enhancing/EnhancingConstants";
 
 export class EnhancerHelperPlugin extends MooLitePlugin {
     name: string = "Enhancer Helper";
@@ -185,17 +186,22 @@ export class EnhancerHelperPlugin extends MooLitePlugin {
             this._game.inventory.itemDetailMap[<ItemHrid>(<unknown>"/items/wisdom_tea")].consumableDetail.buffs[0]
                 .flatBoost;
         let experience = 0;
-        const baseExpRate = 1.4 * itemLevel + 14;
+        const baseExpRate = EnhancingConstants.experiencePerLevel * itemLevel + EnhancingConstants.experienceBonus;
         let remainingActionAmount = actionAmount;
         for (let i = currentLevel + 1; i < targetLevel; i++) {
             experience +=
                 baseExpRate * i * actionAmount * sTable[i] +
-                baseExpRate * i * (remainingActionAmount - actionAmount * sTable[i]) * (1 - sTable[i]) * 0.1;
+                baseExpRate *
+                    i *
+                    (remainingActionAmount - actionAmount * sTable[i]) *
+                    (1 - sTable[i]) *
+                    EnhancingConstants.failureExperienceRate;
             remainingActionAmount = actionAmount * sTable[i];
         }
         experience += baseExpRate * targetLevel;
         if (remainingActionAmount - 1 > 0) {
-            experience += baseExpRate * targetLevel * (remainingActionAmount - 1) * 0.1;
+            experience +=
+                baseExpRate * targetLevel * (remainingActionAmount - 1) * EnhancingConstants.failureExperienceRate;
         }
         if (useWisdomTea) {
             experience *= wisdomTeaBuff;
@@ -204,11 +210,8 @@ export class EnhancerHelperPlugin extends MooLitePlugin {
     }
 
     getTimeTaken(actionAmount: number, enhancingLevel: number, itemLevel: number): number {
-        let actionSpeedBonus = 1;
-        if (enhancingLevel - itemLevel >= 0) {
-            actionSpeedBonus = 1 + (enhancingLevel - itemLevel) / 100;
-        }
-        const baseTime = 12;
+        let actionSpeedBonus = 1 + this._game.skills.getSkillEfficiencyBonusRatio(itemLevel, enhancingLevel);
+        const baseTime = EnhancingConstants.actionSpeed;
         return (baseTime / actionSpeedBonus) * actionAmount;
     }
 

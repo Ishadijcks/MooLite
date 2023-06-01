@@ -1,5 +1,6 @@
 import { ItemDetail } from "src/MooLite/core/inventory/items/ItemDetail";
 import { Math as MathUtil } from "src/MooLite/util/Math";
+import { EnhancingConstants } from "src/MooLite/core/enhancing/EnhancingConstants";
 
 export class Enhancing {
     public readonly enhancementLevelSuccessRateTable: number[];
@@ -14,7 +15,8 @@ export class Enhancing {
         let successChanceTable: number[] = [0];
         for (let i = 0; i < this.enhancementLevelSuccessRateTable.length; i++) {
             let baseChance = this.enhancementLevelSuccessRateTable.at(i);
-            const levelBuff = 0.0005 * Math.max(currentEnhancingLevel - currentItemLevel, 0);
+            const levelBuff =
+                EnhancingConstants.levelBuffMultiplier * Math.max(currentEnhancingLevel - currentItemLevel, 0);
             const levelDebuff = Math.min((currentEnhancingLevel / currentItemLevel + 1) / 2, 1);
             if (baseChance != undefined) {
                 const actualChance = baseChance * (toolBonus + levelBuff + levelDebuff);
