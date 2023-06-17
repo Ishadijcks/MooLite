@@ -2,14 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    display: flex;
-}
-
 input {
-    @apply bg-white text-black;
+    @apply text-black bg-white;
 }
 
 select {
-    @apply bg-white text-black;
+    @apply text-black bg-white;
 }
