@@ -47,7 +47,7 @@ const setActiveTab = (index: number) => {
                     <component v-bind:is="tab.componentName" :plugin="findPlugin(tab.pluginName)"></component>
                 </div>
             </div>
-            <div class="flex flex-col h-full overflow-auto shrink-0 bg-divider ">
+            <div class="flex flex-col h-full overflow-auto shrink-0 bg-divider">
                 <template v-for="(tab, index) in tabs">
                     <PluginTabItem
                         v-if="index === 1"
