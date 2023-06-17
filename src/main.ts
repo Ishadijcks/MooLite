@@ -68,7 +68,11 @@ const launchMooLite = () => {
         app.mount(
             (() => {
                 const app = document.createElement("div");
-                document.body.append(app);
+                const root = document.getElementById('root');
+                console.log(document.body.classList);
+                root?.append(app);
+                root?.style.setProperty("display", "flex");
+                root?.style.setProperty("flex-direction", "row");
                 return app;
             })()
         );
