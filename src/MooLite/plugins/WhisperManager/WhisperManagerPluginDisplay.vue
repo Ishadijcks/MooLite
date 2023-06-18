@@ -2,7 +2,7 @@
 import { computed } from "vue";
 import { WhisperManagerPlugin } from "./WhisperManagerPlugin";
 import Accordion from "src/components/atoms/Accordion.vue";
-import ChatElement from "src/components/atoms/ChatElement.vue";
+import ChatBox from "src/components/chat/ChatBox.vue";
 
 const props = defineProps<{
     plugin: WhisperManagerPlugin;
@@ -156,7 +156,7 @@ const updateChatInput = (message: string) => {
                 </button>
                 <div v-for="[user, messages] in Object.entries(conversations)" class="flex flex-col space-y-2">
                     <p>{{ user }}:</p>
-                    <ChatElement v-for="msg in messages" :message="msg"/>
+                    <ChatBox :messages="messages" />
                 </div>
             </template>
         </Accordion>
