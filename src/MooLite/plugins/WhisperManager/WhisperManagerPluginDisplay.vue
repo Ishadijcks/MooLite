@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { WhisperManagerPlugin } from "./WhisperManagerPlugin";
 import Accordion from "src/components/atoms/Accordion.vue";
 import ChatBox from "src/components/chat/ChatBox.vue";
@@ -92,72 +92,47 @@ function setNativeValue(el: HTMLInputElement, value: string) {
     el.dispatchEvent(new Event("change", { bubbles: true }));
 }
 
-const updateChatInput = (message: string) => {
+const updateGameChatInput = (message: string) => {
     const chatInput = document.getElementsByClassName("Chat_chatInput__16dhX")[0] as HTMLInputElement;
     setNativeValue(chatInput, message);
+    chatInput.focus();
 };
+
+const chatInput = ref("");
+
+const sendMessageToGameChat = (message: string, recipient: string) => {
+    const msg = `/w ${recipient} ${message}`;
+    updateGameChatInput(msg);
+    chatInput.value = "";
+};
+
+const activeConversation = ref("");
 </script>
 
 <template>
     <div class="flex flex-col">
         <h1 class="text-lg font-bold">Laguna Test</h1>
-        <div class="flex flex-col space-y-2">
-            <div class="p-4 bg-gray-800 rounded-lg">
-                <div class="text-gray-400">Messages</div>
-                <div class="text-gray-400">{{ messages.length }}</div>
-            </div>
-            <div class="p-4 bg-gray-800 rounded-lg">
-                <div class="text-gray-400">Unique users</div>
-                <div class="text-gray-400">{{ uniqueUsers.length }}</div>
-            </div>
-        </div>
-        <!-- collapsible list of 3 items -->
-
-        <Accordion title="Accordion 1">
-            <template v-slot:title>
-                <h1>Leaderboards</h1>
-            </template>
-            <template v-slot:content>
-                <div class="flex flex-col space-y-2">
-                    <div class="p-4 bg-gray-800 rounded-lg">
-                        <div class="text-gray-400">Top 5 average message length</div>
-                        <div class="text-gray-400">
-                            <!-- Simple, Sleek, Modern, Colorized leaderboard. -->
-                            <ul class="list-disc list-inside">
-                                <li v-for="msg in topFiveAverageMessageLength" class="flex flex-row justify-between">
-                                    <span>{{ msg.name }}:</span>
-                                    <span>{{ msg.count }}</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="p-4 bg-gray-800 rounded-lg">
-                        <div class="text-gray-400">Top 5 messages sent</div>
-                        <div class="text-gray-400">
-                            <ul class="list-disc list-inside">
-                                <li v-for="msg in topFiveMessagesSent" class="flex flex-row justify-between">
-                                    <span>{{ msg.name }}:</span>
-                                    <span>{{ msg.count }}</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </template>
-        </Accordion>
         <Accordion title="Whispers">
             <template v-slot:title>
                 <h1>Whispers</h1>
             </template>
             <template v-slot:content>
-                <p>test</p>
-                <button class="p-4 bg-gray-800 rounded-lg my-2" @click="updateChatInput('Hello World!')">
-                    Update chat input
-                </button>
-                <div v-for="[user, messages] in Object.entries(conversations)" class="flex flex-col space-y-2">
-                    <p>{{ user }}:</p>
-                    <ChatBox :messages="messages" />
+                <div class="flex flex-row overflow-x-scroll space-x-0.5">
+                    <div 
+                        v-for="[user, _] in Object.entries(conversations)"
+                        class="flex-grow flex flex-row justify-center bg-gray-800 rounded-t-lg pt-1 pb-0.5 px-2 min-w-max text-gray-300 cursor-pointer"
+                        @click="activeConversation = user"
+                    >
+                        <span class="font-bold">{{user}}</span>
+                    </div>
                 </div>
+                <ChatBox :messages="conversations[activeConversation]" />
+                <input
+                    v-model="chatInput"
+                    type="text"
+                    class="p-1 bg-gray-800 rounded-lg my-2 text-gray-400 w-full"
+                    @keyup.enter="sendMessageToGameChat(chatInput, activeConversation)"
+                />
             </template>
         </Accordion>
     </div>
