@@ -11,6 +11,10 @@ const messages = computed(() => {
     return props.plugin.messages;
 });
 
+const conversations = computed(() => {
+    return props.plugin.conversations;
+});
+
 const uniqueUsers = computed(() => {
     return props.plugin.messages
         .map((msg) => msg.senderName)
@@ -107,7 +111,7 @@ const updateChatInput = (message: string) => {
             </div>
         </div>
         <!-- collapsible list of 3 items -->
-        
+
         <Accordion title="Accordion 1">
             <template v-slot:title>
                 <h1>Leaderboards</h1>
@@ -149,6 +153,12 @@ const updateChatInput = (message: string) => {
                 <button class="p-4 bg-gray-800 rounded-lg my-2" @click="updateChatInput('Hello World!')">
                     Update chat input
                 </button>
+                <div v-for="[user, messages] in Object.entries(conversations)" class="flex flex-col space-y-2">
+                    <p>{{ user }}:</p>
+                    <div v-for="message in messages">
+                        <p>{{ message.message }}</p>
+                    </div>
+                </div>
             </template>
         </Accordion>
     </div>
