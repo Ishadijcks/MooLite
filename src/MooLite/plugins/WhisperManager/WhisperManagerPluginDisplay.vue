@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { WhisperManagerPlugin } from "./WhisperManagerPlugin";
-import Accordion from "src/components/atoms/Accordion.vue";
 import ChatBox from "src/components/chat/ChatBox.vue";
 
 const props = defineProps<{
@@ -101,6 +100,7 @@ const updateGameChatInput = (message: string) => {
 const chatInput = ref("");
 
 const sendMessageToGameChat = (message: string, recipient: string) => {
+    if (!recipient) return;
     const msg = `/w ${recipient} ${message}`;
     updateGameChatInput(msg);
     chatInput.value = "";
@@ -110,30 +110,23 @@ const activeConversation = ref("");
 </script>
 
 <template>
-    <div class="flex flex-col">
+    <div class="flex flex-col h-max-full overflow-hidden">
         <h1 class="text-lg font-bold">Laguna Test</h1>
-        <Accordion title="Whispers">
-            <template v-slot:title>
-                <h1>Whispers</h1>
-            </template>
-            <template v-slot:content>
-                <div class="flex flex-row overflow-x-scroll space-x-0.5">
-                    <div 
-                        v-for="[user, _] in Object.entries(conversations)"
-                        class="flex-grow flex flex-row justify-center bg-gray-800 rounded-t-lg pt-1 pb-0.5 px-2 min-w-max text-gray-300 cursor-pointer"
-                        @click="activeConversation = user"
-                    >
-                        <span class="font-bold">{{user}}</span>
-                    </div>
-                </div>
-                <ChatBox :messages="conversations[activeConversation]" />
-                <input
-                    v-model="chatInput"
-                    type="text"
-                    class="p-1 bg-gray-800 rounded-lg my-2 text-gray-400 w-full"
-                    @keyup.enter="sendMessageToGameChat(chatInput, activeConversation)"
-                />
-            </template>
-        </Accordion>
+        <div class="flex flex-row overflow-x-scroll space-x-0.5">
+            <div
+                v-for="[user, _] in Object.entries(conversations)"
+                class="flex-grow flex flex-row justify-center bg-gray-800 rounded-t-lg pt-1 pb-0.5 px-2 min-w-max text-gray-300 cursor-pointer"
+                @click="activeConversation = user"
+            >
+                <span class="font-bold">{{ user }}</span>
+            </div>
+        </div>
+        <ChatBox :messages="conversations[activeConversation]" />
+        <input
+            v-model="chatInput"
+            type="text"
+            class="p-1 bg-gray-800 rounded-lg my-2 text-gray-400 w-full"
+            @keyup.enter="sendMessageToGameChat(chatInput, activeConversation)"
+        />
     </div>
 </template>
