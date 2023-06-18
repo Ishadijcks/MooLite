@@ -107,9 +107,7 @@ const updateChatInput = (message: string) => {
             </div>
         </div>
         <!-- collapsible list of 3 items -->
-        <button class="p-4 bg-gray-800 rounded-lg my-2" @click="updateChatInput('Hello World!')">
-            Update chat input
-        </button>
+        
         <Accordion title="Accordion 1">
             <template v-slot:title>
                 <h1>Leaderboards</h1>
@@ -140,6 +138,17 @@ const updateChatInput = (message: string) => {
                         </div>
                     </div>
                 </div>
+            </template>
+        </Accordion>
+        <Accordion title="Whispers">
+            <template v-slot:title>
+                <h1>Whispers</h1>
+            </template>
+            <template v-slot:content>
+                <p>test</p>
+                <button class="p-4 bg-gray-800 rounded-lg my-2" @click="updateChatInput('Hello World!')">
+                    Update chat input
+                </button>
             </template>
         </Accordion>
     </div>

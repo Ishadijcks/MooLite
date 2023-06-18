@@ -17,6 +17,7 @@ import { LeaderboardPlugin } from "src/MooLite/plugins/Leaderboard/LeaderboardPl
 import { LootNotifierPlugin } from "src/MooLite/plugins/LootNotifier/LootNotifierPlugin";
 import { ConsumableNotifierPlugin } from "./MooLite/plugins/ConsumableNotifier/ConsumableNotifierPlugin";
 import { EquipmentExporterPlugin } from "src/MooLite/plugins/EquipmentExporter/EquipmentExporterPlugin";
+import { WhisperManagerPlugin } from "./MooLite/plugins/WhisperManager/WhisperManagerPlugin";
 
 declare global {
     interface Window {
@@ -57,6 +58,7 @@ const launchMooLite = () => {
             new LeaderboardPlugin(),
             new ConsumableNotifierPlugin(),
             new EquipmentExporterPlugin(),
+            new WhisperManagerPlugin(),
         ]) as unknown as MooLitePlugin[];
         const pluginManager = reactive<PluginManager>(new PluginManager(game, plugins)) as PluginManager;
 
