@@ -110,9 +110,9 @@ const activeConversation = ref("");
 </script>
 
 <template>
-    <div class="flex flex-col h-max-full overflow-hidden">
+    <div class="flex flex-col">
         <h1 class="text-lg font-bold">Laguna Test</h1>
-        <div class="flex flex-row overflow-x-scroll space-x-0.5">
+        <div class="flex flex-row space-x-0.5">
             <div
                 v-for="[user, _] in Object.entries(conversations)"
                 class="flex-grow flex flex-row justify-center bg-gray-800 rounded-t-lg pt-1 pb-0.5 px-2 min-w-max text-gray-300 cursor-pointer"
