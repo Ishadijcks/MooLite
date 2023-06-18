@@ -41,13 +41,13 @@ const setActiveTab = (index: number) => {
         <MooDivider class="border-b-4" />
 
         <div class="flex flex-row h-full">
-            <div v-if="activeTab > -1" class="flex flex-col flex-grow p-2 overflow-auto">
+            <div v-if="activeTab > -1" class="flex flex-col flex-grow p-2 overflow-clip">
                 <PluginManagerDisplay v-if="activeTab === 0" :manager="pluginManager"></PluginManagerDisplay>
                 <div v-for="(tab, index) in tabs" v-show="index + 1 === activeTab">
                     <component v-bind:is="tab.componentName" :plugin="findPlugin(tab.pluginName)"></component>
                 </div>
             </div>
-            <div class="flex flex-col h-full overflow-auto shrink-0 bg-divider">
+            <div class="flex flex-col overflow-x-clip overflow-y-auto shrink-0 bg-divider">
                 <template v-for="(tab, index) in tabs">
                     <PluginTabItem
                         v-if="index === 1"
