@@ -6,6 +6,8 @@ import PluginManagerDisplay from "src/components/PluginManagerDisplay.vue";
 import MooDivider from "src/components/atoms/MooDivider.vue";
 import PluginTabItem from "src/components/plugins/PluginTabItem.vue";
 
+const defaultPluginWidth: string = "w-64";
+
 const props = defineProps<{
     client: MooLite;
 }>();
@@ -42,12 +44,12 @@ const setActiveTab = (index: number) => {
 
         <div class="flex flex-row h-full">
             <div v-if="activeTab > -1" class="flex flex-col flex-grow p-2 overflow-auto">
-                <PluginManagerDisplay v-if="activeTab === 0" :manager="pluginManager" class="w-64"></PluginManagerDisplay>
+                <PluginManagerDisplay v-if="activeTab === 0" :manager="pluginManager" :class="defaultPluginWidth"></PluginManagerDisplay>
                 <div 
                     v-for="(tab, index) in tabs" 
                     v-show="index + 1 === activeTab"
                     :class="{
-                        [tab.width ? tab.width : 'w-64']: true,
+                        [tab.width ? tab.width : defaultPluginWidth]: true,
                     }"
                 >
                     <component v-bind:is="tab.componentName" :plugin="findPlugin(tab.pluginName)" ></component>
