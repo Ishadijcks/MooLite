@@ -49,7 +49,7 @@ const sendMessageToGameChat = (message: string, recipient: string) => {
 </script>
 
 <template>
-    <div class="flex flex-col space-y-1.5 h-full">
+    <div class="flex flex-col space-y-1.5 h-full mb-1.5">
         <h1 class="text-lg font-bold">Whisper Manager</h1>
         <div class="flex flex-row space-x-0.5">
             <div
