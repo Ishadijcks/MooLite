@@ -5,7 +5,7 @@ import { MooLiteTab } from "src/MooLite/core/plugins/MooLiteTab";
 import PluginManagerDisplay from "src/components/PluginManagerDisplay.vue";
 import MooDivider from "src/components/atoms/MooDivider.vue";
 import PluginTabItem from "src/components/plugins/PluginTabItem.vue";
-import { PluginTabWidth } from "./MooLite/core/plugins/PluginTabWidth";
+import { PluginTabWidth } from "src/MooLite/core/plugins/PluginTabWidth";
 
 const defaultPluginWidth: PluginTabWidth = "w-64";
 

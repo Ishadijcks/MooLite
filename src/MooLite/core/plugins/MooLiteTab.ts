@@ -1,5 +1,5 @@
 import { Component } from "vue";
-import { PluginTabWidth } from "./PluginTabWidth";
+import { PluginTabWidth } from "src/MooLite/core/plugins/PluginTabWidth";
 
 export interface MooLiteTab {
     icon: string;
