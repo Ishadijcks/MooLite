@@ -26,6 +26,7 @@ export class WhisperManagerPlugin extends MooLitePlugin {
         pluginName: this.name,
         componentName: "WhisperManagerPluginDisplay",
         component: markRaw(WhisperManagerPluginDisplay),
+        width: "w-80"
     };
 
     onChatMessage(message: ChatMessage): void {
