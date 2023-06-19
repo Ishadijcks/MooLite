@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, defineProps } from "vue";
 import { WhisperManagerPlugin } from "./WhisperManagerPlugin";
 import ChatBox from "src/components/chat/ChatBox.vue";
+
+const chatInput = ref("");
+const activeConversation = ref("");
 
 const props = defineProps<{
     plugin: WhisperManagerPlugin;
@@ -36,7 +39,6 @@ const updateGameChatInput = (message: string) => {
     chatInput.focus();
 };
 
-const chatInput = ref("");
 
 const sendMessageToGameChat = (message: string, recipient: string) => {
     if (!recipient) return;
@@ -45,7 +47,6 @@ const sendMessageToGameChat = (message: string, recipient: string) => {
     chatInput.value = "";
 };
 
-const activeConversation = ref("");
 </script>
 
 <template>
