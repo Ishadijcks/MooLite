@@ -36,15 +36,21 @@ const setActiveTab = (index: number) => {
 <template>
     <div
         class="flex flex-col h-full shadow-sm overflow-clip bg-background-game text-dark-mode shadow-space-200"
-        :class="{ 'w-64': activeTab !== -1 }"
+        
     >
         <MooDivider class="border-b-4" />
 
         <div class="flex flex-row h-full">
             <div v-if="activeTab > -1" class="flex flex-col flex-grow p-2 overflow-auto">
-                <PluginManagerDisplay v-if="activeTab === 0" :manager="pluginManager"></PluginManagerDisplay>
-                <div v-for="(tab, index) in tabs" v-show="index + 1 === activeTab">
-                    <component v-bind:is="tab.componentName" :plugin="findPlugin(tab.pluginName)"></component>
+                <PluginManagerDisplay v-if="activeTab === 0" :manager="pluginManager" class="w-64"></PluginManagerDisplay>
+                <div 
+                    v-for="(tab, index) in tabs" 
+                    v-show="index + 1 === activeTab"
+                    :class="{
+                        [tab.width ? tab.width : 'w-64']: true,
+                    }"
+                >
+                    <component v-bind:is="tab.componentName" :plugin="findPlugin(tab.pluginName)" ></component>
                 </div>
             </div>
             <div class="flex flex-col h-full overflow-auto shrink-0 bg-divider">
