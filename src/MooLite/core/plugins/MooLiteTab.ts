@@ -11,4 +11,7 @@ export interface MooLiteTab {
 
     // Must be wrapped with markRaw()
     component: Component;
+
+    /** Expects a tailwind width class. */
+    width?: string;
 }
