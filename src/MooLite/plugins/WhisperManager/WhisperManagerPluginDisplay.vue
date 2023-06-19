@@ -49,8 +49,11 @@ const sendMessageToGameChat = (message: string, recipient: string) => {
 </script>
 
 <template>
-    <div class="flex flex-col space-y-1.5 h-full mb-1.5">
+    <div class="flex flex-col space-y-1.5 h-full max-h-full mb-1.5">
         <h1 class="text-lg font-bold">Whisper Manager</h1>
+        <button @click="props.plugin.populateConversations()" class="text-sm bg-gray-800 p-1.5 rounded-[4px]">
+            Dev Data
+        </button>
         <div class="flex flex-row space-x-0.5">
             <div
                 v-for="[user, _] in Object.entries(conversations)"
@@ -61,7 +64,7 @@ const sendMessageToGameChat = (message: string, recipient: string) => {
             </div>
         </div>
         <MooDivider style="margin-top: 0" />
-        <ChatBox :messages="conversations[activeConversation]" class="flex-1" />
+        <ChatBox :messages="conversations[activeConversation]" class="flex-1 overflow-auto" />
         <input
             v-model="chatInput"
             type="text"
