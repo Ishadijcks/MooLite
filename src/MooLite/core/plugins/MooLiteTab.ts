@@ -26,5 +26,5 @@ export interface MooLiteTab {
         | "w-72"
         | "w-80"
         | "w-96"
-        | `w-[${string}${"em" | "rem" | "px" | "%"}]`;
+        | `w-[${number}${"em" | "rem" | "px" | "%"}]`;
 }
