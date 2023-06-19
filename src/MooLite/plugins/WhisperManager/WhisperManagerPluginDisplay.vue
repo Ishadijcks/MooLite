@@ -65,7 +65,7 @@ const sendMessageToGameChat = (message: string, recipient: string) => {
         <input
             v-model="chatInput"
             type="text"
-            class="p-1 bg-gray-800 rounded-lg my-2 text-gray-400 w-full"
+            class="p-1 bg-gray-800 rounded-[4px] my-2 text-gray-400 w-full"
             @keyup.enter="sendMessageToGameChat(chatInput, activeConversation)"
         />
     </div>
