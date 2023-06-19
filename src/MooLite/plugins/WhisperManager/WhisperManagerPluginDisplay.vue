@@ -7,69 +7,8 @@ const props = defineProps<{
     plugin: WhisperManagerPlugin;
 }>();
 
-const messages = computed(() => {
-    return props.plugin.messages;
-});
-
 const conversations = computed(() => {
     return props.plugin.conversations;
-});
-
-const uniqueUsers = computed(() => {
-    return props.plugin.messages
-        .map((msg) => msg.senderName)
-        .filter((value, index, self) => self.indexOf(value) === index);
-});
-
-const topFiveMessagesSent = computed(() => {
-    const { messages } = props.plugin;
-    let totals: { [key: string]: number } = {};
-
-    messages.forEach((msg) => {
-        const { senderName } = msg;
-        if (!totals[senderName]) {
-            totals[senderName] = 0;
-        }
-        totals[senderName]++;
-    });
-
-    return Object.entries(totals)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 5)
-        .map(([name, count]) => {
-            return {
-                name,
-                count,
-            };
-        });
-});
-
-const topFiveAverageMessageLength = computed(() => {
-    const { messages } = props.plugin;
-    let totals: { [key: string]: number } = {};
-    let counts: { [key: string]: number } = {};
-
-    messages.forEach((msg) => {
-        const { senderName, message } = msg;
-        if (!totals[senderName]) {
-            totals[senderName] = 0;
-        }
-        if (!counts[senderName]) {
-            counts[senderName] = 0;
-        }
-        totals[senderName] += message.length;
-        counts[senderName]++;
-    });
-
-    return Object.entries(totals)
-        .sort((a, b) => b[1] / counts[b[0]] - a[1] / counts[a[0]])
-        .slice(0, 5)
-        .map(([name, count]) => {
-            return {
-                name,
-                count: Math.floor(count / counts[name]),
-            };
-        });
 });
 
 function setNativeValue(el: HTMLInputElement, value: string) {
