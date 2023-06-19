@@ -2,6 +2,7 @@
 import { computed, ref, defineProps } from "vue";
 import { WhisperManagerPlugin } from "./WhisperManagerPlugin";
 import ChatBox from "src/components/chat/ChatBox.vue";
+import MooDivider from "src/components/atoms/MooDivider.vue";
 
 const chatInput = ref("");
 const activeConversation = ref("");
@@ -50,18 +51,19 @@ const sendMessageToGameChat = (message: string, recipient: string) => {
 </script>
 
 <template>
-    <div class="flex flex-col">
-        <h1 class="text-lg font-bold">Laguna Test</h1>
+    <div class="flex flex-col space-y-1.5">
+        <h1 class="text-lg font-bold">Whisper Manager</h1>
         <div class="flex flex-row space-x-0.5">
             <div
                 v-for="[user, _] in Object.entries(conversations)"
-                class="flex-grow flex flex-row justify-center bg-gray-800 rounded-t-lg pt-1 pb-0.5 px-2 min-w-max text-gray-300 cursor-pointer"
+                class="flex-grow flex flex-row justify-center bg-gray-800 rounded-t-lg pt-1 pb-0.5 px-2 text-gray-300 cursor-pointer"
                 @click="activeConversation = user"
             >
                 <span class="font-bold">{{ user }}</span>
             </div>
         </div>
-        <ChatBox :messages="conversations[activeConversation]" />
+        <MooDivider style="margin-top: 0;"/>
+        <ChatBox :messages="conversations[activeConversation]" class="flex-1"/>
         <input
             v-model="chatInput"
             type="text"
