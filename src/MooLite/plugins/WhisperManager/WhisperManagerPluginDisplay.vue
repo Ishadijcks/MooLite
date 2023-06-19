@@ -40,14 +40,12 @@ const updateGameChatInput = (message: string) => {
     chatInput.focus();
 };
 
-
 const sendMessageToGameChat = (message: string, recipient: string) => {
     if (!recipient) return;
     const msg = `/w ${recipient} ${message}`;
     updateGameChatInput(msg);
     chatInput.value = "";
 };
-
 </script>
 
 <template>
@@ -62,8 +60,8 @@ const sendMessageToGameChat = (message: string, recipient: string) => {
                 <span class="font-bold">{{ user }}</span>
             </div>
         </div>
-        <MooDivider style="margin-top: 0;"/>
-        <ChatBox :messages="conversations[activeConversation]" class="flex-1"/>
+        <MooDivider style="margin-top: 0" />
+        <ChatBox :messages="conversations[activeConversation]" class="flex-1" />
         <input
             v-model="chatInput"
             type="text"

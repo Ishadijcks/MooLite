@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { defineProps, computed } from 'vue';
-import { ChatMessage } from 'src/MooLite/core/chat/ChatMessage';
+import { defineProps, computed } from "vue";
+import { ChatMessage } from "src/MooLite/core/chat/ChatMessage";
 
 const props = defineProps<{
-  message: ChatMessage;
+    message: ChatMessage;
 }>();
 </script>
 
