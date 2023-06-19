@@ -1,4 +1,4 @@
-export type PluginWidth =
+export type PluginTabWidth =
     | "w-32"
     | "w-36"
     | "w-40"

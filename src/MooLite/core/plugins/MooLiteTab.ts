@@ -1,5 +1,5 @@
 import { Component } from "vue";
-import { PluginWidth } from "./PluginWidth";
+import { PluginTabWidth } from "./PluginTabWidth";
 
 export interface MooLiteTab {
     icon: string;
@@ -14,5 +14,5 @@ export interface MooLiteTab {
     component: Component;
 
     /** Expects a tailwind width class. */
-    width?: PluginWidth;
+    width?: PluginTabWidth;
 }
