@@ -8,7 +8,7 @@ const props = defineProps<{
 </script>
 
 <template>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col">
         <div v-for="plugin in manager.plugins" class="px-2 border-b-2 border-divider">
             <PluginListItem :plugin="plugin" :key="plugin.name" />
         </div>
