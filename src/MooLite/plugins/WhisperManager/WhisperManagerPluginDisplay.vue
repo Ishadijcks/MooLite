@@ -71,6 +71,7 @@ const sendMessageToGameChat = (message: string, recipient: string) => {
             v-model="searchText"
             placeholder="Search tabs..."
             class="p-1 bg-gray-800 rounded-[4px] my-2 text-gray-400 w-full"
+            :class="{ hidden: !Object.keys(conversations).length }"
         />
         <div class="flex flex-row space-x-0.5">
             <div
