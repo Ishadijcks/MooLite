@@ -83,7 +83,9 @@ const startWhisperInGameChat = (recipient: string) => {
             </div>
         </div>
         <MooDivider style="margin-top: 0" />
-        <ChatBox :messages="conversations[activeConversation]" class="flex-1 overflow-auto" />
+        <div class="relative h-full">
+            <ChatBox :messages="conversations[activeConversation]" class="absolute inset-0 flex-1" />
+        </div>
         <button
             class="p-1 bg-gray-800 rounded-[4px] my-2 text-gray-400 w-full"
             @click="startWhisperInGameChat(activeConversation)"
