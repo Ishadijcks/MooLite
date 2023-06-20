@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { defineProps } from "vue";
 import ChatElement from "./ChatElement.vue";
-import { ChatMessage } from "src/MooLite/core/chat/ChatMessage";
+import { ConversationMessage } from "src/MooLite/plugins/WhisperManager/ConversationMessage";
 
 const props = defineProps<{
-    messages: ChatMessage[];
+    messages: ConversationMessage[];
 }>();
 </script>
 

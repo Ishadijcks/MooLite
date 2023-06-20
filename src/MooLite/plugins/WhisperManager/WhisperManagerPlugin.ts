@@ -4,6 +4,7 @@ import { markRaw } from "vue";
 import WhisperManagerPluginDisplay from "src/MooLite/plugins/WhisperManager/WhisperManagerPluginDisplay.vue";
 import { ChatMessage } from "src/MooLite/core/chat/ChatMessage";
 import { ChatChannelTypeHrid } from "src/MooLite/core/chat/ChatChannelTypeHrid";
+import { ConversationMessage } from "./ConversationMessage";
 
 export class WhisperManagerPlugin extends MooLitePlugin {
     name: string = "Whisper Manager";
@@ -11,7 +12,7 @@ export class WhisperManagerPlugin extends MooLitePlugin {
     description: string = "A plugin to help manage all of your conversations!";
 
     _messages: ChatMessage[] = [];
-    _conversations: Record<string, ChatMessage[]> = {};
+    _conversations: Record<string, ConversationMessage[]> = {};
 
     public get messages(): ChatMessage[] {
         return this._messages;
@@ -29,294 +30,343 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Hey, how's it going?",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: false,
                 },
             ],
             Squall: [
@@ -325,18 +375,21 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Hey, how's it going?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Squall",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: false,
                 },
                 {
                     senderName: "Squall",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: true,
                 },
             ],
             Rinoa: [
@@ -345,18 +398,21 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Hey, how's it going?",
+                    isInbound: true,
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Rinoa",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
+                    isInbound: false,
                 },
                 {
                     senderName: "Rinoa",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
+                    isInbound: true,
                 },
             ],
         };
@@ -376,10 +432,12 @@ export class WhisperManagerPlugin extends MooLitePlugin {
         }
         if (message.channel === ChatChannelTypeHrid.Whisper) {
             console.log("Whispered message", message);
-            const { senderName, receiverName } = message;
+            const conversationMessage = message as ConversationMessage;
+            const { senderName, receiverName } = conversationMessage;
+            conversationMessage.isInbound = receiverName === this._game.character.name;
             const otherName = senderName === this._game.character.name ? receiverName : senderName;
             this._conversations[otherName] ||= [];
-            this._conversations[otherName].push(message);
+            this._conversations[otherName].push(conversationMessage);
             console.log("Conversations", this._conversations);
         } else {
             this._messages.push(message);
