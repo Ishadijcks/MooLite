@@ -3,6 +3,7 @@ import { computed, ref, defineProps } from "vue";
 import { WhisperManagerPlugin } from "./WhisperManagerPlugin";
 import ChatBox from "src/components/chat/ChatBox.vue";
 import MooDivider from "src/components/atoms/MooDivider.vue";
+import Accordion from "src/components/atoms/Accordion.vue";
 
 const chatInput = ref("");
 const activeConversation = ref("");
@@ -51,6 +52,16 @@ const sendMessageToGameChat = (message: string, recipient: string) => {
 <template>
     <div class="flex flex-col space-y-1.5 h-full max-h-full mb-1.5">
         <h1 class="text-lg font-bold">Whisper Manager</h1>
+        <Accordion>
+            <template #title>
+                <div class="flex flex-row justify-between">
+                    <span>Settings</span>
+                </div>
+            </template>
+            <template #content>
+                <p>test</p>
+            </template>
+        </Accordion>
         <button @click="props.plugin.populateConversations()" class="text-sm bg-gray-800 p-1.5 rounded-[4px]">
             Dev Data
         </button>
