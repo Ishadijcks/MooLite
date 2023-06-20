@@ -23,342 +23,342 @@ export class WhisperManagerPlugin extends MooLitePlugin {
 
     public populateConversations(): void {
         this._conversations = {
-            "Zeplin": [
+            Zeplin: [
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Hey, how's it going?"
+                    message: "Hey, how's it going?",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
+                    message: "I'm doing well, thanks for asking!",
                 },
                 {
                     senderName: "Zeplin",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Zeplin",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
-                }
+                    message: "I'm doing well, thanks for asking!",
+                },
             ],
-            "Squall": [
+            Squall: [
                 {
                     senderName: "Squall",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Hey, how's it going?"
+                    message: "Hey, how's it going?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Squall",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Squall",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
-                }
+                    message: "I'm doing well, thanks for asking!",
+                },
             ],
-            "Rinoa": [
+            Rinoa: [
                 {
                     senderName: "Rinoa",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Hey, how's it going?"
+                    message: "Hey, how's it going?",
                 },
                 {
                     senderName: "Laguna",
                     receiverName: "Rinoa",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "Pretty good, you?"
+                    message: "Pretty good, you?",
                 },
                 {
                     senderName: "Rinoa",
                     receiverName: "Laguna",
                     channel: ChatChannelTypeHrid.Whisper,
-                    message: "I'm doing well, thanks for asking!"
-                }
-            ]
+                    message: "I'm doing well, thanks for asking!",
+                },
+            ],
         };
     }
 
@@ -367,7 +367,7 @@ export class WhisperManagerPlugin extends MooLitePlugin {
         pluginName: this.name,
         componentName: "WhisperManagerPluginDisplay",
         component: markRaw(WhisperManagerPluginDisplay),
-        width: "w-80"
+        width: "w-80",
     };
 
     onChatMessage(message: ChatMessage): void {

@@ -7,6 +7,7 @@ import Accordion from "src/components/atoms/Accordion.vue";
 
 const chatInput = ref("");
 const activeConversation = ref("");
+const searchText = ref("");
 
 const props = defineProps<{
     plugin: WhisperManagerPlugin;
@@ -59,15 +60,23 @@ const sendMessageToGameChat = (message: string, recipient: string) => {
                 </div>
             </template>
             <template #content>
-                <p>test</p>
+                <span>test</span>
             </template>
         </Accordion>
         <button @click="props.plugin.populateConversations()" class="text-sm bg-gray-800 p-1.5 rounded-[4px]">
             Dev Data
         </button>
+        <input
+            type="text"
+            v-model="searchText"
+            placeholder="Search tabs..."
+            class="p-1 bg-gray-800 rounded-[4px] my-2 text-gray-400 w-full"
+        />
         <div class="flex flex-row space-x-0.5">
             <div
-                v-for="[user, _] in Object.entries(conversations)"
+                v-for="[user, _] in Object.entries(conversations).filter(([user, _]) =>
+                    user.toLowerCase().includes(searchText.toLowerCase())
+                )"
                 class="flex-grow flex flex-row justify-center bg-gray-800 rounded-t-lg pt-1 pb-0.5 px-2 text-gray-300 cursor-pointer"
                 @click="activeConversation = user"
             >
