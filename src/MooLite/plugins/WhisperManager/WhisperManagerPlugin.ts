@@ -18,7 +18,7 @@ export class WhisperManagerPlugin extends MooLitePlugin {
         return this._messages;
     }
 
-    public get conversations(): Record<string, ChatMessage[]> {
+    public get conversations(): Record<string, ConversationMessage[]> {
         return this._conversations;
     }
 

@@ -77,6 +77,7 @@ const startWhisperInGameChat = (recipient: string) => {
                     user.toLowerCase().includes(searchText.toLowerCase())
                 )"
                 class="flex-grow flex flex-row justify-center bg-gray-800 rounded-t-lg pt-1 pb-0.5 px-2 text-gray-300 cursor-pointer"
+                :class="{ 'bg-gray-700': activeConversation === user }"
                 @click="activeConversation = user"
             >
                 <span class="font-bold">{{ user }}</span>
