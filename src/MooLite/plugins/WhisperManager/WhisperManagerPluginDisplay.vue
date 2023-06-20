@@ -5,7 +5,6 @@ import ChatBox from "src/components/chat/ChatBox.vue";
 import MooDivider from "src/components/atoms/MooDivider.vue";
 import Accordion from "src/components/atoms/Accordion.vue";
 
-const chatInput = ref("");
 const activeConversation = ref("");
 const searchText = ref("");
 
@@ -42,11 +41,10 @@ const updateGameChatInput = (message: string) => {
     chatInput.focus();
 };
 
-const sendMessageToGameChat = (message: string, recipient: string) => {
+const startWhisperInGameChat = (recipient: string) => {
     if (!recipient) return;
-    const msg = `/w ${recipient} ${message}`;
+    const msg = `/w ${recipient}`;
     updateGameChatInput(msg);
-    chatInput.value = "";
 };
 </script>
 
@@ -86,11 +84,11 @@ const sendMessageToGameChat = (message: string, recipient: string) => {
         </div>
         <MooDivider style="margin-top: 0" />
         <ChatBox :messages="conversations[activeConversation]" class="flex-1 overflow-auto" />
-        <input
-            v-model="chatInput"
-            type="text"
+        <button
             class="p-1 bg-gray-800 rounded-[4px] my-2 text-gray-400 w-full"
-            @keyup.enter="sendMessageToGameChat(chatInput, activeConversation)"
-        />
+            @click="startWhisperInGameChat(activeConversation)"
+        >
+            <b>Whisper</b>
+        </button>
     </div>
 </template>
