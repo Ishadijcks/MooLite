@@ -51,7 +51,7 @@ const startWhisperInGameChat = (recipient: string) => {
 <template>
     <div class="flex flex-col space-y-1.5 h-full max-h-full mb-1.5">
         <h1 class="text-lg font-bold">Whisper Manager</h1>
-        <Accordion :class="{ 'hidden': props.plugin.character.name !== 'LagunaE' }">
+        <Accordion :class="{ hidden: props.plugin.character.name !== 'LagunaE' }">
             <template #title>
                 <div class="flex flex-row justify-between">
                     <span>Settings</span>
