@@ -15,6 +15,7 @@ export interface ChatMessageReceived extends ServerMessage {
         chatIconHrid: ChatIconHrid;
         id: number;
         isDeleted: boolean;
+        isModMessage: boolean;
         isSystemMessage: boolean;
         linksMetaData: string;
         message: string;
@@ -37,6 +38,9 @@ export class ChatMessageReceivedParser extends MessageParser {
             channel: message.message.channelTypeHrid,
             senderName: message.message.senderName,
             receiverName: message.message.receiverName,
+            isDeleted: message.message.isDeleted,
+            isModMessage: message.message.isModMessage,
+            isSystemMessage: message.message.isSystemMessage,
         });
     }
 }
