@@ -76,8 +76,8 @@ const startWhisperInGameChat = (recipient: string) => {
                 v-for="[user, _] in Object.entries(conversations).filter(([user, _]) =>
                     user.toLowerCase().includes(searchText.toLowerCase())
                 )"
-                class="flex-grow flex flex-row justify-center bg-gray-800 rounded-t-lg pt-1 pb-0.5 px-2 text-gray-300 cursor-pointer"
-                :class="{ 'bg-gray-700': activeConversation === user }"
+                class="flex-grow flex flex-row justify-center rounded-t-lg pt-1 pb-0.5 px-2 text-gray-300 cursor-pointer"
+                :class="activeConversation === user ? 'bg-gray-700' : 'bg-gray-800'"
                 @click="activeConversation = user"
             >
                 <span class="font-bold">{{ user }}</span>
