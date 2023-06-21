@@ -12,6 +12,10 @@ const props = defineProps<{
     plugin: WhisperManagerPlugin;
 }>();
 
+const isDev = computed(() => {
+    return props.plugin.character.name === "LagunaE";
+});
+
 const conversations = computed(() => {
     return props.plugin.conversations;
 });
@@ -53,7 +57,7 @@ props.plugin.populateConversations();
 <template>
     <div class="flex flex-col space-y-1.5 h-full max-h-full mb-1.5">
         <h1 class="text-lg font-bold">Whisper Manager</h1>
-        <Accordion :class="{ hidden: props.plugin.character.name !== 'LagunaE' }">
+        <Accordion :class="{ hidden: isDev }">
             <template #title>
                 <div class="flex flex-row justify-between">
                     <span>Settings</span>
@@ -92,11 +96,11 @@ props.plugin.populateConversations();
                     v-for="[user, _] in Object.entries(conversations).filter(([user, _]) =>
                         user.toLowerCase().includes(searchText.toLowerCase())
                     )"
-                    class="flex-grow flex flex-row justify-center rounded-t-lg pt-1 pb-0.5 px-2 text-gray-300 cursor-pointer"
-                    :class="activeConversation === user ? 'bg-gray-700' : 'bg-gray-800'"
+                    class="flex-grow flex flex-row justify-center rounded-t-[4px] pt-1 pb-0.5 px-2 text-gray-300 cursor-pointer"
+                    :class="activeConversation === user ? 'bg-space-600' : 'bg-gray-800'"
                     @click="activeConversation = user"
                 >
-                    <span class="font-bold">{{ user }}</span>
+                    <span class="font-bold text-base">{{ user }}</span>
                 </div>
             </div>
             <MooDivider style="margin-top: 0" />
