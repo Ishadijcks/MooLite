@@ -75,7 +75,7 @@ props.plugin.populateConversations();
             class="p-1 bg-gray-800 rounded-[4px] my-2 text-gray-400 w-full"
             :class="{ hidden: !Object.keys(conversations).length }"
         />
-        <div class="flex flex-row space-x-0.5 overflow-x-auto overflow-y-visible">
+        <div class="flex flex-row space-x-0.5 overflow-y-hidden">
             <div
                 v-for="[user, _] in Object.entries(conversations).filter(([user, _]) =>
                     user.toLowerCase().includes(searchText.toLowerCase())
