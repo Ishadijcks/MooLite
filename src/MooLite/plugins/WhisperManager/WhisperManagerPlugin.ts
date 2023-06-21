@@ -36,6 +36,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Hey, how's it going?",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -43,6 +46,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -50,6 +56,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -57,6 +66,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -64,6 +76,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -71,6 +86,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -78,6 +96,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -85,6 +106,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -92,6 +116,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -99,6 +126,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -106,6 +136,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -113,6 +146,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -120,6 +156,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -127,6 +166,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -134,6 +176,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -141,6 +186,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -148,6 +196,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -155,6 +206,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -162,6 +216,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -169,6 +226,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -176,6 +236,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -183,6 +246,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -190,6 +256,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -197,6 +266,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -204,6 +276,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -211,6 +286,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -218,6 +296,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -225,6 +306,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -232,6 +316,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -239,6 +326,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -246,6 +336,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -253,6 +346,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -260,6 +356,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -267,6 +366,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -274,6 +376,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -281,6 +386,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -288,6 +396,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -295,6 +406,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -302,6 +416,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -309,6 +426,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -316,6 +436,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -323,6 +446,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -330,6 +456,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -337,6 +466,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -344,6 +476,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -351,6 +486,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -358,6 +496,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Zeplin",
@@ -365,6 +506,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -372,6 +516,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
             ],
             Squall: [
@@ -381,6 +528,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Hey, how's it going?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -388,6 +538,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Squall",
@@ -395,6 +548,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
             ],
             Rinoa: [
@@ -404,6 +560,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Hey, how's it going?",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Laguna",
@@ -411,6 +570,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "Pretty good, you?",
                     isInbound: false,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
                 {
                     senderName: "Rinoa",
@@ -418,6 +580,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
                     channel: ChatChannelTypeHrid.Whisper,
                     message: "I'm doing well, thanks for asking!",
                     isInbound: true,
+                    isDeleted: false,
+                    isModMessage: false,
+                    isSystemMessage: false,
                 },
             ],
         };
