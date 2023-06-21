@@ -43,7 +43,7 @@ const updateGameChatInput = (message: string) => {
 
 const startWhisperInGameChat = (recipient: string) => {
     if (!recipient) return;
-    const msg = `/w ${recipient}`;
+    const msg = `/w ${recipient} `;
     updateGameChatInput(msg);
 };
 </script>
