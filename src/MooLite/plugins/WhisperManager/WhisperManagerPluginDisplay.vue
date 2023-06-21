@@ -68,34 +68,41 @@ props.plugin.populateConversations();
                 </button>
             </template>
         </Accordion>
-        <input
-            type="text"
-            v-model="searchText"
-            placeholder="Search tabs..."
-            class="p-1 bg-gray-800 rounded-[4px] my-2 text-gray-400 w-full"
-            :class="{ hidden: !Object.keys(conversations).length }"
-        />
-        <div class="flex flex-row space-x-0.5 overflow-y-hidden">
-            <div
-                v-for="[user, _] in Object.entries(conversations).filter(([user, _]) =>
-                    user.toLowerCase().includes(searchText.toLowerCase())
-                )"
-                class="flex-grow flex flex-row justify-center rounded-t-lg pt-1 pb-0.5 px-2 text-gray-300 cursor-pointer"
-                :class="activeConversation === user ? 'bg-gray-700' : 'bg-gray-800'"
-                @click="activeConversation = user"
-            >
-                <span class="font-bold">{{ user }}</span>
+        <div v-if="!Object.keys(conversations).length" class="flex flex-col justify-center gap-y-3 items-center w-full h-full text-center">
+            <span class="bold text-4xl">No whispers!</span>
+            <span class="text-xl">Start one by clicking a users name in chat and selecting the whisper option. You can also type the following in chat:</span>
+            <code class="text-xl p-1.5 rounded-[4px] bg-gray-700">/w &lt;username&gt;</code>
+        </div>
+        <div v-else class="flex flex-col space-y-1.5 h-full max-h-full mb-1.5">
+            <input
+                v-if="Object.keys(conversations).length > 4"
+                v-model="searchText"
+                type="text"
+                placeholder="Search tabs..."
+                class="p-1 bg-gray-800 rounded-[4px] my-2 text-gray-400 w-full"
+            />
+            <div class="flex flex-row space-x-0.5 overflow-y-hidden">
+                <div
+                    v-for="[user, _] in Object.entries(conversations).filter(([user, _]) =>
+                        user.toLowerCase().includes(searchText.toLowerCase())
+                    )"
+                    class="flex-grow flex flex-row justify-center rounded-t-lg pt-1 pb-0.5 px-2 text-gray-300 cursor-pointer"
+                    :class="activeConversation === user ? 'bg-gray-700' : 'bg-gray-800'"
+                    @click="activeConversation = user"
+                >
+                    <span class="font-bold">{{ user }}</span>
+                </div>
             </div>
+            <MooDivider style="margin-top: 0" />
+            <div class="relative h-full">
+                <ChatBox :messages="conversations[activeConversation]" class="absolute inset-0 flex-1" />
+            </div>
+            <button
+                class="p-1 bg-gray-800 rounded-[4px] my-2 text-gray-400 w-full"
+                @click="startWhisperInGameChat(activeConversation)"
+            >
+                <b>Whisper</b>
+            </button>
         </div>
-        <MooDivider style="margin-top: 0" />
-        <div class="relative h-full">
-            <ChatBox :messages="conversations[activeConversation]" class="absolute inset-0 flex-1" />
-        </div>
-        <button
-            class="p-1 bg-gray-800 rounded-[4px] my-2 text-gray-400 w-full"
-            @click="startWhisperInGameChat(activeConversation)"
-        >
-            <b>Whisper</b>
-        </button>
     </div>
 </template>
