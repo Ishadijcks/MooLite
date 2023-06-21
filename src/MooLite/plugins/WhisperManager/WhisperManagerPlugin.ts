@@ -5,6 +5,7 @@ import WhisperManagerPluginDisplay from "src/MooLite/plugins/WhisperManager/Whis
 import { ChatMessage } from "src/MooLite/core/chat/ChatMessage";
 import { ChatChannelTypeHrid } from "src/MooLite/core/chat/ChatChannelTypeHrid";
 import { ConversationMessage } from "./ConversationMessage";
+import { Character } from "src/MooLite/core/character/Character";
 
 export class WhisperManagerPlugin extends MooLitePlugin {
     name: string = "Whisper Manager";
@@ -20,6 +21,10 @@ export class WhisperManagerPlugin extends MooLitePlugin {
 
     public get conversations(): Record<string, ConversationMessage[]> {
         return this._conversations;
+    }
+
+    public get character(): Character {
+        return this._game.character;
     }
 
     public populateConversations(): void {
