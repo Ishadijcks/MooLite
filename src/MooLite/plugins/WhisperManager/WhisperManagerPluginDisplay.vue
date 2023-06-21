@@ -46,6 +46,8 @@ const startWhisperInGameChat = (recipient: string) => {
     const msg = `/w ${recipient} `;
     updateGameChatInput(msg);
 };
+
+props.plugin.populateConversations();
 </script>
 
 <template>
@@ -58,7 +60,10 @@ const startWhisperInGameChat = (recipient: string) => {
                 </div>
             </template>
             <template #content>
-                <button @click="props.plugin.populateConversations()" class="text-sm bg-gray-800 p-1.5 rounded-[4px]">
+                <button
+                    @click="props.plugin.populateDevConversations()"
+                    class="text-sm bg-gray-800 p-1.5 rounded-[4px]"
+                >
                     Dev Data
                 </button>
             </template>
@@ -70,7 +75,7 @@ const startWhisperInGameChat = (recipient: string) => {
             class="p-1 bg-gray-800 rounded-[4px] my-2 text-gray-400 w-full"
             :class="{ hidden: !Object.keys(conversations).length }"
         />
-        <div class="flex flex-row space-x-0.5">
+        <div class="flex flex-row space-x-0.5 overflow-x-auto overflow-y-visible">
             <div
                 v-for="[user, _] in Object.entries(conversations).filter(([user, _]) =>
                     user.toLowerCase().includes(searchText.toLowerCase())
