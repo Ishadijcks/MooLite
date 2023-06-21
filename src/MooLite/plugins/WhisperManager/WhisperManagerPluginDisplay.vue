@@ -68,9 +68,15 @@ props.plugin.populateConversations();
                 </button>
             </template>
         </Accordion>
-        <div v-if="!Object.keys(conversations).length" class="flex flex-col justify-center gap-y-3 items-center w-full h-full text-center">
+        <div
+            v-if="!Object.keys(conversations).length"
+            class="flex flex-col justify-center gap-y-3 items-center w-full h-full text-center"
+        >
             <span class="bold text-4xl">No whispers!</span>
-            <span class="text-xl">Start one by clicking a users name in chat and selecting the whisper option. You can also type the following in chat:</span>
+            <span class="text-xl">
+                Start one by clicking a users name in chat and selecting the whisper option. You can also type the
+                following in chat:
+            </span>
             <code class="text-xl p-1.5 rounded-[4px] bg-gray-700">/w &lt;username&gt;</code>
         </div>
         <div v-else class="flex flex-col space-y-1.5 h-full max-h-full mb-1.5">
