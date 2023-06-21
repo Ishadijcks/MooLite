@@ -15,6 +15,7 @@ import { CharacterConsumable } from "src/MooLite/core/inventory/items/CharacterC
 import { CombatUnit } from "src/MooLite/core/combat/CombatUnit";
 import { NonCombatStats } from "src/MooLite/core/equipment/NonCombatStats";
 import { Character } from "src/MooLite/core/character/Character";
+import { ChatMessage } from "src/MooLite/core/chat/ChatMessage";
 
 export interface InitCharacterInfoMessage extends ServerMessage {
     type: ServerMessageType.InitCharacterInfo;
@@ -28,6 +29,7 @@ export interface InitCharacterInfoMessage extends ServerMessage {
     characterChatIconMap: Record<ChatIconHrid, CharacterChatIcon>;
     characterItems: CharacterItem[];
     characterSkills: CharacterSkill[];
+    chatWhisperHistory: ChatMessage[];
     combatUnit: CombatUnit;
     noncombatStats: NonCombatStats;
 }
@@ -53,7 +55,7 @@ export class InitCharacterInfoParser extends MessageParser {
         //  characterSetting
         //  characterUpgradeMap
         //  chatHistoryByChannelMap
-        //  chatWhisperHistory
+        game.chatWhisperHistory = message.chatWhisperHistory;
         game.combat.updateCombatUnit(message.combatUnit, false);
         //  communityActionTypeBuffsMap
         //  communityBuffs
