@@ -66,6 +66,6 @@ export class WhisperManagerPlugin extends MooLitePlugin {
         conversationMessage.isInbound = receiverName === this._game.character.name;
         const otherName = senderName === this._game.character.name ? receiverName : senderName;
         this._conversations[otherName] ||= [];
-        this._conversations[otherName].push(conversationMessage);
+        this._conversations[otherName].unshift(conversationMessage);
     }
 }
