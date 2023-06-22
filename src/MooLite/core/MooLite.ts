@@ -95,9 +95,12 @@ export class MooLite {
                     value: config.value,
                 };
             });
+            const data = plugin.save?.();
+
             saveData.plugins[plugin.key] = {
                 isEnabled: plugin.isEnabled,
                 config,
+                data,
             };
         });
         LocalStorage.store(saveData);
@@ -135,6 +138,19 @@ export class MooLite {
                     config.value = configSaveData.value;
                 }
             });
+
+            if (pluginData.data) {
+                try {
+                    plugin.load?.(pluginData.data);
+                } catch (e) {
+                    console.warn(e);
+                    console.warn(
+                        `An error occurred while trying to load plugin ${plugin.key} with data ${JSON.stringify(
+                            pluginData.data
+                        )}`
+                    );
+                }
+            }
         });
     }
 
