@@ -13,7 +13,13 @@ const props = defineProps<{
 const searchText = ref("");
 const characterName = props.plugin.game.character.name;
 const isDev = characterName !== "LagunaE";
-const pinnedTabs = ["System", "Mods"];
+
+const pinnedTabs = computed(() => {
+    const tabNames = [];
+    if (!props.plugin.hideSystemMessages) tabNames.push("System");
+    if (!props.plugin.hideModMessages) tabNames.push("Mods");
+    return tabNames;
+});
 
 const conversations = computed(() => {
     return props.plugin.conversations;

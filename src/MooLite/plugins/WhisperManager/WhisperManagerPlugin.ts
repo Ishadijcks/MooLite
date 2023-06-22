@@ -8,6 +8,8 @@ import { ConversationMessage } from "./ConversationMessage";
 import { conversationData } from "src/MooLite/plugins/WhisperManager/DevConstants";
 import { Game } from "src/MooLite/core/Game";
 import { Conversation } from "src/MooLite/plugins/WhisperManager/Conversation";
+import { PluginConfig } from "src/MooLite/core/plugins/config/PluginConfig";
+import { PluginConfigType } from "src/MooLite/core/plugins/config/PluginConfigType";
 
 export class WhisperManagerPlugin extends MooLitePlugin {
     name: string = "Whisper Manager";
@@ -17,6 +19,23 @@ export class WhisperManagerPlugin extends MooLitePlugin {
     _messages: ChatMessage[] = [];
     _conversations: Record<string, Conversation> = {};
     _activeConversationName: string = "";
+
+    config: PluginConfig[] = [
+        {
+            type: PluginConfigType.CheckBox,
+            name: "Hide System Messages",
+            description: "Hide system messages from the conversation list",
+            key: "hide-system-messages",
+            value: false,
+        },
+        {
+            type: PluginConfigType.CheckBox,
+            name: "Hide Mod Messages",
+            description: "Hide mod messages from the conversation list",
+            key: "hide-mod-messages",
+            value: false,
+        },
+    ];
 
     tab: MooLiteTab = {
         icon: "💬",
@@ -29,6 +48,14 @@ export class WhisperManagerPlugin extends MooLitePlugin {
     initialize(game: Game): void {
         super.initialize(game);
         console.log("WhisperManagerPlugin initialized");
+    }
+
+    public get hideSystemMessages(): boolean {
+        return this.getConfig("hide-system-messages").value;
+    }
+
+    public get hideModMessages(): boolean {
+        return this.getConfig("hide-mod-messages").value;
     }
 
     public get activeConversation(): Conversation {
