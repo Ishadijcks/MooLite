@@ -8,6 +8,7 @@ import { ConversationMessage } from "./ConversationMessage";
 import { Character } from "src/MooLite/core/character/Character";
 import { conversationData } from "src/MooLite/plugins/WhisperManager/DevConstants";
 import { Game } from "src/MooLite/core/Game";
+import { Conversation } from "src/MooLite/plugins/WhisperManager/Conversation";
 
 export class WhisperManagerPlugin extends MooLitePlugin {
     name: string = "Whisper Manager";
@@ -15,13 +16,13 @@ export class WhisperManagerPlugin extends MooLitePlugin {
     description: string = "A plugin to help manage all of your conversations!";
 
     _messages: ChatMessage[] = [];
-    _conversations: Record<string, ConversationMessage[]> = {};
+    _conversations: Record<string, Conversation> = {};
 
     public get messages(): ChatMessage[] {
         return this._messages;
     }
 
-    public get conversations(): Record<string, ConversationMessage[]> {
+    public get conversations(): Record<string, Conversation> {
         return this._conversations;
     }
 
@@ -30,7 +31,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
     }
 
     public populateDevConversations(): void {
-        Object.entries(conversationData).forEach(([name, messages]) => (this._conversations[name] = messages));
+        Object.entries(conversationData).forEach(([name, messages]) => {
+            this._conversations[name] = new Conversation(messages);
+        });
     }
 
     public populateConversations(): void {
@@ -53,19 +56,27 @@ export class WhisperManagerPlugin extends MooLitePlugin {
     }
 
     onChatMessage(message: ChatMessage): void {
-        if (message.channel === ChatChannelTypeHrid.Whisper) {
+        const { channel, isModMessage, isSystemMessage } = message;
+        const theseAreTheDroidsWereLookingFor =
+            channel === ChatChannelTypeHrid.Whisper || isModMessage || isSystemMessage;
+
+        if (theseAreTheDroidsWereLookingFor) {
             this._addToConversations(message);
-        } else {
-            this._messages.push(message);
+            return;
         }
+
+        this._messages.push(message);
     }
 
     _addToConversations(message: ChatMessage): void {
         const conversationMessage = message as ConversationMessage;
-        const { senderName, receiverName } = conversationMessage;
+        const { senderName, receiverName, isModMessage, isSystemMessage } = conversationMessage;
         conversationMessage.isInbound = receiverName === this._game.character.name;
-        const otherName = senderName === this._game.character.name ? receiverName : senderName;
-        this._conversations[otherName] ||= [];
-        this._conversations[otherName].unshift(conversationMessage);
+        let otherName = senderName === this._game.character.name ? receiverName : senderName;
+        otherName = isModMessage ? "Mods" : otherName;
+        otherName = isSystemMessage ? "System" : otherName;
+        this._conversations[otherName] ??= new Conversation([]);
+        this._conversations[otherName].addMessage(conversationMessage);
+        console.log(this._conversations);
     }
 }

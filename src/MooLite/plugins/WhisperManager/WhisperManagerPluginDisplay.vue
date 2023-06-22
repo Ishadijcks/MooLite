@@ -21,11 +21,11 @@ const conversations = computed(() => {
 });
 
 const modMessages = computed(() => {
-    return props.plugin.messages.filter(msg => msg.isModMessage);
+    return props.plugin.messages.filter((msg) => msg.isModMessage);
 });
 
 const systemMessages = computed(() => {
-    return props.plugin.messages.filter(msg => msg.isSystemMessage);
+    return props.plugin.messages.filter((msg) => msg.isSystemMessage);
 });
 
 function setNativeValue(el: HTMLInputElement, value: string) {
@@ -113,7 +113,10 @@ props.plugin.populateConversations();
             </div>
             <MooDivider style="margin-top: 0" />
             <div class="relative h-full">
-                <ChatBox :messages="conversations[activeConversation]" class="absolute inset-0 flex-1" />
+                <ChatBox
+                    :messages="conversations[activeConversation]?.messages ?? []"
+                    class="absolute inset-0 flex-1"
+                />
             </div>
             <button
                 class="p-1 bg-gray-800 rounded-[4px] my-2 text-gray-400 w-full"
