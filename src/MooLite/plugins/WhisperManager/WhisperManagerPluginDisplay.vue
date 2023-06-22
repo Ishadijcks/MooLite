@@ -4,6 +4,7 @@ import { WhisperManagerPlugin } from "./WhisperManagerPlugin";
 import ChatBox from "src/components/chat/ChatBox.vue";
 import MooDivider from "src/components/atoms/MooDivider.vue";
 import Accordion from "src/components/atoms/Accordion.vue";
+import { contributorNames, betaTesterNames, helperNames } from "src/MooLite/plugins/WhisperManager/DevConstants";
 
 const props = defineProps<{
     plugin: WhisperManagerPlugin;
@@ -62,7 +63,14 @@ props.plugin.populateConversations();
 <template>
     <div class="flex flex-col space-y-1.5 h-full max-h-full mb-1.5">
         <div class="flex flex-row justify-between items-center">
-            <h1 class="text-lg font-bold">Whisper Manager</h1>
+            <h1 
+                class="text-lg font-bold transition duration-700 ease-in-out"
+                :class="{
+                    'hover:text-cyan-300': contributorNames.includes(characterName),
+                    'bg-clip-text hover:text-transparent bg-gradient-to-br from-yellow-500 to-red-400 to-90% via-orange-300 via-30%': betaTesterNames.includes(characterName),
+                    'hover:text-fuchsia-300': helperNames.includes(characterName),
+                }"
+            >Whisper Manager</h1>
             <button
                 v-if="isDev"
                 class="aspect-square h-7 text-lg rounded-full text-gray-400 bg-gray-800 shadow-md hover:bg-gray-700"
@@ -120,7 +128,7 @@ props.plugin.populateConversations();
                             if (pinnedTabs.includes(b[0])) return 1;
                             return 0;
                         })"
-                    class="flex-grow flex flex-row justify-center items-center rounded-t-[4px] py-1 px-2 text-gray-300 cursor-pointer relative"
+                    class="flex-grow flex flex-row justify-center items-center rounded-t-[4px] py-1 px-2 cursor-pointer relative"
                     :class="{
                         'bg-space-600': activeConversationName === user,
                         'bg-gray-800': !(activeConversationName === user) && !conversations[user].unread,
@@ -131,7 +139,16 @@ props.plugin.populateConversations();
                     <div v-if="conversations[user].unread" class="absolute top-0 right-0">
                         <div class="bg-red-500 rounded-full w-2 h-2"></div>
                     </div>
-                    <span class="font-semibold text-base">{{ user }}</span>
+                    <span 
+                        class="font-semibold text-base"
+                        :class="{
+                            'text-cyan-300': contributorNames.includes(user),
+                            'bg-clip-text text-transparent bg-gradient-to-br from-yellow-500 to-red-400 to-90% via-orange-300 via-30%': betaTesterNames.includes(user),
+                            'text-fuchsia-300': helperNames.includes(user),
+                        }"
+                    >
+                        {{ user }}
+                    </span>
                 </div>
             </div>
             <MooDivider style="margin-top: 0" />
