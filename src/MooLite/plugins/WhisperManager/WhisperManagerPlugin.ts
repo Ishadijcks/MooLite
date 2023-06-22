@@ -71,7 +71,12 @@ export class WhisperManagerPlugin extends MooLitePlugin {
     }
 
     public get conversations(): Record<string, Conversation> {
-        return this._conversations;
+        let conversations: Record<string, Conversation> = this.hideSystemMessages
+            ? (({ System, ...o }) => o)(this._conversations)
+            : this._conversations;
+        conversations = this.hideModMessages ? (({ Mods, ...o }) => o)(conversations) : conversations;
+
+        return conversations;
     }
 
     public get game(): Game {
