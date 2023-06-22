@@ -98,9 +98,14 @@ props.plugin.populateConversations();
             />
             <div class="flex flex-row space-x-0.5 overflow-y-hidden">
                 <div
-                    v-for="[user, _] in Object.entries(conversations).filter(([user, _]) =>
-                        user.toLowerCase().includes(searchText.toLowerCase())
-                    )"
+                    v-for="[user, _] in Object.entries(conversations)
+                        .filter(([user, _]) => user.toLowerCase().includes(searchText.toLowerCase()))
+                        .sort((a, b) => {
+                            const pinnedTabs = ['System', 'Mods'];
+                            if (pinnedTabs.includes(a[0])) return -1;
+                            if (pinnedTabs.includes(b[0])) return 1;
+                            return 0;
+                        })"
                     class="flex-grow flex flex-row justify-center rounded-t-[4px] pt-1 pb-0.5 px-2 text-gray-300 cursor-pointer relative"
                     :class="{
                         'bg-space-600': activeConversationName === user,
