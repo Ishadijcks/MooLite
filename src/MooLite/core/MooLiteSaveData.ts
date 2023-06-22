@@ -4,6 +4,7 @@ export interface MooLiteSaveData {
         {
             isEnabled: boolean;
             config: { key: string; value: any }[];
+            data?: Record<string, any>;
         }
     >;
 }
