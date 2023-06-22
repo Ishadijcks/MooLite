@@ -98,8 +98,15 @@ props.plugin.populateConversations();
             />
             <div class="flex flex-row space-x-0.5 overflow-y-hidden">
                 <div
-                    v-for="[user, _] in Object.entries(conversations)
+                    v-for="[user, _] in Object.entries(conversations.value)
                         .filter(([user, _]) => user.toLowerCase().includes(searchText.toLowerCase()))
+                        .sort((a, b) => {
+                            const convA = a[1];
+                            const convB = b[1];
+                            if (convA.unread && !convB.unread) return -1;
+                            if (!convA.unread && convB.unread) return 1;
+                            return 0;
+                        })
                         .sort((a, b) => {
                             const pinnedTabs = ['System', 'Mods'];
                             if (pinnedTabs.includes(a[0])) return -1;
