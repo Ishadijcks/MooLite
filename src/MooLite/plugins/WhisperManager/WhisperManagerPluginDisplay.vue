@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, defineProps } from "vue";
+import { computed, ref } from "vue";
 import { WhisperManagerPlugin } from "./WhisperManagerPlugin";
 import ChatBox from "src/components/chat/ChatBox.vue";
 import MooDivider from "src/components/atoms/MooDivider.vue";
