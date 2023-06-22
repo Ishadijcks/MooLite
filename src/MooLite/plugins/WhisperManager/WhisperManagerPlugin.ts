@@ -94,7 +94,7 @@ export class WhisperManagerPlugin extends MooLitePlugin {
         otherName = isSystemMessage ? "System" : otherName;
         this._conversations[otherName] ??= new Conversation([]);
         this._conversations[otherName].addMessage(conversationMessage);
-        if (markUnread && otherName !== this._activeConversationName) {
+        if (markUnread && otherName !== this._activeConversationName && !this._conversations[otherName].unread) {
             this._conversations[otherName].toggleUnread();
         }
     }

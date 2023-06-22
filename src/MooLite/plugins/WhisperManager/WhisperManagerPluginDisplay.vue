@@ -98,7 +98,7 @@ props.plugin.populateConversations();
             />
             <div class="flex flex-row space-x-0.5 overflow-y-hidden">
                 <div
-                    v-for="[user, _] in Object.entries(conversations.value)
+                    v-for="[user, _] in Object.entries(conversations)
                         .filter(([user, _]) => user.toLowerCase().includes(searchText.toLowerCase()))
                         .sort((a, b) => {
                             const convA = a[1];
@@ -113,7 +113,7 @@ props.plugin.populateConversations();
                             if (pinnedTabs.includes(b[0])) return 1;
                             return 0;
                         })"
-                    class="flex-grow flex flex-row justify-center rounded-t-[4px] pt-1 pb-0.5 px-2 text-gray-300 cursor-pointer relative"
+                    class="flex-grow flex flex-row justify-center items-center rounded-t-[4px] py-1 px-2 text-gray-300 cursor-pointer relative"
                     :class="{
                         'bg-space-600': activeConversationName === user,
                         'bg-gray-800': !(activeConversationName === user) && !conversations[user].unread,
@@ -124,7 +124,7 @@ props.plugin.populateConversations();
                     <div v-if="conversations[user].unread" class="absolute top-0 right-0">
                         <div class="bg-red-500 rounded-full w-2 h-2"></div>
                     </div>
-                    <span class="font-bold text-base">{{ user }}</span>
+                    <span class="font-semibold text-base">{{ user }}</span>
                 </div>
             </div>
             <MooDivider style="margin-top: 0" />
