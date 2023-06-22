@@ -20,6 +20,14 @@ const conversations = computed(() => {
     return props.plugin.conversations;
 });
 
+const modMessages = computed(() => {
+    return props.plugin.messages.filter(msg => msg.isModMessage);
+});
+
+const systemMessages = computed(() => {
+    return props.plugin.messages.filter(msg => msg.isSystemMessage);
+});
+
 function setNativeValue(el: HTMLInputElement, value: string) {
     const previousValue = el.value;
 
@@ -57,7 +65,7 @@ props.plugin.populateConversations();
 <template>
     <div class="flex flex-col space-y-1.5 h-full max-h-full mb-1.5">
         <h1 class="text-lg font-bold">Whisper Manager</h1>
-        <Accordion :class="{ hidden: isDev }">
+        <Accordion :class="{ hidden: !isDev }">
             <template #title>
                 <div class="flex flex-row justify-between">
                     <span>Settings</span>
