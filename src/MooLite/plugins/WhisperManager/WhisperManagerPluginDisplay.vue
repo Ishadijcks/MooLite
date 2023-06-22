@@ -12,7 +12,7 @@ const props = defineProps<{
 
 const searchText = ref("");
 const characterName = props.plugin.game.character.name;
-const isDev = characterName !== "LagunaE";
+const isDev = characterName === "LagunaE";
 const pinnedTabs = ["System", "Mods"];
 
 const conversations = computed(() => {
