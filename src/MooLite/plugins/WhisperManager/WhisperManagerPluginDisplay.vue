@@ -61,8 +61,15 @@ props.plugin.populateConversations();
 
 <template>
     <div class="flex flex-col space-y-1.5 h-full max-h-full mb-1.5">
-        <h1 class="text-lg font-bold">Whisper Manager</h1>
-        <Accordion :class="{ hidden: !isDev }">
+        <div class="flex flex-row justify-between items-center">
+            <h1 class="text-lg font-bold">Whisper Manager</h1>
+            <button
+                v-if="isDev"
+                class="aspect-square h-7 text-lg rounded-full text-gray-400 bg-gray-800 shadow-md hover:bg-gray-700"
+                @click="props.plugin.populateConversations()"
+            >ℹ</button>
+        </div>
+        <Accordion v-if="isDev">
             <template #title>
                 <div class="flex flex-row justify-between">
                     <span>Settings</span>
