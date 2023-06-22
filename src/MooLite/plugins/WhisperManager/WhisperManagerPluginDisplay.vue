@@ -5,27 +5,24 @@ import ChatBox from "src/components/chat/ChatBox.vue";
 import MooDivider from "src/components/atoms/MooDivider.vue";
 import Accordion from "src/components/atoms/Accordion.vue";
 
-const activeConversation = ref("");
-const searchText = ref("");
-
 const props = defineProps<{
     plugin: WhisperManagerPlugin;
 }>();
 
-const isDev = computed(() => {
-    return props.plugin.character.name === "LagunaE";
-});
+const searchText = ref("");
+const characterName = props.plugin.game.character.name;
+const isDev = characterName === "LagunaE";
 
 const conversations = computed(() => {
     return props.plugin.conversations;
 });
 
-const modMessages = computed(() => {
-    return props.plugin.messages.filter((msg) => msg.isModMessage);
+const activeConversation = computed(() => {
+    return props.plugin.activeConversation;
 });
 
-const systemMessages = computed(() => {
-    return props.plugin.messages.filter((msg) => msg.isSystemMessage);
+const activeConversationName = computed(() => {
+    return props.plugin.activeConversationName;
 });
 
 function setNativeValue(el: HTMLInputElement, value: string) {
@@ -104,23 +101,27 @@ props.plugin.populateConversations();
                     v-for="[user, _] in Object.entries(conversations).filter(([user, _]) =>
                         user.toLowerCase().includes(searchText.toLowerCase())
                     )"
-                    class="flex-grow flex flex-row justify-center rounded-t-[4px] pt-1 pb-0.5 px-2 text-gray-300 cursor-pointer"
-                    :class="activeConversation === user ? 'bg-space-600' : 'bg-gray-800'"
-                    @click="activeConversation = user"
+                    class="flex-grow flex flex-row justify-center rounded-t-[4px] pt-1 pb-0.5 px-2 text-gray-300 cursor-pointer relative"
+                    :class="{
+                        'bg-space-600': activeConversationName === user,
+                        'bg-gray-800': !(activeConversationName === user) && !conversations[user].unread,
+                        'bg-gray-700': conversations[user].unread,
+                    }"
+                    @click="props.plugin.setActiveConversation(user)"
                 >
+                    <div v-if="conversations[user].unread" class="absolute top-0 right-0">
+                        <div class="bg-red-500 rounded-full w-2 h-2"></div>
+                    </div>
                     <span class="font-bold text-base">{{ user }}</span>
                 </div>
             </div>
             <MooDivider style="margin-top: 0" />
             <div class="relative h-full">
-                <ChatBox
-                    :messages="conversations[activeConversation]?.messages ?? []"
-                    class="absolute inset-0 flex-1"
-                />
+                <ChatBox :messages="activeConversation?.messages ?? []" class="absolute inset-0 flex-1" />
             </div>
             <button
                 class="p-1 bg-gray-800 rounded-[4px] my-2 text-gray-400 w-full"
-                @click="startWhisperInGameChat(activeConversation)"
+                @click="startWhisperInGameChat(activeConversationName)"
             >
                 <b>Whisper</b>
             </button>

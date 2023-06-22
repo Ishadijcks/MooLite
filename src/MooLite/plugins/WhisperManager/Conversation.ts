@@ -2,13 +2,22 @@ import { ConversationMessage } from "src/MooLite/plugins/WhisperManager/Conversa
 
 export class Conversation {
     private _messages: ConversationMessage[] = [];
+    private _unread: boolean = false;
 
     constructor(messages: ConversationMessage[]) {
         this._messages = messages;
     }
 
+    public get unread(): boolean {
+        return this._unread;
+    }
+
     public get messages(): ConversationMessage[] {
         return this._messages;
+    }
+
+    public toggleUnread(): void {
+        this._unread = !this._unread;
     }
 
     public addMessage(message: ConversationMessage): void {
