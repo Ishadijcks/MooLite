@@ -122,10 +122,8 @@ props.plugin.populateConversations();
                     v-for="[user, _] in Object.entries(conversations)
                         .filter(([user, _]) => user.toLowerCase().includes(searchText.toLowerCase()))
                         .sort((a, b) => {
-                            const convA = a[1];
-                            const convB = b[1];
-                            if (convA.unread && !convB.unread) return -1;
-                            if (!convA.unread && convB.unread) return 1;
+                            if (a[1].unread && !b[1].unread) return -1;
+                            if (!a[1].unread && b[1].unread) return 1;
                             return 0;
                         })
                         .sort((a, b) => {
