@@ -10,7 +10,6 @@ import { LeaderboardTopic } from "src/MooLite/core/leaderboard/LeaderboardTopic"
 import { ItemGained } from "src/MooLite/core/inventory/Inventory";
 import { PluginBuiltinOption } from "src/MooLite/core/plugins/config/PluginBuiltinOption";
 import { LootBoxOpened } from "src/MooLite/core/lootboxes/LootBoxOpened";
-import { ActionTypeHrid } from "src/MooLite/core/actions/ActionTypeHrid";
 import { CharacterConsumable } from "src/MooLite/core/inventory/items/CharacterConsumable";
 
 export abstract class MooLitePlugin {
@@ -110,4 +109,14 @@ export abstract class MooLitePlugin {
     onConsumableDepleted?(consumable: CharacterConsumable): void;
 
     onClientTick?(): void;
+
+    /**
+     * Allows you to store a data object between sessions
+     */
+    save?(): Record<string, any>;
+
+    /**
+     * Load the data from local storage. Make sure to sanitize it properly as it could contain anything
+     */
+    load?(data: Record<string, any>): void;
 }
