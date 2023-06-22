@@ -61,14 +61,4 @@ export class MooLiteClientPlugin extends MooLitePlugin {
             this._game.notifier.sendBrowserNotification(notification.message);
         }
     }
-
-    save(): Record<string, any> {
-        return {
-            key: "Wow this works so well",
-        };
-    }
-
-    load(data: Record<string, any>) {
-        console.log(data.test.test);
-    }
 }
