@@ -13,6 +13,7 @@ const props = defineProps<{
 const searchText = ref("");
 const characterName = props.plugin.game.character.name;
 const isDev = characterName === "LagunaE";
+const pinnedTabs = ['System', 'Mods'];
 
 const conversations = computed(() => {
     return props.plugin.conversations;
@@ -128,7 +129,6 @@ props.plugin.populateConversations();
                             return 0;
                         })
                         .sort((a, b) => {
-                            const pinnedTabs = ['System', 'Mods'];
                             if (pinnedTabs.includes(a[0])) return -1;
                             if (pinnedTabs.includes(b[0])) return 1;
                             return 0;
