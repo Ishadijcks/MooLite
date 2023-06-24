@@ -116,7 +116,7 @@ props.plugin.populateConversations();
         </div>
         <div v-else class="flex flex-col space-y-1.5 h-full max-h-full mb-1.5">
             <input
-                v-if="Object.keys(conversations).filter(name => !conversations[name].hidden).length > 4"
+                v-if="Object.keys(conversations).filter((name) => !conversations[name].hidden).length > 4"
                 v-model="searchText"
                 type="text"
                 placeholder="Search tabs..."
