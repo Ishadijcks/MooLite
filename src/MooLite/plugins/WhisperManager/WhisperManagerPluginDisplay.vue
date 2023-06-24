@@ -5,6 +5,7 @@ import ChatBox from "src/components/chat/ChatBox.vue";
 import MooDivider from "src/components/atoms/MooDivider.vue";
 import Accordion from "src/components/atoms/Accordion.vue";
 import { contributorNames, betaTesterNames, helperNames } from "src/MooLite/plugins/WhisperManager/DevConstants";
+import { Conversation } from "src/MooLite/plugins/WhisperManager/Conversation";
 
 const props = defineProps<{
     plugin: WhisperManagerPlugin;
@@ -58,6 +59,12 @@ const startWhisperInGameChat = (recipient: string) => {
     updateGameChatInput(msg);
 };
 
+const unhideAllConversations = () => {
+    for (const [user, conversation] of Object.entries(conversations.value)) {
+        conversation.show();
+    }
+};
+
 props.plugin.populateConversations();
 </script>
 
@@ -77,7 +84,7 @@ props.plugin.populateConversations();
             </h1>
             <button
                 v-if="isDev"
-                class="aspect-square h-7 text-lg rounded-full text-gray-400 bg-gray-800 shadow-md hover:bg-gray-700"
+                class="hover:scale-125 transition-transform aspect-square h-7 text-lg rounded-full text-gray-400 bg-gray-800 shadow-md hover:bg-gray-700"
                 @click="props.plugin.populateConversations()"
             >
                 ℹ
@@ -85,14 +92,12 @@ props.plugin.populateConversations();
         </div>
         <Accordion v-if="isDev">
             <template #title>
-                <div class="flex flex-row justify-between">
-                    <span>Settings</span>
-                </div>
+                <span>Settings</span>
             </template>
             <template #content>
                 <button
                     @click="props.plugin.populateDevConversations()"
-                    class="text-sm bg-gray-800 p-1.5 rounded-[4px]"
+                    class="text-sm bg-gray-800 mt-1.5 p-1.5 rounded-[4px]"
                 >
                     Dev Data
                 </button>
@@ -111,7 +116,7 @@ props.plugin.populateConversations();
         </div>
         <div v-else class="flex flex-col space-y-1.5 h-full max-h-full mb-1.5">
             <input
-                v-if="Object.keys(conversations).length > 4"
+                v-if="Object.keys(conversations).filter(name => !conversations[name].hidden).length > 4"
                 v-model="searchText"
                 type="text"
                 placeholder="Search tabs..."
@@ -119,8 +124,8 @@ props.plugin.populateConversations();
             />
             <div class="flex flex-row space-x-0.5 overflow-y-hidden">
                 <div
-                    v-for="[user, _] in Object.entries(conversations)
-                        .filter(([user, _]) => user.toLowerCase().includes(searchText.toLowerCase()))
+                    v-for="[user, conversation] in Object.entries(conversations)
+                        .filter(([user, conversation]: [string, Conversation]) => (user.toLowerCase().includes(searchText.toLowerCase()) && !conversation.hidden))
                         .sort((a, b) => {
                             if (a[1].unread && !b[1].unread) return -1;
                             if (!a[1].unread && b[1].unread) return 1;
@@ -131,9 +136,10 @@ props.plugin.populateConversations();
                             if (pinnedTabs.includes(b[0])) return 1;
                             return 0;
                         })"
-                    class="flex-grow flex flex-row justify-center items-center rounded-t-[4px] py-1 px-2 cursor-pointer relative"
+                    class="flex-grow flex flex-row align-middle items-center rounded-t-[4px] py-1 px-2 cursor-pointer relative"
                     :class="{
-                        'bg-space-600': activeConversationName === user,
+                        'bg-space-600 justify-between gap-2': activeConversationName === user,
+                        'justify-center': !(activeConversationName === user),
                         'bg-gray-800': !(activeConversationName === user) && !conversations[user].unread,
                         'bg-gray-700': conversations[user].unread,
                     }"
@@ -153,6 +159,26 @@ props.plugin.populateConversations();
                     >
                         {{ user }}
                     </span>
+                    <svg
+                        v-if="activeConversationName === user"
+                        class="h-5 aspect-square fill-gray-300 stroke-3 rounded-full p-1 transition-colors hover:fill-[#a272e4] hover:bg-gray-300"
+                        version="1.1"
+                        id="Capa_1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 460.775 460.775"
+                        xml:space="preserve"
+                        @click="conversation.hide()"
+                    >
+                        <path
+                            d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55
+                            c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55
+                            c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505
+                            c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55
+                            l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719
+                            c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"
+                        />
+                    </svg>
                 </div>
             </div>
             <MooDivider style="margin-top: 0" />

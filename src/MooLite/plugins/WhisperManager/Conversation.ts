@@ -3,6 +3,7 @@ import { ConversationMessage } from "src/MooLite/plugins/WhisperManager/Conversa
 export class Conversation {
     private _messages: ConversationMessage[] = [];
     private _unread: boolean = false;
+    private _hidden: boolean = false;
 
     constructor(messages: ConversationMessage[]) {
         this._messages = messages;
@@ -14,6 +15,18 @@ export class Conversation {
 
     public get messages(): ConversationMessage[] {
         return this._messages;
+    }
+
+    public get hidden(): boolean {
+        return this._hidden;
+    }
+
+    public hide(): void {
+        this._hidden = true;
+    }
+
+    public show(): void {
+        this._hidden = false;
     }
 
     public toggleUnread(): void {
