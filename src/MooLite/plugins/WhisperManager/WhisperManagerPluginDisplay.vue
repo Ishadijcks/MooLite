@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { Ref, computed, ref } from "vue";
 import { WhisperManagerPlugin } from "./WhisperManagerPlugin";
 import ChatBox from "src/components/chat/ChatBox.vue";
 import MooDivider from "src/components/atoms/MooDivider.vue";
@@ -11,7 +11,8 @@ const props = defineProps<{
     plugin: WhisperManagerPlugin;
 }>();
 
-const chatMessageInput = ref("");
+const chatMessageText = ref("");
+const chatMessageInput = ref(null);
 const searchText = ref("");
 const characterName = props.plugin.game.character.name;
 const isDev = characterName === "LagunaE";
@@ -55,7 +56,7 @@ const sendWhisper = (recipient: string, message: string) => {
     ) as HTMLButtonElement;
     const msg = `/w ${recipient} ${message}`;
     setNativeValue(chatInput, msg);
-    chatMessageInput.value = "";
+    chatMessageText.value = "";
     sendButton.click();
 };
 
@@ -63,6 +64,14 @@ const unhideAllConversations = () => {
     for (const [user, conversation] of Object.entries(conversations.value)) {
         conversation.show();
     }
+};
+
+const onTabClick = (name: string) => {
+    props.plugin.setActiveConversation(name);
+
+    // Have to use ignore because it thinks chatMessageInput.value is type 'never'.
+    // @ts-ignore
+    chatMessageInput.value?.focus();
 };
 
 props.plugin.populateConversations();
@@ -150,7 +159,7 @@ props.plugin.populateConversations();
                         'bg-gray-800': !(activeConversationName === user) && !conversations[user].unread,
                         'bg-gray-700': conversations[user].unread,
                     }"
-                    @click="props.plugin.setActiveConversation(user)"
+                    @click="onTabClick(user)"
                 >
                     <div v-if="conversations[user].unread" class="absolute top-0 right-0">
                         <div class="bg-red-500 rounded-full w-2 h-2"></div>
@@ -194,11 +203,12 @@ props.plugin.populateConversations();
                 <ChatBox :messages="activeConversation?.messages ?? []" class="absolute inset-0 flex-1" />
             </div>
             <input
-                v-model="chatMessageInput"
+                v-model="chatMessageText"
                 type="text"
+                ref="chatMessageInput"
                 placeholder="Send a message..."
                 class="p-1 bg-gray-800 rounded-[4px] my-2 text-gray-400 w-full"
-                @keyup.enter="sendWhisper(activeConversationName, chatMessageInput)"
+                @keyup.enter="sendWhisper(activeConversationName, chatMessageText)"
             />
         </div>
     </div>
