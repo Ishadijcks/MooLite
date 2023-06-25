@@ -90,6 +90,7 @@ export class WhisperManagerPlugin extends MooLitePlugin {
     }
 
     public populateConversations(): void {
+        if (Object.keys(this._conversations).length > 0) return;
         for (const message of this._game.chatWhisperHistory) {
             this._addToConversations(message);
         }
