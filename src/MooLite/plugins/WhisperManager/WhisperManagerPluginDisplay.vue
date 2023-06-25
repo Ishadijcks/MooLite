@@ -11,6 +11,7 @@ const props = defineProps<{
     plugin: WhisperManagerPlugin;
 }>();
 
+const chatMessageInput = ref("");
 const searchText = ref("");
 const characterName = props.plugin.game.character.name;
 const isDev = characterName === "LagunaE";
@@ -47,16 +48,15 @@ function setNativeValue(el: HTMLInputElement, value: string) {
     el.dispatchEvent(new Event("change", { bubbles: true }));
 }
 
-const updateGameChatInput = (message: string) => {
+const sendWhisper = (recipient: string, message: string) => {
     const chatInput = document.getElementsByClassName("Chat_chatInput__16dhX")[0] as HTMLInputElement;
-    setNativeValue(chatInput, message);
-    chatInput.focus();
-};
-
-const startWhisperInGameChat = (recipient: string) => {
-    if (!recipient) return;
-    const msg = `/w ${recipient} `;
-    updateGameChatInput(msg);
+    const sendButton = Array.from(document.getElementsByClassName("Button_button__1Fe9z")).find(
+        (button) => button.textContent === "Send"
+    ) as HTMLButtonElement;
+    const msg = `/w ${recipient} ${message}`;
+    setNativeValue(chatInput, msg);
+    chatMessageInput.value = "";
+    sendButton.click();
 };
 
 const unhideAllConversations = () => {
@@ -85,7 +85,7 @@ props.plugin.populateConversations();
             <button
                 v-if="isDev"
                 class="hover:scale-125 transition-transform aspect-square h-7 text-lg rounded-full text-gray-400 bg-gray-800 shadow-md hover:bg-gray-700"
-                @click="props.plugin.populateConversations()"
+                @click="console.log('info', conversations)"
             >
                 ℹ
             </button>
@@ -186,12 +186,13 @@ props.plugin.populateConversations();
             <div class="relative h-full">
                 <ChatBox :messages="activeConversation?.messages ?? []" class="absolute inset-0 flex-1" />
             </div>
-            <button
+            <input
+                v-model="chatMessageInput"
+                type="text"
+                placeholder="Send a message..."
                 class="p-1 bg-gray-800 rounded-[4px] my-2 text-gray-400 w-full"
-                @click="startWhisperInGameChat(activeConversationName)"
-            >
-                <b>Whisper</b>
-            </button>
+                @keyup.enter="sendWhisper(activeConversationName, chatMessageInput)"
+            />
         </div>
     </div>
 </template>
