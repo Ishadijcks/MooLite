@@ -12,6 +12,6 @@ const props = defineProps<{
     <div
         class="flex flex-col-reverse gap-y-2 bg-midnight-700 px-1 py-1.5 border-midnight-300 border-2 rounded-[4px] overflow-y-auto overflow-x-clip"
     >
-            <ChatElement v-for="message in messages" :message="message" />
-</div>
+        <ChatElement v-for="message in messages" :message="message" />
+    </div>
 </template>
