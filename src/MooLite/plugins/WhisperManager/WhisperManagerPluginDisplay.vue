@@ -115,6 +115,13 @@ props.plugin.populateConversations();
             <code class="text-xl p-1.5 rounded-[4px] bg-gray-700">/w &lt;username&gt;</code>
         </div>
         <div v-else class="flex flex-col space-y-1.5 h-full max-h-full mb-1.5">
+            <button
+                v-if="Object.keys(conversations).filter((name) => conversations[name].hidden).length"
+                class="bg-gray-800 font-semibold p-1.5 rounded-[4px] text-gray-400 hover:text-gray-300 hover:bg-gray-700"
+                @click="unhideAllConversations()"
+            >
+                Unhide All
+            </button>
             <input
                 v-if="Object.keys(conversations).filter((name) => !conversations[name].hidden).length > 4"
                 v-model="searchText"
