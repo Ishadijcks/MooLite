@@ -122,7 +122,7 @@ props.plugin.populateConversations();
                 placeholder="Search tabs..."
                 class="p-1 bg-gray-800 rounded-[4px] my-2 text-gray-400 w-full"
             />
-            <div class="flex flex-row space-x-0.5 overflow-y-hidden">
+            <div class="flex flex-row space-x-0.5 overflow-y-visible">
                 <div
                     v-for="[user, conversation] in Object.entries(conversations)
                         .filter(([user, conversation]: [string, Conversation]) => (user.toLowerCase().includes(searchText.toLowerCase()) && !conversation.hidden))
@@ -136,7 +136,7 @@ props.plugin.populateConversations();
                             if (pinnedTabs.includes(b[0])) return 1;
                             return 0;
                         })"
-                    class="flex-grow flex flex-row align-middle items-center rounded-t-[4px] py-1 px-2 cursor-pointer relative"
+                    class="flex-grow flex flex-row align-middle items-center rounded-t-[4px] py-1 px-2 cursor-pointer relative overflow-visible"
                     :class="{
                         'bg-space-600 justify-between gap-2': activeConversationName === user,
                         'justify-center': !(activeConversationName === user),
@@ -147,6 +147,7 @@ props.plugin.populateConversations();
                 >
                     <div v-if="conversations[user].unread" class="absolute top-0 right-0">
                         <div class="bg-red-500 rounded-full w-2 h-2"></div>
+                        <div class="bg-red-500 rounded-full w-2 h-2 animate-ping absolute top-0 right-0"></div>
                     </div>
                     <span
                         class="font-semibold text-base"
