@@ -138,7 +138,7 @@ props.plugin.populateConversations();
                 placeholder="Search tabs..."
                 class="p-1 bg-gray-800 rounded-[4px] my-2 text-gray-400 w-full"
             />
-            <div class="flex flex-row space-x-0.5 overflow-y-visible">
+            <div class="flex flex-row space-x-0.5 overflow-y-visible overflow-x-auto">
                 <div
                     v-for="[user, conversation] in Object.entries(conversations)
                         .filter(([user, conversation]: [string, Conversation]) => (user.toLowerCase().includes(searchText.toLowerCase()) && !conversation.hidden))
@@ -154,7 +154,7 @@ props.plugin.populateConversations();
                         })"
                     class="flex-grow flex flex-row align-middle items-center rounded-t-[4px] py-1 px-2 cursor-pointer relative overflow-visible"
                     :class="{
-                        'bg-space-600 justify-between gap-2': activeConversationName === user,
+                        'bg-space-800 justify-between gap-2': activeConversationName === user,
                         'justify-center': !(activeConversationName === user),
                         'bg-gray-800': !(activeConversationName === user) && !conversations[user].unread,
                         'bg-gray-700': conversations[user].unread,
@@ -171,7 +171,8 @@ props.plugin.populateConversations();
                             'text-cyan-300': contributorNames.includes(user),
                             'bg-clip-text text-transparent bg-gradient-to-br from-yellow-500 to-red-400 to-90% via-orange-300 via-30%':
                                 betaTesterNames.includes(user),
-                            'text-fuchsia-300': helperNames.includes(user),
+                            'bg-clip-text text-transparent bg-gradient-to-br from-burble-250 to-purple-500 to-80% via-violet-400':
+                                helperNames.includes(user),
                         }"
                     >
                         {{ user }}
