@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Ref, computed, ref } from "vue";
+import { ComputedRef, Ref, computed, ref } from "vue";
 import { WhisperManagerPlugin } from "./WhisperManagerPlugin";
 import ChatBox from "src/components/chat/ChatBox.vue";
 import MooDivider from "src/components/atoms/MooDivider.vue";
@@ -22,12 +22,38 @@ const conversations = computed(() => {
     return props.plugin.conversations;
 });
 
+const tabList: ComputedRef<[string, Conversation][]> = computed(() => {
+    return Object.entries(conversations)
+        .filter(
+            ([user, conversation]: [string, Conversation]) =>
+                user.toLowerCase().includes(searchText.value.toLowerCase()) && !conversation.hidden
+        )
+        .sort((a, b) => {
+            if (a[1].unread && !b[1].unread) return -1;
+            if (!a[1].unread && b[1].unread) return 1;
+            return 0;
+        })
+        .sort((a, b) => {
+            if (systemTabs.includes(a[0])) return -1;
+            if (systemTabs.includes(b[0])) return 1;
+            return 0;
+        });
+});
+
 const activeConversation = computed(() => {
     return props.plugin.activeConversation;
 });
 
 const activeConversationName = computed(() => {
     return props.plugin.activeConversationName;
+});
+
+const hiddenConversationCount = computed(() => {
+    return Object.keys(conversations.value).filter((name) => conversations.value[name].hidden).length;
+});
+
+const visibleConversationCount = computed(() => {
+    return Object.keys(conversations.value).filter((name) => !conversations.value[name].hidden).length;
 });
 
 function setNativeValue(el: HTMLInputElement, value: string) {
@@ -50,6 +76,7 @@ function setNativeValue(el: HTMLInputElement, value: string) {
 }
 
 const sendWhisper = (recipient: string, message: string) => {
+    // TODO: Refactor this after implementing UI reflection.
     const chatInput = document.getElementsByClassName("Chat_chatInput__16dhX")[0] as HTMLInputElement;
     const sendButton = Array.from(document.getElementsByClassName("Button_button__1Fe9z")).find(
         (button) => button.textContent === "Send"
@@ -112,14 +139,14 @@ props.plugin.populateConversations();
         </div>
         <div v-else class="flex flex-col space-y-1.5 h-full max-h-full mb-1.5">
             <button
-                v-if="Object.keys(conversations).filter((name) => conversations[name].hidden).length"
+                v-if="hiddenConversationCount"
                 class="bg-gray-800 font-semibold p-1.5 rounded-[4px] text-gray-400 hover:text-gray-300 hover:bg-gray-700"
                 @click="unhideAllConversations()"
             >
                 Unhide All
             </button>
             <input
-                v-if="Object.keys(conversations).filter((name) => !conversations[name].hidden).length > 4"
+                v-if="visibleConversationCount > 4"
                 v-model="searchText"
                 type="text"
                 placeholder="Search users..."
@@ -127,18 +154,7 @@ props.plugin.populateConversations();
             />
             <div class="flex flex-row space-x-0.5 overflow-y-visible overflow-x-auto">
                 <div
-                    v-for="[user, conversation] in Object.entries(conversations)
-                        .filter(([user, conversation]: [string, Conversation]) => (user.toLowerCase().includes(searchText.toLowerCase()) && !conversation.hidden))
-                        .sort((a, b) => {
-                            if (a[1].unread && !b[1].unread) return -1;
-                            if (!a[1].unread && b[1].unread) return 1;
-                            return 0;
-                        })
-                        .sort((a, b) => {
-                            if (systemTabs.includes(a[0])) return -1;
-                            if (systemTabs.includes(b[0])) return 1;
-                            return 0;
-                        })"
+                    v-for="[user, conversation] in tabList"
                     class="flex-grow flex flex-row align-middle items-center rounded-t-[4px] py-1 px-2 cursor-pointer relative overflow-visible"
                     :class="{
                         'bg-space-800 justify-between gap-2': activeConversationName === user,
