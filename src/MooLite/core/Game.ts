@@ -10,7 +10,6 @@ import { Leaderboard } from "src/MooLite/core/leaderboard/Leaderboard";
 import { Equipment } from "src/MooLite/core/equipment/Equipment";
 import { LootBoxes } from "src/MooLite/core/lootboxes/LootBoxes";
 import { Character } from "src/MooLite/core/character/Character";
-import { ChatMessage } from "src/MooLite/core/chat/ChatMessage";
 
 export class Game {
     gameVersion: string;
@@ -33,7 +32,6 @@ export class Game {
 
     lastPing: Date | null = null;
     lastPong: Date | null = null;
-    chatWhisperHistory: ChatMessage[] = [];
 
     constructor(clientInfo: InitClientInfoMessage) {
         this.gameVersion = clientInfo.gameVersion;

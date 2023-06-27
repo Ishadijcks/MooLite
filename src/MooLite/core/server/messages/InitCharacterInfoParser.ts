@@ -55,7 +55,7 @@ export class InitCharacterInfoParser extends MessageParser {
         //  characterSetting
         //  characterUpgradeMap
         //  chatHistoryByChannelMap
-        game.chatWhisperHistory = message.chatWhisperHistory;
+        game.chat.updateWhisperHistory(message.chatWhisperHistory);
         game.combat.updateCombatUnit(message.combatUnit, false);
         //  communityActionTypeBuffsMap
         //  communityBuffs

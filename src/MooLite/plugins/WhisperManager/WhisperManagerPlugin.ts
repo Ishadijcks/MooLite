@@ -45,11 +45,6 @@ export class WhisperManagerPlugin extends MooLitePlugin {
         width: "w-80",
     };
 
-    initialize(game: Game): void {
-        super.initialize(game);
-        console.log("WhisperManagerPlugin initialized");
-    }
-
     public get hideSystemMessages(): boolean {
         return this.getConfig("hide-system-messages").value;
     }
@@ -91,7 +86,7 @@ export class WhisperManagerPlugin extends MooLitePlugin {
 
     public populateConversations(): void {
         if (Object.keys(this._conversations).length > 0) return;
-        for (const message of this._game.chatWhisperHistory) {
+        for (const message of this._game.chat.whisperHistory) {
             this._addToConversations(message);
         }
     }
