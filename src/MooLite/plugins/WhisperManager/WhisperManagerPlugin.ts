@@ -94,10 +94,9 @@ export class WhisperManagerPlugin extends MooLitePlugin {
 
     onChatMessage(message: ChatMessage): void {
         const { channel, isModMessage, isSystemMessage } = message;
-        const theseAreTheDroidsWereLookingFor =
-            channel === ChatChannelTypeHrid.Whisper || isModMessage || isSystemMessage;
+        const isNonStandardMessage = channel === ChatChannelTypeHrid.Whisper || isModMessage || isSystemMessage;
 
-        if (theseAreTheDroidsWereLookingFor) {
+        if (isNonStandardMessage) {
             this._addToConversations(message, true);
             return;
         }
