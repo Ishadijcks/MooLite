@@ -122,7 +122,7 @@ props.plugin.populateConversations();
                 v-if="Object.keys(conversations).filter((name) => !conversations[name].hidden).length > 4"
                 v-model="searchText"
                 type="text"
-                placeholder="Search tabs..."
+                placeholder="Search users..."
                 class="p-1 bg-gray-800 rounded-[4px] my-2 text-gray-400 w-full"
             />
             <div class="flex flex-row space-x-0.5 overflow-y-visible overflow-x-auto">
