@@ -16,7 +16,7 @@ const chatMessageInput = ref(null);
 const searchText = ref("");
 const characterName = props.plugin.game.character.name;
 const isDev = characterName === "LagunaE";
-const pinnedTabs = ["System", "Mods"];
+const systemTabs = ["System", "Mods"];
 
 const conversations = computed(() => {
     return props.plugin.conversations;
@@ -135,8 +135,8 @@ props.plugin.populateConversations();
                             return 0;
                         })
                         .sort((a, b) => {
-                            if (pinnedTabs.includes(a[0])) return -1;
-                            if (pinnedTabs.includes(b[0])) return 1;
+                            if (systemTabs.includes(a[0])) return -1;
+                            if (systemTabs.includes(b[0])) return 1;
                             return 0;
                         })"
                     class="flex-grow flex flex-row align-middle items-center rounded-t-[4px] py-1 px-2 cursor-pointer relative overflow-visible"
@@ -191,6 +191,7 @@ props.plugin.populateConversations();
                 <ChatBox :messages="activeConversation?.messages ?? []" class="absolute inset-0 flex-1" />
             </div>
             <input
+                v-if="!systemTabs.includes(activeConversationName)"
                 v-model="chatMessageText"
                 type="text"
                 ref="chatMessageInput"
