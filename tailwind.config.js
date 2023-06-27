@@ -14,6 +14,7 @@ export default {
                 hitpoints: "var(--color-jade-500)",
                 manapoints: "var(--color-ocean-400)",
                 divider: "var(--color-midnight-400)",
+                "text-dark-mode": "var(--color-text-dark-mode)",
                 midnight: {
                     100: "var(--color-midnight-100)",
                     200: "var(--color-midnight-200)",

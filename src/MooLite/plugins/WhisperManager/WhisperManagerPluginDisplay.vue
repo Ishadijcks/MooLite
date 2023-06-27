@@ -168,16 +168,7 @@ props.plugin.populateConversations();
                         <div class="bg-red-500 rounded-full w-2 h-2"></div>
                         <div class="bg-red-500 rounded-full w-2 h-2 animate-ping absolute top-0 right-0"></div>
                     </div>
-                    <span
-                        class="font-semibold text-base"
-                        :class="{
-                            'text-cyan-300': contributorNames.includes(user),
-                            'bg-clip-text text-transparent bg-gradient-to-br from-yellow-500 to-red-400 to-90% via-orange-300 via-30%':
-                                betaTesterNames.includes(user),
-                            'bg-clip-text text-transparent bg-gradient-to-br from-burble-250 to-purple-500 to-80% via-violet-400':
-                                helperNames.includes(user),
-                        }"
-                    >
+                    <span class="font-semibold text-base text-text-dark-mode">
                         {{ user }}
                     </span>
                     <CrossIcon
