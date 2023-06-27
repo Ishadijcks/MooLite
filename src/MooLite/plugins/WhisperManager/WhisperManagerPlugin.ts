@@ -5,7 +5,6 @@ import WhisperManagerPluginDisplay from "src/MooLite/plugins/WhisperManager/Whis
 import { ChatMessage } from "src/MooLite/core/chat/ChatMessage";
 import { ChatChannelTypeHrid } from "src/MooLite/core/chat/ChatChannelTypeHrid";
 import { ConversationMessage } from "./ConversationMessage";
-import { conversationData } from "src/MooLite/plugins/WhisperManager/DevConstants";
 import { Game } from "src/MooLite/core/Game";
 import { Conversation } from "src/MooLite/plugins/WhisperManager/Conversation";
 import { PluginConfig } from "src/MooLite/core/plugins/config/PluginConfig";
@@ -76,12 +75,6 @@ export class WhisperManagerPlugin extends MooLitePlugin {
 
     public get game(): Game {
         return this._game;
-    }
-
-    public populateDevConversations(): void {
-        Object.entries(conversationData).forEach(([name, messages]) => {
-            this._conversations[name] = new Conversation(messages);
-        });
     }
 
     public populateConversations(): void {
