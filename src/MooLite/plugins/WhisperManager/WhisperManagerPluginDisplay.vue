@@ -99,19 +99,6 @@ props.plugin.populateConversations();
                 ℹ
             </button>
         </div>
-        <Accordion v-if="isDev">
-            <template #title>
-                <span>Settings</span>
-            </template>
-            <template #content>
-                <button
-                    @click="props.plugin.populateDevConversations()"
-                    class="text-sm bg-gray-800 mt-1.5 p-1.5 rounded-[4px]"
-                >
-                    Dev Data
-                </button>
-            </template>
-        </Accordion>
         <div
             v-if="!Object.keys(conversations).length"
             class="flex flex-col justify-center gap-y-3 items-center w-full h-full text-center"
