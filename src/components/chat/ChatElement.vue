@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ChevronIcon from "src/components/icons/Chevron.vue";
 import { defineProps, computed } from "vue";
 import { ConversationMessage } from "src/MooLite/plugins/WhisperManager/ConversationMessage";
 
@@ -14,17 +15,10 @@ const props = defineProps<{
             'justify-end': !message.isInbound,
         }"
     >
-        <svg
+        <ChevronIcon
             class="w-3 h-3 shrink-0 mb-1.5"
             :class="message.isInbound ? '-rotate-90 text-[#a272e4]' : 'rotate-90 text-gray-500 order-2'"
-            fill="none"
-            stroke="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 10"
-            aria-hidden="true"
-        >
-            <path d="M15 1.2l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
+        />
         <div
             class="flex flex-row bg-opacity-40 px-3 py-1.5 rounded-[4px]"
             :class="message.isInbound ? 'bg-space-800' : 'bg-midnight-500'"
