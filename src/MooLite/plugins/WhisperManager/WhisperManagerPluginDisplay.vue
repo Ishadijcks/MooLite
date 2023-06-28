@@ -105,22 +105,23 @@ props.plugin.populateConversations();
 </script>
 
 <template>
-    <div class="flex flex-col space-y-1.5 h-full max-h-full mb-1.5">
+    <div class="flex flex-col space-y-1.5 h-full max-h-full mb-1.5 bg-background-game">
         <div class="flex flex-row justify-between items-center">
             <h1
                 class="text-lg font-bold transition duration-700 ease-in-out"
                 :class="{
                     'hover:text-cyan-300': contributorNames.includes(characterName),
-                    'bg-clip-text hover:text-transparent bg-gradient-to-br from-yellow-500 to-red-400 to-90% via-orange-300 via-30%':
+                    'bg-clip-text hover:text-transparent bg-gradient-to-br from-orange-400 to-scarlet-400 to-90% via-orange-600 via-30%':
                         betaTesterNames.includes(characterName),
-                    'hover:text-fuchsia-300': helperNames.includes(characterName),
+                    'bg-clip-text hover:text-transparent bg-gradient-to-br from-burble-300 to-burble-400 to-90%':
+                        helperNames.includes(characterName),
                 }"
             >
                 Whisper Manager
             </h1>
             <button
                 v-if="isDev"
-                class="hover:scale-125 transition-transform aspect-square h-7 text-lg rounded-full text-gray-400 bg-gray-800 shadow-md hover:bg-gray-700"
+                class="hover:scale-125 transition-transform aspect-square h-7 text-lg rounded-full text-dark-mode bg-midnight-500 shadow-md hover:bg-midnight-300"
                 @click="console.log('info', conversations)"
             >
                 ℹ
@@ -135,12 +136,12 @@ props.plugin.populateConversations();
                 Start one by clicking a users name in chat and selecting the whisper option. You can also type the
                 following in chat:
             </span>
-            <code class="text-xl p-1.5 rounded-[4px] bg-gray-700">/w &lt;username&gt;</code>
+            <code class="text-xl p-1.5 rounded-mwi-standard bg-midnight-300">/w &lt;username&gt;</code>
         </div>
         <div v-else class="flex flex-col space-y-1.5 h-full max-h-full mb-1.5">
             <button
                 v-if="hiddenConversationCount"
-                class="bg-gray-800 font-semibold p-1.5 rounded-[4px] text-gray-400 hover:text-gray-300 hover:bg-gray-700"
+                class="bg-midnight-500 font-semibold p-1.5 rounded-mwi-standard text-dark-mode hover:bg-midnight-300"
                 @click="unhideAllConversations()"
             >
                 Unhide All
@@ -150,34 +151,35 @@ props.plugin.populateConversations();
                 v-model="searchText"
                 type="text"
                 placeholder="Search users..."
-                class="p-1 bg-gray-800 rounded-[4px] my-2 text-gray-400 w-full"
+                class="p-1 bg-midnight-500 rounded-mwi-standard my-2 text-dark-mode w-full"
             />
             <div class="flex flex-row space-x-0.5 overflow-y-visible overflow-x-auto">
                 <div
                     v-for="[user, conversation] in tabList"
-                    class="flex-grow flex flex-row align-middle items-center rounded-t-[4px] py-1 px-2 cursor-pointer relative overflow-visible"
+                    class="flex-grow flex flex-row align-middle items-center rounded-t-mwi-standard py-1 px-2 cursor-pointer relative overflow-visible"
                     :class="{
                         'bg-space-800 justify-between gap-2': activeConversationName === user,
                         'justify-center': !(activeConversationName === user),
-                        'bg-gray-800': !(activeConversationName === user) && !conversations[user].unread,
-                        'bg-gray-700': conversations[user].unread,
+                        'bg-midnight-500': !(activeConversationName === user) && !conversations[user].unread,
+                        'bg-midnight-400': conversations[user].unread,
                     }"
                     @click="onTabClick(user)"
                 >
                     <div v-if="conversations[user].unread" class="absolute top-0 right-0">
-                        <div class="bg-red-500 rounded-full w-2 h-2"></div>
-                        <div class="bg-red-500 rounded-full w-2 h-2 animate-ping absolute top-0 right-0"></div>
+                        <div class="bg-warning rounded-full w-2 h-2"></div>
+                        <div class="bg-warning rounded-full w-2 h-2 animate-ping absolute top-0 right-0"></div>
                     </div>
-                    <span class="font-semibold text-base text-text-dark-mode">
+                    <span class="font-semibold text-base text-dark-mode">
                         {{ user }}
                     </span>
                     <CrossIcon
                         v-if="activeConversationName === user"
-                        class="h-5 aspect-square fill-gray-300 stroke-3 rounded-full p-1 transition-colors hover:fill-[#a272e4] hover:bg-gray-300"
+                        class="h-5 aspect-square fill-dark-mode stroke-3 rounded-full p-1 transition-colors hover:fill-progress hover:bg-neutral-200"
                         @click="conversation.hide()"
                     />
                 </div>
             </div>
+            <!-- Have to add this as a style tag or it gets overridden. -->
             <MooDivider style="margin-top: 0" />
             <div class="relative h-full">
                 <ChatBox :messages="activeConversation?.messages ?? []" class="absolute inset-0 flex-1" />
@@ -188,7 +190,7 @@ props.plugin.populateConversations();
                 type="text"
                 ref="chatMessageInput"
                 placeholder="Send a message..."
-                class="p-1 bg-gray-800 rounded-[4px] my-2 text-gray-400 w-full"
+                class="p-1 bg-midnight-500 rounded-mwi-standard my-2 text-dark-mode w-full"
                 @keyup.enter="sendWhisper(activeConversationName, chatMessageText)"
             />
         </div>

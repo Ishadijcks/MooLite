@@ -7,6 +7,7 @@ export default {
                 xxs: "0.65rem",
             },
             colors: {
+                progress: "var(--color-progress)",
                 primary: "var(--color-space-600)",
                 "primary-hover": "var(--color-space-500)",
                 "background-game": "var(--color-background-game)",
@@ -88,6 +89,9 @@ export default {
                 carol: {
                     300: "var(--color-carol-300)",
                 },
+            },
+            borderRadius: {
+                "mwi-standard": "4px",
             },
         },
     },
