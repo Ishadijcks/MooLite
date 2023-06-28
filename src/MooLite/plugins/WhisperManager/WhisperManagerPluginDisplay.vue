@@ -136,12 +136,12 @@ props.plugin.populateConversations();
                 Start one by clicking a users name in chat and selecting the whisper option. You can also type the
                 following in chat:
             </span>
-            <code class="text-xl p-1.5 rounded-mwi-standard bg-midnight-300">/w &lt;username&gt;</code>
+            <code class="text-xl p-1.5 rounded-mwi-default bg-midnight-300">/w &lt;username&gt;</code>
         </div>
         <div v-else class="flex flex-col space-y-1.5 h-full max-h-full mb-1.5">
             <button
                 v-if="hiddenConversationCount"
-                class="bg-midnight-500 font-semibold p-1.5 rounded-mwi-standard text-dark-mode hover:bg-midnight-300"
+                class="bg-midnight-500 font-semibold p-1.5 rounded-mwi-default text-dark-mode hover:bg-midnight-300"
                 @click="unhideAllConversations()"
             >
                 Unhide All
@@ -151,12 +151,12 @@ props.plugin.populateConversations();
                 v-model="searchText"
                 type="text"
                 placeholder="Search users..."
-                class="p-1 bg-midnight-500 rounded-mwi-standard my-2 text-dark-mode w-full"
+                class="p-1 bg-midnight-500 rounded-mwi-default my-2 text-dark-mode w-full"
             />
             <div class="flex flex-row space-x-0.5 overflow-y-visible overflow-x-auto">
                 <div
                     v-for="[user, conversation] in tabList"
-                    class="flex-grow flex flex-row align-middle items-center rounded-t-mwi-standard py-1 px-2 cursor-pointer relative overflow-visible"
+                    class="flex-grow flex flex-row align-middle items-center rounded-t-mwi-default py-1 px-2 cursor-pointer relative overflow-visible"
                     :class="{
                         'bg-space-800 justify-between gap-2': activeConversationName === user,
                         'justify-center': !(activeConversationName === user),
@@ -190,7 +190,7 @@ props.plugin.populateConversations();
                 type="text"
                 ref="chatMessageInput"
                 placeholder="Send a message..."
-                class="p-1 bg-midnight-500 rounded-mwi-standard my-2 text-dark-mode w-full"
+                class="p-1 bg-midnight-500 rounded-mwi-default my-2 text-dark-mode w-full"
                 @keyup.enter="sendWhisper(activeConversationName, chatMessageText)"
             />
         </div>

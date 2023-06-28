@@ -20,7 +20,7 @@ const props = defineProps<{
             :class="message.isInbound ? '-rotate-90 text-progress' : 'rotate-90 text-neutral-200 order-2'"
         />
         <div
-            class="flex flex-row bg-opacity-40 px-3 py-1.5 rounded-mwi-standard"
+            class="flex flex-row bg-opacity-40 px-3 py-1.5 rounded-mwi-default"
             :class="message.isInbound ? 'bg-space-800' : 'bg-midnight-500'"
         >
             <span class="text-dark-mode">{{ props.message.message }}</span>

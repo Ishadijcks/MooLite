@@ -19,7 +19,7 @@ export default {
     <div>
         <button
             @click="toggleAccordion()"
-            class="flex items-center justify-between w-full p-2 text-sm font-semibold text-left text-dark-mode bg-midnight-500 rounded-mwi-standard hover:bg-midnight-300 focus:outline-none focus:shadow-outline"
+            class="flex items-center justify-between w-full p-2 text-sm font-semibold text-left text-dark-mode bg-midnight-500 rounded-mwi-default hover:bg-midnight-300 focus:outline-none focus:shadow-outline"
             :aria-expanded="isOpen"
         >
             <slot name="title" />
