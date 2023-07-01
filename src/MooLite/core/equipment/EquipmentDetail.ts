@@ -7,7 +7,7 @@ export interface EquipmentDetail {
     combatEnhancementBonuses: CombatStats;
     combatStats: CombatStats;
     levelRequirements: LevelRequirement[] | null;
-    nonCombatEnhancementBonuses: NonCombatStats;
-    nonCombatStats: NonCombatStats;
+    noncombatEnhancementBonuses: NonCombatStats;
+    noncombatStats: NonCombatStats;
     type: EquipmentTypeHrid;
 }

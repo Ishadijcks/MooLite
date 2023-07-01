@@ -89,4 +89,15 @@ export class Skills {
     public getLevel(skillHrid: SkillHrid) {
         return this._characterSkills[skillHrid].level;
     }
+
+    public getEnhancingLevel() {
+        return this._characterSkills["/skills/enhancing"].level;
+    }
+
+    public getSkillEfficiencyBonusRatio(requiredLevel: number, currentLevel: number): number {
+        if (requiredLevel >= currentLevel) {
+            return 0;
+        }
+        return (currentLevel - requiredLevel) / 100;
+    }
 }
