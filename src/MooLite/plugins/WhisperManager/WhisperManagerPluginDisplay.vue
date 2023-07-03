@@ -15,11 +15,14 @@ const chatMessageText = ref("");
 const chatMessageInput = ref(null);
 const searchText = ref("");
 const characterName = props.plugin.game.character.name;
-const isDev = characterName === "LagunaE";
 const systemTabs = ["System", "Mods"];
 
 const conversations = computed(() => {
     return props.plugin.conversations;
+});
+
+const hasConversations = computed(() => {
+    return Object.keys(conversations.value).length > 0;
 });
 
 const tabList: ComputedRef<[string, Conversation][]> = computed(() => {
@@ -119,16 +122,9 @@ props.plugin.populateConversations();
             >
                 Whisper Manager
             </h1>
-            <button
-                v-if="isDev"
-                class="hover:scale-125 transition-transform aspect-square h-7 text-lg rounded-full text-dark-mode bg-midnight-500 shadow-md hover:bg-midnight-300"
-                @click="console.log('info', conversations)"
-            >
-                ℹ
-            </button>
         </div>
         <div
-            v-if="!Object.keys(conversations).length"
+            v-if="!hasConversations"
             class="flex flex-col justify-center gap-y-3 items-center w-full h-full text-center"
         >
             <span class="bold text-4xl">No whispers!</span>
