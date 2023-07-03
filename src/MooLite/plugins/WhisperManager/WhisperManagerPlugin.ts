@@ -15,7 +15,6 @@ export class WhisperManagerPlugin extends MooLitePlugin {
     key = "whisper-manager";
     description: string = "A plugin to help manage all of your conversations!";
 
-    _messages: ChatMessage[] = [];
     _conversations: Record<string, Conversation> = {};
     _activeConversationName: string = "";
 
@@ -60,10 +59,6 @@ export class WhisperManagerPlugin extends MooLitePlugin {
         return this._activeConversationName;
     }
 
-    public get messages(): ChatMessage[] {
-        return this._messages;
-    }
-
     public get conversations(): Record<string, Conversation> {
         let conversations: Record<string, Conversation> = this.hideSystemMessages
             ? (({ System, ...o }) => o)(this._conversations)
@@ -100,14 +95,14 @@ export class WhisperManagerPlugin extends MooLitePlugin {
             this._addToConversations(message, true);
             return;
         }
-
-        this._messages.push(message);
     }
 
     _addToConversations(message: ChatMessage, markUnread?: boolean): void {
-        const conversationMessage = message as ConversationMessage;
+        const conversationMessage: ConversationMessage = {
+            ...message,
+            isInbound: message.receiverName === this._game.character.name,
+        };
         const { senderName, receiverName, isModMessage, isSystemMessage } = conversationMessage;
-        conversationMessage.isInbound = receiverName === this._game.character.name;
         let otherName = senderName === this._game.character.name ? receiverName : senderName;
         otherName = isModMessage ? "Mods" : otherName;
         otherName = isSystemMessage ? "System" : otherName;
