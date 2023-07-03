@@ -6,6 +6,8 @@ import PluginManagerDisplay from "src/components/PluginManagerDisplay.vue";
 import MooDivider from "src/components/atoms/MooDivider.vue";
 import PluginTabItem from "src/components/plugins/PluginTabItem.vue";
 import { PluginTabWidth } from "src/MooLite/core/plugins/PluginTabWidth";
+import PluginCreditsDisplay from "src/components/plugins/PluginCreditsDisplay.vue";
+import { MooLitePlugin } from "src/MooLite/core/plugins/MooLitePlugin";
 
 const defaultPluginWidth: PluginTabWidth = "w-64";
 
@@ -23,8 +25,8 @@ const tabs = computed(() => {
 
 const activeTab = ref(0);
 
-const findPlugin = (name: string) => {
-    return pluginManager.value.plugins.find((plugin) => plugin.name === name);
+const findPlugin = (name: string): MooLitePlugin => {
+    return pluginManager.value.plugins.find((plugin) => plugin.name === name) as unknown as MooLitePlugin;
 };
 
 const setActiveTab = (index: number) => {
@@ -50,9 +52,14 @@ const setActiveTab = (index: number) => {
                 <div
                     v-for="(tab, index) in tabs"
                     v-show="index + 1 === activeTab"
+                    class="flex flex-col justify-between"
                     :class="(tab.width ?? defaultPluginWidth) + ' h-full'"
                 >
                     <component v-bind:is="tab.componentName" :plugin="findPlugin(tab.pluginName)"></component>
+                    <div class="flex flex-col">
+                        <MooDivider class="mb-1" />
+                        <PluginCreditsDisplay :plugin="findPlugin(tab.pluginName)" />
+                    </div>
                 </div>
             </div>
             <div class="flex flex-col h-full overflow-auto shrink-0 bg-divider">

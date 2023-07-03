@@ -20,7 +20,7 @@ export class WhisperManagerPlugin extends MooLitePlugin {
         author: "LagunaE",
         maintainer: "LagunaE",
         contributors: ["JBQ", "knighterd", "Thessaloniki", "Houston", "Champ", "ML", "Maxion", "hoador"],
-    }
+    };
 
     _conversations: Record<string, Conversation> = {};
     _activeConversationName: string = "";
