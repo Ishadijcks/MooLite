@@ -9,11 +9,18 @@ import { Game } from "src/MooLite/core/Game";
 import { Conversation } from "src/MooLite/plugins/WhisperManager/Conversation";
 import { PluginConfig } from "src/MooLite/core/plugins/config/PluginConfig";
 import { PluginConfigType } from "src/MooLite/core/plugins/config/PluginConfigType";
+import { PluginAuthorCredits } from "src/MooLite/core/plugins/PluginAuthorCredits";
 
 export class WhisperManagerPlugin extends MooLitePlugin {
     name: string = "Whisper Manager";
     key = "whisper-manager";
     description: string = "A plugin to help manage all of your conversations!";
+
+    credits: PluginAuthorCredits = {
+        author: "LagunaE",
+        maintainer: "LagunaE",
+        contributors: ["JBQ", "knighterd", "Thessaloniki", "Houston", "Champ", "ML", "Maxion", "hoador"],
+    };
 
     _conversations: Record<string, Conversation> = {};
     _activeConversationName: string = "";

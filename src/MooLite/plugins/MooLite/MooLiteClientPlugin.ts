@@ -6,6 +6,7 @@ import { Game } from "src/MooLite/core/Game";
 import { MooLiteTab } from "src/MooLite/core/plugins/MooLiteTab";
 import MooLiteClientPluginDisplay from "src/MooLite/plugins/MooLite/MooLiteClientPluginDisplay.vue";
 import { markRaw } from "vue";
+import { PluginAuthorCredits } from "src/MooLite/core/plugins/PluginAuthorCredits";
 
 export class MooLiteClientPlugin extends MooLitePlugin {
     name: string = "MooLite";
@@ -14,6 +15,11 @@ export class MooLiteClientPlugin extends MooLitePlugin {
 
     _isEnabled: boolean = true;
     _canBeDisabled: boolean = false;
+
+    credits: PluginAuthorCredits = {
+        author: "Isha",
+        maintainer: "Isha",
+    };
 
     tab: MooLiteTab = {
         pluginName: this.name,

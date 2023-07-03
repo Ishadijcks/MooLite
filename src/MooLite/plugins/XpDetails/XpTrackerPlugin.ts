@@ -6,12 +6,19 @@ import { SkillHrid } from "src/MooLite/core/skills/SkillHrid";
 import XpTrackerDisplay from "src/MooLite/plugins/XpDetails/XpTrackerDisplay.vue";
 import { Game } from "src/MooLite/core/Game";
 import { XpTrackerSkill } from "src/MooLite/plugins/XpDetails/XpTrackerSkill";
+import { PluginAuthorCredits } from "src/MooLite/core/plugins/PluginAuthorCredits";
 
 export class XpTrackerPlugin extends MooLitePlugin {
     name: string = "Xp Tracker";
     key = "xp-tracker";
     description: string = "Tracks Xp gains over time";
+
     _isEnabled: boolean = true;
+
+    credits: PluginAuthorCredits = {
+        author: "Isha",
+        maintainer: "Isha",
+    };
 
     tab: MooLiteTab = {
         icon: "📊",

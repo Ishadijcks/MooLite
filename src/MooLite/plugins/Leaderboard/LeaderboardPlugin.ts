@@ -3,12 +3,19 @@ import { MooLitePlugin } from "src/MooLite/core/plugins/MooLitePlugin";
 import { MooLiteTab } from "src/MooLite/core/plugins/MooLiteTab";
 import LeaderboardPluginDisplay from "src/MooLite/plugins/Leaderboard/LeaderboardPluginDisplay.vue";
 import { LeaderboardPlayerSummary } from "src/MooLite/core/leaderboard/LeaderboardPlayerSummary";
+import { PluginAuthorCredits } from "src/MooLite/core/plugins/PluginAuthorCredits";
 
 export class LeaderboardPlugin extends MooLitePlugin {
     name: string = "Leaderboard";
     key = "leaderboard";
     description: string = "See how you stack against other players";
+
     _isEnabled: boolean = true;
+
+    credits: PluginAuthorCredits = {
+        author: "Isha",
+        maintainer: "Isha",
+    };
 
     tab: MooLiteTab = {
         icon: "🏆",

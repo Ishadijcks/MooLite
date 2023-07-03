@@ -4,6 +4,7 @@ import { PluginConfig } from "src/MooLite/core/plugins/config/PluginConfig";
 import { PluginConfigType } from "src/MooLite/core/plugins/config/PluginConfigType";
 import { ItemHrid } from "src/MooLite/core/inventory/ItemHrid";
 import { PluginBuiltinOption } from "src/MooLite/core/plugins/config/PluginBuiltinOption";
+import { PluginAuthorCredits } from "src/MooLite/core/plugins/PluginAuthorCredits";
 
 enum AbilityNotifierOptions {
     Never = "never",
@@ -17,6 +18,11 @@ export class LootNotifierPlugin extends MooLitePlugin {
     description: string = "Notifies you whenever you get certain drops";
 
     _isEnabled: boolean = true;
+
+    credits: PluginAuthorCredits = {
+        author: "Isha",
+        maintainer: "Isha",
+    };
 
     config: PluginConfig[] = [
         {

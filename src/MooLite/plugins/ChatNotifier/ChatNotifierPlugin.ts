@@ -2,11 +2,17 @@ import { MooLitePlugin } from "src/MooLite/core/plugins/MooLitePlugin";
 import { ChatMessage } from "src/MooLite/core/chat/ChatMessage";
 import { PluginConfig } from "src/MooLite/core/plugins/config/PluginConfig";
 import { PluginConfigType } from "src/MooLite/core/plugins/config/PluginConfigType";
+import { PluginAuthorCredits } from "src/MooLite/core/plugins/PluginAuthorCredits";
 
 export class ChatNotifierPlugin extends MooLitePlugin {
     name = "Chat Notifier";
     key = "chat-notifier";
     description = "Notifies your of chat messages";
+
+    credits: PluginAuthorCredits = {
+        author: "Isha",
+        maintainer: "Isha",
+    };
 
     config: PluginConfig[] = [
         {

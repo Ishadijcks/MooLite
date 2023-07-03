@@ -15,11 +15,23 @@ const hasConfig = computed(() => {
 const toggleConfig = () => {
     showConfig.value = !showConfig.value;
 };
+
+const creditText = computed(() => {
+    const credits = props.plugin.credits;
+    let creditText = `Created by ${credits.author}`;
+    if (credits.author !== credits.maintainer) {
+        creditText += ` and maintained by ${credits.maintainer}`;
+    }
+    if (credits.contributors) {
+        creditText += `\nOther contributors include ${credits.contributors.join(", ")}`;
+    }
+    return creditText;
+});
 </script>
 
 <template>
     <div class="flex flex-row space-x-1 items-center py-2">
-        <span :title="plugin.description">{{ plugin.name }}</span>
+        <span :title="plugin.description + '\n\n' + creditText">{{ plugin.name }}</span>
         <span class="flex-1"></span>
         <span class="text-xs hover:opacity-40 cursor-pointer" @click="toggleConfig">
             <span v-show="hasConfig">⚙️</span>
