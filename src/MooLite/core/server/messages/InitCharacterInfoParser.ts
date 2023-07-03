@@ -14,6 +14,9 @@ import { ActionTypeHrid } from "src/MooLite/core/actions/ActionTypeHrid";
 import { CharacterConsumable } from "src/MooLite/core/inventory/items/CharacterConsumable";
 import { CombatUnit } from "src/MooLite/core/combat/CombatUnit";
 import { NonCombatStats } from "src/MooLite/core/equipment/NonCombatStats";
+import { Character } from "src/MooLite/core/character/Character";
+import { ChatMessage } from "src/MooLite/core/chat/ChatMessage";
+import { CharacterDetail } from "src/MooLite/core/character/CharacterDetail";
 
 export interface InitCharacterInfoMessage extends ServerMessage {
     type: ServerMessageType.InitCharacterInfo;
@@ -21,11 +24,13 @@ export interface InitCharacterInfoMessage extends ServerMessage {
     actionTypeDrinkSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]>;
     actionTypeFoodSlotsMap: Record<ActionTypeHrid, CharacterConsumable[]>;
     abilityCombatTriggersMap: Record<AbilityHrid, CombatTrigger>;
+    character: CharacterDetail;
     characterAbilities: CharacterAbility[] | null;
     characterActions: CharacterAction[];
     characterChatIconMap: Record<ChatIconHrid, CharacterChatIcon>;
     characterItems: CharacterItem[];
     characterSkills: CharacterSkill[];
+    chatWhisperHistory: ChatMessage[];
     combatUnit: CombatUnit;
     noncombatStats: NonCombatStats;
 }
@@ -45,13 +50,13 @@ export class InitCharacterInfoParser extends MessageParser {
         // TODO(@Isha): Parse everything here
         //
         //  blockerCharacterMap
-        //  character
+        game.character = new Character(message.character);
         game.chat.updateCharacterChatIcons(message.characterChatIconMap);
         //  characterQuests
         //  characterSetting
         //  characterUpgradeMap
         //  chatHistoryByChannelMap
-        //  chatWhisperHistory
+        game.chat.updateWhisperHistory(message.chatWhisperHistory);
         game.combat.updateCombatUnit(message.combatUnit, false);
         //  communityActionTypeBuffsMap
         //  communityBuffs

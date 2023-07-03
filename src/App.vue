@@ -50,7 +50,7 @@ const setActiveTab = (index: number) => {
                 <div
                     v-for="(tab, index) in tabs"
                     v-show="index + 1 === activeTab"
-                    :class="tab.width ?? defaultPluginWidth"
+                    :class="(tab.width ?? defaultPluginWidth) + ' h-full'"
                 >
                     <component v-bind:is="tab.componentName" :plugin="findPlugin(tab.pluginName)"></component>
                 </div>
