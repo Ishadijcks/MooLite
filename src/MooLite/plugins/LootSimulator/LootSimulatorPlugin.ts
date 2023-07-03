@@ -6,11 +6,17 @@ import { MonsterHrid } from "src/MooLite/core/combat/monsters/MonsterHrid";
 import { MonsterDetail } from "src/MooLite/core/combat/monsters/MonsterDetail";
 import { ItemAmount } from "src/MooLite/core/inventory/items/ItemAmount";
 import { LootSimulator } from "src/MooLite/plugins/LootSimulator/LootSimulator";
+import { PluginAuthorCredits } from "src/MooLite/core/plugins/PluginAuthorCredits";
 
 export class LootSimulatorPlugin extends MooLitePlugin {
     name: string = "Loot Simulator";
     key = "loot-simulator";
     description: string = "Try your 'luck' against some of the monsters in the game!";
+
+    credits: PluginAuthorCredits = {
+        author: "Isha",
+        maintainer: "Isha",
+    };
 
     tab: MooLiteTab = {
         icon: "👩‍💻",

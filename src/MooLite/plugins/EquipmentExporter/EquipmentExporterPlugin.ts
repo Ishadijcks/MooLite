@@ -8,17 +8,23 @@ import { CharacterAbility } from "src/MooLite/core/abilities/CharacterAbility";
 import { ItemHrid } from "src/MooLite/core/inventory/ItemHrid";
 import { SkillHrid } from "src/MooLite/core/skills/SkillHrid";
 import { ActionTypeHrid } from "src/MooLite/core/actions/ActionTypeHrid";
+import { PluginAuthorCredits } from "src/MooLite/core/plugins/PluginAuthorCredits";
 
 export class EquipmentExporterPlugin extends MooLitePlugin {
     name: string = "Equipment Exporter";
     key = "equipment-exporter";
-    description: string = "Export your equipment details for the Combat Sim - By Void";
+    description: string = "Export your equipment details for the Combat Sim";
 
     tab: MooLiteTab = {
         icon: "🗡",
         pluginName: this.name,
         componentName: "EquipmentExporterPluginDisplay",
         component: markRaw(EquipmentExporterPluginDisplay),
+    };
+
+    credits: PluginAuthorCredits = {
+        author: "Void",
+        maintainer: "Isha",
     };
 
     getEquipmentSummary(): CharacterItem[] | null {

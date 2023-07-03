@@ -11,11 +11,14 @@ import { ItemGained } from "src/MooLite/core/inventory/Inventory";
 import { PluginBuiltinOption } from "src/MooLite/core/plugins/config/PluginBuiltinOption";
 import { LootBoxOpened } from "src/MooLite/core/lootboxes/LootBoxOpened";
 import { CharacterConsumable } from "src/MooLite/core/inventory/items/CharacterConsumable";
+import { PluginAuthorCredits } from "src/MooLite/core/plugins/PluginAuthorCredits";
 
 export abstract class MooLitePlugin {
     abstract name: string;
     abstract key: string;
     abstract description: string;
+
+    abstract credits: PluginAuthorCredits;
 
     protected _isEnabled: boolean = false;
     protected _canBeDisabled: boolean = true;

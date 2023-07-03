@@ -8,11 +8,17 @@ import { ItemFoundInLoot } from "src/MooLite/plugins/ItemFinder/ItemFoundInLoot"
 import { DropTableLoot } from "src/MooLite/core/combat/DropTable";
 import { ItemFoundInAction } from "src/MooLite/plugins/ItemFinder/ItemFoundInAction";
 import { ItemFoundInActionDropTable } from "src/MooLite/plugins/ItemFinder/ItemFoundInActionDropTable";
+import { PluginAuthorCredits } from "src/MooLite/core/plugins/PluginAuthorCredits";
 
 export class ItemFinderPlugin extends MooLitePlugin {
     name: string = "Item Finder";
     key = "item-finder";
     description: string = "Inspect the possible ways to obtain items";
+
+    credits: PluginAuthorCredits = {
+        author: "Isha",
+        maintainer: "Isha",
+    };
 
     tab: MooLiteTab = {
         icon: "📖",
