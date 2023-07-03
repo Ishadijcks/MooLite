@@ -10,7 +10,7 @@ export class ChatNotifierPlugin extends MooLitePlugin {
     description = "Notifies your of chat messages";
 
     credits: PluginAuthorCredits = {
-        author: "Kevin Lee",
+        author: "Isha",
         maintainer: "Isha",
     };
 
