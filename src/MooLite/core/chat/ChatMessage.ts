@@ -5,4 +5,7 @@ export interface ChatMessage {
     receiverName: string;
     channel: ChatChannelTypeHrid;
     message: string;
+    isDeleted: boolean;
+    isModMessage: boolean;
+    isSystemMessage: boolean;
 }

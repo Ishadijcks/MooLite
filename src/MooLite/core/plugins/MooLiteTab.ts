@@ -1,4 +1,5 @@
 import { Component } from "vue";
+import { PluginTabWidth } from "src/MooLite/core/plugins/PluginTabWidth";
 
 export interface MooLiteTab {
     icon: string;
@@ -11,4 +12,7 @@ export interface MooLiteTab {
 
     // Must be wrapped with markRaw()
     component: Component;
+
+    /** Expects a tailwind width class. */
+    width?: PluginTabWidth;
 }

@@ -7,6 +7,7 @@ import { CharacterChatIcon } from "src/MooLite/core/chat/CharacterChatIton";
 
 export class Chat {
     private _messages: ChatMessage[] = [];
+    private _whisperHistory: ChatMessage[] = [];
     private _characterChatIcons: Record<ChatIconHrid, CharacterChatIcon> = {};
 
     private _onMessage = new SimpleEventDispatcher<ChatMessage>();
@@ -24,6 +25,14 @@ export class Chat {
 
     public updateCharacterChatIcons(chatIconMap: Record<ChatIconHrid, CharacterChatIcon>) {
         this._characterChatIcons = chatIconMap;
+    }
+
+    public updateWhisperHistory(chatWhisperHistory: ChatMessage[]) {
+        this._whisperHistory = chatWhisperHistory;
+    }
+
+    public get whisperHistory() {
+        return this._whisperHistory;
     }
 
     public get onMessage() {

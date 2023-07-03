@@ -5,6 +5,9 @@ import { MooLiteTab } from "src/MooLite/core/plugins/MooLiteTab";
 import PluginManagerDisplay from "src/components/PluginManagerDisplay.vue";
 import MooDivider from "src/components/atoms/MooDivider.vue";
 import PluginTabItem from "src/components/plugins/PluginTabItem.vue";
+import { PluginTabWidth } from "src/MooLite/core/plugins/PluginTabWidth";
+
+const defaultPluginWidth: PluginTabWidth = "w-64";
 
 const props = defineProps<{
     client: MooLite;
@@ -34,16 +37,21 @@ const setActiveTab = (index: number) => {
 </script>
 
 <template>
-    <div
-        class="flex flex-col h-full shadow-sm overflow-clip bg-background-game text-dark-mode shadow-space-200"
-        :class="{ 'w-64': activeTab !== -1 }"
-    >
+    <div class="flex flex-col h-full shadow-sm overflow-clip bg-background-game text-dark-mode shadow-space-200">
         <MooDivider class="border-b-4" />
 
         <div class="flex flex-row h-full">
             <div v-if="activeTab > -1" class="flex flex-col flex-grow p-2 overflow-auto">
-                <PluginManagerDisplay v-if="activeTab === 0" :manager="pluginManager"></PluginManagerDisplay>
-                <div v-for="(tab, index) in tabs" v-show="index + 1 === activeTab">
+                <PluginManagerDisplay
+                    v-if="activeTab === 0"
+                    :manager="pluginManager"
+                    :class="defaultPluginWidth"
+                ></PluginManagerDisplay>
+                <div
+                    v-for="(tab, index) in tabs"
+                    v-show="index + 1 === activeTab"
+                    :class="(tab.width ?? defaultPluginWidth) + ' h-full'"
+                >
                     <component v-bind:is="tab.componentName" :plugin="findPlugin(tab.pluginName)"></component>
                 </div>
             </div>
