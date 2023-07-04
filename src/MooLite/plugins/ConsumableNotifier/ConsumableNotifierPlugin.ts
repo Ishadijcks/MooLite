@@ -8,7 +8,7 @@ export class ConsumableNotifierPlugin extends MooLitePlugin {
     description = "Notifies you when a consumable is used up completely";
 
     credits: PluginAuthorCredits = {
-        author: "Kevin Lee",
+        author: "Granttank2",
         maintainer: "Isha",
     };
 
