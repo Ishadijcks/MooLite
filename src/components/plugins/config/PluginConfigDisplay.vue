@@ -11,6 +11,8 @@ const props = defineProps<{
 const options = computed(() => {
     return props.config.options as PluginConfigOption[];
 });
+
+const emit = defineEmits(["onConfigChange"]);
 </script>
 
 <template>
@@ -25,7 +27,12 @@ const options = computed(() => {
             class="bg-divider w-24C"
         />
 
-        <select v-if="config.type === PluginConfigType.Choice" v-model="config.value" class="bg-divider w-24">
+        <select
+            v-if="config.type === PluginConfigType.Choice"
+            v-model="config.value"
+            @change="emit('onConfigChange')"
+            class="bg-divider w-24"
+        >
             {{
                 options
             }}
