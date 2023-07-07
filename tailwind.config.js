@@ -1,3 +1,18 @@
+const isRunningHistoire = () => {
+    return !!process.env.HISTOIRE;
+};
+
+// We don't want to bloat the css with unused classes,
+// so we only force the safe list when running histoire.
+// This allows us to use the same tailwind config for
+// both the app and the storybook.
+const safelist = !isRunningHistoire() ? [] : [
+    {
+        pattern: /bg-+/,
+        variants: ["hover"],
+    },
+];
+
 /** @type {import('tailwindcss').Config} */
 export default {
     content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
@@ -110,5 +125,6 @@ export default {
             },
         },
     },
+    safelist,
     plugins: [],
 };
