@@ -315,7 +315,7 @@ variantSets.unshift(...oneOffColorSets);
                 />
             </div>
         </Variant>
-        <Variant title="Background" icon="fluent:color-24-filled">
+        <Variant title="Background" icon="fluent:color-background-24-regular">
             <div class="flex flex-col gap-4">
                 <ColorSampleSet
                     v-for="variantSet in variantSets"
@@ -326,7 +326,7 @@ variantSets.unshift(...oneOffColorSets);
                 />
             </div>
         </Variant>
-        <Variant title="Border" icon="fluent:color-24-filled">
+        <Variant title="Border" icon="teenyicons:border-all-outline">
             <div class="flex flex-col gap-4">
                 <ColorSampleSet
                     v-for="variantSet in variantSets"
@@ -337,7 +337,7 @@ variantSets.unshift(...oneOffColorSets);
                 />
             </div>
         </Variant>
-        <Variant title="Text" icon="fluent:color-24-filled">
+        <Variant title="Text" icon="ion:text">
             <div class="flex flex-col gap-4">
                 <ColorSampleSet
                     v-for="variantSet in variantSets"
