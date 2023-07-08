@@ -30,7 +30,7 @@ const colors = {
         auto-props-disabled
     >
         <Variant title="Original">
-            <ColorSample colorClass="bg-orange-500" value="var(--color-orange-500)" />
+            <ColorSample colorClass="orange-500" value="var(--color-orange-500)" />
         </Variant>
         <Variant title="HstColorShades">
             <HstColorShades

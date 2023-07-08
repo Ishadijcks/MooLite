@@ -17,7 +17,7 @@ const sampleData = {
 const props = {
     title: "midnight",
     colorSamples: Object.entries(sampleData).map(([key, value]) => ({
-        colorClass: `bg-midnight-${key}`,
+        colorClass: `midnight-${key}`,
         value,
     })),
 };

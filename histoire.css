@@ -98,3 +98,11 @@
     --color-space-900: #192142;
     --color-space-950: #121830;
 }
+
+body {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+code {
+    font-family: "Operator Mono", "Fira Code", "Fira Mono", "Roboto Mono", monospace !important;
+}

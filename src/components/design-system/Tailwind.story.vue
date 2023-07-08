@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { markRaw } from "vue";
-import ColorSampleSet, { ColorSampleSetProps } from "../histoire-controls/Color/ColorSampleSet.vue";
+import ColorSampleSet, { ColorSampleSetProps } from "src/components/histoire-controls/Color/ColorSampleSet.vue";
+import ColorSampleType from "src/components/histoire-controls/Color/ColorSampleType";
 
 const themeConfig = markRaw({
     fontSize: {
@@ -125,7 +126,7 @@ variantSets.unshift(
                 title: color.split("")[0].toLocaleUpperCase() + color.slice(1),
                 colorSamples: Object.entries(shades).map(([shade, value]) => {
                     return {
-                        colorClass: `bg-${color}-${shade}`,
+                        colorClass: `${color}-${shade}`,
                         value,
                     };
                 }),
@@ -147,11 +148,11 @@ const primaryColorSampleSet: ColorSampleSetProps = {
     title: "Primary",
     colorSamples: [
         {
-            colorClass: "bg-primary",
+            colorClass: "primary",
             value: oneOffColors.primary,
         },
         {
-            colorClass: "bg-primary-hover",
+            colorClass: "primary-hover",
             value: oneOffColors["primary-hover"],
         },
     ],
@@ -161,11 +162,11 @@ const secondaryColorSampleSet: ColorSampleSetProps = {
     title: "Secondary",
     colorSamples: [
         {
-            colorClass: "bg-secondary",
+            colorClass: "secondary",
             value: oneOffColors.secondary,
         },
         {
-            colorClass: "bg-secondary-hover",
+            colorClass: "secondary-hover",
             value: oneOffColors["secondary-hover"],
         },
     ],
@@ -175,11 +176,11 @@ const abilitySampleSet: ColorSampleSetProps = {
     title: "Ability",
     colorSamples: [
         {
-            colorClass: "bg-ability",
+            colorClass: "ability",
             value: oneOffColors.ability,
         },
         {
-            colorClass: "bg-ability-hover",
+            colorClass: "ability-hover",
             value: oneOffColors["ability-hover"],
         },
     ],
@@ -189,11 +190,11 @@ const backgroundSampleSet: ColorSampleSetProps = {
     title: "Background",
     colorSamples: [
         {
-            colorClass: "bg-background",
+            colorClass: "background",
             value: oneOffColors.background,
         },
         {
-            colorClass: "bg-background-game",
+            colorClass: "background-game",
             value: oneOffColors["background-game"],
         },
     ],
@@ -203,23 +204,23 @@ const barSampleSet: ColorSampleSetProps = {
     title: "Bar",
     colorSamples: [
         {
-            colorClass: "bg-progress",
+            colorClass: "progress",
             value: oneOffColors.progress,
         },
         {
-            colorClass: "bg-hitpoints",
+            colorClass: "hitpoints",
             value: oneOffColors.hitpoints,
         },
         {
-            colorClass: "bg-manapoints",
+            colorClass: "manapoints",
             value: oneOffColors.manapoints,
         },
         {
-            colorClass: "bg-empty",
+            colorClass: "empty",
             value: oneOffColors.empty,
         },
         {
-            colorClass: "bg-empty-hover",
+            colorClass: "empty-hover",
             value: oneOffColors["empty-hover"],
         },
     ],
@@ -229,19 +230,19 @@ const marketSampleSet: ColorSampleSetProps = {
     title: "Market",
     colorSamples: [
         {
-            colorClass: "bg-market-sell",
+            colorClass: "market-sell",
             value: oneOffColors["market-sell"],
         },
         {
-            colorClass: "bg-market-sell-hover",
+            colorClass: "market-sell-hover",
             value: oneOffColors["market-sell-hover"],
         },
         {
-            colorClass: "bg-market-buy",
+            colorClass: "market-buy",
             value: oneOffColors["market-buy"],
         },
         {
-            colorClass: "bg-market-buy-hover",
+            colorClass: "market-buy-hover",
             value: oneOffColors["market-buy-hover"],
         },
     ],
@@ -251,15 +252,15 @@ const miscSampleSet: ColorSampleSetProps = {
     title: "Misc",
     colorSamples: [
         {
-            colorClass: "bg-dark-mode",
+            colorClass: "dark-mode",
             value: oneOffColors["dark-mode"],
         },
         {
-            colorClass: "bg-divider",
+            colorClass: "divider",
             value: oneOffColors.divider,
         },
         {
-            colorClass: "bg-disabled",
+            colorClass: "disabled",
             value: oneOffColors.disabled,
         },
     ],
@@ -269,19 +270,19 @@ const statusSampleSet: ColorSampleSetProps = {
     title: "Status",
     colorSamples: [
         {
-            colorClass: "bg-success",
+            colorClass: "success",
             value: oneOffColors.success,
         },
         {
-            colorClass: "bg-success-hover",
+            colorClass: "success-hover",
             value: oneOffColors["success-hover"],
         },
         {
-            colorClass: "bg-warning",
+            colorClass: "warning",
             value: oneOffColors.warning,
         },
         {
-            colorClass: "bg-warning-hover",
+            colorClass: "warning-hover",
             value: oneOffColors["warning-hover"],
         },
     ],
@@ -310,6 +311,40 @@ variantSets.unshift(...oneOffColorSets);
                     :key="variantSet.title"
                     :title="variantSet.title"
                     :colorSamples="variantSet.colorSamples"
+                    :type="ColorSampleType.Sample"
+                />
+            </div>
+        </Variant>
+        <Variant title="Background" icon="fluent:color-24-filled">
+            <div class="flex flex-col gap-4">
+                <ColorSampleSet
+                    v-for="variantSet in variantSets"
+                    :key="variantSet.title"
+                    :title="variantSet.title"
+                    :colorSamples="variantSet.colorSamples"
+                    :type="ColorSampleType.Background"
+                />
+            </div>
+        </Variant>
+        <Variant title="Border" icon="fluent:color-24-filled">
+            <div class="flex flex-col gap-4">
+                <ColorSampleSet
+                    v-for="variantSet in variantSets"
+                    :key="variantSet.title"
+                    :title="variantSet.title"
+                    :colorSamples="variantSet.colorSamples"
+                    :type="ColorSampleType.Border"
+                />
+            </div>
+        </Variant>
+        <Variant title="Text" icon="fluent:color-24-filled">
+            <div class="flex flex-col gap-4">
+                <ColorSampleSet
+                    v-for="variantSet in variantSets"
+                    :key="variantSet.title"
+                    :title="variantSet.title"
+                    :colorSamples="variantSet.colorSamples"
+                    :type="ColorSampleType.Text"
                 />
             </div>
         </Variant>

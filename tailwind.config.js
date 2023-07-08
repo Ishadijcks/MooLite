@@ -8,7 +8,7 @@ const isRunningHistoire = () => {
 // both the app and the storybook.
 const safelist = !isRunningHistoire() ? [] : [
     {
-        pattern: /bg-+/,
+        pattern: /(primary|secondary|background|dark-mode|progress|hitpoints|manapoints|divider|ability|market-sell|market-buy|success|warning|empty|disabled|midnight|ocean|orange|scarlet|space|neutral|jade|burble|carol)(-hover|-game|-\d+)?/,
         variants: ["hover"],
     },
 ];

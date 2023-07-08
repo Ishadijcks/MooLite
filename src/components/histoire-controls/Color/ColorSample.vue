@@ -2,10 +2,13 @@
 import CopyIcon from "src/components/icons/CopyIcon.vue";
 import { useClipboard } from "@vueuse/core";
 import { VTooltip as vTooltip } from "floating-vue";
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import ColorSampleType from "src/components/histoire-controls/Color/ColorSampleType";
+
 export interface ColorSampleProps {
     colorClass: string;
     value: string;
+    type?: ColorSampleType;
 }
 
 const props = defineProps<ColorSampleProps>();
@@ -14,17 +17,34 @@ const { copy: copyClass, copied: copiedClass } = useClipboard();
 const { copy: copyValue, copied: copiedValue } = useClipboard();
 
 const showCopyButtons = ref(false);
+
+const sampleType = computed(() => props.type ?? ColorSampleType.Sample);
+
+const sampleClass = computed(() => {
+    switch (sampleType.value) {
+        case ColorSampleType.Sample:
+            return `rounded-full w-16 bg-${props.colorClass}`;
+        case ColorSampleType.Background:
+            return `rounded-mwi-default bg-${props.colorClass}`;
+        case ColorSampleType.Border:
+            return `rounded-mwi-default border border-4 border-${props.colorClass}`;
+        case ColorSampleType.Text:
+            return `rounded-mwi-default text-${props.colorClass} text-6xl`;
+    }
+});
 </script>
 
 <template>
     <div
-        class="flex flex-col w-64 bg-neutral-600 text-dark-mode rounded-mwi-default"
+        class="flex flex-col w-64 text-dark-mode border-2.5 rounded-mwi-default"
         @mouseenter="showCopyButtons = true"
         @mouseleave="showCopyButtons = false"
     >
-        <div class="h-16 rounded-mwi-default" :class="props.colorClass"></div>
+        <div class="h-16" :class="sampleClass">
+            {{ props.type === ColorSampleType.Text ? "Aa 0-9" : null }}
+        </div>
         <div class="flex flex-col px-1.5 py-1">
-            <div class="flex justify-between">
+            <div class="flex">
                 <code class="text-sm">
                     {{ props.colorClass }}
                 </code>
@@ -36,12 +56,12 @@ const showCopyButtons = ref(false);
                         distance: 12,
                         delay: 0,
                     }"
-                    class="h-4 ml-1.5 opacity-50 cursor-pointer aspect-square text-dark-mode hover:opacity-100"
-                    :class="{ hidden: !showCopyButtons }"
+                    class="h-4 ml-1.5 cursor-pointer aspect-square text-dark-mode hover:text-ocean-500 hover:opacity-100"
+                    :class="{ 'opacity-0': !showCopyButtons, 'opacity-50': showCopyButtons }"
                     @click="copyClass(props.colorClass)"
                 />
             </div>
-            <div class="flex justify-between">
+            <div class="flex">
                 <code class="text-xs">{{ props.value }}</code>
                 <CopyIcon
                     v-tooltip="{
@@ -51,8 +71,8 @@ const showCopyButtons = ref(false);
                         distance: 12,
                         delay: 0,
                     }"
-                    class="h-4 ml-1.5 opacity-50 cursor-pointer aspect-square text-dark-mode hover:opacity-100"
-                    :class="{ hidden: !showCopyButtons }"
+                    class="h-4 ml-1.5 cursor-pointer aspect-square text-black dark:text-white hover:text-ocean-500 hover:opacity-100"
+                    :class="{ 'opacity-0': !showCopyButtons, 'opacity-50': showCopyButtons }"
                     @click="copyValue(props.value)"
                 />
             </div>
