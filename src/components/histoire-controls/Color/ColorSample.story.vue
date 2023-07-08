@@ -1,23 +1,10 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import ColorSample from "./ColorSample.vue";
+import ColorSampleType from "src/components/histoire-controls/Color/ColorSampleType";
 
-const colors = {
-    slate: {
-        50: "#f8fafc",
-        100: "#f1f5f9",
-        200: "#e2e8f0",
-        300: "#cbd5e1",
-        400: "#94a3b8",
-        500: "#64748b",
-        600: "#475569",
-        700: "#334155",
-        750: "#283548",
-        800: "#1e293b",
-        850: "#151f32",
-        900: "#0f172a",
-        950: "#09101f",
-    },
-};
+const color = ref("orange-500");
+const value = ref("var(--color-orange-500)");
 </script>
 
 <template>
@@ -25,40 +12,48 @@ const colors = {
         title="Color/Sample"
         group="histoire-controls"
         icon="ph:eyedropper-sample-duotone"
-        :layout="{ type: 'single', iframe: false }"
+        :layout="{ type: 'grid', width: '33%' }"
         responsive-disabled
         auto-props-disabled
     >
-        <Variant title="Original">
-            <ColorSample colorClass="orange-500" value="var(--color-orange-500)" />
+        <Variant title="Default (Sample)" icon="fluent:color-24-filled">
+            <ColorSample :colorClass="color" :value="value" />
         </Variant>
-        <Variant title="HstColorShades">
-            <HstColorShades
-                :key="'orange'"
-                :shades="{ 500: 'var(--color-orange-500)', 600: 'var(--color-orange-600)' }"
-                :get-name="(shade) => `bg-orange-${shade}`"
-            >
-                <template #default="{ color }">
-                    <div class="h-16 max-w-[16rem] rounded-mwi-default" :style="{ backgroundColor: color }" />
-                </template>
-            </HstColorShades>
-        </Variant>
-        <Variant title="background">
-            <HstColorShades
-                v-for="(shades, key) of colors"
-                :key="key"
-                :shades="shades"
-                :get-name="(shade) => `${key}-${shade}`"
-            >
-                <template #default="{ color }">
-                    <div
-                        class="htw-rounded htw-h-[100px]"
-                        :style="{
-                            backgroundColor: color,
-                        }"
+        <Variant title="Background" icon="fluent:color-background-24-regular">
+            <ColorSample :colorClass="color" :value="value" :type="ColorSampleType.Background" />
+            <template v-slot:source>
+                <textarea v-pre>
+                    <ColorSample
+                      :colorClass="color" 
+                      :value="value" 
+                      :type="ColorSampleType.Background" 
                     />
-                </template>
-            </HstColorShades>
+                </textarea>
+            </template>
+        </Variant>
+        <Variant title="Border" icon="teenyicons:border-all-outline">
+            <ColorSample :colorClass="color" :value="value" :type="ColorSampleType.Border" />
+            <template v-slot:source>
+                <textarea v-pre>
+                    <ColorSample
+                      :colorClass="color" 
+                      :value="value" 
+                      :type="ColorSampleType.Border" 
+                    />
+                </textarea>
+            </template>
+        </Variant>
+        <Variant title="Text" icon="ion:text">
+            <ColorSample :colorClass="color" :value="value" :type="ColorSampleType.Text" />
+            <template v-slot:source>
+                <textarea v-pre>
+                    <ColorSample
+                      :colorClass="color" 
+                      :value="value" 
+                      :type="ColorSampleType.Text" 
+                    />
+                </textarea>
+            </template>
         </Variant>
     </Story>
 </template>
