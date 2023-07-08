@@ -32,6 +32,19 @@ const sampleClass = computed(() => {
             return `rounded-mwi-default text-${props.colorClass} text-6xl`;
     }
 });
+
+const displayClass = computed(() => {
+    switch (sampleType.value) {
+        case ColorSampleType.Sample:
+            return props.colorClass;
+        case ColorSampleType.Background:
+            return `bg-${props.colorClass}`;
+        case ColorSampleType.Border:
+            return `border-${props.colorClass}`;
+        case ColorSampleType.Text:
+            return `text-${props.colorClass}`;
+    }
+});
 </script>
 
 <template>
@@ -46,7 +59,7 @@ const sampleClass = computed(() => {
         <div class="flex flex-col px-1.5 py-1">
             <div class="flex">
                 <code class="text-sm">
-                    {{ props.colorClass }}
+                    {{ displayClass }}
                 </code>
                 <CopyIcon
                     v-tooltip="{
@@ -58,7 +71,7 @@ const sampleClass = computed(() => {
                     }"
                     class="h-4 ml-1.5 cursor-pointer aspect-square text-dark-mode hover:text-ocean-500 hover:opacity-100"
                     :class="{ 'opacity-0': !showCopyButtons, 'opacity-50': showCopyButtons }"
-                    @click="copyClass(props.colorClass)"
+                    @click="copyClass(displayClass)"
                 />
             </div>
             <div class="flex">
