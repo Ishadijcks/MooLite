@@ -63,6 +63,16 @@ export class ThemesPlugin extends MooLitePlugin {
         document.head.appendChild(style);
     }
 
+    enable() {
+        super.enable();
+        this.onThemeChanged(this.selectedTheme as ThemeHrid);
+    }
+
+    disable() {
+        super.disable();
+        this.onThemeChanged(ThemeHrid.Default);
+    }
+
     public onConfigChange(key: string, newValue: any) {
         switch (key) {
             case "selected-theme":
