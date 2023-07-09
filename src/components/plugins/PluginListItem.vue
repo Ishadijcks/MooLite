@@ -27,6 +27,10 @@ const creditText = computed(() => {
     }
     return creditText;
 });
+
+const onConfigChange = (key: string, newValue: any) => {
+    props.plugin.onConfigChange?.(key, newValue);
+};
 </script>
 
 <template>
@@ -39,7 +43,15 @@ const creditText = computed(() => {
         <input class="cursor-pointer" type="checkbox" v-model="plugin.isEnabled" :disabled="!plugin.canBeDisabled" />
     </div>
     <div v-if="hasConfig && showConfig" class="flex flex-col pl-2 py-2 space-y-2">
-        <PluginConfigDisplay v-for="config in plugin.config" :config="config"></PluginConfigDisplay>
+        <PluginConfigDisplay
+            v-for="config in plugin.config"
+            :config="config"
+            @onConfigChange="
+                () => {
+                    onConfigChange(config.key, config.value);
+                }
+            "
+        ></PluginConfigDisplay>
     </div>
 </template>
 

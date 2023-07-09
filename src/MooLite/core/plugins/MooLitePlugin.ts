@@ -89,6 +89,11 @@ export abstract class MooLitePlugin {
         }
     }
 
+    /**
+     * Called whenever a config value changes
+     */
+    onConfigChange?(key: string, newValue: any): void;
+
     onChatMessage?(message: ChatMessage): void;
 
     onNotification?(notification: MooNotification): void;

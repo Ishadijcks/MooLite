@@ -126,12 +126,6 @@ export class MooLite {
             if (!plugin) {
                 return;
             }
-            if (pluginData.isEnabled && !plugin.isEnabled) {
-                plugin.enable();
-            }
-            if (!pluginData.isEnabled && plugin.isEnabled) {
-                plugin.disable();
-            }
             pluginData.config.forEach((configSaveData) => {
                 const config = plugin.getConfig(configSaveData.key);
                 if (config) {
@@ -150,6 +144,13 @@ export class MooLite {
                         )}`
                     );
                 }
+            }
+
+            if (pluginData.isEnabled) {
+                plugin.enable();
+            }
+            if (!pluginData.isEnabled && plugin.isEnabled) {
+                plugin.disable();
             }
         });
     }
