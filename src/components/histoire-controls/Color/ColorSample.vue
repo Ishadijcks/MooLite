@@ -12,8 +12,6 @@ export interface ColorSampleProps {
 
 const props = defineProps<ColorSampleProps>();
 
-const showCopyButtons = ref(false);
-
 const sampleType = computed(() => props.type ?? ColorSampleType.Sample);
 
 const sampleClass = computed(() => {
@@ -31,11 +29,7 @@ const sampleClass = computed(() => {
 </script>
 
 <template>
-    <div
-        class="flex flex-col w-64 text-dark-mode rounded-mwi-default"
-        @mouseenter="showCopyButtons = true"
-        @mouseleave="showCopyButtons = false"
-    >
+    <div class="flex flex-col w-64 text-dark-mode rounded-mwi-default">
         <div class="h-16" :class="sampleClass">
             <span v-if="props.type === ColorSampleType.Text">{{ props.sampleText || "Aa 0-9" }}</span>
         </div>
