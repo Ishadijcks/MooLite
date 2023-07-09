@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { markRaw } from "vue";
+import { markRaw, ref, watchEffect } from "vue";
 import ColorSampleSet, { ColorSampleSetProps } from "src/components/histoire-controls/Color/ColorSampleSet.vue";
 import ColorSampleType from "src/components/histoire-controls/Color/ColorSampleType";
+import CopyableText from "src/components/histoire-controls/Text/CopyableText.vue";
 
 const themeConfig = markRaw({
     fontSize: {
@@ -300,6 +301,91 @@ const oneOffColorSets: ColorSampleSetProps[] = [
 ];
 
 variantSets.unshift(...oneOffColorSets);
+
+const colorClasses = colorVariants
+    .map(([color, shades]) => {
+        if (colorGroupNames.includes(color)) {
+            return Object.entries(shades).map(([shade, _]) => {
+                return `${color}-${shade}`;
+            });
+        } else {
+            return [color];
+        }
+    })
+    .flat();
+
+const gradientDirections = [
+    {
+        label: "Top",
+        value: "to-t",
+    },
+    {
+        label: "Right",
+        value: "to-r",
+    },
+    {
+        label: "Bottom",
+        value: "to-b",
+    },
+    {
+        label: "Left",
+        value: "to-l",
+    },
+    {
+        label: "Top Right",
+        value: "to-tr",
+    },
+    {
+        label: "Bottom Right",
+        value: "to-br",
+    },
+    {
+        label: "Bottom Left",
+        value: "to-bl",
+    },
+    {
+        label: "Top Left",
+        value: "to-tl",
+    },
+];
+
+const fromColor = ref("progress");
+const fromPosition = ref(0);
+const fromPosStr = ref("");
+watchEffect(() => {
+    fromPosStr.value = fromPosition.value === 0 ? "" : ` from-${fromPosition.value}%`;
+});
+
+const toColor = ref("hitpoints");
+const toPosition = ref(100);
+const toPosStr = ref("");
+watchEffect(() => {
+    toPosStr.value = toPosition.value === 100 ? "" : ` to-${toPosition.value}%`;
+});
+
+const isViaEnabled = ref(false);
+const viaColor = ref("manapoints");
+const viaPosition = ref(50);
+const viaPosStr = ref("");
+watchEffect(() => {
+    viaPosStr.value = viaPosition.value === 50 ? "" : ` via-${viaPosition.value}%`;
+});
+const viaString = ref(isViaEnabled.value ? ` via-${viaColor.value}${viaPosStr.value}` : "");
+watchEffect(() => {
+    viaString.value = isViaEnabled.value ? ` via-${viaColor.value}${viaPosStr.value}` : "";
+});
+
+const gradientDirection = ref("to-br");
+
+const gradientClass = ref(
+    `bg-gradient-${gradientDirection.value} from-${fromColor.value}${fromPosStr.value} to-${toColor.value}${toPosStr.value}${viaString.value}`
+);
+
+watchEffect(() => {
+    gradientClass.value = `bg-gradient-${gradientDirection.value} from-${fromColor.value}${fromPosStr.value} to-${toColor.value}${toPosStr.value}${viaString.value}`;
+});
+
+const sampleText = ref("Aa 0-9");
 </script>
 
 <template>
@@ -347,6 +433,72 @@ variantSets.unshift(...oneOffColorSets);
                     :type="ColorSampleType.Text"
                 />
             </div>
+        </Variant>
+        <Variant title="Gradient" icon="mdi:gradient">
+            <div class="flex flex-col gap-8">
+                <div class="relative h-64 rounded-mwi-default" :class="gradientClass">
+                    <CopyableText
+                        class="absolute bottom-0 left-0 px-2 py-1 mx-2 my-1 text-sm rounded-mwi-default w-fit bg-slate-900/70"
+                        :text="'h-64 rounded-mwi-default ' + gradientClass"
+                        monospace
+                    />
+                </div>
+                <div
+                    class="flex items-center justify-center rounded-mwi-default h-fit w-fit bg-clip-content"
+                    :class="gradientClass"
+                >
+                    <div
+                        class="text-dark-mode flex flex-col justify-center items-start m-[2px] rounded-mwi-default bg-slate-800"
+                    >
+                        <div class="flex items-center justify-between">
+                            <code class="px-2 py-1 text-sm w-max shrink-0 rounded-l-mwi-default"
+                                >Outer &lt;div&gt;:</code
+                            >
+                            <CopyableText
+                                class="px-2 py-1 text-sm center rounded-r-mwi-default w-fi"
+                                :text="
+                                    'flex justify-center items-center rounded-mwi-default h-fit w-fit ' + gradientClass
+                                "
+                                monospace
+                            />
+                        </div>
+                        <div class="flex items-center w-full">
+                            <code class="px-2 py-1 text-sm center rounded-l-mwi-default w-fit">Inner &lt;div&gt;:</code>
+                            <CopyableText
+                                class="px-2 py-1 text-sm center rounded-r-mwi-default w-fit"
+                                :text="'m-[2px] rounded-mwi-default bg-slate-800'"
+                                monospace
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="text-6xl font-light text-transparent bg-clip-text" :class="gradientClass">
+                    <span>{{ sampleText || "Aa 0-9" }}</span>
+                </div>
+                <CopyableText
+                    class="px-2 py-1 text-sm bg-slate-900/50 rounded-mwi-default w-fit"
+                    :text="'text-transparent bg-clip-text ' + gradientClass"
+                    monospace
+                />
+            </div>
+            <template v-slot:controls>
+                <HstCheckbox title="Via" v-model="isViaEnabled" />
+                <HstSelect title="From" :options="colorClasses" v-model="fromColor" />
+                <HstSlider title="From Position" :min="0" :max="100" :step="5" v-model="fromPosition" />
+                <HstSelect :hidden="!isViaEnabled" title="Via" :options="colorClasses" v-model="viaColor" />
+                <HstSlider
+                    :class="{ hidden: !isViaEnabled }"
+                    title="Via Position"
+                    :min="0"
+                    :max="100"
+                    :step="5"
+                    v-model="viaPosition"
+                />
+                <HstSelect title="To" :options="colorClasses" v-model="toColor" />
+                <HstSlider title="To Position" :min="0" :max="100" :step="5" v-model="toPosition" />
+                <HstSelect title="Direction" :options="gradientDirections" v-model="gradientDirection" />
+                <HstText title="Sample Text" v-model="sampleText" />
+            </template>
         </Variant>
     </Story>
 </template>

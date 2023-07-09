@@ -4,6 +4,7 @@ import { useClipboard } from "@vueuse/core";
 import { VTooltip as vTooltip } from "floating-vue";
 import { computed, ref } from "vue";
 import ColorSampleType from "src/components/histoire-controls/Color/ColorSampleType";
+import CopyableText from "src/components/histoire-controls/Text/CopyableText.vue";
 
 export interface ColorSampleProps {
     colorClass: string;
@@ -58,36 +59,10 @@ const displayClass = computed(() => {
         </div>
         <div class="flex flex-col px-1.5 py-1">
             <div class="flex">
-                <code class="text-sm">
-                    {{ displayClass }}
-                </code>
-                <CopyIcon
-                    v-tooltip="{
-                        content: 'Copied!',
-                        triggers: [],
-                        shown: copiedClass,
-                        distance: 12,
-                        delay: 0,
-                    }"
-                    class="h-4 ml-1.5 cursor-pointer aspect-square text-dark-mode hover:text-ocean-500 hover:opacity-100"
-                    :class="{ 'opacity-0': !showCopyButtons, 'opacity-50': showCopyButtons }"
-                    @click="copyClass(displayClass)"
-                />
+                <CopyableText class="text-sm" :text="props.colorClass" monospace />
             </div>
             <div class="flex">
-                <code class="text-xs">{{ props.value }}</code>
-                <CopyIcon
-                    v-tooltip="{
-                        content: 'Copied!',
-                        triggers: [],
-                        shown: copiedValue,
-                        distance: 12,
-                        delay: 0,
-                    }"
-                    class="h-4 ml-1.5 cursor-pointer aspect-square text-black dark:text-white hover:text-ocean-500 hover:opacity-100"
-                    :class="{ 'opacity-0': !showCopyButtons, 'opacity-50': showCopyButtons }"
-                    @click="copyValue(props.value)"
-                />
+                <CopyableText class="text-xs" :text="props.value" monospace />
             </div>
         </div>
     </div>
