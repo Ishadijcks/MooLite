@@ -54,6 +54,14 @@ You can now open the game in your browser, and see the MooLite sidebar.
 > If you don't see the sidebar the first time, try refreshing once.
 > If you ever don't get the sidebar after that, please open an issue.
 
+### Histoire
+
+Inspect the component library with [Histoire](https://histoire.dev), run
+
+```bash
+npm run story:dev
+```
+
 ### Linting
 
 Enforces the correct styles across all files

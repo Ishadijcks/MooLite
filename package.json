@@ -10,24 +10,29 @@
         "preview": "vite preview",
         "lint": "prettier --write src",
         "lint:check": "prettier --check src",
-        "semantic-release": "semantic-release"
+        "semantic-release": "semantic-release",
+        "story:dev": "histoire dev",
+        "story:build": "histoire build",
+        "story:preview": "histoire preview"
     },
     "dependencies": {
         "strongly-typed-events": "^3.0.9",
         "vue": "^3.2.47"
     },
     "devDependencies": {
+        "@histoire/plugin-vue": "^0.16.1",
         "@semantic-release/exec": "^6.0.3",
         "@types/node": "^18.16.0",
         "@vitejs/plugin-vue": "^4.1.0",
         "autoprefixer": "^10.4.14",
+        "histoire": "^0.16.2",
         "postcss": "^8.4.23",
         "prettier": "2.8.8",
         "semantic-release": "^21.0.2",
         "tailwindcss": "^3.3.1",
         "tsx": "^3.12.7",
         "typescript": "^5.0.4",
-        "vite": "^4.2.2",
+        "vite": "^4.3.9",
         "vite-plugin-monkey": "^3.1.4",
         "vue-tsc": "^1.2.0"
     }

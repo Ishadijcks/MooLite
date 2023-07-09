@@ -15,11 +15,27 @@ const hasConfig = computed(() => {
 const toggleConfig = () => {
     showConfig.value = !showConfig.value;
 };
+
+const creditText = computed(() => {
+    const credits = props.plugin.credits;
+    let creditText = `Created by ${credits.author}`;
+    if (credits.author !== credits.maintainer) {
+        creditText += ` and maintained by ${credits.maintainer}`;
+    }
+    if (credits.contributors) {
+        creditText += `\nOther contributors include ${credits.contributors.join(", ")}`;
+    }
+    return creditText;
+});
+
+const onConfigChange = (key: string, newValue: any) => {
+    props.plugin.onConfigChange?.(key, newValue);
+};
 </script>
 
 <template>
     <div class="flex flex-row space-x-1 items-center py-2">
-        <span :title="plugin.description">{{ plugin.name }}</span>
+        <span :title="plugin.description + '\n\n' + creditText">{{ plugin.name }}</span>
         <span class="flex-1"></span>
         <span class="text-xs hover:opacity-40 cursor-pointer" @click="toggleConfig">
             <span v-show="hasConfig">⚙️</span>
@@ -27,7 +43,15 @@ const toggleConfig = () => {
         <input class="cursor-pointer" type="checkbox" v-model="plugin.isEnabled" :disabled="!plugin.canBeDisabled" />
     </div>
     <div v-if="hasConfig && showConfig" class="flex flex-col pl-2 py-2 space-y-2">
-        <PluginConfigDisplay v-for="config in plugin.config" :config="config"></PluginConfigDisplay>
+        <PluginConfigDisplay
+            v-for="config in plugin.config"
+            :config="config"
+            @onConfigChange="
+                () => {
+                    onConfigChange(config.key, config.value);
+                }
+            "
+        ></PluginConfigDisplay>
     </div>
 </template>
 

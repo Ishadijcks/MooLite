@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { ComputedRef, Ref, computed, ref } from "vue";
+import { ComputedRef, computed, ref } from "vue";
 import { WhisperManagerPlugin } from "src/MooLite/plugins/WhisperManager/WhisperManagerPlugin";
 import ChatBox from "src/components/chat/ChatBox.vue";
 import MooDivider from "src/components/atoms/MooDivider.vue";
 import CrossIcon from "src/components/icons/Cross.vue";
-import { contributorNames, betaTesterNames, helperNames } from "src/MooLite/plugins/WhisperManager/DevConstants";
 import { Conversation } from "src/MooLite/plugins/WhisperManager/Conversation";
 
 const props = defineProps<{
@@ -110,18 +109,7 @@ props.plugin.populateConversations();
 <template>
     <div class="flex flex-col space-y-1.5 h-full max-h-full mb-1.5 bg-background-game">
         <div class="flex flex-row justify-between items-center">
-            <h1
-                class="text-lg font-bold transition duration-700 ease-in-out"
-                :class="{
-                    'hover:text-cyan-300': contributorNames.includes(characterName),
-                    'bg-clip-text hover:text-transparent bg-gradient-to-br from-orange-400 to-scarlet-400 to-90% via-orange-600 via-30%':
-                        betaTesterNames.includes(characterName),
-                    'bg-clip-text hover:text-transparent bg-gradient-to-br from-burble-300 to-burble-400 to-90%':
-                        helperNames.includes(characterName),
-                }"
-            >
-                Whisper Manager
-            </h1>
+            <h1 class="text-lg font-bold transition duration-700 ease-in-out">Whisper Manager</h1>
         </div>
         <div
             v-if="!hasConversations"
