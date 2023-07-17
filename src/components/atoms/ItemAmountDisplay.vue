@@ -10,7 +10,7 @@ const props = defineProps<{
 
 <template>
     <div class="flex flex-col items-center" :title="name">
-        <ItemIcon class="w-6 h-6" :item="itemAmount.itemHrid"></ItemIcon>
+        <ItemIcon :item="itemAmount.itemHrid"></ItemIcon>
         <span>{{ itemAmount.count }}</span>
     </div>
 </template>
