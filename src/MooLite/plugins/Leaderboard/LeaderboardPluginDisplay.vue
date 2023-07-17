@@ -3,6 +3,8 @@ import { computed, ref } from "vue";
 import { LeaderboardPlugin } from "src/MooLite/plugins/Leaderboard/LeaderboardPlugin";
 import MooDivider from "src/components/atoms/MooDivider.vue";
 import { DateFormatter } from "src/MooLite/util/DateFormatter";
+import ItemIcon from "src/components/atoms/ItemIcon.vue";
+import { ItemHrid } from "src/MooLite/core/inventory/ItemHrid";
 
 const props = defineProps<{
     plugin: LeaderboardPlugin;
@@ -52,6 +54,23 @@ const lastUpdatedText = computed(() => {
                     <th>{{ entry.level }}</th>
                     <th>{{ entry.experience.toLocaleString() }}</th>
                     <th>{{ entry.rank }}</th>
+                </tr>
+
+                <tr class="spacer h-6"></tr>
+
+                <tr class="pt-8" v-if="playerData.taskPoints">
+                    <th>Tasks</th>
+                    <th class="flex flex-row justify-center">
+                        <ItemIcon size="4" :item="'/items/task_token' as unknown as ItemHrid" />
+                    </th>
+                    <th></th>
+                    <th>🏆</th>
+                </tr>
+                <tr v-if="playerData.taskPoints">
+                    <th class="text-left">{{ playerData.taskPoints.name }}</th>
+                    <th>{{ playerData.taskPoints.taskPoints }}</th>
+                    <th></th>
+                    <th>{{ playerData.taskPoints.rank }}</th>
                 </tr>
             </table>
             <span v-else class="italic text-xs" v-if="selectedName"
