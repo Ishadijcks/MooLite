@@ -2,10 +2,14 @@
 import { computed } from "vue";
 import { ItemHrid } from "src/MooLite/core/inventory/ItemHrid";
 
-const props = defineProps<{
+export interface Props {
     item: ItemHrid;
-    size: string;
-}>();
+    size?: string;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+    size: "8",
+});
 
 const imgUrl = computed(() => {
     const split = (props.item as unknown as string).split("/");
@@ -16,7 +20,7 @@ const imgUrl = computed(() => {
 </script>
 
 <template>
-    <svg :class="'w-' + (size ?? 8) + ' h-' + (size ?? 8)">
+    <svg :class="'w-' + size + ' h-' + size">
         <use :href="imgUrl"></use>
     </svg>
 </template>
