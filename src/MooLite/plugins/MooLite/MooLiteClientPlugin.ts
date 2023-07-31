@@ -56,6 +56,13 @@ export class MooLiteClientPlugin extends MooLitePlugin {
             type: PluginConfigType.CheckBox,
             value: true,
         },
+        {
+            key: "mooliteclient/start-collapsed",
+            name: "Collapse MooLite sidebar on launch",
+            description: "Collapses the MooLite sidebar on launch",
+            type: PluginConfigType.CheckBox,
+            value: false,
+        },
     ];
 
     public get showBrowserNotifications(): boolean {
