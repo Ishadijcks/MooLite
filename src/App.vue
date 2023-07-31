@@ -36,6 +36,10 @@ const setActiveTab = (index: number) => {
         activeTab.value = index;
     }
 };
+
+if (findPlugin("MooLite").getConfig("mooliteclient/start-collapsed").value === true) {
+    setActiveTab(-1);
+}
 </script>
 
 <template>
