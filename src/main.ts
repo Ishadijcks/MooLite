@@ -43,6 +43,7 @@ const launchMooLite = () => {
         return;
     }
 
+    mooSocket.initialize();
     mooSocket.onInitClientInfoMessage.subscribe((clientInfo) => {
         // Create the game with the init client info
         const game = reactive<Game>(new Game(clientInfo)) as Game;
