@@ -1,6 +1,6 @@
 export enum ServerMessageType {
     // Internals,
-    InitClientInfo = "init_client_info",
+    InitClientInfo = "init_client_data",
     InitCharacterInfo = "init_character_info",
     Pong = "pong",
 

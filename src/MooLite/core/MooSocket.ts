@@ -24,6 +24,14 @@ export class MooSocket extends WebSocket {
 
     constructor(url: string | URL, protocols: string | string[] | undefined) {
         super(url, protocols);
+
+        // Only set the correct socket and skip the one Vite is using
+        if (url.toString().includes("milkyway")) {
+            unsafeWindow.mooSocket = this;
+        }
+    }
+
+    public initialize(): void {
         this.addEventListener("message", (e: any) => {
             const msg = JSON.parse(e.data);
 
@@ -33,11 +41,6 @@ export class MooSocket extends WebSocket {
 
             this._onServerMessage.dispatch(msg);
         });
-
-        // Only set the correct socket and skip the one Vite is using
-        if (url.toString().includes("milkyway")) {
-            unsafeWindow.mooSocket = this;
-        }
     }
 
     send(data: string | ArrayBufferLike | Blob | ArrayBufferView): void {
