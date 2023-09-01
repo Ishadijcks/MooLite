@@ -92,7 +92,12 @@ export class EquipmentExporterPlugin extends MooLitePlugin {
             throw new Error("Browser don't have support for native clipboard.");
         }
 
-        void navigator.clipboard.writeText(copyValue);
-        alert("Copied Equipment to Clipboard");
+        try {
+            void navigator.clipboard
+                .writeText(copyValue)
+                .then(() => alert("Current set has been copied to clipboard."));
+        } catch (err) {
+            alert("Error copying to clipboard: " + err);
+        }
     }
 }
