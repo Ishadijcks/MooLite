@@ -27,8 +27,8 @@ export class Chat {
         this._characterChatIcons = chatIconMap;
     }
 
-    public updateWhisperHistory(chatWhisperHistory: ChatMessage[]) {
-        this._whisperHistory = chatWhisperHistory;
+    public updateWhisperHistory(whisperChatHistory: ChatMessage[]) {
+        this._whisperHistory = whisperChatHistory;
     }
 
     public get whisperHistory() {
