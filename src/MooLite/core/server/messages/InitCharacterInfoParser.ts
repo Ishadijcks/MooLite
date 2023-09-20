@@ -30,9 +30,9 @@ export interface InitCharacterInfoMessage extends ServerMessage {
     characterChatIconMap: Record<ChatIconHrid, CharacterChatIcon>;
     characterItems: CharacterItem[];
     characterSkills: CharacterSkill[];
-    chatWhisperHistory: ChatMessage[];
     combatUnit: CombatUnit;
     noncombatStats: NonCombatStats;
+    whisperChatHistory: ChatMessage[];
 }
 
 export class InitCharacterInfoParser extends MessageParser {
@@ -56,7 +56,7 @@ export class InitCharacterInfoParser extends MessageParser {
         //  characterSetting
         //  characterUpgradeMap
         //  chatHistoryByChannelMap
-        game.chat.updateWhisperHistory(message.chatWhisperHistory);
+        game.chat.updateWhisperHistory(message.whisperChatHistory);
         game.combat.updateCombatUnit(message.combatUnit, false);
         //  communityActionTypeBuffsMap
         //  communityBuffs
