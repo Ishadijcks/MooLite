@@ -1,8 +1,8 @@
-import { ServerMessageType } from "src/MooLite/core/server/ServerMessageType";
-import { MessageParser } from "src/MooLite/core/server/MessageParser";
-import { Game } from "src/MooLite/core/Game";
-import { ServerMessage } from "src/MooLite/core/server/ServerMessage";
 import { CharacterAbility } from "src/MooLite/core/abilities/CharacterAbility";
+import { ServerMessageType } from "../ServerMessageType";
+import { ServerMessage } from "../ServerMessage";
+import { MessageParser } from "../../MessageParser";
+import { Game } from "src/MooLite/core/Game";
 
 export interface AbilitiesUpdatedMessage extends ServerMessage {
     type: ServerMessageType.AbilitiesUpdated;

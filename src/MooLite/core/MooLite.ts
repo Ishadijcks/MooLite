@@ -1,28 +1,32 @@
 import { PluginManager } from "src/MooLite/core/plugins/PluginManager";
 import { MooSocket } from "src/MooLite/core/MooSocket";
-import { ServerMessage } from "src/MooLite/core/server/ServerMessage";
-import { MessageParser } from "src/MooLite/core/server/MessageParser";
-import { ActionCompletedParser } from "src/MooLite/core/server/messages/ActionCompleted";
 import { Game } from "src/MooLite/core/Game";
-import { ChatMessageReceivedParser } from "src/MooLite/core/server/messages/ChatMessageReceived";
-import { ActivePlayerCountUpdatedParser } from "src/MooLite/core/server/messages/ActivePlayerCountUpdated";
-import { ConsumableSlotsUpdatedParser } from "src/MooLite/core/server/messages/ConsumableSlotsUpdated";
-import { ActionsUpdatedParser } from "src/MooLite/core/server/messages/ActionsUpdated";
-import { InitCharacterInfoParser } from "src/MooLite/core/server/messages/InitCharacterInfoParser";
-import { InfoParser } from "src/MooLite/core/server/messages/Info";
-import { LeaderboardInfoUpdatedParser } from "src/MooLite/core/server/messages/LeaderboardInfoUpdated";
-import { PingParser } from "src/MooLite/core/server/clientmessages/Ping";
-import { ClientMessage } from "src/MooLite/core/server/clientmessages/ClientMessage";
-import { PongParser } from "src/MooLite/core/server/messages/Pong";
 import { LocalStorage } from "src/MooLite/util/LocalStorage";
 import { MooLiteSaveData } from "src/MooLite/core/MooLiteSaveData";
-import { CombatTriggersUpdatedParser } from "src/MooLite/core/server/messages/CombatTriggersUpdated";
-import { CharacterStatsUpdatedParser } from "src/MooLite/core/server/messages/CharacterStatsUpdated";
-import { EquipmentBuffsUpdatedParser } from "src/MooLite/core/server/messages/EquipmentBuffsUpdated";
-import { ItemsUpdatedParser } from "src/MooLite/core/server/messages/ItemsUpdated";
-import { LootOpenedParser } from "src/MooLite/core/server/messages/LootOpened";
-import { AbilitiesUpdatedParser } from "src/MooLite/core/server/messages/AbilitiesUpdated";
-
+import { InitClientInfoParser } from "./messages/server/messages/InitClientInfo";
+import { MessageParser } from "./messages/MessageParser";
+import { ClientMessage } from "./messages/client/ClientMessage";
+import { GetMarketItemOrderBooksParser } from "./messages/client/messages/GetMarketItemOrderBooks";
+import { PingParser } from "./messages/client/messages/Ping";
+import { ServerMessage } from "./messages/server/ServerMessage";
+import { AbilitiesUpdatedParser } from "./messages/server/messages/AbilitiesUpdated";
+import { ActionCompletedParser } from "./messages/server/messages/ActionCompleted";
+import { ActionsUpdatedParser } from "./messages/server/messages/ActionsUpdated";
+import { ActivePlayerCountUpdatedParser } from "./messages/server/messages/ActivePlayerCountUpdated";
+import { CharacterStatsUpdatedParser } from "./messages/server/messages/CharacterStatsUpdated";
+import { ChatMessageReceivedParser } from "./messages/server/messages/ChatMessageReceived";
+import { CombatTriggersUpdatedParser } from "./messages/server/messages/CombatTriggersUpdated";
+import { CombatUnitsInBattleUpdatedMessageParser } from "./messages/server/messages/CombatUnitsInBattleUpdated";
+import { ConsumableSlotsUpdatedParser } from "./messages/server/messages/ConsumableSlotsUpdated";
+import { EquipmentBuffsUpdatedParser } from "./messages/server/messages/EquipmentBuffsUpdated";
+import { InfoParser } from "./messages/server/messages/Info";
+import { InitCharacterInfoParser } from "./messages/server/messages/InitCharacterInfo";
+import { ItemsUpdatedParser } from "./messages/server/messages/ItemsUpdated";
+import { LeaderboardInfoUpdatedParser } from "./messages/server/messages/LeaderboardInfoUpdated";
+import { LootOpenedParser } from "./messages/server/messages/LootOpened";
+import { MarketItemorderBooksUpdated } from "./messages/server/messages/MarketItemOrderBooksUpdated";
+import { NewBattleMessageParser } from "./messages/server/messages/NewBattle";
+import { PongParser } from "./messages/server/messages/Pong";
 export class MooLite {
     pluginManager: PluginManager;
     mooSocket: MooSocket;
@@ -31,6 +35,7 @@ export class MooLite {
 
     messageParsers: MessageParser[] = [
         // Server messages
+        new InitClientInfoParser(),
         new InitCharacterInfoParser(),
         new PongParser(),
 
@@ -41,15 +46,19 @@ export class MooLite {
         new ConsumableSlotsUpdatedParser(),
         new InfoParser(),
         new CombatTriggersUpdatedParser(),
+        new NewBattleMessageParser(),
+        new CombatUnitsInBattleUpdatedMessageParser(),
         new LeaderboardInfoUpdatedParser(),
         new LootOpenedParser(),
         new CharacterStatsUpdatedParser(),
         new EquipmentBuffsUpdatedParser(),
         new ItemsUpdatedParser(),
         new AbilitiesUpdatedParser(),
+        new MarketItemorderBooksUpdated(),
 
         // Client messages
         new PingParser(),
+        new GetMarketItemOrderBooksParser(),
     ];
 
     private _interval: NodeJS.Timeout;
@@ -159,13 +168,18 @@ export class MooLite {
         const parser = this.messageParsers.find((parser) => {
             return parser.canParse(message);
         });
+
         if (!parser) {
             if (!isClientMessage) {
-                console.warn(`Unhandled message type ${message.type}`);
+                console.warn(`Unhandled server message type: ${message.type}`);
                 console.log(message);
+            } else {
+                console.debug(`Unhandled client message type: ${message.type}`);
             }
+
             return;
         }
+
         parser.apply(message, this.game);
     }
 }

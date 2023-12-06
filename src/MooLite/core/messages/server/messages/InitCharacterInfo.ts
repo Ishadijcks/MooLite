@@ -1,7 +1,4 @@
-import { ServerMessage } from "src/MooLite/core/server/ServerMessage";
-import { ServerMessageType } from "src/MooLite/core/server/ServerMessageType";
 import { CharacterAction } from "src/MooLite/core/actions/CharacterAction";
-import { MessageParser } from "src/MooLite/core/server/MessageParser";
 import { Game } from "src/MooLite/core/Game";
 import { CharacterItem } from "src/MooLite/core/inventory/CharacterItem";
 import { CharacterSkill } from "src/MooLite/core/skills/CharacterSkill";
@@ -17,6 +14,9 @@ import { NonCombatStats } from "src/MooLite/core/equipment/NonCombatStats";
 import { Character } from "src/MooLite/core/character/Character";
 import { ChatMessage } from "src/MooLite/core/chat/ChatMessage";
 import { CharacterDetail } from "src/MooLite/core/character/CharacterDetail";
+import { MessageParser } from "../../MessageParser";
+import { ServerMessage } from "../ServerMessage";
+import { ServerMessageType } from "../ServerMessageType";
 
 export interface InitCharacterInfoMessage extends ServerMessage {
     type: ServerMessageType.InitCharacterInfo;
@@ -39,7 +39,6 @@ export class InitCharacterInfoParser extends MessageParser {
     type = ServerMessageType.InitCharacterInfo;
 
     apply(message: InitCharacterInfoMessage, game: Game): void {
-        console.log(message);
         game.abilities.updateCharacterAbilities(message.characterAbilities, false);
         game.abilities.updateCombatTriggers(message.abilityCombatTriggersMap);
         game.actionQueue.updateActions(message.characterActions);
