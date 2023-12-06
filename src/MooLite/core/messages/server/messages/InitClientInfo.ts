@@ -1,6 +1,3 @@
-import { ServerMessage } from "src/MooLite/core/server/ServerMessage";
-import { ServerMessageType } from "src/MooLite/core/server/ServerMessageType";
-import { MessageParser } from "src/MooLite/core/server/MessageParser";
 import { Game } from "src/MooLite/core/Game";
 import { AbilityHrid } from "src/MooLite/core/abilities/AbilityHrid";
 import { AbilityDetail } from "src/MooLite/core/abilities/AbilityDetail";
@@ -30,6 +27,9 @@ import { EquipmentTypeHrid } from "src/MooLite/core/equipment/EquipmentTypeHrid"
 import { EquipmentTypeDetail } from "src/MooLite/core/equipment/EquipmentTypeDetail";
 import { ItemLocationHrid } from "src/MooLite/core/inventory/ItemLocationHrid";
 import { ItemLocationDetail } from "src/MooLite/core/inventory/ItemLocationDetail";
+import { MessageParser } from "../../MessageParser";
+import { ServerMessage } from "../ServerMessage";
+import { ServerMessageType } from "../ServerMessageType";
 
 export interface InitClientInfoMessage extends ServerMessage {
     type: ServerMessageType.InitClientInfo;

@@ -36,8 +36,6 @@ export class Leaderboard {
             return null;
         }
 
-        console.log(this.leaderboardList);
-
         const skills: LeaderboardSkill[] = this.getSkillLeaderboards().flatMap((value) => {
             const playerEntry = value.data.find((entry) => entry.name.toLowerCase() === name.toLowerCase());
             if (!playerEntry) {

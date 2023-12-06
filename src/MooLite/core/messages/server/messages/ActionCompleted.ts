@@ -1,11 +1,11 @@
-import { ServerMessage } from "src/MooLite/core/server/ServerMessage";
-import { ServerMessageType } from "src/MooLite/core/server/ServerMessageType";
-import { CharacterSkill } from "src/MooLite/core/skills/CharacterSkill";
-import { MessageParser } from "src/MooLite/core/server/MessageParser";
 import { Game } from "src/MooLite/core/Game";
 import { CharacterAction } from "src/MooLite/core/actions/CharacterAction";
 import { CharacterItem } from "src/MooLite/core/inventory/CharacterItem";
 import { CharacterAbility } from "src/MooLite/core/abilities/CharacterAbility";
+import { CharacterSkill } from "src/MooLite/core/skills/CharacterSkill";
+import { MessageParser } from "../../MessageParser";
+import { ServerMessage } from "../ServerMessage";
+import { ServerMessageType } from "../ServerMessageType";
 
 export interface ActionCompletedMessage extends ServerMessage {
     type: ServerMessageType.ActionCompleted;

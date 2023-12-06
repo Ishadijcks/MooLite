@@ -1,7 +1,7 @@
-import { ClientMessage } from "src/MooLite/core/server/clientmessages/ClientMessage";
-import { ClientMessageType } from "src/MooLite/core/server/clientmessages/ClientMessageType";
-import { MessageParser } from "src/MooLite/core/server/MessageParser";
 import { Game } from "src/MooLite/core/Game";
+import { ClientMessageType } from "../ClientMessageType";
+import { MessageParser } from "../../MessageParser";
+import { ClientMessage } from "../ClientMessage";
 
 export interface PingMessage extends ClientMessage {
     type: ClientMessageType.Ping;

@@ -1,7 +1,7 @@
-import { MessageParser } from "src/MooLite/core/server/MessageParser";
 import { Game } from "src/MooLite/core/Game";
-import { ServerMessage } from "src/MooLite/core/server/ServerMessage";
-import { ServerMessageType } from "src/MooLite/core/server/ServerMessageType";
+import { MessageParser } from "../../MessageParser";
+import { ServerMessage } from "../ServerMessage";
+import { ServerMessageType } from "../ServerMessageType";
 
 export interface PongMessage extends ServerMessage {
     type: ServerMessageType.Pong;

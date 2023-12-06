@@ -1,8 +1,8 @@
-import { ServerMessageType } from "src/MooLite/core/server/ServerMessageType";
-import { ServerMessage } from "src/MooLite/core/server/ServerMessage";
 import { Game } from "src/MooLite/core/Game";
-import { ClientMessageType } from "src/MooLite/core/server/clientmessages/ClientMessageType";
-import { ClientMessage } from "src/MooLite/core/server/clientmessages/ClientMessage";
+import { ServerMessageType } from "./server/ServerMessageType";
+import { ClientMessage } from "./client/ClientMessage";
+import { ClientMessageType } from "./client/ClientMessageType";
+import { ServerMessage } from "./server/ServerMessage";
 
 export abstract class MessageParser {
     abstract type: ServerMessageType | ClientMessageType;
