@@ -30,7 +30,7 @@ const simulate = () => {
 <template>
     <div class="flex flex-col">
         <span>Loot Simulator</span>
-        <select v-model="selectedHrid" class="bg-divider">
+        <select v-model="selectedHrid" class="bg-divider text-dark-mode">
             <option v-for="option in options" :value="option.value" class="bg-divider">
                 {{ option.text }}
             </option>

@@ -24,14 +24,14 @@ const emit = defineEmits(["onConfigChange"]);
             v-if="config.type === PluginConfigType.Text"
             type="text"
             v-model="config.value"
-            class="bg-divider w-24C"
+            class="bg-divider w-24C text-dark-mode"
         />
 
         <select
             v-if="config.type === PluginConfigType.Choice"
             v-model="config.value"
             @change="emit('onConfigChange')"
-            class="bg-divider w-24"
+            class="bg-divider w-24 text-dark-mode"
         >
             {{
                 options
