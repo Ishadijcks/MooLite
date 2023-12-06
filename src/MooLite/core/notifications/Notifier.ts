@@ -1,7 +1,7 @@
-import { InfoMessage } from "src/MooLite/core/server/messages/Info";
 import { SimpleEventDispatcher } from "strongly-typed-events";
 import { MooNotification } from "src/MooLite/core/notifications/MooNotification";
 import { NotificationType } from "src/MooLite/core/notifications/NotificationType";
+import { InfoMessage } from "../messages/server/messages/Info";
 
 export class Notifier {
     private _onNotification = new SimpleEventDispatcher<MooNotification>();

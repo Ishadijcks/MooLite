@@ -3,13 +3,13 @@ import { Chat } from "src/MooLite/core/chat/Chat";
 import { ActionQueue } from "src/MooLite/core/actions/ActionQueue";
 import { Inventory } from "src/MooLite/core/inventory/Inventory";
 import { Notifier } from "src/MooLite/core/notifications/Notifier";
-import { InitClientInfoMessage } from "src/MooLite/core/server/messages/InitClientInfo";
 import { Abilities } from "src/MooLite/core/abilities/Abilities";
 import { Combat } from "src/MooLite/core/combat/Combat";
 import { Leaderboard } from "src/MooLite/core/leaderboard/Leaderboard";
 import { Equipment } from "src/MooLite/core/equipment/Equipment";
 import { LootBoxes } from "src/MooLite/core/lootboxes/LootBoxes";
 import { Character } from "src/MooLite/core/character/Character";
+import { InitClientInfoMessage } from "./messages/server/messages/InitClientInfo";
 
 export class Game {
     gameVersion: string;

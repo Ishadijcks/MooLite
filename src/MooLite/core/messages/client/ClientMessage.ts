@@ -1,4 +1,4 @@
-import { ClientMessageType } from "src/MooLite/core/server/ClientMessageType";
+import { ClientMessageType } from "./ClientMessageType";
 
 export interface ClientMessage {
     type: ClientMessageType;
