@@ -60,7 +60,7 @@ const formatDropRate = (percentage: number, digits: number = 3, threshold: numbe
     <div class="flex flex-col">
         <span class="text-center">{{ plugin.name }}</span>
         <MooDivider class="mb-2" />
-        <select v-model="selectedHrid" class="bg-divider p-2">
+        <select v-model="selectedHrid" class="bg-divider p-2 text-dark-mode">
             <option v-for="option in options" :value="option.value" class="bg-divider">
                 {{ option.text }}
             </option>
