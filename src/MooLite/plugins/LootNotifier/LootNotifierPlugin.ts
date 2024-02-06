@@ -1,15 +1,16 @@
 import { MooLitePlugin } from "src/MooLite/core/plugins/MooLitePlugin";
 import { ItemGained } from "src/MooLite/core/inventory/Inventory";
-import { PluginConfig } from "src/MooLite/core/plugins/config/PluginConfig";
-import { PluginConfigType } from "src/MooLite/core/plugins/config/PluginConfigType";
 import { ItemHrid } from "src/MooLite/core/inventory/ItemHrid";
-import { PluginBuiltinOption } from "src/MooLite/core/plugins/config/PluginBuiltinOption";
 import { PluginAuthorCredits } from "src/MooLite/core/plugins/PluginAuthorCredits";
+import { MooLiteTab } from "src/MooLite/core/plugins/MooLiteTab";
+import { markRaw } from "vue";
+import { ItemDetail } from "src/MooLite/core/inventory/items/ItemDetail";
+import LootNotifierPluginDisplay from "src/MooLite/plugins/LootNotifier/LootNotifierPluginDisplay.vue";
+import { AbilityNotifierOptions } from "./AbilityNotifierOptions";
 
-enum AbilityNotifierOptions {
-    Never = "never",
-    New = "new",
-    Always = "always",
+interface LootNotifierPluginData {
+    highlightAbilities: AbilityNotifierOptions;
+    highlightedItemHrids: ItemHrid[];
 }
 
 export class LootNotifierPlugin extends MooLitePlugin {
@@ -17,42 +18,46 @@ export class LootNotifierPlugin extends MooLitePlugin {
     key = "loot-notifier";
     description: string = "Notifies you whenever you get certain drops";
 
-    _isEnabled: boolean = true;
-
     credits: PluginAuthorCredits = {
         author: "Isha",
         maintainer: "Isha",
     };
 
-    config: PluginConfig[] = [
-        {
-            type: PluginConfigType.Choice,
-            name: "Item",
-            description: "Select the item to highlight",
-            key: "highlighted-items",
-            value: "",
-            options: PluginBuiltinOption.Items,
-        },
-        {
-            type: PluginConfigType.Choice,
-            name: "Abilities",
-            description: "Send a notification whenever you loot an ability",
-            key: "highlight-abilities",
-            value: AbilityNotifierOptions.New,
-            options: [
-                { text: "Never", value: AbilityNotifierOptions.Never },
-                { text: "New", value: AbilityNotifierOptions.New },
-                { text: "Always", value: AbilityNotifierOptions.Always },
-            ],
-        },
-    ];
+    tab: MooLiteTab = {
+        icon: "🪙",
+        pluginName: this.name,
+        componentName: "LootNotifierPluginDisplay",
+        component: markRaw(LootNotifierPluginDisplay),
+    };
 
-    public get highlightedItemHrids(): ItemHrid[] {
-        return this.getConfig("highlighted-items").value.replaceAll(", ", ",").split(",");
+    save(): LootNotifierPluginData {
+        return {
+            highlightAbilities: this.highlightAbilities,
+            highlightedItemHrids: this.highlightedItemHrids,
+        };
     }
 
-    public get highlightAbilities(): AbilityNotifierOptions {
-        return this.getConfig("highlight-abilities").value;
+    load(data: LootNotifierPluginData): void {
+        this.highlightAbilities = data.highlightAbilities;
+        this.highlightedItemHrids = data.highlightedItemHrids;
+    }
+
+    highlightAbilities: AbilityNotifierOptions = AbilityNotifierOptions.New;
+    highlightedItemHrids: ItemHrid[] = [];
+
+    public get allItems(): ItemDetail[] {
+        return this._game.inventory.sortedAlphabeticalItems;
+    }
+
+    addHighlightedItemHrid(itemHrid: ItemHrid) {
+        this.highlightedItemHrids.push(itemHrid);
+    }
+
+    removeHighlightedItemHrid(itemHrid: ItemHrid) {
+        const i = this.highlightedItemHrids.indexOf(itemHrid, 0);
+        if (i > -1) {
+            this.highlightedItemHrids.splice(i, 1);
+        }
     }
 
     onItemGained(itemGained: ItemGained) {
