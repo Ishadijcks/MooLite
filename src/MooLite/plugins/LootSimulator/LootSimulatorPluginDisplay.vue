@@ -2,6 +2,7 @@
 import { computed, Ref, ref } from "vue";
 import { LootSimulatorPlugin } from "src/MooLite/plugins/LootSimulator/LootSimulatorPlugin";
 import { ItemAmount } from "src/MooLite/core/inventory/items/ItemAmount";
+import MooDivider from "src/components/atoms/MooDivider.vue";
 
 const props = defineProps<{
     plugin: LootSimulatorPlugin;
@@ -28,22 +29,24 @@ const simulate = () => {
 </script>
 
 <template>
-    <div class="flex flex-col">
-        <span>Loot Simulator</span>
-        <select v-model="selectedHrid" class="bg-divider text-dark-mode">
+    <div class="flex flex-col gap-2">
+        <span class="text-center">{{ plugin.name }}</span>
+
+        <MooDivider/>
+
+        <select v-model="selectedHrid" class="bg-divider p-2 text-dark-mode">
             <option v-for="option in options" :value="option.value" class="bg-divider">
                 {{ option.text }}
             </option>
         </select>
 
-        <br />
-        <input class="bg-divider" type="number" v-model="iterations" />
+        <input class="bg-divider p-2 text-dark-mode" type="number" v-model="iterations" />
 
         <button @click="simulate">Simulate!</button>
 
         <div class="flex flex-col">
             <div v-for="drop in loot" class="flex flex-row justify-between">
-                <span>{{ drop.itemHrid }}</span>
+                <span>{{ plugin.itemDetailMap[drop.itemHrid].name }}</span>
                 <span>{{ drop.count }}</span>
             </div>
         </div>
