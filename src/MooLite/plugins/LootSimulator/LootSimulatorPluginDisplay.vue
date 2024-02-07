@@ -32,7 +32,7 @@ const simulate = () => {
     <div class="flex flex-col gap-2">
         <span class="text-center">{{ plugin.name }}</span>
 
-        <MooDivider/>
+        <MooDivider />
 
         <select v-model="selectedHrid" class="bg-divider p-2 text-dark-mode">
             <option v-for="option in options" :value="option.value" class="bg-divider">
