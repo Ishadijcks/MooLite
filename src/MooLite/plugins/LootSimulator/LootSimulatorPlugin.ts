@@ -7,6 +7,8 @@ import { MonsterDetail } from "src/MooLite/core/combat/monsters/MonsterDetail";
 import { ItemAmount } from "src/MooLite/core/inventory/items/ItemAmount";
 import { LootSimulator } from "src/MooLite/plugins/LootSimulator/LootSimulator";
 import { PluginAuthorCredits } from "src/MooLite/core/plugins/PluginAuthorCredits";
+import { ItemDetail } from "src/MooLite/core/inventory/items/ItemDetail";
+import { ItemHrid } from "src/MooLite/core/inventory/ItemHrid";
 
 export class LootSimulatorPlugin extends MooLitePlugin {
     name: string = "Loot Simulator";
@@ -27,6 +29,10 @@ export class LootSimulatorPlugin extends MooLitePlugin {
 
     public get allMonsters(): MonsterDetail[] {
         return this._game.combat.monsterDetailList;
+    }
+
+    public get itemDetailMap(): Record<ItemHrid, ItemDetail> {
+        return this._game.inventory.itemDetailMap;
     }
 
     simulate(monsterHrid: MonsterHrid, iterations: number): ItemAmount[] {
