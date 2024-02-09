@@ -19,14 +19,18 @@ const emit = defineEmits(["onConfigChange"]);
     <div class="flex flex-row">
         <span :title="config.description">{{ config.name }}</span>
         <span class="flex-1"></span>
-        <input v-if="config.type === PluginConfigType.CheckBox" type="checkbox" v-model="config.value" />
+        <input
+            v-if="config.type === PluginConfigType.CheckBox"
+            type="checkbox"
+            v-model="config.value"
+            @change="emit('onConfigChange')"
+        />
         <input
             v-if="config.type === PluginConfigType.Text"
             type="text"
             v-model="config.value"
             class="bg-divider w-24C text-dark-mode"
         />
-
         <select
             v-if="config.type === PluginConfigType.Choice"
             v-model="config.value"
