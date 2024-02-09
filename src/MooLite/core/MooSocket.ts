@@ -29,6 +29,8 @@ export class MooSocket extends WebSocket {
         if (url.toString().includes("milkyway")) {
             unsafeWindow.mooSocket = this;
         }
+
+        this.initialize();
     }
 
     public initialize(): void {
