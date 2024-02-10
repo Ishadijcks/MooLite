@@ -5,8 +5,12 @@ import { MooNotification } from "src/MooLite/core/notifications/MooNotification"
 import { Game } from "src/MooLite/core/Game";
 import { MooLiteTab } from "src/MooLite/core/plugins/MooLiteTab";
 import MooLiteClientPluginDisplay from "src/MooLite/plugins/MooLite/MooLiteClientPluginDisplay.vue";
-import { markRaw } from "vue";
+import { CSSProperties, markRaw } from "vue";
 import { PluginAuthorCredits } from "src/MooLite/core/plugins/PluginAuthorCredits";
+import { toTitleCase } from "src/MooLite/util/String";
+
+const mooLiteDisplaySides = ["left", "right"] as const;
+type MooLiteDisplaySide = (typeof mooLiteDisplaySides)[number];
 
 export class MooLiteClientPlugin extends MooLitePlugin {
     name: string = "MooLite";
@@ -36,8 +40,12 @@ export class MooLiteClientPlugin extends MooLitePlugin {
     /**
      * Cannot be disabled
      */
-    disable() {
+    disable(): void {
         return;
+    }
+
+    enable(): void {
+        this.setMooliteDisplaySide(this.getConfig("mooliteclient/display-side").value);
     }
 
     config: PluginConfig[] = [
@@ -63,6 +71,19 @@ export class MooLiteClientPlugin extends MooLitePlugin {
             type: PluginConfigType.CheckBox,
             value: false,
         },
+        {
+            key: "mooliteclient/display-side",
+            name: "MooLite display side",
+            description: "Display MooLite on the left or the right",
+            type: PluginConfigType.Choice,
+            value: "right",
+            options: mooLiteDisplaySides.map((side) => {
+                return {
+                    text: toTitleCase(side),
+                    value: side,
+                };
+            }),
+        },
     ];
 
     public get showBrowserNotifications(): boolean {
@@ -73,5 +94,27 @@ export class MooLiteClientPlugin extends MooLitePlugin {
         if (this.showBrowserNotifications) {
             this._game.notifier.sendBrowserNotification(notification.message);
         }
+    }
+
+    onConfigChange(key: string, newValue: any): void {
+        if (key === "mooliteclient/display-side") {
+            this.setMooliteDisplaySide(newValue);
+        }
+    }
+
+    private setMooliteDisplaySide(displaySide: MooLiteDisplaySide): void {
+        const direction = displaySide === "right" ? "row" : "row-reverse";
+        this.setFlexDirectionById("root", direction);
+        this.setFlexDirectionById("moolite-container", direction);
+    }
+
+    private setFlexDirectionById(elementId: string, direction: CSSProperties["flex-direction"]) {
+        const element = document.getElementById(elementId);
+
+        if (!element || !direction) {
+            return;
+        }
+
+        element.style.setProperty("flex-direction", direction);
     }
 }
