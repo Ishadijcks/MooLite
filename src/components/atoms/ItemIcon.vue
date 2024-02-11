@@ -15,7 +15,7 @@ const imgUrl = computed(() => {
     const split = (props.item as unknown as string).split("/");
     const itemPostfix = split[split.length - 1];
     // TODO(@Isha): Research how these CDN resource urls are generated
-    return `/static/media/items_sprite.951ef1ec.svg#${itemPostfix}`;
+    return `/static/media/items_sprite.018a3c6e.svg#${itemPostfix}`;
 });
 </script>
 

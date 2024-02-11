@@ -22,6 +22,7 @@ import { EquipmentBuffsUpdatedParser } from "src/MooLite/core/server/messages/Eq
 import { ItemsUpdatedParser } from "src/MooLite/core/server/messages/ItemsUpdated";
 import { LootOpenedParser } from "src/MooLite/core/server/messages/LootOpened";
 import { AbilitiesUpdatedParser } from "src/MooLite/core/server/messages/AbilitiesUpdated";
+import { InitClientInfoParser } from "./server/messages/InitClientInfo";
 import { unsafeWindow } from "$";
 
 export class MooLite {
@@ -33,6 +34,7 @@ export class MooLite {
     messageParsers: MessageParser[] = [
         // Server messages
         new InitCharacterInfoParser(),
+        new InitClientInfoParser(),
         new PongParser(),
 
         new ActionCompletedParser(),
@@ -171,8 +173,7 @@ export class MooLite {
         });
         if (!parser) {
             if (!isClientMessage) {
-                console.warn(`Unhandled message type ${message.type}`);
-                console.log(message);
+                console.warn(`Unhandled message type ${message.type}`, message);
             }
             return;
         }
