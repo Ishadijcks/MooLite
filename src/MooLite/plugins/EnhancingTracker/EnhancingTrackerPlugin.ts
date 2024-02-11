@@ -6,7 +6,6 @@ import { PluginAuthorCredits } from "src/MooLite/core/plugins/PluginAuthorCredit
 import { ItemDetail } from "src/MooLite/core/inventory/items/ItemDetail";
 import { ItemHrid } from "src/MooLite/core/inventory/ItemHrid";
 import { CharacterAction } from "src/MooLite/core/actions/CharacterAction";
-import { ItemGained } from "src/MooLite/core/inventory/Inventory";
 import { ItemHashParts, decodeItemHash } from "src/MooLite/core/inventory/items/decodeItemHash";
 import { ItemAmount } from "src/MooLite/core/inventory/items/ItemAmount";
 import { ActionHrid } from "src/MooLite/core/actions/ActionHrid";
@@ -54,8 +53,8 @@ export class EnhancingTrackerPlugin extends MooLitePlugin {
         const currentAction = queue.length ? queue[0] : null;
 
         const enhancing = "/actions/enhancing/enhance" as unknown as ActionHrid;
-        const currentActionIsEnhancing = currentAction?.actionHrid === enhancingHrid;
-        const previousActionIsEnhancing = this.previousAction?.actionHrid === enhancingHrid;
+        const currentActionIsEnhancing = currentAction?.actionHrid === enhancing;
+        const previousActionIsEnhancing = this.previousAction?.actionHrid === enhancing;
 
         if (currentActionIsEnhancing) {
             previousActionIsEnhancing
