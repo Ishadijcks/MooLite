@@ -53,10 +53,9 @@ export class EnhancingTrackerPlugin extends MooLitePlugin {
     onActionQueueUpdated(queue: CharacterAction[]): void {
         const currentAction = queue.length ? queue[0] : null;
 
-        const currentActionIsEnhancing =
-            currentAction?.actionHrid === ("/actions/enhancing/enhance" as unknown as ActionHrid);
-        const previousActionIsEnhancing =
-            this.previousAction?.actionHrid === ("/actions/enhancing/enhance" as unknown as ActionHrid);
+        const enhancing = "/actions/enhancing/enhance" as unknown as ActionHrid;
+        const currentActionIsEnhancing = currentAction?.actionHrid === enhancingHrid;
+        const previousActionIsEnhancing = this.previousAction?.actionHrid === enhancingHrid;
 
         if (currentActionIsEnhancing) {
             previousActionIsEnhancing
