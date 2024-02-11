@@ -9,6 +9,7 @@ import { CharacterAction } from "src/MooLite/core/actions/CharacterAction";
 import { ItemGained } from "src/MooLite/core/inventory/Inventory";
 import { ItemHashParts, decodeItemHash } from "src/MooLite/core/inventory/items/decodeItemHash";
 import { ItemAmount } from "src/MooLite/core/inventory/items/ItemAmount";
+import { ActionHrid } from "src/MooLite/core/actions/ActionHrid";
 
 export class EnhancingTrackerPlugin extends MooLitePlugin {
     name: string = "Enhancing Tracker";
@@ -51,20 +52,16 @@ export class EnhancingTrackerPlugin extends MooLitePlugin {
 
     onActionQueueUpdated(queue: CharacterAction[]): void {
         const currentAction = queue.length ? queue[0] : null;
-        if (currentAction !== null) {
-            if (
-                currentAction.actionHrid === "/actions/enhancing/enhance" &&
-                !(this.previousAction?.actionHrid === "/actions/enhancing/enhance")
-            ) {
-                this.handleStartedEnhancing(currentAction);
-            }
 
-            if (
-                currentAction.actionHrid === "/actions/enhancing/enhance" &&
-                this.previousAction?.actionHrid === "/actions/enhancing/enhance"
-            ) {
-                this.handleEnhancing(currentAction);
-            }
+        const currentActionIsEnhancing =
+            currentAction?.actionHrid === ("/actions/enhancing/enhance" as unknown as ActionHrid);
+        const previousActionIsEnhancing =
+            this.previousAction?.actionHrid === ("/actions/enhancing/enhance" as unknown as ActionHrid);
+
+        if (currentActionIsEnhancing) {
+            previousActionIsEnhancing
+                ? this.handleEnhancing(currentAction)
+                : this.handleStartedEnhancing(currentAction);
         }
 
         this.previousAction = currentAction;
