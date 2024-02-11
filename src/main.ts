@@ -73,12 +73,14 @@ const launchMooLite = () => {
             (() => {
                 const app = document.createElement("div");
                 const root = document.getElementById("root");
+
                 if (root == null) {
                     throw new Error("Could not append MooLite to the element with id 'root' as it does not exist");
                 }
+
                 root.append(app);
                 root.style.setProperty("display", "flex");
-                root.style.setProperty("flex-direction", "row");
+
                 return app;
             })()
         );

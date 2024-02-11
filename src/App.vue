@@ -46,7 +46,7 @@ if (findPlugin("MooLite").getConfig("mooliteclient/start-collapsed").value === t
     <div class="flex flex-col h-full shadow-sm overflow-clip bg-background-game text-dark-mode shadow-space-200">
         <MooDivider class="border-b-4" />
 
-        <div class="flex flex-row h-full">
+        <div id="moolite-container" class="flex flex-row h-full">
             <div v-if="activeTab > -1" class="flex flex-col flex-grow p-2 overflow-auto">
                 <PluginManagerDisplay
                     v-if="activeTab === 0"
