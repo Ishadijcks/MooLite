@@ -23,6 +23,7 @@ import { ItemsUpdatedParser } from "src/MooLite/core/server/messages/ItemsUpdate
 import { LootOpenedParser } from "src/MooLite/core/server/messages/LootOpened";
 import { AbilitiesUpdatedParser } from "src/MooLite/core/server/messages/AbilitiesUpdated";
 import { InitClientInfoParser } from "./server/messages/InitClientInfo";
+import { unsafeWindow } from "$";
 
 export class MooLite {
     pluginManager: PluginManager;
@@ -61,14 +62,18 @@ export class MooLite {
         this.pluginManager = pluginManager;
         this.mooSocket = mooSocket;
 
-        this.mooSocket.onServerMessage.subscribe((message) => this.parseMessage(message, false));
-        this.mooSocket.onClientMessage.subscribe((message) => this.parseMessage(message, true));
+        this.subscribeToMooSocket();
 
         this._interval = setInterval(() => {
             this._clientTick(1);
         }, 1000);
 
         this._load();
+    }
+
+    private subscribeToMooSocket(): void {
+        this.mooSocket.onServerMessage.subscribe((message) => this.parseMessage(message, false));
+        this.mooSocket.onClientMessage.subscribe((message) => this.parseMessage(message, true));
     }
 
     private _timeSinceLastSave: number = 0;
@@ -80,6 +85,11 @@ export class MooLite {
         if (this._timeSinceLastSave > this.SAVE_INTERVAL) {
             this._save();
             this._timeSinceLastSave = 0;
+        }
+
+        if (unsafeWindow.mooSocket && this.mooSocket !== unsafeWindow.mooSocket) {
+            this.mooSocket = unsafeWindow.mooSocket;
+            this.subscribeToMooSocket();
         }
 
         this.pluginManager.clientTick();
