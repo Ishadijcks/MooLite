@@ -42,11 +42,7 @@ export class EnhancingTrackerPlugin extends MooLitePlugin {
 
     public get successRate(): number {
         const attempts = this.successes + this.failures;
-        if (attempts === 0) {
-            return 100;
-        }
-
-        return (this.successes / (this.successes + this.failures)) * 100;
+        return attempts === 0 ? 0 : (this.successes / attempts) * 100;
     }
 
     onActionQueueUpdated(queue: CharacterAction[]): void {
@@ -74,11 +70,9 @@ export class EnhancingTrackerPlugin extends MooLitePlugin {
     }
 
     addConsumedItem(itemAmount: ItemAmount): void {
-        if (itemAmount.itemHrid in this.itemsConsumed) {
-            this.itemsConsumed[itemAmount.itemHrid] += itemAmount.count;
-        } else {
-            this.itemsConsumed[itemAmount.itemHrid] = itemAmount.count;
-        }
+        itemAmount.itemHrid in this.itemsConsumed
+            ? (this.itemsConsumed[itemAmount.itemHrid] += itemAmount.count)
+            : (this.itemsConsumed[itemAmount.itemHrid] = itemAmount.count);
     }
 
     handleEnhancing(currentAction: CharacterAction): void {

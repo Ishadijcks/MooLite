@@ -39,7 +39,10 @@ const loot: Ref<ItemAmount[]> = ref([]);
             </div>
 
             <p>Best enhancement level: {{ plugin.bestEnhancementLevel }}</p>
-            <p>Success rate: {{ plugin.successRate.toFixed(2) }}% ({{ plugin.successes }} / {{ plugin.failures }})</p>
+            <p>
+                Success rate: {{ plugin.successRate.toFixed(2) }}% ({{ plugin.successes }} /
+                {{ plugin.successes + plugin.failures }})
+            </p>
         </div>
 
         <div v-if="!plugin.itemBeingEnhancedHrid" class="flex flex-col gap-2">
