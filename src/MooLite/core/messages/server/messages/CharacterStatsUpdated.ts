@@ -1,6 +1,6 @@
-import { ServerMessageType } from "src/MooLite/core/server/ServerMessageType";
-import { ServerMessage } from "src/MooLite/core/server/ServerMessage";
-import { MessageParser } from "src/MooLite/core/server/MessageParser";
+import { MessageParser } from "../../MessageParser";
+import { ServerMessage } from "../ServerMessage";
+import { ServerMessageType } from "../ServerMessageType";
 import { Game } from "src/MooLite/core/Game";
 import { NonCombatStats } from "src/MooLite/core/equipment/NonCombatStats";
 import { CombatUnit } from "src/MooLite/core/combat/CombatUnit";

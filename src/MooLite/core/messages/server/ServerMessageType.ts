@@ -11,6 +11,7 @@ export enum ServerMessageType {
 
     CharacterStatsUpdated = "character_stats_updated",
     EquipmentBuffsUpdated = "equipment_buffs_updated",
+    CommunityBuffsUpdated = "community_buffs_updated",
     ItemsUpdated = "items_updated",
 
     LootOpened = "loot_opened",
@@ -26,7 +27,12 @@ export enum ServerMessageType {
     // Combat
     CombatTriggersUpdated = "combat_triggers_updated",
     AbilitiesUpdated = "abilities_updated",
+    CombatUnitsInBattleUpdated = "combat_units_in_battle_updated",
+    NewBattle = "new_battle",
 
     // Leaderboard
     LeaderboardInfoUpdated = "leaderboard_info_updated",
+
+    // Marketplace
+    MarketItemorderBooksUpdated = "market_item_order_books_updated",
 }

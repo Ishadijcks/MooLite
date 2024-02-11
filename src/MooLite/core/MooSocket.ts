@@ -1,9 +1,9 @@
 import { SimpleEventDispatcher } from "strongly-typed-events";
-import { ServerMessage } from "src/MooLite/core/server/ServerMessage";
-import { InitClientInfoMessage } from "src/MooLite/core/server/messages/InitClientInfo";
-import { ServerMessageType } from "src/MooLite/core/server/ServerMessageType";
-import { ClientMessage } from "src/MooLite/core/server/clientmessages/ClientMessage";
 import { unsafeWindow } from "$";
+import { ServerMessage } from "./messages/server/ServerMessage";
+import { ClientMessage } from "./messages/client/ClientMessage";
+import { InitClientInfoMessage } from "./messages/server/messages/InitClientInfo";
+import { ServerMessageType } from "./messages/server/ServerMessageType";
 
 export class MooSocket extends WebSocket {
     private _onServerMessage = new SimpleEventDispatcher<ServerMessage>();
